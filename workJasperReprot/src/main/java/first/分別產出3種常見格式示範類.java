@@ -15,6 +15,9 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 /**
  * 簡單的jasperReport樣版輸出而已，這個範例已經盡量最輕量化了<br>
@@ -80,11 +83,21 @@ public class 分別產出3種常見格式示範類 {
 		/**
 		 * 用到poi-3.10.1.jar檔
 		 */
-		// 匯出excel
+		// 匯出excel舊的寫法
 		JRXlsExporter exporterXLS = new JRXlsExporter();
 		exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
 		exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, "z:/jasperoutput/StyledTextReport.xls");
 		exporterXLS.exportReport();
+		//匯出excel新的寫法，好像是把config拉了出來的樣子
+		JRXlsExporter exporter = new JRXlsExporter();
+		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport2.xls"));
+		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+		configuration.setOnePagePerSheet(false);
+		exporter.setConfiguration(configuration);
+		
+		exporter.exportReport();
+		
 		System.out.println("done");
 	}
 }
