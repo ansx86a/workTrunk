@@ -12,7 +12,7 @@
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.0</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -41,9 +41,35 @@
 			<artifactId>commons-digester</artifactId>
 			<version>2.0</version>
 		</dependency>
+
+		<!-- 加密pdf用，不需要可以拿掉 用什麼an1加密-->
+		<dependency>
+			<groupId>bouncycastle</groupId>
+			<artifactId>bcprov-jdk15</artifactId>
+			<version>124</version>
+		</dependency>
+
+		<!-- 字型，jasper不用的可以拿掉 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.0.0</version>
+		</dependency>
+
+		<!-- ↓↓載入萬國碼Arial Unicode.jar會用到的jar檔 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>4.2.5.RELEASE</version>
+		</dependency>
+		<!-- ↑↑載入萬國碼Arial Unicode.jar會用到的jar檔 -->
+
 	</dependencies>
-
-
 
 	<build>
 		<plugins>

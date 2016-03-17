@@ -12,11 +12,16 @@ import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import net.sf.jasperreports.export.SimpleWriterExporterOutput;
 import net.sf.jasperreports.export.SimpleXlsReportConfiguration;
 
 /**
@@ -61,7 +66,6 @@ public class 分別產出3種常見格式示範類 {
 		// This is simple example, no database.
 		// then using empty datasource.
 		JRDataSource dataSource = new JREmptyDataSource();
-		
 
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
@@ -83,21 +87,50 @@ public class 分別產出3種常見格式示範類 {
 		/**
 		 * 用到poi-3.10.1.jar檔
 		 */
-		// 匯出excel舊的寫法
-		JRXlsExporter exporterXLS = new JRXlsExporter();
-		exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
-		exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, "z:/jasperoutput/StyledTextReport.xls");
-		exporterXLS.exportReport();
-		//匯出excel新的寫法，好像是把config拉了出來的樣子
-		JRXlsExporter exporter = new JRXlsExporter();
-		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport2.xls"));
-		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
-		configuration.setOnePagePerSheet(false);
-		exporter.setConfiguration(configuration);
-		
-		exporter.exportReport();
-		
+		匯出excel舊的寫法: {
+			JRXlsExporter exporterXLS = new JRXlsExporter();
+			exporterXLS.setParameter(JRXlsExporterParameter.JASPER_PRINT, jasperPrint);
+			exporterXLS.setParameter(JRXlsExporterParameter.OUTPUT_FILE_NAME, "z:/jasperoutput/StyledTextReport.xls");
+			exporterXLS.exportReport();
+		}
+		匯出excel新的寫法: {
+			// 匯出excel新的寫法，好像是把config拉了出來的樣子
+			JRXlsExporter exporter = new JRXlsExporter();
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport2.xls"));
+			SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
+			configuration.setOnePagePerSheet(false);
+			exporter.setConfiguration(configuration);
+			exporter.exportReport();
+		}
+		匯出新格式excel的寫法: {
+			JRXlsxExporter exporter = new JRXlsxExporter();
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport.xlsx"));
+			exporter.exportReport();
+		}
+
+		匯出csv的寫法: {// 用處會十分的怪異，jasper檔應該只有title和detail吧
+			JRCsvExporter exporter = new JRCsvExporter();
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleWriterExporterOutput("z:/jasperoutput/StyledTextReport.csv"));
+			exporter.exportReport();
+		}
+		// openOffice跳過，odt檔JROdtExporter，ods檔JROdsExporter
+		// rtf跳過
+		匯出word檔: {// 沒有舊的doc格式
+			JRDocxExporter exporter = new JRDocxExporter();
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport.docx"));
+			exporter.exportReport();
+		}
+		匯出powerPoint檔: {
+			JRPptxExporter exporter = new JRPptxExporter();
+			exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+			exporter.setExporterOutput(new SimpleOutputStreamExporterOutput("z:/jasperoutput/StyledTextReport.pptx"));
+			exporter.exportReport();
+		}
+
 		System.out.println("done");
 	}
 }
