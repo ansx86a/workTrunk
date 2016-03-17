@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
-<!-- 2016-03-17T09:31:33 -->
+<!-- 2016-03-17T14:10:44 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConfigTable_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f472044f-f48e-4df3-9233-cc21b3bfb203">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="p1" class="java.lang.String"/>
-	<parameter name="p2" class="java.lang.String"/>
+	<parameter name="p2" class="java.awt.Image">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[select * from config]]>
 	</queryString>
@@ -14,8 +16,13 @@
 	<field name="value" class="java.lang.String"/>
 	<field name="description" class="java.lang.String"/>
 	<background>
-		<band splitType="Stretch">
+		<band height="200" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="554" height="200" uuid="08e50979-0564-47b1-af5a-e0e331a12b1d"/>
+				<imageExpression><![CDATA[$P{p1}]]></imageExpression>
+			</image>
 		</band>
 	</background>
 	<title>
@@ -36,14 +43,14 @@
 				<textFieldExpression><![CDATA[$P{p2}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="210" y="20" width="100" height="30" uuid="5f2835c5-f6cc-4dab-909a-07adf03408e4"/>
+				<reportElement x="280" y="40" width="100" height="30" uuid="5f2835c5-f6cc-4dab-909a-07adf03408e4"/>
 				<textElement>
 					<font fontName="Serif" isBold="false" isItalic="false" pdfFontName="MSung-Light" pdfEncoding="UniCNS-UCS2-H" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA["Config報表あ日文]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="340" y="24" width="100" height="30" uuid="c90868be-ebda-41f9-96df-e3ad33d1cf6a"/>
+				<reportElement x="380" y="10" width="100" height="30" uuid="c90868be-ebda-41f9-96df-e3ad33d1cf6a"/>
 				<textElement>
 					<font fontName="Arial Unicode MS" pdfFontName="Arial Unicode MS" pdfEncoding="Identity-H" isPdfEmbedded="false"/>
 				</textElement>
@@ -53,18 +60,6 @@
 	</title>
 	<pageHeader>
 		<band height="47" splitType="Stretch">
-			<textField>
-				<reportElement x="210" y="10" width="70" height="20" uuid="0a977bcc-4eda-4616-b186-bd2b647489a3"/>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="180" y="10" width="30" height="24" uuid="69d45e64-0942-4267-8e13-8cf053607bd9"/>
-				<text><![CDATA[第]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="291" y="11" width="36" height="22" uuid="ca5af0b5-e33e-4a1c-8fe6-76654b0f405b"/>
-				<text><![CDATA[頁]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="0" y="11" width="70" height="22" uuid="0c515663-a1ca-403e-81a0-16242f55cbb1"/>
 				<text><![CDATA[page header]]></text>
@@ -166,17 +161,21 @@
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="56" splitType="Stretch">
+		<band height="88" splitType="Stretch">
 			<textField>
-				<reportElement x="170" y="26" width="100" height="30" uuid="b004974d-2e6e-4b36-8129-46315cf6da0f"/>
+				<reportElement x="180" y="40" width="100" height="30" uuid="b004974d-2e6e-4b36-8129-46315cf6da0f"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="270" y="26" width="100" height="30" uuid="0e72c88a-353a-44d2-8a83-38a8347d221d"/>
+				<reportElement x="280" y="40" width="100" height="30" uuid="0e72c88a-353a-44d2-8a83-38a8347d221d"/>
 				<textElement textAlignment="Left"/>
 				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement key="" x="80" y="18" width="100" height="50" uuid="bcd55b9a-a19d-410c-b2c0-73debd9dcd3c"/>
+				<imageExpression><![CDATA[$P{p2}]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 	<summary>

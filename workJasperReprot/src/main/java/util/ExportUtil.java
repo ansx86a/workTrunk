@@ -63,6 +63,10 @@ public class ExportUtil {
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(filePathAndName));
 		SimpleXlsReportConfiguration configuration = new SimpleXlsReportConfiguration();
 		configuration.setOnePagePerSheet(false);
+
+		// 以下把方格和空白拿回來
+		configuration.setIgnoreCellBorder(true);
+		configuration.setWhitePageBackground(false);
 		exporter.setConfiguration(configuration);
 		exporter.exportReport();
 	}
@@ -71,18 +75,11 @@ public class ExportUtil {
 		JRXlsxExporter exporter = new JRXlsxExporter();
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
 		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(filePathAndName));
+		//config都無效
+		
 		exporter.exportReport();
 	}
 
-	public static void 匯出加密xlsx(JasperPrint jasperPrint, String filePathAndName,String pwd) throws JRException {
-		JRXlsxExporter exporter = new JRXlsxExporter();
-		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(filePathAndName));
-		SimpleXlsxReportConfiguration config = new SimpleXlsxReportConfiguration();
-		config.setPassword(pwd);
-		exporter.exportReport();
-	}
-	
 	public static void 匯出csv(JasperPrint jasperPrint, String filePathAndName) throws JRException {
 		JRCsvExporter exporter = new JRCsvExporter();
 		exporter.setExporterInput(new SimpleExporterInput(jasperPrint));

@@ -42,7 +42,7 @@
 			<version>2.0</version>
 		</dependency>
 
-		<!-- 加密pdf用，不需要可以拿掉 用什麼an1加密-->
+		<!-- 加密pdf用，不需要可以拿掉 用什麼an1加密 -->
 		<dependency>
 			<groupId>bouncycastle</groupId>
 			<artifactId>bcprov-jdk15</artifactId>
@@ -68,6 +68,64 @@
 			<version>4.2.5.RELEASE</version>
 		</dependency>
 		<!-- ↑↑載入萬國碼Arial Unicode.jar會用到的jar檔 -->
+
+		<!-- ↓↓barcode和qrcode會用的 -->
+		<dependency>
+			<groupId>net.sf.barcode4j</groupId>
+			<artifactId>barcode4j</artifactId>
+			<version>2.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>avalon-framework-impl</artifactId>
+					<groupId>avalon-framework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-cli</artifactId>
+					<groupId>commons-cli</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>ant</artifactId>
+					<groupId>org.apache.ant</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-bridge</artifactId>
+			<version>1.7</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>xml-apis</artifactId>
+					<groupId>xml-apis</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>xalan</artifactId>
+					<groupId>xalan</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- ↑↑barcode和qrcode會用的 -->
+
+
+
+
+		<!-- 讀圖片用的，沒有也行，方便啦 -->
+		<!-- <dependency> -->
+		<!-- <groupId>commons-io</groupId> -->
+		<!-- <artifactId>commons-io</artifactId> -->
+		<!-- <version>2.4</version> -->
+		<!-- </dependency> -->
+		<!-- 圖片base64用的 -->
+		<!-- <dependency> -->
+		<!-- <groupId>commons-codec</groupId> -->
+		<!-- <artifactId>commons-codec</artifactId> -->
+		<!-- <version>1.10</version> -->
+		<!-- </dependency> -->
 
 	</dependencies>
 
