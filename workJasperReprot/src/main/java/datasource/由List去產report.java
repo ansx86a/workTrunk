@@ -13,6 +13,12 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 import vo.CustomBeanFactory;
 
+/**
+ * 正常的報表都有包sql，而會傳connection進去，由sql產生出list<br>
+ * 再由list去填報表，這個例子就是直接由list去填報表，省掉↑↑的方式
+ * @author ai
+ *
+ */
 public class 由List去產report {
 
 	public static void main(String[] args) throws JRException {

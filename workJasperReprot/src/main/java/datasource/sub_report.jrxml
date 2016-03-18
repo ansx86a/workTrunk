@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.2.0.final using JasperReports Library version 6.2.0  -->
+<!-- 2016-03-17T17:33:42 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sub_report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="681ec453-c634-4332-ba78-dba9a8b44060">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="anz"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[select * from config
+where config_id < 10]]>
+	</queryString>
+	<field name="config_id" class="java.lang.Integer"/>
+	<field name="type" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="value" class="java.lang.String"/>
+	<field name="description" class="java.lang.String"/>
+	<variable name="config_id1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{config_id}]]></variableExpression>
+	</variable>
+	<variable name="type1" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{type}]]></variableExpression>
+	</variable>
+	<variable name="config_id2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{config_id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="10" width="110" height="30" uuid="3b5a5c7a-b667-4b19-af63-a1eead195f6a"/>
+				<text><![CDATA[i am sub report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="80" height="30" uuid="c6bee7cc-ce1c-49d0-9169-ffd44a122f8b"/>
+				<text><![CDATA[detail]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="80" y="10" width="80" height="30" uuid="ace4d362-f98e-4267-b3fd-6a14af144052"/>
+				<textFieldExpression><![CDATA[$V{type1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="12" width="100" height="30" uuid="70dc6c57-e3b6-47f8-983f-9587ef252035"/>
+				<textFieldExpression><![CDATA[$V{config_id2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

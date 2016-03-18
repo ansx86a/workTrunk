@@ -8,7 +8,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import util.ExportUtil;
 
-public class 空的去產生 {
+public class 空的來源去產生寫死的報表 {
 
 	public static void main(String[] args) throws JRException {
 		JasperReport jasperReport = (JasperReport) JRLoader.loadObject(ClassLoader
