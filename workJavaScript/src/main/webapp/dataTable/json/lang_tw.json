@@ -1,0 +1,23 @@
+﻿{
+	"sEmptyTable":   	"",
+	"sInfo":         	"目前顯示頁面為 _PAGE_ / _PAGES_",
+	"sInfoEmpty":    	"",
+	"sInfoFiltered": 	"(從 _MAX_ 筆資料中篩選)",
+	"sInfoPostFix":  	"",
+	"sInfoThousands":  	".",
+	"sLengthMenu":   	"每頁顯示 _MENU_ 筆",
+	"sLoadingRecords": 	"讀取中...",
+	"sProcessing":   	"處理中...",
+	"sSearch":       	"搜尋",
+	"sZeroRecords":  	"--無資料--",
+	"oPaginate": {
+		"sFirst":    	"第一頁",
+		"sPrevious": 	"上一頁",
+		"sNext":     	"下一頁",
+		"sLast":     	"最後頁"
+	},
+	"oAria": {
+		"sSortAscending":  ": aktivieren, um Spalte aufsteigend zu sortieren",
+		"sSortDescending": ": aktivieren, um Spalte absteigend zu sortieren"
+	}
+}
