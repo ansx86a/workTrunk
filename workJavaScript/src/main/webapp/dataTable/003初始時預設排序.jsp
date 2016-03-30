@@ -13,10 +13,11 @@
 </body>
 <script>
 	$(document).ready(function() {
-		$('#example').DataTable({
+		ttt=$('#example').DataTable({
 			//"order" : [ [ 3, "desc" ] ]//單一預設排序
 			//order : [ [ 3, 'desc' ], [ 0, 'asc' ] ]	//複合預設排序
-			order : [ [ 3, 'desc' ], [ 0, 'asc' ] ]
+			order : [ ]//預設不排序
+			//order : [ [ 3, 'desc' ], [ 0, 'asc' ] ]
 		});
 	});
 </script>

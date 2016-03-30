@@ -3,8 +3,10 @@ package j2seTest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 import model.Config;
+import model.ConfigExample;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.ibatis.io.Resources;
@@ -28,7 +30,7 @@ public class 第一個測試 {
 		t1.init();
 		// t1.測試第一個查詢();//舊版的寫法
 		// t1.測試第一個查詢java7();//更乾淨的寫法
-		t1.測試annotation查詢();// 此例還不需要加入ext的sqlmap.xml就可以用了
+		// t1.測試annotation查詢();// 此例還不需要加入ext的sqlmap.xml就可以用了
 		t1.測試第一個example查詢();// 跨資料庫使用，因為example是用捲出來的
 	}
 
@@ -91,9 +93,21 @@ public class 第一個測試 {
 		}
 	}
 
+	/**
+	 * example只適合簡單的查詢
+	 */
 	public void 測試第一個example查詢() {
-		// 待補完
-
+		ConfigExample ex = new ConfigExample();
+		// select * from config where (configId between 1 and 3) or (configId between 6 and 8);
+		ex.or().andConfigIdBetween(1, 2);
+		ex.or().andConfigIdBetween(6, 7);
+		try (SqlSession session = sqlSessionFactory.openSession()) {
+			ConfigMapperExt mapper = session.getMapper(ConfigMapperExt.class);
+			List<Config> list = mapper.selectByExample(ex);
+			for (Config c : list) {
+				System.out.println(ToStringBuilder.reflectionToString(c));
+			}
+		}
 	}
 
 }
