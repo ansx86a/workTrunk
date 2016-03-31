@@ -14,7 +14,8 @@ public interface ConfigMapperExt extends ConfigMapper {
 	HashMap<String,Object> selectByPrimaryKeyAnnotationMap(Integer configId);
 	// 以上j2seTest第一個測試使用
 	
-	
+	//新增一個可以取回insertKey的method
+	int insertGetKey(Config config);
 	
 	
 	

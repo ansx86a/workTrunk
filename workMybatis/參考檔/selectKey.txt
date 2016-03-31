@@ -1,0 +1,25 @@
+<!-- oracle Example -->   
+<insert id="insertProduct-ORACLE" parameterClass="product">     
+    <selectKey resultClass="int" type="pre" keyProperty="id" >     
+        SELECT STOCKIDSEQUENCE.NEXTVAL AS VALUE FROM DUAL     
+    </selectKey>     
+    insert into PRODUCT (PRD_ID,PRD_DESCRIPTION) values (#id#,#description#)     
+</insert>     
+     
+<!-- Microsoft SQL Server IDENTITY Column Example -->     
+<insert id="insertProduct-MS-SQL" parameterClass="product">     
+    insert into PRODUCT (PRD_DESCRIPTION)     
+    values (#description#)     
+    <selectKey resultClass="int" type="post" keyProperty="id" >     
+        select @@IDENTITY as value     
+    </selectKey>     
+</insert>     
+     
+<!-- MySQL Example -->     
+<insert id="insertProduct-MYSQL" parameterClass="product">     
+    insert into PRODUCT (PRD_DESCRIPTION)     
+    values (#description#)     
+    <selectKey resultClass="int" type="post" keyProperty="id" >     
+        select LAST_INSERT_ID() as value     
+    </selectKey>     
+</insert>    

@@ -99,18 +99,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.Config" >
-    insert into config (config_id, type, name, 
-      value, description)
-    values (#{configId,jdbcType=INTEGER}, #{type,jdbcType=NVARCHAR}, #{name,jdbcType=NVARCHAR}, 
-      #{value,jdbcType=NVARCHAR}, #{description,jdbcType=NVARCHAR})
+  <insert id="insert" parameterType="model.Config" useGeneratedKeys="true" keyProperty="configId" >
+    insert into config (type, name, value, 
+      description)
+    values (#{type,jdbcType=NVARCHAR}, #{name,jdbcType=NVARCHAR}, #{value,jdbcType=NVARCHAR}, 
+      #{description,jdbcType=NVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="model.Config" >
+  <insert id="insertSelective" parameterType="model.Config" useGeneratedKeys="true" keyProperty="configId" >
     insert into config
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="configId != null" >
-        config_id,
-      </if>
       <if test="type != null" >
         type,
       </if>
@@ -125,9 +122,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="configId != null" >
-        #{configId,jdbcType=INTEGER},
-      </if>
       <if test="type != null" >
         #{type,jdbcType=NVARCHAR},
       </if>
