@@ -15,6 +15,6 @@
 <!--     </environment> -->
 <!--   </environments> -->
   <mappers>
-    <mapper resource="sqlmap/JustSqlCommand.xml"/>
+    <mapper resource="j2seTest/JustSqlCommand.xml"/>
   </mappers>
 </configuration>

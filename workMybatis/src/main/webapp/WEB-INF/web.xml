@@ -17,6 +17,38 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
+	<!--  spring mvc -->
+	<servlet>
+		<servlet-name>webServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/web-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		<servlet-mapping>
+		<servlet-name>webServlet</servlet-name>
+		<url-pattern>*.mvc</url-pattern>
+	</servlet-mapping>	
+	
+	
+	<!--  spring的起始設定檔，因為有mvc了，所以這個載不載入應該沒什麼太大的關係
+			我的想法有兩個
+			一是所有的設定都寫在web-context.xml算了，rootContext只寫一些共同的jndi之類的，或許可以拿掉也沒關系
+			二是web-context都只導contorller，其它的全寫在rootContext兩種
+	 -->
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/root-context.xml</param-value>
+	</context-param>
+
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>	
+	
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>
