@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="JustSqlCommand">
-  <resultMap id="BaseResultMap" type="model.Customer" >
-    <id column="CustomerID" property="customerid" jdbcType="NCHAR" />
+<mapper namespace="dao.SupplierMapperExt" >
+  <resultMap id="BaseResultMap" type="model.Supplier" >
+    <id column="SupplierID" property="supplierid" jdbcType="INTEGER" />
     <result column="CompanyName" property="companyname" jdbcType="NVARCHAR" />
     <result column="ContactName" property="contactname" jdbcType="NVARCHAR" />
     <result column="ContactTitle" property="contacttitle" jdbcType="NVARCHAR" />
@@ -13,6 +13,7 @@
     <result column="Country" property="country" jdbcType="NVARCHAR" />
     <result column="Phone" property="phone" jdbcType="NVARCHAR" />
     <result column="Fax" property="fax" jdbcType="NVARCHAR" />
+    <result column="HomePage" property="homepage" jdbcType="LONGNVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,16 +74,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    CustomerID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, 
-    Country, Phone, Fax
+    SupplierID, CompanyName, ContactName, ContactTitle, Address, City, Region, PostalCode, 
+    Country, Phone, Fax, HomePage
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="model.CustomerExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="model.SupplierExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from Customers
+    from Suppliers
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,38 +91,35 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from Customers
-    where CustomerID = #{customerid,jdbcType=NCHAR}
+    from Suppliers
+    where SupplierID = #{supplierid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from Customers
-    where CustomerID = #{customerid,jdbcType=NCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Suppliers
+    where SupplierID = #{supplierid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="model.CustomerExample" >
-    delete from Customers
+  <delete id="deleteByExample" parameterType="model.SupplierExample" >
+    delete from Suppliers
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="model.Customer" >
-    insert into Customers (CustomerID, CompanyName, ContactName, 
-      ContactTitle, Address, City, 
-      Region, PostalCode, Country, 
-      Phone, Fax)
-    values (#{customerid,jdbcType=NCHAR}, #{companyname,jdbcType=NVARCHAR}, #{contactname,jdbcType=NVARCHAR}, 
-      #{contacttitle,jdbcType=NVARCHAR}, #{address,jdbcType=NVARCHAR}, #{city,jdbcType=NVARCHAR}, 
-      #{region,jdbcType=NVARCHAR}, #{postalcode,jdbcType=NVARCHAR}, #{country,jdbcType=NVARCHAR}, 
-      #{phone,jdbcType=NVARCHAR}, #{fax,jdbcType=NVARCHAR})
+  <insert id="insert" parameterType="model.Supplier" useGeneratedKeys="true" keyProperty="supplierid" >
+    insert into Suppliers (CompanyName, ContactName, ContactTitle, 
+      Address, City, Region, 
+      PostalCode, Country, Phone, 
+      Fax, HomePage)
+    values (#{companyname,jdbcType=NVARCHAR}, #{contactname,jdbcType=NVARCHAR}, #{contacttitle,jdbcType=NVARCHAR}, 
+      #{address,jdbcType=NVARCHAR}, #{city,jdbcType=NVARCHAR}, #{region,jdbcType=NVARCHAR}, 
+      #{postalcode,jdbcType=NVARCHAR}, #{country,jdbcType=NVARCHAR}, #{phone,jdbcType=NVARCHAR}, 
+      #{fax,jdbcType=NVARCHAR}, #{homepage,jdbcType=LONGNVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="model.Customer" >
-    insert into Customers
+  <insert id="insertSelective" parameterType="model.Supplier" useGeneratedKeys="true" keyProperty="supplierid" >
+    insert into Suppliers
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="customerid != null" >
-        CustomerID,
-      </if>
       <if test="companyname != null" >
         CompanyName,
       </if>
@@ -152,11 +150,11 @@
       <if test="fax != null" >
         Fax,
       </if>
+      <if test="homepage != null" >
+        HomePage,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="customerid != null" >
-        #{customerid,jdbcType=NCHAR},
-      </if>
       <if test="companyname != null" >
         #{companyname,jdbcType=NVARCHAR},
       </if>
@@ -187,19 +185,22 @@
       <if test="fax != null" >
         #{fax,jdbcType=NVARCHAR},
       </if>
+      <if test="homepage != null" >
+        #{homepage,jdbcType=LONGNVARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="model.CustomerExample" resultType="java.lang.Integer" >
-    select count(*) from Customers
+  <select id="countByExample" parameterType="model.SupplierExample" resultType="java.lang.Integer" >
+    select count(*) from Suppliers
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update Customers
+    update Suppliers
     <set >
-      <if test="record.customerid != null" >
-        CustomerID = #{record.customerid,jdbcType=NCHAR},
+      <if test="record.supplierid != null" >
+        SupplierID = #{record.supplierid,jdbcType=INTEGER},
       </if>
       <if test="record.companyname != null" >
         CompanyName = #{record.companyname,jdbcType=NVARCHAR},
@@ -231,14 +232,17 @@
       <if test="record.fax != null" >
         Fax = #{record.fax,jdbcType=NVARCHAR},
       </if>
+      <if test="record.homepage != null" >
+        HomePage = #{record.homepage,jdbcType=LONGNVARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update Customers
-    set CustomerID = #{record.customerid,jdbcType=NCHAR},
+    update Suppliers
+    set SupplierID = #{record.supplierid,jdbcType=INTEGER},
       CompanyName = #{record.companyname,jdbcType=NVARCHAR},
       ContactName = #{record.contactname,jdbcType=NVARCHAR},
       ContactTitle = #{record.contacttitle,jdbcType=NVARCHAR},
@@ -248,13 +252,14 @@
       PostalCode = #{record.postalcode,jdbcType=NVARCHAR},
       Country = #{record.country,jdbcType=NVARCHAR},
       Phone = #{record.phone,jdbcType=NVARCHAR},
-      Fax = #{record.fax,jdbcType=NVARCHAR}
+      Fax = #{record.fax,jdbcType=NVARCHAR},
+      HomePage = #{record.homepage,jdbcType=LONGNVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="model.Customer" >
-    update Customers
+  <update id="updateByPrimaryKeySelective" parameterType="model.Supplier" >
+    update Suppliers
     <set >
       <if test="companyname != null" >
         CompanyName = #{companyname,jdbcType=NVARCHAR},
@@ -286,11 +291,14 @@
       <if test="fax != null" >
         Fax = #{fax,jdbcType=NVARCHAR},
       </if>
+      <if test="homepage != null" >
+        HomePage = #{homepage,jdbcType=LONGNVARCHAR},
+      </if>
     </set>
-    where CustomerID = #{customerid,jdbcType=NCHAR}
+    where SupplierID = #{supplierid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="model.Customer" >
-    update Customers
+  <update id="updateByPrimaryKey" parameterType="model.Supplier" >
+    update Suppliers
     set CompanyName = #{companyname,jdbcType=NVARCHAR},
       ContactName = #{contactname,jdbcType=NVARCHAR},
       ContactTitle = #{contacttitle,jdbcType=NVARCHAR},
@@ -300,44 +308,8 @@
       PostalCode = #{postalcode,jdbcType=NVARCHAR},
       Country = #{country,jdbcType=NVARCHAR},
       Phone = #{phone,jdbcType=NVARCHAR},
-      Fax = #{fax,jdbcType=NVARCHAR}
-    where CustomerID = #{customerid,jdbcType=NCHAR}
+      Fax = #{fax,jdbcType=NVARCHAR},
+      HomePage = #{homepage,jdbcType=LONGNVARCHAR}
+    where SupplierID = #{supplierid,jdbcType=INTEGER}
   </update>
-  
- <update id="updateByPrimaryKeySelective2" parameterType="model.Customer" >
-    update Customers
-    <set >
-      <if test="companyname != null" >
-        CompanyName = :companyName,
-      </if>
-      <if test="contactname != null" >
-        ContactName = :contactName,
-      </if>
-      <if test="contacttitle != null" >
-        ContactTitle = :contactTitle,
-      </if>
-      <if test="address != null" >
-        Address = :address,
-      </if>
-      <if test="city != null" >
-        City = :city,
-      </if>
-      <if test="region != null" >
-        Region = :region,
-      </if>
-      <if test="postalcode != null" >
-        PostalCode = :postalCode,
-      </if>
-      <if test="country != null" >
-        Country = :country,
-      </if>
-      <if test="phone != null" >
-        Phone = :phone,
-      </if>
-      <if test="fax != null" >
-        Fax = :fax,
-      </if>
-    </set>
-    where CustomerID = :customerID
-  </update>  
 </mapper>

@@ -48,7 +48,7 @@ public class DynamicSqlSource implements SqlSource {
 		}
 		return boundSql;
 	}
-
+	//加上的get和set，利外部程式取得configuration和rootSqlNode
 	public Configuration getConfiguration() {
 		return configuration;
 	}

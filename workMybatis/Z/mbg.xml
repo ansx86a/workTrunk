@@ -17,7 +17,7 @@
 
 		<!--数据库连接 -->
 		<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-			connectionURL="jdbc:sqlserver://127.0.0.1;DatabaseName=ANZ_WORKFLOW"
+			connectionURL="jdbc:sqlserver://127.0.0.1;DatabaseName=NORTHWND"
 			userId="sa" password="sa">
 		</jdbcConnection>
 		<!--默认false Java type resolver will always use java.math.BigDecimal if 
@@ -45,11 +45,40 @@
 		<!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等 -->
 		<!-- <table tableName="USER" domainObjectName="User" > -->
 		<!-- </table> -->
-		<table tableName="config" domainObjectName="Config"  >
+		<table tableName="Employees" domainObjectName="Employee"  >
 			<!-- generatedKey 參考註解001  -->
-			<generatedKey column="config_id"  sqlStatement="JDBC" identity="true" />
+			<generatedKey column="EmployeeID"  sqlStatement="JDBC" identity="true" />
 		</table>
-		<table tableName="credit_card_case" domainObjectName="CreditCardCase" />
+		<table tableName="Orders" domainObjectName="Order" >
+				<generatedKey column="OrderID"  sqlStatement="JDBC" identity="true" />
+		</table>
+		<table tableName="Order Details" domainObjectName="OrderDetail" >
+		</table>		
+		<table tableName="Products" domainObjectName="Product" >
+				<generatedKey column="ProductID"  sqlStatement="JDBC" identity="true" />
+		</table>		
+		<table tableName="Categories" domainObjectName="Category" >
+				<generatedKey column="CategoryID"  sqlStatement="JDBC" identity="true" />
+		</table>				
+		<table tableName="Suppliers" domainObjectName="Supplier" >
+				<generatedKey column="SupplierID"  sqlStatement="JDBC" identity="true" />
+		</table>						
+		<table tableName="Customers" domainObjectName="Customer" >
+		</table>				
+		<table tableName="CustomerCustomerDemo" domainObjectName="CustomerCustomerDemo" >
+		</table>
+		<table tableName="CustomerDemographics" domainObjectName="CustomerDemographic" >
+		</table>		
+		<table tableName="Shippers" domainObjectName="Shipper" >
+				<generatedKey column="ShipperID"  sqlStatement="JDBC" identity="true" />		
+		</table>				
+		<table tableName="EmployeeTerritories" domainObjectName="EmployeeTerritory" >
+		</table>						
+		<table tableName="Territories" domainObjectName="Territory" >
+		</table>		
+		<table tableName="Region" domainObjectName="Region" >
+				<generatedKey column="RegionID"  sqlStatement="JDBC" identity="true" />		
+		</table>									
 	</context>
 	
 <!--  註解001 -->	

@@ -27,6 +27,6 @@
 	<Resource name="jdbc/workflow" auth="Container" type="javax.sql.DataSource"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" maxTotal="30" maxIdle="30"
 		maxWaitMillis="10000"
-		url="jdbc:sqlserver://127.0.0.1;DatabaseName=ANZ_WORKFLOW"
+		url="jdbc:sqlserver://127.0.0.1;DatabaseName=NORTHWND"
 		username="sa" password="sa" />
 </Context>

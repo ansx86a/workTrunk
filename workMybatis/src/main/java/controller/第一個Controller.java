@@ -21,5 +21,12 @@ public class 第一個Controller {
 		System.out.println("myTest");
 		return "/jsp/test.jsp";
 	}
+	@RequestMapping(value = "/test002.mvc", method = RequestMethod.GET)
+	public String test2(HttpServletRequest request, HttpServletResponse response) {
+		service.最簡單的insert();
+		request.setAttribute("test", "這是測試001");
+		System.out.println("myTest");
+		return "/jsp/test.jsp";
+	}
 
 }

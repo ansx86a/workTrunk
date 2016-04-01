@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.Config;
+import javax.servlet.jsp.jstl.core.Config;
+
+import model.Customer;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.ibatis.io.Resources;
@@ -28,6 +30,7 @@ public class SQL語法抽出 {
 		測試一: {
 			ArrayList<Object> list = new ArrayList<>();
 			String sql = sql抽出.產生jdbcSql語法by問號配beanUtils(list);
+			sql = sql.replaceAll("(\n)([ \\t]+(\n))+", "\n");
 			System.out.println(sql);
 			System.out.println(list);
 			System.out.println("=======================");
@@ -49,14 +52,16 @@ public class SQL語法抽出 {
 	 */
 	public String 產生jdbcSql語法by問號配beanUtils(List<Object> param) throws Exception {
 		MappedStatement ms = sqlSessionFactory.getConfiguration().getMappedStatement(
-				"JustSqlCommand.updateByPrimaryKeySelective2");
+				"JustSqlCommand.updateByPrimaryKeySelective");
 		// 由物件產生sql，
-		Config config = new Config();
-		config.setName("name111");
-		config.setType("type222");
-		BoundSql bs = ms.getBoundSql(config);
+		Customer customer = new Customer();
+		customer.setCustomerid("custId");
+		customer.setCity("city");
+		customer.setAddress("addr");
+		customer.setFax("fax");
+		BoundSql bs = ms.getBoundSql(customer);
 		for (ParameterMapping pm : bs.getParameterMappings()) {
-			param.add(BeanUtils.getProperty(config, pm.getProperty()));
+			param.add(BeanUtils.getProperty(customer, pm.getProperty()));
 		}
 		return bs.getSql();
 	}
@@ -66,12 +71,15 @@ public class SQL語法抽出 {
 	 */
 	public void 產生templateForhHsql的例子() {
 		MappedStatement ms = sqlSessionFactory.getConfiguration().getMappedStatement(
-				"JustSqlCommand.updateByPrimaryKeySelective3");
+				"JustSqlCommand.updateByPrimaryKeySelective2");
 		HashMap<String, Object> map = new HashMap<>();
-		map.put("name", "name333");
-		map.put("type", "type444");
+		map.put("customerid", "id1111");
+		map.put("city", "city2222");
+		map.put("address", "addr3333");
 		BoundSql bs = ms.getBoundSql(map);
-		System.out.println(bs.getSql());
+		String sql = bs.getSql();
+		sql = sql.replaceAll("(\n)([ \\t]+(\n))+", "\n");
+		System.out.println(sql);
 		// 以下參照hibernate應用，把map的值都放進去，沒有list的話用utils來foreach轉成map就可以了？？可行？？
 		// Query query = getCurrentSession().createSQLQuery(sql.toString());
 		// query.setParameter("keyword", "%" + keyword + "%");
@@ -85,18 +93,22 @@ public class SQL語法抽出 {
 
 	public String 改寫原始碼取得最初始轉好的template並轉成命名sql參數() {
 		MappedStatement ms = sqlSessionFactory.getConfiguration().getMappedStatement(
-				"JustSqlCommand.updateByPrimaryKeySelective2");
-		Config config = new Config();
-		config.setName("name111");
-		config.setType("type222");
+				"JustSqlCommand.updateByPrimaryKeySelective");
+		Customer customer = new Customer();
+		customer.setCustomerid("custId");
+		customer.setCity("city");
+		customer.setAddress("addr");
+		customer.setFax("fax");
 		DynamicSqlSource dss = (DynamicSqlSource) ms.getSqlSource();
-		DynamicContext context = new DynamicContext(dss.getConfiguration(), config);
+		DynamicContext context = new DynamicContext(dss.getConfiguration(), customer);
 		dss.getRootSqlNode().apply(context);
 		String sql = context.getSql();
+		sql = sql.replaceAll("(\n)([ \\t]+(\n))+", "\n");
 		System.out.println(sql);
 		// 用正規表示式來替換成一般的sql
 		sql = sql.replaceAll("\\Q#{\\E", ":");
 		sql = sql.replaceAll(",jdbcType=(\\w)*}", " ");
+		sql = sql.replaceAll("(\n)([ \\t]+(\n))+", "\n");
 		System.out.println(sql);
 		return sql;
 	}

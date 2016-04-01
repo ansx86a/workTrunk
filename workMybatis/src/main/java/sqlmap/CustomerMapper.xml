@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="JustSqlCommand">
+<mapper namespace="dao.CustomerMapperExt" >
   <resultMap id="BaseResultMap" type="model.Customer" >
     <id column="CustomerID" property="customerid" jdbcType="NCHAR" />
     <result column="CompanyName" property="companyname" jdbcType="NVARCHAR" />
@@ -303,41 +303,4 @@
       Fax = #{fax,jdbcType=NVARCHAR}
     where CustomerID = #{customerid,jdbcType=NCHAR}
   </update>
-  
- <update id="updateByPrimaryKeySelective2" parameterType="model.Customer" >
-    update Customers
-    <set >
-      <if test="companyname != null" >
-        CompanyName = :companyName,
-      </if>
-      <if test="contactname != null" >
-        ContactName = :contactName,
-      </if>
-      <if test="contacttitle != null" >
-        ContactTitle = :contactTitle,
-      </if>
-      <if test="address != null" >
-        Address = :address,
-      </if>
-      <if test="city != null" >
-        City = :city,
-      </if>
-      <if test="region != null" >
-        Region = :region,
-      </if>
-      <if test="postalcode != null" >
-        PostalCode = :postalCode,
-      </if>
-      <if test="country != null" >
-        Country = :country,
-      </if>
-      <if test="phone != null" >
-        Phone = :phone,
-      </if>
-      <if test="fax != null" >
-        Fax = :fax,
-      </if>
-    </set>
-    where CustomerID = :customerID
-  </update>  
 </mapper>
