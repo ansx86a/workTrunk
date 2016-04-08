@@ -24,6 +24,14 @@
 <%-- 
 json的應用就考慮在它是在非同步的ajax的應用
 一開始是空值，然後再塞值進去
+另外附一些比較複雜的json的寫法，.0和.1代表陣列0和陣列1
+            { "data": "hr.position" },
+            { "data": "contact.0" },
+            { "data": "contact.1" },
+            { "data": "hr.start_date" },
+            { "data": "hr.salary" }
+另外陣列可以合併一個欄位顯示"name": ["Nixon","Tiger"]
+"data": "name[, ]"   --->result =  Nixon, Tiger，中括號的那兩個字會變用拆分的符號？？？
  --%>
 $(document).ready(function() {
     ttt = $('#example').DataTable( {
