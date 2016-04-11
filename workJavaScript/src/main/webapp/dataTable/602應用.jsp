@@ -10,6 +10,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/dataTable/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/dataTable/css/jquery.dataTables.min.css">
 </head>
+<%-- 本頁比601多了一點前端的東西，主要是可以在dataTable中有checkBox
+而且可以撈出本頁的checkBox和全table的checkBox，而且可以透過head的dom去調整本頁的dom
+差不多就這樣 --%>
+
 <body>
 	<form id="myForm">
 		<div>
@@ -31,15 +35,14 @@
 		</div>
 	</form>
 	<div>
-		<button id="bt1">第一種轉json，有陣列會出錯</button>
-		<button id="bt2">第二種轉json，這個比較好</button>
-		<button id="bt3">json2配合非同步</button>
-		<button id="bt4">測試4</button>
+		<button id="bt1">捉server的資料</button>
 	</div>
 	==以下是table=============
 	<br>
 	<div id="tableDiv">
-		<table id="example" class="display" >
+		<table id="example" class="display">
+			<thead></thead>
+			<tbody></tbody>
 		</table>
 	</div>
 
@@ -47,34 +50,7 @@
 <script>
 	var t = "0";
 	$(document).ready(function() {
-		//initTable();
-		//$("#tableDiv").hide();//控制不要一開始就透出dataTable來
-
 		$("#bt1").on("click", function() {
-			var url = '${pageContext.request.contextPath}/dataTable002.mvc';
-			$.ajax({
-				type : 'post',
-				url : url,
-				data : {
-					data1 : $("[name='txt1']").val(),
-					data2 : $("[name='txt2']").val(),
-					jsonData : JSON.stringify($("#myForm").serializeToJSON())
-				//這個沒辦法處理陣列input，還是用我從網路上抄下來的ext好了
-				//https://github.com/raphaelm22/jquery.serializeToJSON
-				//$("#myForm").serializeToJSON()  //jsonObject
-				//JSON.stringify($("#myForm").serializeToJSON())  //jsonString
-				},
-				dataType : 'json',
-				cache : false,
-				success : function(data) {
-					putTable(data);
-				},
-				error : function(data) {
-					alert("伺服器錯誤");
-				}
-			});
-		});
-		$("#bt2").on("click", function() {
 			var url = '${pageContext.request.contextPath}/dataTable002.mvc';
 			$.ajax({
 				type : 'post',
@@ -94,33 +70,33 @@
 				}
 			});
 		});
-		$("#bt3").on("click", function() {
-			var url = '${pageContext.request.contextPath}/dataTable003.mvc';
-			$.ajax({
-				type : 'post',
-				url : url,
-				data : {
-					jsonData : JSON.stringify($("#myForm").serializeJsonObject())
-				},
-				async: false,
-				dataType : 'json',
-				cache : false,
-				success : function(data) {
-					putTable(data);
-				},
-				error : function(data) {
-					alert("伺服器錯誤");
+	});
+
+	$("#example tbody").on(
+			"click",
+			"input[type='checkBox']",
+			function() {
+				me = $(this);
+				if (me.prop("checked")) {
+					//checkbox要用prop來取得，就可以取得true or false'
 				}
+				//這裡的重點是t.$可以下jquery去撈值，不然#example tbody input只能撈出該頁的東西，跳頁就不見了
+				alert(me.next().html() + "-->" + $("#example tbody input[type='checkBox']:checked").length + "-->"
+						+ t.$("input:checked").length);
+
 			});
-		});
-		$("#bt4").on("click", function() {
-			alert($(this).html());
-		});
+	$("#example thead").on("click", "input[type='checkBox']", function() {
+		me2 = $(this);
+		if (me2.prop("checked")) {
+			$("#example tbody input[type='checkBox']").prop("checked", true);
+		} else {
+			$("#example tbody input[type='checkBox']").prop("checked", false);
+		}
 	});
 
 	function putTable(data) {
 		if (t === "0") {
-			$("#tableDiv").css("border","3px solid #73AD21");
+			$("#tableDiv").css("border", "3px solid #73AD21");
 			initTable();
 		} else {
 			t.clear();
@@ -138,7 +114,15 @@
 			"ordering" : false,
 			"info" : false,
 			"searching" : false,
+			"columnDefs" : [ {
+				"render" : function(data, type, row) {
+					return '<input type="checkBox" value="true"/>' + '<span> (' + row.name + ')</span>';
+				},
+				"targets" : 0
+			} ],
 			"columns" : [ {
+				title : "<input type='checkBox'>全選"
+			}, {
 				data : "name",
 				title : "名字"
 			},//其它的欄位就照排
@@ -154,5 +138,7 @@
 			} ]
 		});
 	}
+
+
 </script>
 </html>

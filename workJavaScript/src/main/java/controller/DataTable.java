@@ -45,14 +45,31 @@ public class DataTable {
 		return result;
 	}
 
-	public static void main(String[] args) {
+	@RequestMapping(value = "/dataTable003.mvc", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+	@ResponseBody
+	public String test003(HttpServletRequest request, HttpServletResponse response, String jsonData) throws Exception {
+		// 因為是測試非同步，就直接回傳test2，但是要delay一下時間
+		try {
+			Thread.sleep(5 * 1000);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return test002(request, response, jsonData);
+	}
 
+	public static void main(String[] args) {
+		DataTableForm df = new DataTableForm();
+		Gson gson = new Gson();
+		String s = gson.toJson(df, DataTableForm.class);
+		System.out.println(s);
 	}
 
 	public static class DataTableForm {
 		String txt1;
 		String txt2;
-		String txt3;
+		String[] txt3;
+		boolean cb;
+		String rad;
 
 		public String getTxt1() {
 			return txt1;
@@ -70,17 +87,34 @@ public class DataTable {
 			this.txt2 = txt2;
 		}
 
-		public String getTxt3() {
+		public String[] getTxt3() {
 			return txt3;
 		}
 
-		public void setTxt3(String txt3) {
+		public void setTxt3(String[] txt3) {
 			this.txt3 = txt3;
+		}
+
+		public boolean isCb() {
+			return cb;
+		}
+
+		public void setCb(boolean cb) {
+			this.cb = cb;
+		}
+
+		public String getRad() {
+			return rad;
+		}
+
+		public void setRad(String rad) {
+			this.rad = rad;
 		}
 
 		@Override
 		public String toString() {
-			return "DataTableForm [txt1=" + txt1 + ", txt2=" + txt2 + ", txt3=" + txt3 + "]";
+			return "DataTableForm [txt1=" + txt1 + ", txt2=" + txt2 + ", txt3=" + Arrays.toString(txt3) + ", cb=" + cb
+					+ ", rad=" + rad + "]";
 		}
 
 	}
