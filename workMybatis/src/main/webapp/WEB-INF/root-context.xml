@@ -18,12 +18,14 @@
 		<property name="jndiName" value="java:comp/env/jdbc/workflow"></property>
 	</bean>
 
+	<!--  假如要連2個db的話，要有兩個sqlSessionFactory的實例  -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自動掃描entity目錄, 省掉Configuration.xml裡的手工配置 -->
 		<property name="mapperLocations" value="classpath:sqlmap/*.xml" />
 	</bean>
 
+	<!-- 如果有兩個db的話，這裡也分2個package會比較好，但是看起來可以不用分 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

@@ -13,4 +13,6 @@ public interface CustomerMapperExt extends CustomerMapper {
 
 	@Select("select * from customers where customerId = #{customerid}")
 	HashMap<String, Object> selectByPrimaryKeyAnnotationMap(String customerid);
+
+	Integer 取出customer筆數();
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.CustomerMapperExt">
+	<select id="取出customer筆數" resultType="int">
+		select 100
+		<!-- select count(1) from customers -->
+		<!-- 另外type都用int=Integer的好，用_int的話，會有null收不到值的問題 -->
+		<!-- 而且對db來話參數是null可以動態塞default值，不須要在程式設定default值 -->
+	</select>
+</mapper>
