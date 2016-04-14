@@ -1,4 +1,4 @@
-package j2se;
+package thread;
 /**
  * 每個thread裡都有一table在放key:threadLocal和value:threadLocalValue
  * 所以每個thread結束後，資源應該會被釋放沒錯
