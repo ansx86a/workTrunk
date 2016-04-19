@@ -2,11 +2,12 @@ package 新功能;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 
 import tool.Utils;
 
@@ -14,6 +15,7 @@ public class Java7Ex {
 
 	public static void main(String[] args) throws Exception {
 		// io 多了一個path class
+		// nio package
 
 		// 泛型宣告
 		List<String> list = new ArrayList<>();
@@ -27,6 +29,7 @@ public class Java7Ex {
 		/*
 		 * catch (IOException|SQLException ex) { logger.log(ex); throw ex; }
 		 */
+		
 	}
 
 	public static void autoClose() throws Exception {
@@ -39,7 +42,7 @@ public class Java7Ex {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		
+
 		// 照理說是被關了，會丟出closed的消息
 		try {
 			System.out.println(br1.readLine());

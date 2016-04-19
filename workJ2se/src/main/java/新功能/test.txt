@@ -1,1 +1,2 @@
 這是測試的文字檔
+測試java7的autoclose

@@ -2,8 +2,10 @@
 
 import static java.lang.Math.abs;
 
+import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -17,6 +19,7 @@ public class Java6beforeEx {
 		j.$1靜態導入();
 		j.$2printf();
 		j.$3邊界和浮點誤差();
+		j.$5不定參數(1, "不定參數", 9,8,7);
 		// 位元運算 ~(not) |(or) &(and) ^(xor) <<(左移) >>(右移)
 		// new Scanner(System.in) while(.nextInt()!=0)，用來玩輸入選擇題用的
 		// interface中 [public abstract] void method(); ，中括號的東西可以被省略
@@ -61,6 +64,10 @@ public class Java6beforeEx {
 		te.run();
 	}
 
+	public void $5不定參數(int a,String b,int ...c){
+		System.out.println(b+Arrays.toString(c));
+	}
+	
 	private static void tryLog() {
 		Logger log = Logger.getLogger("myLog");
 		Logger log2 = Logger.getLogger("myLog");
@@ -76,18 +83,28 @@ public class Java6beforeEx {
 		ps.setProperty("key1", "value1\r\n有換行耶\t有跳脫鍵");
 		ps.setProperty("key2", "value2");
 		StringWriter sw = new StringWriter();
-		ps.store(sw, "comments");
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ps.store(sw, "comments string");
+		ps.storeToXML(out, "comments xml");
+		//可以寫出string 也可以寫出xml
 		sw.flush();
 		sw.close();
+		out.flush();
+		out.close();
 		System.out.println(sw.toString());
+		System.out.println(new String(out.toByteArray()));
 		// #comments
 		// #Tue Aug 05 09:38:23 CST 2014
 		// key2=value2
 		// key1=value1
+		
+		
 
 		ps = new Properties();
 		ps.load(new StringReader(sw.toString()));
 		System.out.println(ps.getProperty("key1"));// value1
+		
+		
 	}
 
 	private static void trytryFinally() {
