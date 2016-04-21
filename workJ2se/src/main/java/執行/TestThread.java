@@ -1,8 +1,10 @@
 package 執行;
 
-import java.io.File;
-import java.net.URISyntaxException;
-
+/**
+ * 給runtimeExe裡的java TestThread測試用的
+ * @author ai
+ *
+ */
 public class TestThread {
 
 	public static void main(String[] args) throws Exception {
@@ -20,13 +22,4 @@ public class TestThread {
 		System.exit(0);
 	}
 
-	public static File getRootFile() {
-		try {
-			File f = new File(ClassLoader.getSystemResource("").toURI());
-			return f;
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

@@ -5,7 +5,9 @@ import static java.lang.Math.abs;
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
@@ -14,12 +16,25 @@ public class Java6beforeEx {
 		System.out.println("class statis區塊java ex static start");
 	}
 
+	private List<String> 匿名加內容的List = new ArrayList<String>() {
+		{
+			add("msg 1");
+			add("msg 2");
+			add("msg 3");
+			int i = 0;
+			add("msg i->" + i);
+		}
+	};
+
+
 	public static void main(String[] args) throws Exception {
 		Java6beforeEx j = new Java6beforeEx();
+		System.out.println(j.匿名加內容的List);
+		
 		j.$1靜態導入();
 		j.$2printf();
 		j.$3邊界和浮點誤差();
-		j.$5不定參數(1, "不定參數", 9,8,7);
+		j.$5不定參數(1, "不定參數", 9, 8, 7);
 		// 位元運算 ~(not) |(or) &(and) ^(xor) <<(左移) >>(右移)
 		// new Scanner(System.in) while(.nextInt()!=0)，用來玩輸入選擇題用的
 		// interface中 [public abstract] void method(); ，中括號的東西可以被省略
@@ -64,10 +79,10 @@ public class Java6beforeEx {
 		te.run();
 	}
 
-	public void $5不定參數(int a,String b,int ...c){
-		System.out.println(b+Arrays.toString(c));
+	public void $5不定參數(int a, String b, int... c) {
+		System.out.println(b + Arrays.toString(c));
 	}
-	
+
 	private static void tryLog() {
 		Logger log = Logger.getLogger("myLog");
 		Logger log2 = Logger.getLogger("myLog");
@@ -86,7 +101,7 @@ public class Java6beforeEx {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		ps.store(sw, "comments string");
 		ps.storeToXML(out, "comments xml");
-		//可以寫出string 也可以寫出xml
+		// 可以寫出string 也可以寫出xml
 		sw.flush();
 		sw.close();
 		out.flush();
@@ -97,14 +112,11 @@ public class Java6beforeEx {
 		// #Tue Aug 05 09:38:23 CST 2014
 		// key2=value2
 		// key1=value1
-		
-		
 
 		ps = new Properties();
 		ps.load(new StringReader(sw.toString()));
 		System.out.println(ps.getProperty("key1"));// value1
-		
-		
+
 	}
 
 	private static void trytryFinally() {

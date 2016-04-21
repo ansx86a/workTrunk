@@ -15,14 +15,17 @@ public class Utils {
 		return null;
 	}
 
-	public static File getResourceFromRoot(String resourec) {
+	public static File getResourceFromRoot(String resource) {
 		try {
-			File f = new File(ClassLoader.getSystemResource(resourec).toURI());
+			File f = getRootFile();
+			f = new File(f,resource);
 			return f;
-		} catch (URISyntaxException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+	
+	
 
 }
