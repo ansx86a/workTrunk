@@ -97,6 +97,44 @@
 			</exclusions>
 		</dependency>
 
+		<!-- log4j1的lib -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<!-- slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+
+		<!-- log4j2 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.5</version>
+		</dependency>
+
+		<!-- vfs相依net -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-vfs2</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
+		</dependency>
+
+		<!-- sftp使用 (maven中比較多人用的SSH Libraries分類) -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.53</version>
+		</dependency>
 
 
 	</dependencies>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" monitorInterval="3600">
+    <Appenders>
+        <!-- Console & SYSTEM_OUT format by pattern-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="這個是console %d{HH:mm:ss.SSS} (%F:%L) [%t] %-5level %logger{36} - %msg%n" />
+        </Console>
+		<Console name="Console Details" target="SYSTEM_OUT">
+		<!-- Use File and location is an expensive operation.(%F and %L) Use them with caution.-->
+            <PatternLayout pattern="這個是consoleDetails %d %-5p [%t] %C{2} (%F:%L) - %m%n" />
+        </Console>
+		
+        <!-- DailyFile & Log file Name format by pattern-->
+        <RollingFile
+            name="DailyFile" fileName="z:/log4j2.log"
+            filePattern="z:/log4j2-%d{yyyyMMdd}-%i.log">
+            <PatternLayout>
+                <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} (%F:%L)- %msg%n
+                </Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.apache.log4j.xml" level="info" />
+		<Logger name="test" level="info" additivity="false" >
+			<AppenderRef ref="Console Details" />
+			<AppenderRef ref="DailyFile" />
+		</Logger>
+        <Root level="trace">
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="DailyFile" />
+        </Root>
+    </Loggers>
+</Configuration>

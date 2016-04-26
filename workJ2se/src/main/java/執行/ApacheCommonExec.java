@@ -11,14 +11,17 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.exec.ExecuteResultHandler;
 import org.apache.commons.exec.LogOutputStream;
+import org.apache.commons.exec.ProcessDestroyer;
 import org.apache.commons.exec.PumpStreamHandler;
 
 public class ApacheCommonExec {
 
+	Process willCloseProcess;
+	
 	public static void main(String[] args) throws Exception {
 		// 預設是同步
 		ApacheCommonExec a = new ApacheCommonExec();
-		a.$1最簡單的exec同步並sysout結果();
+		a.$7控制一個exe的開始和kill();
 	}
 
 	public void $1最簡單的exec同步並sysout結果() throws Exception {
@@ -112,6 +115,40 @@ public class ApacheCommonExec {
 		DefaultExecutor exe = new DefaultExecutor();
 		exe.execute(cmdLine, rh);
 		System.out.println("==end=========");
+	}
+
+	public void $7控制一個exe的開始和kill() throws  Exception {
+		DefaultExecuteResultHandler rh = new DefaultExecuteResultHandler();
+		File f = new File(ClassLoader.getSystemResource("執行/123.txt").toURI());
+		String line = "notepad.exe";
+		CommandLine cmdLine = CommandLine.parse(line);
+		cmdLine.addArgument(f.getAbsolutePath());
+		DefaultExecutor exe = new DefaultExecutor();
+		exe.setProcessDestroyer(new ProcessDestroyer() {
+			@Override
+			public int size() {
+				return 0;
+			}
+			@Override
+			public boolean remove(Process process) {
+				System.out.println("remove" + process);
+				willCloseProcess = null;
+				return false;
+			}
+			@Override
+			public boolean add(Process process) {
+				System.out.println("add"+process);
+				willCloseProcess=process;
+				return false;
+			}
+		});
+		exe.execute(cmdLine, rh);
+		System.out.println("==exec end=========");
+		System.out.println("===wait 3sec to kill exec");
+		Thread.sleep(3000);
+		willCloseProcess.destroy();
+		Thread.sleep(3000);
+		System.out.println("=kill exec end===");
 	}
 
 	public static class CollectingLogOutputStream extends LogOutputStream {

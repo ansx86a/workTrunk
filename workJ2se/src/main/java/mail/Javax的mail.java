@@ -11,9 +11,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
+ * <pre>
  * 已完成有認證和沒認證的發smtp的method
  * 需完成html發送本文、附件、ssl(再確認要不要實作)
- * 
+ * 參考下列網扯設定參數
+ * https://javamail.java.net/nonav/docs/api/com/sun/mail/smtp/package-summary.html
+ * </pre>
  * @author ai
  */
 public class Javax的mail {
