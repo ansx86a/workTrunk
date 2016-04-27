@@ -1,10 +1,142 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="dao.CustomerMapperExt">
+	<!-- ========================================================================================= -->
 	<select id="取出customer筆數" resultType="int">
 		select 100
 		<!-- select count(1) from customers -->
 		<!-- 另外type都用int=Integer的好，用_int的話，會有null收不到值的問題 -->
 		<!-- 而且對db來話參數是null可以動態塞default值，不須要在程式設定default值 -->
 	</select>
+	<!-- ========================================================================================= -->
+	<select id="最常用的一種select_map例子" parameterType="string"
+		resultType="map">
+		SELECT * FROM customers WHERE CustomerID = #{只傳一個參數進來} and CustomerID
+		= #{只傳一個參數進來名字和數目都隨意}
+		<!-- 這裡的map等於hashmap -->
+		<!-- parameterType為string、int之類的，就只能有一個帶入參數 ，如果要多個帶入參數一定要用map或class -->
+
+	</select>
+	<!-- ========================================================================================= -->
+	<select id="最常用的一種select_map例子map參數" parameterType="map"
+		resultType="map">
+		SELECT * FROM customers WHERE CustomerID = #{customerid} and
+		CompanyName = #{companyName}
+		<!-- 這裡的傳入參數要對應map的key，大小寫也要一樣，不然可能會有null的產生 -->
+	</select>
+	<!-- ========================================================================================= -->
+	<sql id="My3個欄位template">
+		<!-- 故意加入中括號測試 -->
+		<!-- 這邊的重點是這裡也可以動態，$裡面放變數可以類似spring注入的方式使用 -->
+		<!-- 所以這裡的用法會不止是欄位，where條件、table名稱都可以，但是使用還是要克制一點才不會太亂 -->
+		<!--因為是$的用法，會有sql注入問題不能用parameter來導入(重要)，建議一律hardcode注入 -->
+		${alias}[CustomerID] CustomerID${newName},${alias}CompanyName
+		CompanyName${newName},${alias}ContactName ContactName${newName}
+	</sql>
+
+	<select id="最常用的一種select_map例子map參數2" parameterType="map"
+		resultType="map">
+		<!-- 和最常用的一種select_map例子map參數相同，只是導入select欄位的template -->
+		SELECT
+		<include refid="My3個欄位template"></include>
+		FROM customers WHERE CustomerID = #{customerid} and
+		CompanyName =
+		#{companyName}
+	</select>
+	<!-- ========================================================================================= -->
+	<select id="最常用的一種select_map例子map參數3" parameterType="map"
+		resultType="map">
+		<!-- 重點是select欄位的template的別名 -->
+		SELECT
+		<include refid="My3個欄位template">
+			<property name="alias" value="c1." />
+			<property name="newName" value="cc1" />
+		</include>
+		,
+		<include refid="My3個欄位template">
+			<property name="alias" value="c2." />
+			<property name="newName" value="cc2" />
+		</include>
+		FROM customers c1,customers c2
+		WHERE c1.CustomerID = #{customerid} and
+		c1.CompanyName = #{companyName} and
+		c1.CustomerID = c2.CustomerID
+	</select>
+	<!-- ========================================================================================= -->
+	<select id="最常用的一種select_map例子class參數" parameterType="model.Customer"
+		resultType="map">
+		SELECT * FROM customers WHERE CustomerID = #{customerid} and
+		CompanyName = #{companyname}
+		<!-- 這裡的傳入參數要對應class的屬性，大小寫也要一樣，不然可能會有null的產生 -->
+	</select>
+	<!-- ========================================================================================= -->
+	<resultMap id="自創的resultMap" type="model.Employee">
+		<!-- 如果是pk的話，文件寫說用id會增加效能 -->
+		<!-- <id property="firstname" column="CustomerID" /> -->
+		<result property="firstname" column="CustomerID" />
+		<result property="lastname" column="CompanyName" />
+		<result property="title" column="ContactName" />
+	</resultMap>
+	<select id="對result物件多做一層mapping" parameterType="model.Customer"
+		resultMap="自創的resultMap">
+		<!-- 這裡神奇的是 property<->column有寫的會map進去 -->
+		<!-- 但是如果class本身的屬性和db欄位相同，就會直接map進去，不用寫property -->
+
+		SELECT * FROM customers WHERE CustomerID = #{customerid}
+		and
+		CompanyName = #{companyname}
+
+		<!-- 由於很複雜，等要用到很複雜的resultMap的時候再來記錄 -->
+		<!-- constructor - 类在实例化时,用来注入结果到构造方法中 -->
+		<!-- idArg - ID 参数;标记结果作为 ID 可以帮助提高整体效能 -->
+		<!-- arg - 注入到构造方法的一个普通结果 -->
+		<!-- id – 一个 ID 结果;标记结果作为 ID 可以帮助提高整体效能 -->
+		<!-- result – 注入到字段或 JavaBean 属性的普通结果 -->
+		<!-- association – 一个复杂的类型关联;许多结果将包成这种类型 -->
+		<!-- 嵌入结果映射 – 结果映射自身的关联,或者参考一个 -->
+		<!-- collection – 复杂类型的集 -->
+		<!-- 嵌入结果映射 – 结果映射自身的集,或者参考一个 -->
+		<!-- discriminator – 使用结果值来决定使用哪个结果映射 -->
+		<!-- case – 基于某些值的结果映射 -->
+		<!-- 嵌入结果映射 – 这种情形结果也映射它本身,因此可以包含很多相 同的元素,或者它可以参照一个外部的结果映射。 -->
+	</select>
+
+	<!-- ========================================================================================= -->
+	<resultMap id="有lsit的resultMap" type="java.util.HashMap">
+		<!-- 這個做法是事後再join，效能可能比較差一點，而且傳過去的傳數也只有一個 -->
+		<collection property="訂單列表" javaType="ArrayList" column="CustomerID"
+			ofType="java.util.HashMap" select="join到訂單" />
+	</resultMap>
+
+	<select id="對join的物件做result的mapping" resultMap="有lsit的resultMap">
+		select * from
+		customers
+	</select>
+
+	<select id="join到訂單" resultType="map">
+		select * from
+		orders where
+		CustomerID = #{什麼鬼參數都可以，因為都resultmap過來的參數只有一個}
+	</select>
+
+	<!-- ========================================================================================= -->
+	<resultMap id="有lsit的resultMap2" type="model.result.CustomerJoin1">
+	<!-- 如果要對result做到完全oo的話，免不掉要對每個result都寫一個對應物件，很費工的 -->
+	<!-- 已試過第一層的model.result.CustomerJoin1換不成hashMap -->
+		<result property="customerid" column="CustomerID" />
+		<result property="companyname" column="companyname" />
+		<result property="contactname" column="contactname" />
+		<collection property="訂單列表" ofType="model.Order">
+			<result property="orderid" column="OrderID" />
+			<result property="customerid" column="CustomerID" />
+		</collection>
+	</resultMap>
+	<select id="對join的物件做result的直接mapping" resultMap="有lsit的resultMap2">
+		select * from
+		customers c,orders o
+		where c.CustomerID = o.CustomerID
+	</select>
+
+
+
 </mapper>
