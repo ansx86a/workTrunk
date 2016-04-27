@@ -7,6 +7,8 @@
 <body>
 cout:<c:out value="${test}"/>
 <br>
-el:${test}
+el:${test2}
+<br>
+<a href="http://127.0.0.1:8080/workMybatis/index.jsp">回測試首頁</a>
 </body>
 </html>
