@@ -14,15 +14,50 @@
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 	<description>Spring公共配置</description>
 
+	<!-- 這裡以下是要設定多組資料庫產動態sql的設定 -->
+	<bean id="dbMapProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="SQL Server">sqlserver</prop>
+				<prop key="DB2">db2</prop>
+				<prop key="Oracle">oracle</prop>
+				<prop key="MySQL">mysql</prop>
+				<prop key="H2">h2</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="databaseIdProvider" class="org.apache.ibatis.mapping.VendorDatabaseIdProvider">
+		<property name="properties" ref="dbMapProperties" />
+	</bean>
+	<!-- 這裡以上是要設定多組資料庫產動態sql的設定 -->
+
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/workflow"></property>
 	</bean>
 
-	<!--  假如要連2個db的話，要有兩個sqlSessionFactory的實例  -->
+	<!-- 導入交易以下 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- enable transaction annotation support -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	<!-- 一定要有component scan才行 -->
+	<context:component-scan base-package="controller"
+		use-default-filters="false">
+		<context:include-filter type="regex"
+			expression="controller.*Service" />
+	</context:component-scan>
+	<!-- 導入交易以上 -->
+
+	<!-- 假如要連2個db的話，要有兩個sqlSessionFactory的實例 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- 自動掃描entity目錄, 省掉Configuration.xml裡的手工配置 -->
 		<property name="mapperLocations" value="classpath:sqlmap/*.xml" />
+		<!-- 這一行是要設定多種db對應的 -->
+		<property name="databaseIdProvider" ref="databaseIdProvider" />
 	</bean>
 
 	<!-- 如果有兩個db的話，這裡也分2個package會比較好，但是看起來可以不用分 -->
@@ -31,12 +66,5 @@
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 
-	<!-- 交易的部分先註解，先還不導入交易 -->
-	<!-- <bean id="transactionManager" -->
-	<!-- class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
-	<!-- <property name="dataSource" ref="dataSource" /> -->
-	<!-- </bean> -->
-
-	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
 
 </beans>

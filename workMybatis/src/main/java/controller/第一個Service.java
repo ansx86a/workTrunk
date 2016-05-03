@@ -47,7 +47,7 @@ public class 第一個Service {
 		Utils.getRequest().setAttribute("test2", map);
 	}
 
-	public void 最簡單的sqlMap例子1() {
+	public void 取出customer筆數() {
 		Integer count = customerMapperExt.取出customer筆數();
 		System.out.println(count);
 		Utils.getRequest().setAttribute("test2", count);

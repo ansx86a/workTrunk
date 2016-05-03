@@ -2,10 +2,9 @@ package j2seTest;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.jsp.jstl.core.Config;
 
 import model.Customer;
 import model.CustomerExample;
@@ -15,6 +14,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.session.TransactionIsolationLevel;
 
 import dao.CustomerMapperExt;
 
@@ -34,6 +34,8 @@ public class 第一個測試 {
 		// t1.測試第一個查詢java7();// 更乾淨的寫法
 		t1.測試annotation查詢();// 此例還不需要加入ext的sqlmap.xml就可以用了
 		t1.測試第一個example查詢();// 跨資料庫使用，因為example是用捲出來的
+
+		t1.測試交易(false);
 	}
 
 	public void init() throws IOException {
@@ -112,4 +114,28 @@ public class 第一個測試 {
 		}
 	}
 
+	public void 測試交易(boolean isRight) {
+		SqlSession session = sqlSessionFactory.openSession(TransactionIsolationLevel.READ_COMMITTED);
+		// 以後再來補完
+		try {
+			// 先塞一筆資料進去
+			Customer c = new Customer();
+			c.setCustomerid("id" + new Date().getTime() % 1000);
+			c.setContactname("連絡人");
+			c.setCompanyname("公司司");
+			CustomerMapperExt mapper = session.getMapper(CustomerMapperExt.class);
+			mapper.insert(c);
+			if (!isRight) {
+				throw new RuntimeException("錯誤，測試rollback");
+			}
+			session.commit();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			session.rollback();
+			System.out.println("rollback完成");
+		} finally {
+			session.close();
+		}
+
+	}
 }

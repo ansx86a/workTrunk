@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.CustomerMapperExt">
+	<!-- ============================================================================================== -->
+	<!-- 再來是service2的例子了=============================================================================== -->
+	<!-- ============================================================================================== -->
+	<resultMap id="caseWhenResultMap" type="java.util.HashMap">
+		<!-- 這是去針對mapping做優化，而caseWhen mapping到的column，將會以設定的key mapping進去，不會auto 
+			mapping -->
+		<!-- 以下做法可以製造多種map的直，例如值1 key要對欄位1，值2 key要對欄位2可以在這裡做掉，減低程式的複雜度 -->
+		<discriminator javaType="string" column="CustomerID">
+			<case value="ALFKI" resultMap="carResult" />
+			<case value="ANATR" resultMap="truckResult" />
+			<case value="ANTON" resultMap="vanResult" />
+		</discriminator>
+		<!-- 也可以直接在body設定mapping項目 -->
+		<!-- <case value="1" resultType="carResult"> -->
+		<!-- <result property="doorCount" column="door_count" /> -->
+		<!-- </case> -->
+	</resultMap>
+
+	<select id="caseWhen的應用" resultMap="caseWhenResultMap">
+		select *
+		from
+		customers
+	</select>
+	<resultMap id="carResult" type="java.util.HashMap"
+		autoMapping="false">
+		<!-- 這裡順便做一下autoMappnig的測試 -->
+		<result property="對的id" column="CustomerID" />
+		<result property="對的公司" column="companyname" />
+		<result property="對的連絡人" column="contactname" />
+	</resultMap>
+	<resultMap id="truckResult" type="java.util.HashMap"
+		autoMapping="false">
+		<!-- 這裡順便做一下autoMappnig的測試 -->
+		<result property="對的id-1" column="companyname" />
+		<result property="對的公司-1" column="CustomerID" />
+		<result property="對的連絡人" column="contactname" />
+	</resultMap>
+	<resultMap id="vanResult" type="java.util.HashMap">
+		<result property="對的id" column="CustomerID" />
+		<result property="對的公司-2" column="contactname" />
+		<result property="對的連絡人-2" column="companyname" />
+	</resultMap>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlIf" parameterType="model.Customer" resultType="map">
+		select * from customers where 1=1
+		<if test="customerid != null"> AND CustomerID = #{customerid}		</if>
+		<if test="companyname != null"> AND companyname = #{companyname}		</if>
+		<if test="contactname != null"> AND contactname = #{contactname}		</if>
+		<if test="contacttitle != null"> AND contacttitle = #{contacttitle}		</if>
+		<if test="address != null"> AND address = #{address}		</if>
+		<if test="city != null"> AND city = #{city}		</if>
+		<if test="region != null"> AND region = #{region}		</if>
+		<if test="postalcode != null"> AND postalcode = #{postalcode}		</if>
+		<if test="country != null"> AND country = #{country}		</if>
+		<if test="phone != null"> AND phone = #{phone}		</if>
+		<if test="fax != null"> AND fax = #{fax}		</if>
+		<!-- 不能用&&，要用and ，這裡可以用複和條件(OGNL ) -->
+		<if test="fax == null and phone == null"> AND fax is not null AND phone is not null		</if>
+	</select>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlCaseWhen" parameterType="model.Customer"
+		resultType="map">
+		select * from customers where 1=1
+		<choose>
+			<when test="fax == 'equal'"> AND CustomerID = #{customerid}		</when>
+			<when test="fax == '百分比'"> AND CustomerID like #{customerid}			</when>
+			<otherwise> AND CustomerID = 'ANTON'			</otherwise>
+		</choose>
+	</select>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlIf去化where1等於1" parameterType="model.Customer"
+		resultType="map">
+		<!-- 去化where的動作，而且會幫你把第一個and 或是 or 拿掉，但是如果是or或是and以外的開頭就要再看看要不要用trim了了 -->
+		select * from customers
+		<!-- 參照替代where的方案trim -->
+		<!-- <trim prefix="WHERE" prefixOverrides="AND |OR ">一堆if</trim> （注意prefixOverrides的空格也是必要的） -->
+		<where>
+			<if test="customerid != null"> and CustomerID = #{customerid}		</if>
+			<if test="companyname != null"> and companyname = #{companyname}		</if>
+			<if test="contactname != null"> AND contactname = #{contactname}		</if>
+			<if test="contacttitle != null"> AND contacttitle = #{contacttitle}		</if>
+			<if test="address != null"> AND address = #{address}		</if>
+			<if test="city != null"> AND city = #{city}		</if>
+			<if test="region != null"> AND region = #{region}		</if>
+			<if test="postalcode != null"> AND postalcode = #{postalcode}		</if>
+			<if test="country != null"> AND country = #{country}		</if>
+			<if test="phone != null"> AND phone = #{phone}		</if>
+			<if test="fax != null"> AND fax = #{fax}		</if>
+			<!-- 不能用&&，要用and ，這裡可以用複和條件(OGNL ) -->
+			<if test="fax == null and phone == null"> AND fax is not null AND phone is not null		</if>
+		</where>
+	</select>
+	<!-- ============================================================================================== -->
+	<update id="動態sqlIf去化結尾的逗號" parameterType="model.Customer">
+		<!-- 去化結尾的逗號，會幫你把最後一個逗號拿掉 -->
+		update customers
+		<!-- 參照替代set的方案trim -->
+		<!-- <trim prefix="SET" suffixOverrides=",">一堆if</trim> -->
+		<set>
+			<if test="contactname != null"> contactname = #{contactname},		</if>
+			<if test="contacttitle != null"> contacttitle = #{contacttitle} ,	</if>
+			<if test="address != null"> address = #{address},		</if>
+		</set>
+		where customerid=#{customerid}
+	</update>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlIf內部參數組合Class" parameterType="model.Customer"
+		resultType="map">
+		<bind name="pattern" value="'%' + _parameter.getCustomerid() + '%'" />
+		select * from customers
+		where customerid LIKE #{pattern}
+	</select>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlIf內部參數組合Map" resultType="map">
+		<bind name="pattern" value="'%' + _parameter.get('customerid') + '%'" />
+		select * from customers
+		where customerid LIKE #{pattern}
+	</select>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlForEachMap" resultType="map">
+		select * from customers
+		where customerid in
+		<foreach item="myItem" index="index" collection="一堆id資料list"
+			open="(" separator="," close=")">
+			#{myItem}
+		</foreach>
+	</select>
+	<!-- ============================================================================================== -->
+	<select id="動態sqlForEachClass" parameterType="model.input.MyInput"
+		resultType="map">
+		select * from customers
+		where customerid in
+		<foreach item="myItem" index="index" collection="list1" open="("
+			separator="," close=")">
+			#{myItem}
+		</foreach>
+	</select>
+	<!-- 多種db支援=========================================================================== -->
+	<select id="多種db支援1" resultType="int" databaseId="sqlserver">
+		select 100
+	</select>
+	<select id="多種db支援1" resultType="int" databaseId="oracle">
+		select 100 from
+		dual
+	</select>
+
+	<select id="多種db支援2" resultType="int">
+		<if test="_databaseId == 'oracle'">
+			select 102 from dual
+		</if>
+		<if test="_databaseId == 'sqlserver'">
+			select 103
+		</if>
+	</select>
+
+
+</mapper>

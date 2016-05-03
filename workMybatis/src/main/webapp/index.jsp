@@ -10,11 +10,11 @@
 <a href="http://127.0.0.1:8080/workMybatis/test001.mvc">程虏虫select</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test002.mvc">程虏虫insert</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test003.mvc">眖annotation暗select</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test004.mvc">程虏虫sqlMapㄒ</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test004.mvc">customer掸计</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test005.mvc">程盽ノ贺select_mapㄒ</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test006.mvc">程盽ノ贺select_mapㄒ把计</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test007.mvc">程盽ノ贺select_mapㄒ把计2</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test008.mvc">程盽ノ贺select_mapㄒ把计3</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test006.mvc">程盽ノ贺select_mapㄒmap把计</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test007.mvc">程盽ノ贺select_mapㄒmap把计2</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test008.mvc">程盽ノ贺select_mapㄒmap把计3</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test009.mvc">程盽ノ贺select_mapㄒclass把计</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test010.mvc">癸resultン暗糷mapping</a><br>
 <hr>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import model.Customer;
 import model.Employee;
+import model.input.MyInput;
 
 import org.apache.ibatis.annotations.Select;
 
@@ -34,4 +35,28 @@ public interface CustomerMapperExt extends CustomerMapper {
 	List<HashMap<String, Object>> 對join的物件做result的mapping();
 
 	List<HashMap<String, Object>> 對join的物件做result的直接mapping();
+
+	/**
+	 * 以下為第二個service的應用
+	 */
+	List<HashMap> caseWhen的應用();
+
+	List<HashMap> 動態sqlIf(Customer c);
+
+	List<HashMap> 動態sqlCaseWhen(Customer c);
+
+	List<HashMap> 動態sqlIf去化where1等於1(Customer c);
+
+	int 動態sqlIf去化結尾的逗號(Customer c);
+
+	List<HashMap> 動態sqlIf內部參數組合Class(Customer c);
+
+	List<HashMap> 動態sqlIf內部參數組合Map(HashMap c);
+
+	List<HashMap> 動態sqlForEachMap(HashMap c);
+
+	List<HashMap> 動態sqlForEachClass(MyInput c);
+
+	int 多種db支援1();
+	int 多種db支援2();
 }

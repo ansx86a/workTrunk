@@ -46,7 +46,7 @@ public class 第一個Controller {
 	@RequestMapping(value = "/test004.mvc", method = RequestMethod.GET)
 	public String test4(HttpServletRequest request, HttpServletResponse response) {
 		Utils.setRequest(request);
-		service.最簡單的sqlMap例子1();
+		service.取出customer筆數();
 		request.setAttribute("test", "最簡單的sqlMap例子1");
 		System.out.println("myTest");
 		return "/jsp/test.jsp";

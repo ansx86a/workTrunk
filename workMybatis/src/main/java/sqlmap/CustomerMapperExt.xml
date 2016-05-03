@@ -11,8 +11,10 @@
 	<!-- ========================================================================================= -->
 	<select id="最常用的一種select_map例子" parameterType="string"
 		resultType="map">
+		<![CDATA[
 		SELECT * FROM customers WHERE CustomerID = #{只傳一個參數進來} and CustomerID
 		= #{只傳一個參數進來名字和數目都隨意}
+		]]>
 		<!-- 這裡的map等於hashmap -->
 		<!-- parameterType為string、int之類的，就只能有一個帶入參數 ，如果要多個帶入參數一定要用map或class -->
 
@@ -121,8 +123,8 @@
 
 	<!-- ========================================================================================= -->
 	<resultMap id="有lsit的resultMap2" type="model.result.CustomerJoin1">
-	<!-- 如果要對result做到完全oo的話，免不掉要對每個result都寫一個對應物件，很費工的 -->
-	<!-- 已試過第一層的model.result.CustomerJoin1換不成hashMap -->
+		<!-- 如果要對result做到完全oo的話，免不掉要對每個result都寫一個對應物件，很費工的 -->
+		<!-- 已試過第一層的model.result.CustomerJoin1換不成hashMap -->
 		<result property="customerid" column="CustomerID" />
 		<result property="companyname" column="companyname" />
 		<result property="contactname" column="contactname" />
@@ -136,7 +138,6 @@
 		customers c,orders o
 		where c.CustomerID = o.CustomerID
 	</select>
-
 
 
 </mapper>
