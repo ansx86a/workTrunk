@@ -136,7 +136,7 @@ public class 第二個Service {
 		Utils.getRequest().setAttribute("test2", result);
 	}
 
-	 @Transactional(readOnly = false, rollbackFor = Exception.class)
+	@Transactional(readOnly = false, rollbackFor = Exception.class)
 	public void 測試交易() {
 		// 以下是一個update的交易，會update地扯
 		動態sqlIf去化結尾的逗號();
@@ -148,6 +148,14 @@ public class 第二個Service {
 			System.out.println("ok");
 			Utils.getRequest().setAttribute("test2", "交易ok");
 		}
+	}
+
+	public void 預存程序帶參數的Select() {
+		HashMap map = new HashMap();
+		map.put("參數1", "Beverages");
+		List<HashMap> list = customerMapperExt.預存程序帶參數的Select(map);
+		System.out.println(list.get(0));
+		Utils.getRequest().setAttribute("test2", list.get(0));
 	}
 
 }

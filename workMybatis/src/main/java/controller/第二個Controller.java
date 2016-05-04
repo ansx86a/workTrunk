@@ -124,4 +124,13 @@ public class 第二個Controller {
 		}
 		return "/jsp/test2.jsp";
 	}
+	
+	@RequestMapping(value = "/test033.mvc", method = RequestMethod.GET)
+	public String test033(HttpServletRequest request, HttpServletResponse response) {
+		Utils.setRequest(request);
+		service.預存程序帶參數的Select();
+		request.setAttribute("test", "預存程序帶參數的Select");
+		System.out.println("myTest");
+		return "/jsp/test2.jsp";
+	}
 }

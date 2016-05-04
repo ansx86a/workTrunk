@@ -37,6 +37,7 @@
 			我的想法有兩個
 			一是所有的設定都寫在web-context.xml算了，rootContext只寫一些共同的jndi之類的，或許可以拿掉也沒關系
 			二是web-context都只導contorller，其它的全寫在rootContext兩種
+			如果要包war和可執行檔的話，最好把web另外包成xml，root跑j2se，然後讓mvc可以抽出
 	 -->
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>

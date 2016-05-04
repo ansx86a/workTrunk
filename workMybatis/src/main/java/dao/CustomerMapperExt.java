@@ -58,5 +58,8 @@ public interface CustomerMapperExt extends CustomerMapper {
 	List<HashMap> 動態sqlForEachClass(MyInput c);
 
 	int 多種db支援1();
+
 	int 多種db支援2();
+
+	List<HashMap> 預存程序帶參數的Select(HashMap c);
 }
