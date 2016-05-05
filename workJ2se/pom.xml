@@ -5,8 +5,21 @@
 	<artifactId>workJ2se</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
 
 	<dependencies>
+		<!-- 載入jdbc driver -->
+		<dependency>
+			<groupId>sqlserverjdbc</groupId>
+			<artifactId>sqlserverjdbc</artifactId>
+			<version>4.2</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/sqljdbc42.jar</systemPath>
+		</dependency>
+
 		<!-- 常用 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -135,8 +148,6 @@
 			<artifactId>jsch</artifactId>
 			<version>0.1.53</version>
 		</dependency>
-
-
 	</dependencies>
 
 
@@ -150,6 +161,28 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+			<!-- 包可執行jar檔的plugin  -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.4.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>json.Fastxml實作</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
