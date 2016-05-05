@@ -16,9 +16,9 @@
 			<groupId>sqlserverjdbc</groupId>
 			<artifactId>sqlserverjdbc</artifactId>
 			<version>4.2</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/sqljdbc42.jar</systemPath>
 		</dependency>
+		<!-- 安裝maven語法 mvn install:install-file -Dfile=E:\workide\git_group\mygit\workTrunk\workJ2se\lib\sqljdbc42.jar 
+			-DgroupId=sqlserverjdbc -DartifactId=sqlserverjdbc -Dversion=4.2 -Dpackaging=jar -->
 
 		<!-- 常用 -->
 		<dependency>
@@ -148,6 +148,14 @@
 			<artifactId>jsch</artifactId>
 			<version>0.1.53</version>
 		</dependency>
+
+		<!-- 單元測試 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -162,8 +170,52 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+
 			<plugin>
-			<!-- 包可執行jar檔的plugin  -->
+				<!-- unit test的plug， -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<!-- 為true就不會有test -->
+					<skip>false</skip>
+					<!-- 載入其它的test -->
+					<includes>
+						<include>**/*第一個junit</include>
+					</includes>
+					<!-- 排除特定的一些test -->
+					<excludes>
+						<exclude>**/*ServiceTest</exclude>
+						<exclude>**/TempDaoTest</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!-- 測試覆蓋率 -->
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<!-- 不要寫版本，好像會拉最新的，這樣跑maven時才不會出現編碼錯誤 -->
+				<!-- <version>2.5.1</version> -->
+				<configuration>
+					<formats>
+						<format>xml</format>
+						<format>html</format>
+					</formats>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>cobertura</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<!-- 包可執行jar檔的plugin -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.4.3</version>
