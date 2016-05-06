@@ -62,7 +62,7 @@ public class 第一個junit {
 	@Test
 	public void testOneItemCollection() {
 		collection.add("itemA這裡斷言錯誤的數字，在maven package時失敗就會造成不會包檔");
-		Assert.assertEquals(1, collection.size());
+		Assert.assertEquals(2, collection.size());
 		System.out.println("@Test - ====測試有內容的集合");
 	}
 }

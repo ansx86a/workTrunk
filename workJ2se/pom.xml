@@ -9,7 +9,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
 	<dependencies>
 		<!-- 載入jdbc driver -->
 		<dependency>
@@ -156,6 +155,8 @@
 			<version>4.12</version>
 		</dependency>
 
+
+
 	</dependencies>
 
 
@@ -170,6 +171,8 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<testSource>1.8</testSource>
+					<testTarget>1.8</testTarget>
 				</configuration>
 			</plugin>
 
