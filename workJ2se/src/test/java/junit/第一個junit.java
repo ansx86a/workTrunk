@@ -22,30 +22,31 @@ public class 第一個junit {
 	@BeforeClass
 	public static void oneTimeSetUp() {
 		// one-time initialization code
-		System.out.println("@BeforeClass - oneTimeSetUp");
+		System.out.println("@BeforeClass - 單元測式物件建立之前的動作");
 	}
 
 	@AfterClass
 	public static void oneTimeTearDown() {
 		// one-time cleanup code
-		System.out.println("@AfterClass - oneTimeTearDown");
+		System.out.println("@AfterClass - 單元測式物件結束之後的動作");
 	}
 
 	@Before
 	public void setUp() {
 		collection = new ArrayList();
-		System.out.println("@Before - setUp");
+		System.out.println("@Before - 單元測式Method之前的動作");
 	}
 
 	@After
 	public void tearDown() {
 		collection.clear();
-		System.out.println("@After - tearDown");
+		System.out.println("@After - 單元測式Method之後的動作");
 	}
 
 	@Test
 	public void 測試覆蓋率() {
 		try {
+			System.out.println("@Test ========測式覆蓋率");
 			IOUtilsTest.main(null);
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -55,13 +56,13 @@ public class 第一個junit {
 	@Test
 	public void testEmptyCollection() {
 		Assert.assertTrue(collection.isEmpty());
-		System.out.println("@Test - testEmptyCollection");
+		System.out.println("@Test - ====測試空的集合");
 	}
 
 	@Test
 	public void testOneItemCollection() {
-		collection.add("itemA");
+		collection.add("itemA這裡斷言錯誤的數字，在maven package時失敗就會造成不會包檔");
 		Assert.assertEquals(1, collection.size());
-		System.out.println("@Test - testOneItemCollection");
+		System.out.println("@Test - ====測試有內容的集合");
 	}
 }
