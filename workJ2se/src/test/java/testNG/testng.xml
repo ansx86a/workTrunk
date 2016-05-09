@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- 在eclipse右鍵 run testNG，在cmd下的執行不明 -->
+<!-- @BeforeSuite -->
+<suite name="TestAll">
+	<parameter name="dbconfig" value="config路徑" />
+	<parameter name="連接池大小" value="10" />
+	<!-- @BeforeTest -->
+	<test name="case1">
+	  <classes>
+		<class name="testNG.NG001" />
+		<class name="testNG.NG002" />
+	  </classes>
+	</test>
+	<!-- @AfterTest -->
+	
+	<!-- @BeforeTest -->
+	<test name="case2">
+	  <classes>
+		<class name="testNG.NG001" />
+		<class name="testNG.NG002" />
+	  </classes>
+	</test>
+	<!-- @AfterTest -->
+	
+</suite>
+<!-- @AfterSuite -->

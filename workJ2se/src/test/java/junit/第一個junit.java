@@ -10,11 +10,25 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import 新功能.Java7Ex;
+import 新功能.列舉中文範例;
+import 新功能.lambda.Lambda整理;
 import commonTool.IOUtilsTest;
 
 //1）  **/Test*.java ：任何子目录下所有命名以 Test 开头的 Java 类。
 //2）  **/*Test.java ：任何子目录下所有命名以 Test 结尾的 Java 类。
 //3）  **/*TestCase.java ：任何子目录下所有命名以 TestCase 结尾的 Java 类。
+
+/*
+ * <pre>
+ * 三個部分
+ * 一 beforeClass和afterClass
+ * 二 test的運行
+ * 三 test運行的 beforMethod和afterMethod
+ * 
+ * 斷言 assertTrue，assertFalse，assertEquals，assertNotEquals，assertArrayEquals，assertNull
+ * </pre>
+ */
 public class 第一個junit {
 
 	private Collection collection;
@@ -62,7 +76,19 @@ public class 第一個junit {
 	@Test
 	public void testOneItemCollection() {
 		collection.add("itemA這裡斷言錯誤的數字，在maven package時失敗就會造成不會包檔");
-		Assert.assertEquals(2, collection.size());
-		System.out.println("@Test - ====測試有內容的集合");
+		System.out.println("@Test - ====測試有內容的集合開始");
+		Assert.assertEquals(1, collection.size());
+		System.out.println("@Test - ====測試有內容的集合結束");
+	}
+
+	@Test
+	public void 測試新功能() {
+		try {
+			Java7Ex.byte2value();
+			列舉中文範例.main(null);
+			Lambda整理.main(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -75,6 +75,13 @@
 			<artifactId>spring-jdbc</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.2.2.RELEASE</version>
+		</dependency>
+
+
 
 		<!-- json -->
 		<!-- 被淘汱了，改用jackson-databind下面那個 -->
@@ -153,10 +160,14 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
+			<scope>test</scope>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.9.10</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 
@@ -187,13 +198,21 @@
 					<skip>false</skip>
 					<!-- 載入其它的test -->
 					<includes>
+						<!-- junit -->
 						<include>**/*第一個junit</include>
+						<!-- testng -->
+						<include>**/*NG001</include>
 					</includes>
 					<!-- 排除特定的一些test -->
 					<excludes>
 						<exclude>**/*ServiceTest</exclude>
 						<exclude>**/TempDaoTest</exclude>
 					</excludes>
+
+					<!-- 導入xml的話，只會跑xml的unit test，其它的就不會跑了，所以註解一下 -->
+					<!-- <suiteXmlFiles> -->
+					<!-- <suiteXmlFile>target/test-classes/testNG/testng.xml</suiteXmlFile> -->
+					<!-- </suiteXmlFiles> -->
 				</configuration>
 			</plugin>
 
