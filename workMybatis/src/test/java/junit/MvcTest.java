@@ -8,14 +8,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.ContextHierarchy;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -32,10 +33,11 @@ import controller.第一個Service;
 // @ContextConfiguration("/junit/root-context.xml")
 // @ContextConfiguration(locations={"/app-config.xml", "/test-config.xml"})
 // 上面二個或下面這一個選一個來用即可
-@ContextHierarchy({ @ContextConfiguration("/root-context.xml"), @ContextConfiguration("/web-context.xml") })
-//這裡用runwith和繼承AbstractJUnit4SpringContextTests都能跑
-//@RunWith(SpringJUnit4ClassRunner.class)
-public class MvcTest extends AbstractJUnit4SpringContextTests{
+// @ContextHierarchy({ @ContextConfiguration("/root-context.xml"), @ContextConfiguration("/web-context.xml") })
+@ContextConfiguration(locations = { "classpath:root-context.xml", "classpath:web-context.xml" })
+// 這裡用runwith和繼承AbstractJUnit4SpringContextTests都能跑
+// @RunWith(SpringJUnit4ClassRunner.class)
+public class MvcTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
 	第一個Controller controller;
 	@Autowired
@@ -101,9 +103,9 @@ public class MvcTest extends AbstractJUnit4SpringContextTests{
 		r.andExpect(jsonPath("$.name").value("中文名字"));
 		// 參照org.hamcrest.CoreMatchers物件來了解jsonPath的用法
 		r.andExpect(jsonPath("$.name", containsString("文名")));
-		//jsonPath ex：
-		//$.store.book[0].title
-		//$['store']['book'][0]['title']
+		// jsonPath ex：
+		// $.store.book[0].title
+		// $['store']['book'][0]['title']
 		// $ 根对象
 		// $[-1] 最后元素
 		// $[:-2] 第1个至倒数第2个

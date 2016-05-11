@@ -32,7 +32,8 @@ import controller.第一個Service;
 // @ContextConfiguration("/junit/root-context.xml")
 // @ContextConfiguration(locations={"/app-config.xml", "/test-config.xml"})
 // 上面二個或下面這一個選一個來用即可
-@ContextHierarchy({ @ContextConfiguration("/root-context.xml"), @ContextConfiguration("/web-context.xml") })
+// @ContextHierarchy({ @ContextConfiguration("/root-context.xml"), @ContextConfiguration("/web-context.xml") })
+@ContextConfiguration(locations = { "classpath:root-context.xml", "classpath:web-context.xml" })
 public class MvcTest extends AbstractTestNGSpringContextTests {
 	@Autowired
 	第一個Controller controller;
