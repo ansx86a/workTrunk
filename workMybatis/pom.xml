@@ -5,10 +5,13 @@
 	<artifactId>workMybatis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
 	<dependencies>
 		<!-- 載入jdbc driver -->
 		<dependency>
@@ -191,6 +194,8 @@
 				</executions>
 			</plugin>
 
+
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -203,5 +208,15 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+<!-- 		<pluginManagement> -->
+<!-- 			<plugins> -->
+<!-- 				<plugin> -->
+<!-- 					<groupId>org.sonarsource.scanner.maven</groupId> -->
+<!-- 					<artifactId>sonar-maven-plugin</artifactId> -->
+<!-- 					<version>3.0.1</version> -->
+<!-- 				</plugin> -->
+<!-- 			</plugins> -->
+<!-- 		</pluginManagement> -->
 	</build>
 </project>
