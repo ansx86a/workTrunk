@@ -1,4 +1,4 @@
-package springAop;
+package springAop.ex1;
 
 import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package springAop;
+package springAop.ex1;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -6,7 +6,6 @@ import java.util.Arrays;
 import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.ThrowsAdvice;
-import org.springframework.aop.framework.ProxyFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -37,7 +36,7 @@ public class Ex001代理aop implements MethodBeforeAdvice, AfterReturningAdvice,
 	private JustBean justBean2;
 
 	public static void main(String args[]) {
-		String path = "springAop/ex1.xml";
+		String path = "springAop/ex1/ex1.xml";
 		ApplicationContext appContext = new ClassPathXmlApplicationContext(path);
 		Ex001代理aop j = (Ex001代理aop) appContext.getBean("ex001代理aop");
 		System.out.println(j.justBean.say());
@@ -47,7 +46,7 @@ public class Ex001代理aop implements MethodBeforeAdvice, AfterReturningAdvice,
 		try {
 			j.justBean2.sayEx();
 		} catch (Exception ex) {
-			System.out.println("ex = "+ex.toString());
+			System.out.println("ex = " + ex.toString());
 		}
 		System.out.println("=========end");
 	}
