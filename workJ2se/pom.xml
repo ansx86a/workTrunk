@@ -113,6 +113,13 @@
 			<artifactId>xmpbox</artifactId>
 			<version>2.0.1</version>
 		</dependency>
+		<!-- 加密，pdf的加密有用到這個 -->
+		<!-- http://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk16 -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk16</artifactId>
+			<version>1.46</version>
+		</dependency>
 
 
 

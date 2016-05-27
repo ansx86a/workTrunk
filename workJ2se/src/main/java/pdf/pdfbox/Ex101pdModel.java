@@ -117,7 +117,7 @@ public class Ex101pdModel {
 		e.$18建立PDFA文件();
 		e.$19每頁的後製處理();
 		e.$20橫向排版畫線();
-		e.$21附加檔案();//由於20_2可以解出來，應該是有加進去附加檔
+		e.$21附加檔案();// 由於20_2可以解出來，應該是有加進去附加檔
 		e.$21_2解出附加檔案();
 		e.$22文字放大旋轉展示();
 		e.$23pdf轉圖片();
@@ -377,6 +377,7 @@ public class Ex101pdModel {
 			// if you already have the image in a BufferedImage,
 			// call LosslessFactory.createFromImage() instead
 			PDImageXObject pdImage = PDImageXObject.createFromFile(imageFile.getAbsolutePath(), doc);
+
 			// 強化範例八
 			// APPEND,OVERWRITE,PREPEND，用PREPEND讓圖變底圖
 			PDPageContentStream contentStream = new PDPageContentStream(doc, page, AppendMode.PREPEND, true);
@@ -1486,4 +1487,5 @@ public class Ex101pdModel {
 		}
 
 	}
+
 }
