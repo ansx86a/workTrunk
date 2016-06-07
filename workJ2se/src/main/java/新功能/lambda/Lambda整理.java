@@ -22,6 +22,10 @@ public class Lambda整理 {
 	public static void main(String[] args) {
 		Lambda整理 l = new Lambda整理();
 		l.$8轉成map或list();
+		
+		//要管線作業不可缺的東西
+		//IntStream.range(1, 4)
+		
 	}
 
 	public void $1無參數寫法() {
