@@ -21,6 +21,9 @@ package excel;
 /**
  * <pre>
  * HSSF(excel xls) XSSF	(Excel XLSX) Common SS	(Excel XLS and XLSX)
+ * Common SS範例碼都比較長就不看了，但是有一個excelToHtml或許有機會用得到
+ * 其它的word或是ppt有機會再看，我認為用到的機會太低了
+ * 
  * HSLF(PowerPoint PPT) XSLF	(PowerPoint PPTX) Common SL	(PowerPoint PPT and PPTX)
  * HWPF(Word DOC) XWPF	(Word DOCX)
  * HSMF	Outlook
