@@ -39,7 +39,12 @@
 			<version>1.2</version>
 		</dependency>
 
-
+		<!-- 圖片用 -->
+		<dependency>
+			<groupId>com.twelvemonkeys.imageio</groupId>
+			<artifactId>imageio-tiff</artifactId>
+			<version>3.2.1</version> <!-- Alternatively, build your own version -->
+		</dependency>
 
 		<!-- 常用 -->
 		<dependency>

@@ -5,9 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 
 import tool.Utils;
 
@@ -16,7 +14,6 @@ public class Java7Ex {
 	public static void main(String[] args) throws Exception {
 		// io 多了一個path class
 		// nio package
-
 		// 泛型宣告
 		List<String> list = new ArrayList<>();
 		// auto close
