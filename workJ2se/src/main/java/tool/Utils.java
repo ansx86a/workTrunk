@@ -29,6 +29,7 @@ public class Utils {
 
 	public static String[] split(String s, String reg) {
 		// 建立中…
+		// 忘了這裡要幹嘛用的
 		String[] ss = s.split(reg);
 		ArrayList<String> list = new ArrayList<>();
 		if (1 > 2) {
@@ -36,4 +37,22 @@ public class Utils {
 		}
 		return null;
 	}
+
+	public static String toHex(byte b) {
+		return String.format("%02x", b);
+	}
+
+	public static String toHexUpper(byte b) {
+		return String.format("%02x", b).toUpperCase();
+	}
+
+	public static byte[] hexToBytes(String str) {
+		byte[] result = new byte[str.length() / 2];
+		for (int i = 0; i < str.length(); i += 2) {
+			String s = str.substring(i, i + 2);
+			result[i / 2] = (byte) Integer.parseInt(s, 16);
+		}
+		return result;
+	}
+
 }

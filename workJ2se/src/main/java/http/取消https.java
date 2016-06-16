@@ -1,4 +1,4 @@
-package https;
+package http;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
