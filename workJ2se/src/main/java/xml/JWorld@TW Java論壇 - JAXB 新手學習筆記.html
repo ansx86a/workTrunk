@@ -1,0 +1,1438 @@
+<html>
+<head>
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--<base href="http://www.javaworld.com.tw/jute/" />-->
+<base href="https://www.javaworld.com.tw/jute/" />
+    
+<title>JWorld@TW Java論壇 - JAXB 新手學習筆記</title>
+<link href="/jute/css/tag.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: 'zh-TW'}
+</script>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+
+
+<meta name="robots" content="nofollow">
+  <meta name="description" content="Java & XML、Web Service - JAXB 新手學習筆記">
+<link rel="shortcut icon" href="favicon.ico" />
+<style type="text/css">
+  BODY      { font-family: Tahoma,Georgia; color: #000000; font-size: 12px; margin: 0px;}
+  P         { font-family: Tahoma,Georgia; color: #000000; font-size: 12px } 
+  TD        { font-family: Tahoma,Georgia; color: #000000; font-size: 12px ;table-layout:fixed; word-break :break-all}  
+  TEXTAREA  { font-family: Tahoma,Georgia; font-size: 12px }
+  A         { text-decoration: underline }
+  A:link    { color: #000000; text-decoration: underline }
+  A:visited { color: #000080; text-decoration: underline }
+  A:active  { color: #FF0000; text-decoration: underline }
+  A:hover   { color: #FF0000; text-decoration: underline }
+  .hotnews  {
+              border-style: solid;
+              border-width: 1px;
+              border-color: #b0b0b0;
+              padding-top: 2px;
+              padding-bottom: 2px;
+            }
+
+  .head0    { background-color: #999999 } 
+  TABLE.announce TR TD { font-family: verdana, arial, helvetica, sans-serif;font-size:13px;}
+  TABLE.announce TR TD A:link    { color: #000000; text-decoration: none}
+  TABLE.announce TR TD A         { text-decoration: none}
+  TABLE.announce TR TD A:visited { color: #000080; text-decoration: none}
+  TABLE.announce TR TD A:hover   { color: #FF0000; text-decoration: underline }
+  .head     { background-image: url("images_zh_TW/blue.gif") }
+  tr.head td { background-image: url("images_zh_TW/blue.gif") }
+  .neck     { background-color: #6699cc }
+  .myheader {
+	text-align: left; 
+	background-color: rgb(35, 76, 130);
+	padding-bottom: 5px; 
+	width: 100%;
+   }
+  .myheader .header_desc {
+	font-size: 13px;
+	font-family: Trebuchet MS; 
+	color: rgb(149, 180, 207);
+   }
+  .even     { background-color: #f7f7f7}
+  .odd      { background-color: #e3e3e3 }
+  .board    { background-color: #D6DBE7}  
+  .tip         { text-decoration: none; color:#FFFFFF}
+  .tip:link    { text-decoration: none; color:#FFFFFF}
+  .tip:visited { text-decoration: none; color:#FFFFFF}
+  .tip:active  { text-decoration: none; color:#FFFFFF}
+  .tip:hover   { text-decoration: none; color:#FFFFFF}
+  .nav         { text-decoration: underline; color:#000000 }
+  .nav:link    { text-decoration: underline; color:#000000 }
+  .nav:visited { text-decoration: underline; color:#000000 }
+  .nav:active  { text-decoration: underline; color:#FF0000 }
+  .nav:hover   { text-decoration: none; color:#FF0000 }
+  .topic         { text-decoration: none }
+  .topic:link    { text-decoration: none; color:#000000 }
+  .topic:visited { text-decoration: none; color:#000080 }
+  .topic:active  { text-decoration: none; color:#FF0000 }
+  .topic:hover   { text-decoration: underline; color:#FF0000 }
+  .ilink         { text-decoration: underline; color:#0000FF }
+  .ilink:link    { text-decoration: underline; color:#0000FF }
+  .ilink:visited { text-decoration: underline; color:#004080 }
+  .ilink:active  { text-decoration: underline; color:#FF0000 }
+  .ilink:hover   { text-decoration: underline; color:#FF0000 }
+  .mod         { text-decoration: none; color:#000000 }
+  .mod:link    { text-decoration: none; color:#000000 }
+  .mod:visited { text-decoration: none; color:#000080 }
+  .mod:active  { text-decoration: none; color:#FF0000 }
+  .mod:hover   { text-decoration: underline; color:#FF0000 }  
+  .thd         { text-decoration: none; color:#808080 }
+  .thd:link    { text-decoration: underline; color:#808080 }
+  .thd:visited { text-decoration: underline; color:#808080 }
+  .thd:active  { text-decoration: underline; color:#FF0000 }
+  .thd:hover   { text-decoration: underline; color:#FF0000 }
+  .curpage     { text-decoration: none; color:#FFFFFF; font-family: Tahoma; font-size: 9px }
+  .page         { text-decoration: none; color:#003063; font-family: Tahoma; font-size: 9px }
+  .page:link    { text-decoration: none; color:#003063; font-family: Tahoma; font-size: 9px }
+  .page:visited { text-decoration: none; color:#003063; font-family: Tahoma; font-size: 9px }
+  .page:active  { text-decoration: none; color:#FF0000; font-family: Tahoma; font-size: 9px }
+  .page:hover   { text-decoration: none; color:#FF0000; font-family: Tahoma; font-size: 9px }
+  .subject  { font-family: Tahoma,Georgia; font-size: 12px }
+  .text     { font-family: Tahoma,Georgia; color: #000000; font-size: 12px }
+  .codeStyle {	padding-right: 0.5em; margin-top: 1em; padding-left: 0.5em;  font-size: 9pt; margin-bottom: 1em; padding-bottom: 0.5em; margin-left: 0pt; padding-top: 0.5em; font-family: Courier New; background-color: #000000; color:#ffffff ; }
+  .smalltext   { font-family: Tahoma,Georgia; color: #000000; font-size:11px }
+  .verysmalltext  { font-family: Tahoma,Georgia; color: #000000; font-size:4px }
+  .member   { font-family:Tahoma,Georgia; color:#003063; font-size:9px }
+  .btnStyle  { background-color: #5D7790; border-width:2; 
+             border-color: #E9E9E9; color: #FFFFFF; cursor: hand; 
+             font-family: Tahoma,Georgia; font-size: 12px }
+  .selStyle  { background-color: #FFFFFF; border-bottom: black 1px solid; 
+             border-left: black 1px solid; border-right: black 1px solid; 
+             border-top: black 1px solid; color: #000000; cursor: hand; 
+             font-family: Tahoma,Georgia; font-size: 12px }
+  .inpStyle  { background-color: #FFFFFF; border-bottom: black 1px solid; 
+             border-left: black 1px solid; border-right: black 1px solid; 
+             border-top: black 1px solid; color: #000000; 
+             font-family: Tahoma,Georgia; font-size: 12px }
+  .titleStyle{ COLOR: #ffffff; FONT-FAMILY: Tahoma,Georgia;
+               text-align: center;padding: 2px;   margin: 1px;}
+  .bookmarks{ vertical-align:bottom; margin-left:10px; color:#085278;}
+  .bookmarks img{vertical-align:-3;}
+  .timestamp{ vertical-align:bottom; margin-right:10px;}
+  .timestamp img{ vertical-align:-3;}
+  .myheader a:visited { text-decoration: none; color: white;}
+  .myheader .header_title {font-size: 25px; font-family: Arial;
+	font-weight: bold; font-family: Trebuchet MS;
+	padding-left: 10px; color: rgb(255, 255, 255);}
+  .myheader a { text-decoration: none; color: white;}
+  div.vote {text-align:right; width:200px;}
+  div.vote span{color:#39487A;font-weight:bold;vertical-align:20%;}
+  div.vote img{cursor:pointer;vertical-align:bottom;}
+  .vote-count-post{font-size:240%}
+</style>
+<link rel="stylesheet" type="text/css" href="java.css">
+<script type="text/javascript">
+function jumpTo(b)
+{javascript:window.location.hash=b;}
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-119775-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script type="text/javascript">
+  function recordOutboundLink(link, category, action) {
+     try {
+        _gaq.push(['_trackEvent', category, action]);
+        setTimeout('document.location = "' + link.href + '"', 100)     
+     }catch(err){}
+  }
+</script>
+</head>
+<BODY TEXT='#000000' LINK='#000000' VLINK='#000080' ALINK='#FF0000'>
+<center>
+<a name="top"></a>
+<div class="myheader">         	
+<span class="header_title"><a href="//www.javaworld.com.tw">JWorld@TW</a></span>
+<span class="header_desc">the best professional Java site in Taiwan
+</span>
+
+</div>
+<table bgcolor='#303030'border=0 cellspacing=0 cellpadding=0 width=100% height=21 style="border:1px #666666 solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px;width:100%;">
+<tr>
+<td align=left>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#FFFFFF">
+   
+</font>
+</td>
+<td align="right" valign="middle">
+<font color="#FFFFFF">
+<span title='註冊新帳號' ><a class="tip" href='html/register.html'>註冊</a></span> | 
+<span title='會員登入論壇' ><a class="tip" href='user/login'>登入</a></span> | 
+<span title='全文檢索'><a class="tip" href='post/search'>全文檢索</a></span> | 
+<span title='發文章最多的使用者，回覆最多的話題，人氣最多的話題' ><a class="tip" href='stat/top'>排行榜</a></span>&nbsp;&nbsp;
+</font>
+</td>
+</tr>
+
+</table><br clear='all'>
+
+
+        
+	
+
+<script type='text/javascript'>
+function copyText(obj) {
+var rng = document.body.createTextRange();
+rng.moveToElementText(obj);
+rng.scrollIntoView();
+rng.select();
+rng.execCommand("Copy");
+rng.collapse(false);
+}
+</script>
+
+<table width='95%'  cellspacing=0 cellpadding=2 border=0>
+<tr>
+<td align='right'>
+
+
+
+
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-9406976695343324";
+/* post_Top */
+google_ad_slot = "7534788125";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+
+</td>
+		</tr>
+</table>
+<table width='95%' cellspacing=0 cellpadding=2 border=0 >
+<tr>
+<td>
+<b><font size=3 face=arial><b>&#187;</b></font>&nbsp;<a href='index.html' class=nav><b>JWorld@TW</b></a>
+
+
+<font size=3 face=arial><b>&#187;</b></font>&nbsp;<a href='post/page?bid=19&sty=1&age=0&tpg=1' class=nav><b>Java & XML、Web Service</b></a>
+&nbsp;<br><br>
+<img src='images_zh_TW/icons/icon_print.gif' border=0 alt='按列印兼容模式列印這個話題' align='absmiddle'>&nbsp;<a href='post/print?bid=19&id=293455' class=mod title='按列印兼容模式列印這個話題'><b>列印話題</b></a>
+&nbsp;&nbsp;
+<img src='images_zh_TW/icons/icon_friend.gif' border=0 alt='把這個話題寄給朋友' align='absmiddle'>
+<a href='post/forward?bid=19&id=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455' class=mod title='把這個話題寄給朋友'><b>寄給朋友</b></a>
+&nbsp;&nbsp;
+
+<!--
+<img src='images_zh_TW/icons/icon_watch.gif' border=0 alt='該主題的所有更新都將Email到你的郵箱' align='absmiddle'>
+-->
+			<a href='user/myforum?action=AddWatch&bid=19&id=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455' class=mod><b>訂閱主題</b></a>		
+	</td>
+<td align='right' valign='bottom'>
+<a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455'><img src='images_zh_TW/newreply_index.gif' alt='reply to topic' border=0 align='absmiddle'></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=3&age=0#293455'><img src='images_zh_TW/threaded_index.gif' border=0 align='absmiddle' alt='threaded mode'></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=1&age=0&prev=1'><img src='images_zh_TW/prev_index.gif' align='absmiddle' alt='go to previous topic' border=0></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=1&age=0&next=1'><img src='images_zh_TW/next_index.gif' border=0 align='absmiddle' alt='go to next topic'></a>
+</td>
+</tr>
+</table>
+
+<table border=0 cellspacing=1 cellpadding=4 WIDTH='95%'>
+<tr class='head'><td>
+<font color=#FFFFFF><b>己加入精華區</b></font></td></tr>
+<TR class='odd'><td>by koji at 2011-02-22 14:15</td></tr>
+</TABLE>
+<!--tag start-->
+<script type='text/javascript' src='/jute/dwr/interface/PostVoteServlet.js'></script>
+<script type='text/javascript' src='/jute/dwr/engine.js'></script>
+<script language="javascript">
+	$(document).ready(function(){		
+	});
+</script>
+
+<table border=0 cellspacing=1 cellpadding=4 WIDTH='95%'>
+<tr class='head'><td>
+<font color=#FFFFFF><b>本主題所含的標籤</b></font></td></tr>
+<TR class='odd'><td>
+<span class="tags">
+<span><a href="tag/xsd" class="post-tag" title="標註 'xsd' by benbai123 ">xsd</a>
+</span>
+<span><a href="tag/namespace" class="post-tag" title="標註 'namespace' by benbai123 ">namespace</a>
+</span>
+<span><a href="tag/jaxb" class="post-tag" title="標註 'jaxb' by benbai123 ">jaxb</a>
+</span>
+<span><a href="tag/customizing-binding" class="post-tag" title="標註 'customizing-binding' by benbai123 ">customizing-binding</a>
+</span>
+</span>
+<span class="add-tag-span">
+</span>
+</td></tr>
+</TABLE>
+<!--tag end-->
+
+<!-- google_ad_section_start -->
+	
+				<a name='293455'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+JAXB 新手學習筆記 
+ [精華]  </b></font>
+</td>
+</tr>
+<tr class='odd'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 21:11</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293455);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293455' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293455>
+各位先進好, 小弟最近剛學 JAXB, 整理了一些內容,<BR>希望能藉此減低往後入門者的痛感,<BR>新手拙文, 請多指教,<BR><BR>總共會有八篇<BR><BR>初探 JAXB -- 生成物件及將物件轉 xml<BR>由 XML 字串生成物件 -- 如字面所述<BR>用 NamespacePrefixMapper 修正 prefix -- 增加生出來的 xml 的可讀性<BR>JAXB xsd 中使用其它文件的內容 -- import / include / namespace<BR>使用 Name space 解決名稱衝突 -- 撞名問題<BR>為同名型態生成不同 class - Customizing JAXB Bindings -- 處理完撞名繼續看它<BR>分門別類 - customize package bindings -- 管理 package<BR>以 Ant 使用 JAXB xjc -- 用 Ant 做 xjc 動作<BR><BR>會陸續整理上來<BR><BR>立即開始第一篇 -- 初探 JAXB<BR><FONT COLOR="green"><BR><B>1. 撰寫 XML Schema 的 xsd 檔</B><BR></FONT><BR><BR>首先要準備一份 xsd 檔, 以便利用它來生成物件,<BR><BR>並使用 JAXB 的 API 進行物件與 xml 之間的轉換,<BR><BR>例如以下的 schema 代表一家製糖公司生產的 白糖<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;!-- xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font> ::
+   http:<font class="java-comment">//www.w3.org/2001/XMLSchema </font>
+     可以想成使用到的其它份文件的 namespace
+     xsd 則是要關聯到該文件中的 type 時用作前綴的短名稱
+&nbsp;
+  targetNamespace=<font class="java-string">"http://www.WhiteSugerCompany.com/ws"</font> ::
+    表示這一份文件的 namespace 為 http:<font class="java-comment">//www.WhiteSugerCompany.com/ws</font>
+    想像有多家製糖公司各自都有一個 suger 的 type,
+    namespace 可以用來區分它們
+   --&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+  xmlns:ws=<font class="java-string">"http://www.WhiteSugerCompany.com/ws"</font>
+  targetNamespace=<font class="java-string">"http://www.WhiteSugerCompany.com/ws"</font>&gt;
+&nbsp;
+  &lt;!-- 一個 suger 的 type, 包含了 顏色, 甜度 --&gt;
+  &lt;xsd:complexType name=<font class="java-string">"suger"</font>&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=<font class="java-string">"color"</font> type=<font class="java-string">"xsd:string"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"sweetness"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+&nbsp;
+  &lt;!-- 一個 type 為 suger 的 element --&gt;
+  &lt;xsd:element name=<font class="java-string">"Sugers"</font> type=<font class="java-string">"ws:suger"</font>/&gt;
+&lt;/xsd:schema&gt;
+</pre></td></tr></table><BR><BR><FONT COLOR="green"><BR><B>2. 使用 xjc 由 xsd 檔生成物件</B><BR></FONT><BR><BR>接下來將 xsd 檔複製到 jdk\bin 資料夾中 執行以下命令<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>C:\Program Files\Java\jdk1.6.0_21\bin&gt;xjc -p org.iii.test.jaxb.whitesuger xmlSchema\WhiteSuger\WhiteSuger.xsd
+</pre></td></tr></table><BR><BR>就可以利用 jdk 所附的 xjc 程式, 由我們寫的 xsd 檔生成對應物件,<BR><BR>其中 \-p 是用來指定物件的 package,<BR><BR>xmlSchema\WhiteSuger\WhiteSuger.xsd 則是我們 xsd 檔的相對路徑,<BR><BR>這時可看到像以下的畫面及檔案<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298350631129.png" BORDER="0"><BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298350631130.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B>3. 利用 JAXB 由物件生成 XML</B><BR></FONT><BR><BR>現在有了 xsd 檔及生出的物件, 接下來便可以使用 JAXB 提供的 API,<BR><BR>由物件直接生成 xml<BR><BR>首先將剛生成的 package 放到 src 中如下 (請先忽略紅框之外的部份)<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298350829045.png" BORDER="0"><BR><BR>然後要下載 JAXB RI 及將 lib 加入專案, 如下<BR><BR>下載 JAXB RI<BR><BR>下載頁<BR><BR><A HREF="http://jaxb.java.net/2.2.3/" TARGET=_blank class=ilink>http://jaxb.java.net/2.2.3/</A><BR><BR>點 Download the binary, 副檔名要改 .jar<BR><BR>安裝<BR><BR>在下載後的 jar 檔點兩下, 第一頁版權宣告頁拉到最下方,<BR><BR>點 Accept, 會生出一個資料夾, 將它搬到適當地方即可,<BR><BR>然後將該資料夾下 lib 內的 jar 檔加入專案內<BR><BR>下載並加入 jar 後<BR><BR>接下來撰寫如下程式, 生成物件, 設置適當的值並生成 xml<BR><BR>這裡要注意的是, StringWriter 會以附加的方式持續加入內容,<BR><BR>因此在加入新內容前要清空它的 buffer<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.Suger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.ObjectFactory;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+  <font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+    <font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+      <font class="java-comment">//-- get context instance</font>
+      JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.whitesuger"</font>);
+      ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;
+      <font class="java-comment">//-- create Suger object</font>
+      Suger ws = of.createSuger();
+&nbsp;
+      <font class="java-comment">//-- set values</font>
+      ws.setColor(<font class="java-string">"Cream color"</font>);
+      ws.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+      <font class="java-comment">//-- convert ws to JAXBElement</font>
+      JAXBElement&lt;Suger&gt; je = of.createSugers(ws);
+      <font class="java-comment">//-- get Marshaller</font>
+      Marshaller m = ctx.createMarshaller();
+&nbsp;
+      <font class="java-comment">//-- marshal JAXBElement into StringWriter</font>
+      StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+      m.marshal(je, xml);
+      System.err.println(xml.toString());
+&nbsp;
+      <font class="java-comment">//-- separator</font>
+      System.err.println(<font class="java-string">"\n********\n********\n"</font>);
+&nbsp;
+      <font class="java-comment">//-- clear old content in StringWriter</font>
+      StringBuffer sb = xml.getBuffer();
+      sb.setLength(0);
+&nbsp;
+      <font class="java-comment">//-- marshal JAXBElement into StringWriter with format</font>
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+      m.marshal(je, xml);
+      System.err.println(xml.toString());
+    <font class="java-bracket">}</font>
+    <font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+      e.printStackTrace();
+    <font class="java-bracket">}</font>
+  <font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+&nbsp;
+</pre></td></tr></table><BR><BR>輸出結果如下圖<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298351105793.png" BORDER="0"><BR><BR>其中兩行星號上方的是 未格式化 的輸出結果,<BR><BR>下方的則是經過格式化的輸出結果<BR><BR><FONT COLOR="green"><BR><B>4. References</B><BR></FONT><BR><BR>W3C 文件<BR><BR><A HREF="http://www.w3.org/TR/xmlschema-0/#DefnDeclars" TARGET=_blank class=ilink>http://www.w3.org/TR/xmlschema-0/#DefnDeclars</A><BR><BR>史蒂芬 很詳盡的教學<BR><BR><A HREF="http://home.so-net.net.tw/idealist/WebService/JAXB.html" TARGET=_blank class=ilink>http://home.so-net.net.tw/idealist/WebService/JAXB.html</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293455&sty=3"></g:plusone>
+</div>
+
+benbai123 edited on 2011-04-17 20:05 <br/>
+</div>
+<a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293457'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='even'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 21:26</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293457&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293457&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293457);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293457' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293457>
+第二篇 -- 由 XML 字串生成物件<BR><BR><FONT COLOR="green"><BR><B>1. 使用 Unmarshaller</B><BR></FONT><BR><BR>在 第一篇 之中, 我們將物件利用 JAXB 的 API 轉成 XML 字串,<BR><BR>通常之後我們會將轉出的字串傳到其它地方, 而其它地方收到後,<BR><BR>便要由 XML 字串 轉回相對應的物件,<BR><BR>假設已經知道所要轉成的物件類型, 則轉換的程式如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-comment">//-- get context instance</font>
+JAXBContext context = JAXBContext.newInstance(Suger.class);
+<font class="java-comment">//-- get unmarshaller</font>
+Unmarshaller um = context.createUnmarshaller();
+<font class="java-comment">//-- unmarshal xml string to JAXB element</font>
+JAXBElement&lt;Suger&gt; root = um.unmarshal(<font class="java-reserved_word"><b>new</b></font> StreamSource(<font class="java-reserved_word"><b>new</b></font> StringReader(
+&nbsp;&nbsp;xmlString)), Suger.class);
+&nbsp;
+<font class="java-comment">//-- get object from JAXB element</font>
+Suger ws2 = root.getValue();
+</pre></td></tr></table><BR><BR>這裡要注意的是, xmlString 要是未經 format 過的,<BR><BR><FONT COLOR="green"><BR><B>2. 完整程式及執行結果</B><BR></FONT><BR><BR>以下為完整的程式及執行結果截圖, 其中包含 第一篇 的部份<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringReader;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Unmarshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.transform.stream.StreamSource;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.Suger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.ObjectFactory;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get context instance</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.whitesuger"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create Suger object</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suger ws = of.createSuger();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set values</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setColor(<font class="java-string">"Cream color"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- convert ws to JAXBElement</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;Suger&gt; je = of.createSugers(ws);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get Marshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marshaller m = ctx.createMarshaller();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get xml string</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String xmlString = xml.toString();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(xmlString);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- separator</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">"\n********\n********\n"</font>);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- clear old content in StringWriter</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuffer sb = xml.getBuffer();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sb.setLength(0);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with format</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(xml.toString());
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get context instance</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBContext context = JAXBContext.newInstance(Suger.class);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get unmarshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unmarshaller um = context.createUnmarshaller();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- unmarshal xml string to JAXB element</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;Suger&gt; root = um.unmarshal(<font class="java-reserved_word"><b>new</b></font> StreamSource(<font class="java-reserved_word"><b>new</b></font> StringReader(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlString)), Suger.class);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get object from JAXB element</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suger ws2 = root.getValue();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- separator</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">"\n********\n********\n"</font>);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- output object value</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" ws2 color = "</font> + ws2.getColor());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" ws2 sweetness = "</font> + ws2.getSweetness());
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;<font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+</pre></td></tr></table><BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298352262329.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B>3. References</B><BR></FONT><BR><BR>實用教學<BR><BR><A HREF="http://jaxb.java.net/guide/_XmlRootElement_and_unmarshalling.html" TARGET=_blank class=ilink>http://jaxb.java.net/guide/_XmlRootElement_and_unmarshalling.html</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293457&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293457&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293457&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293458'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='odd'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 21:38</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293458&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293458&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293458);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293458' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293458>
+第三篇 -- 用 NamespacePrefixMapper 修正 prefix<BR><BR><FONT COLOR="green"><BR><B><BR>1. 前言<BR></B><BR></FONT><BR><BR>在 第一篇 之中, 格式化的輸出如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font> standalone=<font class="java-string">"yes"</font>?&gt;
+&lt;ns2:Sugers xmlns:ns2=<font class="java-string">"http://www.WhiteSugerCompany.com/ws"</font>&gt;
+    &lt;color&gt;Cream color&lt;/color&gt;
+    &lt;sweetness&gt;20&lt;/sweetness&gt;
+&lt;/ns2:Sugers&gt;
+&nbsp;
+</pre></td></tr></table><BR><BR>我們可以發現, [http://www.WhiteSugerCompany.com/ws] 在這裡的 prefix,<BR><BR>變成了 ns2, 而不是 xsd 中的 ws,<BR><BR>我們可以實作 com.sun.xml.bind.marshaller.NamespacePrefixMapper,<BR><BR>來進行 Namespace 與 Prefix 之間對應的處理,<BR><BR><FONT COLOR="green"><BR><B><BR>2. 實作並使用 NamespacePrefixMapper<BR></B><BR></FONT><BR><BR>實作 NamespacePrefixMapper<BR><BR>首先我們要實作 NamespacePrefixMapper, 實作程式如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> NamespacePrefixMapperImpl <font class="java-reserved_word"><b>extends</b></font> NamespacePrefixMapper <font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;<font class="java-reserved_word"><b>public</b></font> String getPreferredPrefix(String namespaceUri, String suggestion, <font class="java-reserved_word"><b>boolean</b></font> requirePrefix) <font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- if namespace is "http://www.WhiteSugerCompany.com/ws"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- map it to "ws"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>if</b></font>( <font class="java-string">"http://www.WhiteSugerCompany.com/ws"</font>.equals(namespaceUri) )
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>return</b></font> <font class="java-string">"ws"</font>;
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">// otherwise just use the default suggestion.</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>return</b></font> suggestion;
+&nbsp;&nbsp;<font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+&nbsp;
+</pre></td></tr></table><BR><BR>使用 NamespacePrefixMapper<BR><BR>接下來是在 Marshaller 中 設定要使用的 NamespacePrefixMapperImpl 如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>m.setProperty(<font class="java-string">"com.sun.xml.bind.namespacePrefixMapper"</font>,<font class="java-reserved_word"><b>new</b></font> NamespacePrefixMapperImpl());
+</pre></td></tr></table><BR><BR>只要加了這一行, 並且有實作 NamespacePrefixMapper,<BR><BR>便可得到如下圖的輸出, 可以看到原本的 ns2 都變成 ws 了,<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298352973161.png" BORDER="0"><BR><BR>完整程式如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.Suger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.whitesuger.ObjectFactory;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get context instance</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.whitesuger"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create Suger object</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suger ws = of.createSuger();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set values</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setColor(<font class="java-string">"Cream color"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- convert ws to JAXBElement</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;Suger&gt; je = of.createSugers(ws);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get Marshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marshaller m = ctx.createMarshaller();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with format and mapped prefix</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(<font class="java-string">"com.sun.xml.bind.namespacePrefixMapper"</font>,<font class="java-reserved_word"><b>new</b></font> NamespacePrefixMapperImpl());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(xml.toString());
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;<font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+</pre></td></tr></table><BR><BR><FONT COLOR="green"><BR><B><BR>3. References<BR></B><BR></FONT><BR><BR>官方文件<BR><BR><A HREF="http://download.oracle.com/docs/cd/E17802_01/webservices/webservices/docs/2.0/jaxb/vendorProperties.html" TARGET=_blank class=ilink>http://download.oracle.com/docs/cd/E17802_01/webservices/webservices/docs/2.0/jaxb/vendorProperties.html</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293458&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293458&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293458&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293461'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='even'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 21:52</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293461&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293461&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293461);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293461' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293461>
+第四篇 -- JAXB xsd 中使用其它文件的內容<BR><BR><FONT COLOR="green"><BR><B><BR>1. 前言<BR></B><BR></FONT><BR><BR>我們可以在一份 schema 中, 使用在其它份 schema 中定義好的部份,<BR><BR>大致可分為三種情形, 分別為 都沒有 name space,<BR><BR>有相同的 name space, 及在不同的 name space,<BR><BR>以下說明<BR><BR><FONT COLOR="green"><BR><B><BR>2. 都沒有 name space<BR></B><BR></FONT><BR><BR>假設有三份 schema 分別為 白糖 ( WhiteSuger ) , 飲料基底 ( DrinkBase ),<BR><BR>及 白糖水 ( WhiteSugerWater ) 如下圖,<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298353512267.png" BORDER="0"><BR><BR>其中 白糖 的 schema 如下,<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>&gt;
+&nbsp;
+  &lt;xsd:complexType name=<font class="java-string">"suger"</font>&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=<font class="java-string">"color"</font> type=<font class="java-string">"xsd:string"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"sweetness"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+</pre></td></tr></table><BR><BR>飲料基底 的 schema 如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>&gt;
+&nbsp;
+  &lt;xsd:complexType name=<font class="java-string">"water"</font>&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=<font class="java-string">"hardness"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"ph"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+&lt;/xsd:schema&gt;
+&nbsp;
+</pre></td></tr></table><BR><BR>則在 白糖水 中, 可如下使用以上兩個 schema<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>&gt;
+&nbsp;
+  &lt;xsd:include schemaLocation=<font class="java-string">"../WhiteSuger/WhiteSuger.xsd"</font>/&gt;
+  &lt;xsd:include schemaLocation=<font class="java-string">"DrinkBase.xsd"</font>/&gt;
+&nbsp;
+  &lt;!-- drink type --&gt;
+  &lt;xsd:complexType name=<font class="java-string">"whiteSugerWaterType"</font>&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=<font class="java-string">"sugerInDrink"</font> type=<font class="java-string">"suger"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"waterInDrink"</font> type=<font class="java-string">"water"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"sugerGram"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"waterMl"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+&nbsp;
+  &lt;!-- drink element --&gt;
+  &lt;xsd:element name=<font class="java-string">"whiteSugerWater"</font> type=<font class="java-string">"whiteSugerWaterType"</font>/&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+</pre></td></tr></table><BR><BR>說明<BR><BR>可以看出在 白糖 及 飲料基底 之中都沒有宣告 targetNamespace,<BR><BR>則此時在 白糖水 中也不能宣告 targetNamespace,<BR><BR>只要以 xsd:include 指定要使用的 schema 位置即可使用其它 schema 中的項目,<BR><BR><FONT COLOR="green"><BR><B><BR>3. 有相同或不同的 name space<BR></B><BR></FONT><BR><BR>假設 白糖 的 schema 開頭宣告改為如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+  targetNamespace=<font class="java-string">"http://www.WhiteSuger.com/ws"</font>&gt;
+</pre></td></tr></table><BR><BR>而 飲料基底 的 schema 開頭宣告改為如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+  targetNamespace=<font class="java-string">"http://www.Drink.com/dr"</font>&gt;
+&nbsp;
+</pre></td></tr></table><BR><BR>則在白糖水中, 便要改用以下的方式使用其它兩份 schema<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+  xmlns:ws=<font class="java-string">"http://www.WhiteSuger.com/ws"</font>
+  xmlns:dr=<font class="java-string">"http://www.Drink.com/dr"</font>
+  targetNamespace=<font class="java-string">"http://www.Drink.com/dr"</font>&gt;
+&nbsp;
+  &lt;xsd:<font class="java-reserved_word"><b>import</b></font> namespace=<font class="java-string">"http://www.WhiteSuger.com/ws"</font> schemaLocation=<font class="java-string">"../WhiteSuger/WhiteSuger.xsd"</font>/&gt;
+  &lt;xsd:include schemaLocation=<font class="java-string">"DrinkBase.xsd"</font>/&gt;
+&nbsp;
+  &lt;!-- drink type --&gt;
+  &lt;xsd:complexType name=<font class="java-string">"whiteSugerWaterType"</font>&gt;
+    &lt;xsd:sequence&gt;
+      &lt;xsd:element name=<font class="java-string">"sugerInDrink"</font> type=<font class="java-string">"ws:suger"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"waterInDrink"</font> type=<font class="java-string">"dr:water"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"sugerGram"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+      &lt;xsd:element name=<font class="java-string">"waterMl"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+    &lt;/xsd:sequence&gt;
+  &lt;/xsd:complexType&gt;
+&nbsp;
+  &lt;!-- drink element --&gt;
+  &lt;xsd:element name=<font class="java-string">"whiteSugerWater"</font> type=<font class="java-string">"dr:whiteSugerWaterType"</font>/&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+</pre></td></tr></table><BR><BR>說明<BR><BR>可以看到 白糖 宣告了<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>targetNamespace=<font class="java-string">"http://www.WhiteSuger.com/ws"</font>
+</pre></td></tr></table><BR><BR>而飲料基底 宣告了<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>targetNamespace=<font class="java-string">"http://www.Drink.com/dr"</font>&gt;
+</pre></td></tr></table><BR><BR>則此時 白糖水 就一定要宣告一個 name space, 可以與前面兩者相同,<BR><BR>也可以另外宣告一個新的,<BR><BR>在這裡我們宣告為和 飲料基底 相同的 name space,<BR><BR>而在 白糖水 的 schema 中, 開頭宣告的部份便得增加宣告 <BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>xmlns:xxx=<font class="java-string">"ooo"</font>,
+</pre></td></tr></table><BR><BR>定義這一份 schema 中使用到的其它 schema 的 name space 及對應的 prefix,<BR><BR>而若 白糖水 本身有獨立的一個 name space, 自己有定義 type 並有 element 參照的話,<BR><BR>也需要宣告自己的那一份,<BR><BR>而在下面引入的話份, 可以看到因為 白糖水 及 飲料基底 有相同的 name space,<BR><BR>便同樣用 <table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>xsd:includ
+</pre></td></tr></table> 的方式, 而 白糖水 和 白糖 的 namespace 不同,<BR><BR>則得改用 <table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>xsd:<font class="java-reserved_word"><b>import</b></font>
+</pre></td></tr></table>, 並定義 namespace 與 schema 的對應,<BR><BR>而在下方使用的部份, 則需加上在開頭宣告時的 prefix:<BR><BR>( 其實也可將 <table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>xmlns:dr=<font class="java-string">"http://www.Drink.com/dr"</font>
+</pre></td></tr></table><BR><BR>改為<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>xmlns=<font class="java-string">"http://www.Drink.com/dr"</font>
+</pre></td></tr></table>, 使用時去掉 <table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>dr:
+</pre></td></tr></table> 的部份,<BR><BR>但定義較不明確, 不建議 )<BR><BR>測試程式及執行結果分別如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringReader;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Unmarshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.transform.stream.StreamSource;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.ObjectFactory;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.Suger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.Water;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.WhiteSugerWaterType;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+  <font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+    <font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+      <font class="java-comment">//-- get context instance</font>
+      JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.drink"</font>);
+      ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;
+      <font class="java-comment">//-- create WhiteSugerWater</font>
+      WhiteSugerWaterType wswt = of.createWhiteSugerWaterType();
+      <font class="java-comment">//-- create suger for WhiteSugerWater</font>
+      Suger sg = of.createSuger();
+      <font class="java-comment">//-- create water for WhiteSugerWater</font>
+      Water wt = of.createWater();
+&nbsp;
+      <font class="java-comment">//-- set suger property</font>
+      sg.setColor(<font class="java-string">"Creem color"</font>);
+      sg.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+      <font class="java-comment">//-- set water property</font>
+      wt.setHardness((<font class="java-reserved_word"><b>byte</b></font>)15);
+      wt.setPh((<font class="java-reserved_word"><b>byte</b></font>)7);
+&nbsp;
+      <font class="java-comment">//-- set WhiteSugerWater property</font>
+      wswt.setSugerInDrink(sg);
+      wswt.setWaterInDrink(wt);
+      wswt.setSugerGram(60);
+      wswt.setWaterMl(700);
+&nbsp;
+      <font class="java-comment">//-- convert wswt to JAXBElement</font>
+      JAXBElement&lt;WhiteSugerWaterType&gt; je = of.createWhiteSugerWater(wswt);
+      <font class="java-comment">//-- get Marshaller</font>
+      Marshaller m = ctx.createMarshaller();
+&nbsp;
+      StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+      String xmlString = <font class="java-string">""</font>;
+      <font class="java-comment">//-- marshal JAXBElement into StringWriter with mapped prefix</font>
+      m.setProperty(<font class="java-string">"com.sun.xml.bind.namespacePrefixMapper"</font>,<font class="java-reserved_word"><b>new</b></font> NamespacePrefixMapperImpl());
+      m.marshal(je, xml);
+      xmlString = xml.toString();
+&nbsp;
+      <font class="java-comment">//-- clear StringWriter</font>
+      xml.getBuffer().setLength(0);
+      <font class="java-comment">//-- marshal JAXBElement into StringWriter with format and mapped prefix</font>
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+      m.marshal(je, xml);
+      System.err.println(xml.toString());
+&nbsp;
+      <font class="java-comment">//-- get unmarshaller</font>
+      Unmarshaller um = ctx.createUnmarshaller();
+      <font class="java-comment">//-- unmarshal xml string to JAXB element</font>
+      JAXBElement&lt;WhiteSugerWaterType&gt; root = (JAXBElement)um.unmarshal(<font class="java-reserved_word"><b>new</b></font> StreamSource(<font class="java-reserved_word"><b>new</b></font> StringReader(
+        xmlString)));
+&nbsp;
+      WhiteSugerWaterType wswt2 = root.getValue();
+&nbsp;
+      System.err.println(<font class="java-string">" suger in drink : "</font> + wswt2.getSugerGram() + <font class="java-string">" g"</font>);
+      System.err.println(<font class="java-string">" water in drink : "</font> + wswt2.getWaterMl() + <font class="java-string">" ml"</font>);
+    <font class="java-bracket">}</font>
+    <font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+      e.printStackTrace();
+    <font class="java-bracket">}</font>
+  <font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+</pre></td></tr></table><BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298353903053.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B><BR>4. References<BR></B><BR></FONT><BR><BR>很詳盡的資料<BR><BR><A HREF="http://www.datypic.com/books/defxmlschema/chapter04.html" TARGET=_blank class=ilink>http://www.datypic.com/books/defxmlschema/chapter04.html</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293461&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293461&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293461&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293463'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='odd'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 22:02</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293463&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293463&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293463);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293463' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293463>
+第五篇 -- 使用 Name space 解決名稱衝突<BR><BR><FONT COLOR="green"><BR><B><BR>1. 關於名稱衝突<BR></B><BR></FONT><BR><BR>假設我們想要以 白糖, 黑糖 來製作 混合糖水,<BR><BR>因此 白糖公司 與 黑糖公司 都提供了一份自己的 schema,<BR><BR>都沒有 namespace, 而且都有個型態叫 suger,<BR><BR>則我們在使用 xjc 時就會看到如下圖的錯誤<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298354423546.png" BORDER="0"><BR><BR>而假若他們都有提供自己的 namespace, 我們便可以 namespace 加以區分,<BR><BR>則能得到如下的結果<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298354423547.png" BORDER="0"><BR><BR>oops~ 仍然有錯誤, 然而注意看可看出錯誤訊息為 suger 這個 class 已經有人用,<BR><BR>這表示 xjc 已經能分辨 WhiteSuger 及 BlackSuger 兩份 schema 裡的 suger,<BR><BR>但是在為 suger 生成 class 時, 無法在同一個地方生出兩份叫 suger 的 class,<BR><BR>錯誤訊息裡也很親切的說明要使用 class customization 來解決,<BR><BR>這將會在 第六篇  為同名型態生成不同 class -- Customizing JAXB Bindings 說明<BR><BR><FONT COLOR="green"><BR><B><BR>2. References<BR></B><BR></FONT><BR><BR>提到衝突問題的討論<BR><BR><A HREF="http://xsd.stylusstudio.com/2002Jun/post02016.htm" TARGET=_blank class=ilink>http://xsd.stylusstudio.com/2002Jun/post02016.htm</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293463&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293463&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293463&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293465'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='even'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 22:16</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293465&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293465&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293465);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293465' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293465>
+第六篇 -- 為同名型態生成不同 class - Customizing JAXB Bindings<BR><BR><FONT COLOR="green"><BR><B><BR>1. 撰寫並使用 binding customization file<BR></B><BR></FONT><BR><BR>在 第五篇 -- 使用 Name space 解決名稱衝突 之中解決了名稱衝突的問題後,<BR><BR>但仍然有物件的衝突要處理, 處理物件的衝突,<BR><BR>就要使用 customization JAXB bindings,<BR><BR>以下用外部檔案方式為例,<BR><BR>binding 檔案內容如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;jaxb:bindings version=<font class="java-string">"2.0"</font>
+&nbsp;&nbsp;xmlns:jaxb=<font class="java-string">"http://java.sun.com/xml/ns/jaxb"</font>
+&nbsp;&nbsp;xmlns:xs=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>class</b></font> WhiteSuger <font class="java-reserved_word"><b>for</b></font> <font class="java-string">"suger"</font> in WhiteSuger.xsd --&gt;
+&nbsp;&nbsp;&lt;jaxb:bindings schemaLocation=<font class="java-string">"WhiteSuger/WhiteSuger.xsd"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;node=<font class="java-string">"//xs:complexType[@name='suger']"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>class</b></font> name=<font class="java-string">"WhiteSuger"</font>/&gt;
+&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>class</b></font> BlackSuger <font class="java-reserved_word"><b>for</b></font> <font class="java-string">"suger"</font> in BlackSuger.xsd --&gt;
+&nbsp;&nbsp;&lt;jaxb:bindings schemaLocation=<font class="java-string">"BlackSuger/BlackSuger.xsd"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;node=<font class="java-string">"//xs:complexType[@name='suger']"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>class</b></font> name=<font class="java-string">"BlackSuger"</font>/&gt;
+&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;
+&lt;/jaxb:bindings&gt;
+</pre></td></tr></table><BR><BR>檔案位置如下圖<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298355044707.png" BORDER="0"><BR><BR>則進行 xjc 時以 -b 指定 binding 檔案, 指令如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>C:\Program Files\Java\jdk1.6.0_21\bin&gt;xjc -b xmlSchema\customBinding.xml -p org.iii.test.jaxb.drink xmlSchema\Drink\MixedSugerWater.xsd
+</pre></td></tr></table><BR><BR>即可生成物件, 將之放入專案中如下<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298355112691.png" BORDER="0"><BR><BR>其中各 xsd 檔內容如下<BR><BR>WhiteSuger.xsd<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+&nbsp;&nbsp;targetNamespace=<font class="java-string">"http://www.WhiteSuger.com/ws"</font>&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;xsd:complexType name=<font class="java-string">"suger"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"color"</font> type=<font class="java-string">"xsd:string"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"sweetness"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+</pre></td></tr></table><BR><BR>BlackSuger.xsd<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+&nbsp;&nbsp;targetNamespace=<font class="java-string">"http://www.BlackSuger.com/bs"</font>&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;xsd:complexType name=<font class="java-string">"suger"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"color"</font> type=<font class="java-string">"xsd:string"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"aroma"</font> type=<font class="java-string">"xsd:string"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"sweetness"</font> type=<font class="java-string">"xsd:byte"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+&nbsp;
+</pre></td></tr></table><BR><BR>MixedSugerWater.xsd<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"UTF-8"</font>?&gt;
+&lt;xsd:schema xmlns:xsd=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>
+&nbsp;&nbsp;xmlns:ws=<font class="java-string">"http://www.WhiteSuger.com/ws"</font>
+&nbsp;&nbsp;xmlns:bs=<font class="java-string">"http://www.BlackSuger.com/bs"</font>
+&nbsp;&nbsp;xmlns:dr=<font class="java-string">"http://www.Drink.com/dr"</font>
+&nbsp;&nbsp;targetNamespace=<font class="java-string">"http://www.Drink.com/dr"</font>&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;xsd:include schemaLocation=<font class="java-string">"DrinkBase.xsd"</font>/&gt;
+&nbsp;&nbsp;&lt;xsd:<font class="java-reserved_word"><b>import</b></font> namespace=<font class="java-string">"http://www.WhiteSuger.com/ws"</font> schemaLocation=<font class="java-string">"../WhiteSuger/WhiteSuger.xsd"</font>/&gt;
+&nbsp;&nbsp;&lt;xsd:<font class="java-reserved_word"><b>import</b></font> namespace=<font class="java-string">"http://www.BlackSuger.com/bs"</font> schemaLocation=<font class="java-string">"../BlackSuger/BlackSuger.xsd"</font>/&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- drink type --&gt;
+&nbsp;&nbsp;&lt;xsd:complexType name=<font class="java-string">"mixedSugerWaterType"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:sequence&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"whiteSugerInDrink"</font> type=<font class="java-string">"ws:suger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"blackSugerInDrink"</font> type=<font class="java-string">"bs:suger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"waterInDrink"</font> type=<font class="java-string">"dr:water"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"whiteSugerGram"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"blackSugerGram"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"waterMl"</font> type=<font class="java-string">"xsd:int"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xsd:sequence&gt;
+&nbsp;&nbsp;&lt;/xsd:complexType&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- drink element --&gt;
+&nbsp;&nbsp;&lt;xsd:element name=<font class="java-string">"mixedSugerWater"</font> type=<font class="java-string">"dr:mixedSugerWaterType"</font>/&gt;
+&nbsp;
+&lt;/xsd:schema&gt;
+&nbsp;
+</pre></td></tr></table><BR><BR>以下為測試程式及結果截圖<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringReader;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Unmarshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.transform.stream.StreamSource;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.BlackSuger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.MixedSugerWaterType;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.ObjectFactory;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.Water;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.WhiteSuger;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get context instance</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.drink"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MixedSugerWaterType mswt = of.createMixedSugerWaterType();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create whiteSuger for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WhiteSuger ws = of.createWhiteSuger();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create water for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Water wt = of.createWater();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create blackSuger for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlackSuger bg = of.createBlackSuger();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set white suger property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setColor(<font class="java-string">"Creem color"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set water property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wt.setHardness((<font class="java-reserved_word"><b>byte</b></font>)15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wt.setPh((<font class="java-reserved_word"><b>byte</b></font>)7);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set black suger property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setAroma(<font class="java-string">"Muscat"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setColor(<font class="java-string">"Dark Brown"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set MixedSugerWaterType property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWhiteSugerInDrink(ws);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWaterInDrink(wt);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setBlackSugerInDrink(bg);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWhiteSugerGram(15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setBlackSugerGram(15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWaterMl(700);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- convert mswt to JAXBElement</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;MixedSugerWaterType&gt; je = of.createMixedSugerWater(mswt);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get Marshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marshaller m = ctx.createMarshaller();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String xmlString = <font class="java-string">""</font>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with mapped prefix</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(<font class="java-string">"com.sun.xml.bind.namespacePrefixMapper"</font>,<font class="java-reserved_word"><b>new</b></font> NamespacePrefixMapperImpl());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlString = xml.toString();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- clear StringWriter</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml.getBuffer().setLength(0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with format and mapped prefix</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(xml.toString());
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get unmarshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unmarshaller um = ctx.createUnmarshaller();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- unmarshal xml string to JAXB element</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;MixedSugerWaterType&gt; root = (JAXBElement)um.unmarshal(<font class="java-reserved_word"><b>new</b></font> StreamSource(<font class="java-reserved_word"><b>new</b></font> StringReader(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlString)));
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MixedSugerWaterType wswt2 = root.getValue();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" white suger in drink : "</font> + wswt2.getWhiteSugerGram() + <font class="java-string">" g"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" black suger in drink : "</font> + wswt2.getBlackSugerGram() + <font class="java-string">" g"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" water in drink : "</font> + wswt2.getWaterMl() + <font class="java-string">" ml"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;<font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+</pre></td></tr></table><BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298355252762.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B><BR>2. References<BR></B><BR></FONT><BR><BR>官網, 內容很多但有點零碎, 查東西用<BR><BR><A HREF="http://download.oracle.com/docs/cd/E17802_01/webservices/webservices/docs/2.0/tutorial/doc/JAXBUsing4.html" TARGET=_blank class=ilink>http://download.oracle.com/docs/cd/E17802_01/webservices/webservices/docs/2.0/tutorial/doc/JAXBUsing4.html</A><BR><BR>fusesource, 可以看到比較完整的用法<BR><BR><A HREF="http://fusesource.com/docs/esb/4.3/cxf_jaxws/JAXWSCustomTypeMappingOverview.html" TARGET=_blank class=ilink>http://fusesource.com/docs/esb/4.3/cxf_jaxws/JAXWSCustomTypeMappingOverview.html</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293465&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293465&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293465&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293468'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='odd'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 22:33</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293468&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293468&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293468);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293468' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293468>
+第七篇 -- 分門別類 - customize package bindings<BR><BR><FONT COLOR="green"><BR><B><BR>1. 前言<BR></B><BR></FONT><BR><BR>在 第六篇 -- 為同名型態生成不同 class - Customizing JAXB Bindings 中,<BR><BR>我們以自訂 class 名的方式將兩個 suger 型態分別生成不同的 class,<BR><BR>然而所有的 class 都在 drink 之下,<BR><BR>有時我們可能會希望不同類型的 class 可以分別在不同的 package,<BR><BR>這時就要做 package 的綁定,<BR><BR><FONT COLOR="green"><BR><B><BR>2. 綁定不同的 schema 到不同的 package<BR></B><BR></FONT><BR><BR>首先改寫 binding file 如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;jaxb:bindings version=<font class="java-string">"2.0"</font>
+&nbsp;&nbsp;xmlns:jaxb=<font class="java-string">"http://java.sun.com/xml/ns/jaxb"</font>
+&nbsp;&nbsp;xmlns:xs=<font class="java-string">"http://www.w3.org/2001/XMLSchema"</font>&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>package</b></font> <font class="java-reserved_word"><b>for</b></font> WhiteSuger schema and <font class="java-reserved_word"><b>class</b></font> <font class="java-reserved_word"><b>for</b></font> <font class="java-string">"suger"</font> in WhiteSuger.xsd --&gt;
+&nbsp;&nbsp;&lt;jaxb:bindings schemaLocation=<font class="java-string">"WhiteSuger/WhiteSuger.xsd"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;node=<font class="java-string">"/xs:schema"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>package</b></font> name=<font class="java-string">"org.iii.test.jaxb.suger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:bindings node=<font class="java-string">"//xs:complexType[@name='suger']"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>class</b></font> name=<font class="java-string">"WhiteSuger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>package</b></font> <font class="java-reserved_word"><b>for</b></font> BlackSuger schema and <font class="java-reserved_word"><b>class</b></font> <font class="java-reserved_word"><b>for</b></font> <font class="java-string">"suger"</font> in BlackSuger.xsd --&gt;
+&nbsp;&nbsp;&lt;jaxb:bindings schemaLocation=<font class="java-string">"BlackSuger/BlackSuger.xsd"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;node=<font class="java-string">"/xs:schema"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>package</b></font> name=<font class="java-string">"org.iii.test.jaxb.suger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:bindings node=<font class="java-string">"//xs:complexType[@name='suger']"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>class</b></font> name=<font class="java-string">"BlackSuger"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>package</b></font> <font class="java-reserved_word"><b>for</b></font> mixed suger water schema --&gt;
+&nbsp;&nbsp;&lt;jaxb:bindings schemaLocation=<font class="java-string">"Drink/MixedSugerWater.xsd"</font>
+&nbsp;&nbsp;&nbsp;&nbsp;node=<font class="java-string">"/xs:schema"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jaxb:<font class="java-reserved_word"><b>package</b></font> name=<font class="java-string">"org.iii.test.jaxb.drink"</font>/&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/jaxb:schemaBindings&gt;
+&nbsp;&nbsp;&lt;/jaxb:bindings&gt;
+&nbsp;
+&lt;/jaxb:bindings&gt;
+</pre></td></tr></table><BR><BR>接下來以下面的指令生成物件, 這時便不能用 -p 指定 package,<BR><BR>否則 binding files 裡針對 package 的設定會被忽略<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>C:\Program Files\Java\jdk1.6.0_21\bin&gt;xjc -b xmlSchema\customBinding.xml xmlSchema\Drink\MixedSugerWater.xsd
+</pre></td></tr></table><BR><BR>執行結果如下圖,<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298356099691.png" BORDER="0"><BR><BR>將生成的檔案, 放入專案如下<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298356133050.png" BORDER="0"><BR><BR>測試程式也需要修改, 程式碼及執行結果如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br>93<br>94<br>95<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre><font class="java-reserved_word"><b>package</b></font> org.iii.test.jaxb.test;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringReader;
+<font class="java-reserved_word"><b>import</b></font> java.io.StringWriter;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBContext;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.JAXBElement;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Marshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.bind.Unmarshaller;
+<font class="java-reserved_word"><b>import</b></font> javax.xml.transform.stream.StreamSource;
+&nbsp;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.MixedSugerWaterType;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.ObjectFactory;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.drink.Water;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.suger.BlackSuger;
+<font class="java-reserved_word"><b>import</b></font> org.iii.test.jaxb.suger.WhiteSuger;
+&nbsp;
+<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>class</b></font> Test <font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;<font class="java-reserved_word"><b>public</b></font> <font class="java-reserved_word"><b>static</b></font> <font class="java-reserved_word"><b>void</b></font> main(String args[])<font class="java-bracket">{</font>
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>try</b></font><font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get context instance</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBContext ctx = JAXBContext.newInstance(<font class="java-string">"org.iii.test.jaxb.drink"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- ObjectFactory for drink</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ObjectFactory of = <font class="java-reserved_word"><b>new</b></font> ObjectFactory();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- ObjectFactory for suger</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;org.iii.test.jaxb.suger.ObjectFactory sof = <font class="java-reserved_word"><b>new</b></font> org.iii.test.jaxb.suger.ObjectFactory();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MixedSugerWaterType mswt = of.createMixedSugerWaterType();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create whiteSuger for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WhiteSuger ws = sof.createWhiteSuger();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create water for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Water wt = of.createWater();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- create blackSuger for MixedSugerWaterType</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BlackSuger bg = sof.createBlackSuger();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set white suger property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setColor(<font class="java-string">"Creem color"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ws.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set water property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wt.setHardness((<font class="java-reserved_word"><b>byte</b></font>)15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wt.setPh((<font class="java-reserved_word"><b>byte</b></font>)7);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set black suger property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setAroma(<font class="java-string">"Muscat"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setColor(<font class="java-string">"Dark Brown"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bg.setSweetness((<font class="java-reserved_word"><b>byte</b></font>)20);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- set MixedSugerWaterType property</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWhiteSugerInDrink(ws);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWaterInDrink(wt);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setBlackSugerInDrink(bg);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWhiteSugerGram(15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setBlackSugerGram(15);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mswt.setWaterMl(700);
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- convert mswt to JAXBElement</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;MixedSugerWaterType&gt; je = of.createMixedSugerWater(mswt);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get Marshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marshaller m = ctx.createMarshaller();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringWriter xml = <font class="java-reserved_word"><b>new</b></font> StringWriter();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String xmlString = <font class="java-string">""</font>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with mapped prefix</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(<font class="java-string">"com.sun.xml.bind.namespacePrefixMapper"</font>,<font class="java-reserved_word"><b>new</b></font> NamespacePrefixMapperImpl());
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlString = xml.toString();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- clear StringWriter</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xml.getBuffer().setLength(0);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- marshal JAXBElement into StringWriter with format and mapped prefix</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, <font class="java-reserved_word"><b>true</b></font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;m.marshal(je, xml);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(xml.toString());
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- get unmarshaller</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unmarshaller um = ctx.createUnmarshaller();
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-comment">//-- unmarshal xml string to JAXB element</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JAXBElement&lt;MixedSugerWaterType&gt; root = (JAXBElement)um.unmarshal(<font class="java-reserved_word"><b>new</b></font> StreamSource(<font class="java-reserved_word"><b>new</b></font> StringReader(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlString)));
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MixedSugerWaterType wswt2 = root.getValue();
+&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" white suger in drink : "</font> + wswt2.getWhiteSugerGram() + <font class="java-string">" g"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" black suger in drink : "</font> + wswt2.getBlackSugerGram() + <font class="java-string">" g"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.err.println(<font class="java-string">" water in drink : "</font> + wswt2.getWaterMl() + <font class="java-string">" ml"</font>);
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-reserved_word"><b>catch</b></font> (Exception e)<font class="java-bracket">{</font>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+&nbsp;&nbsp;&nbsp;&nbsp;<font class="java-bracket">}</font>
+&nbsp;&nbsp;<font class="java-bracket">}</font>
+<font class="java-bracket">}</font>
+</pre></td></tr></table><BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298356288576.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B><BR>3. References<BR></B><BR></FONT><BR><BR>stackoverflow 上的一個範例<BR><BR><A HREF="http://stackoverflow.com/questions/1881712/is-it-possible-to-use-jaxb-to-map-from-schema-to-a-java-util-map" TARGET=_blank class=ilink>http://stackoverflow.com/questions/1881712/is-it-possible-to-use-jaxb-to-map-from-schema-to-a-java-util-map</A> 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293468&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293468&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293468&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>	
+				<a name='293470'></a>
+<table border=0 cellspacing=1 cellpadding=4 width='95%'>
+<tr class='head'><td width=150 align=center>
+<font color=#ffffff><b>作者</b></font></td>
+<td>
+<font color=#ffffff><b>
+Re:JAXB 新手學習筆記 
+[Re:benbai123]  </b></font>
+</td>
+</tr>
+<tr class='even'>
+<td width=150 valign=top>
+<b>benbai123</b>
+<br><img src='faces/face_jigglypuff.gif' border=0>
+<br>
+
+<br><br>
+<img src="images/star2.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0><img src="images/star1.gif" border=0>
+<br><br><b>發文:</b> 25
+<br><b>積分:</b> 0 
+<br><img src='images_zh_TW/pixel.gif' border=0 height=1 width=150>
+</td>
+<td valign=top width=100%>
+<span class="timestamp">
+<img src='images_zh_TW/post.gif' border=0 align='absmiddle'>於 2011-02-22 22:54</span>
+<a href='user/info?uid=165675'><img src='images_zh_TW/icons/icon_profile.gif' border=0 alt='user profile' align='absmiddle'></a><a href="user/message?action=WriteMessage&to=benbai123&subject=Re%3ARe%3AJAXB+%E6%96%B0%E6%89%8B%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98" target=_blank><img src='images_zh_TW/icons/icon_pm.gif' border=0 alt='send a private message to user' align='absmiddle'></a><a href='post/reply?bid=19&parent=293470&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293470&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/search?username=benbai123&action=Search'><img src='images_zh_TW/icons/icon_find.gif' border=0 alt="search all posts by" align='absmiddle'></a><a href="javascript:copyText(document.all.text293470);"><img src='images_zh_TW/icons/icon_copy.gif' border=0 alt="select and copy to clipboard. 
+ie only, sorry for netscape users:-)" align='absmiddle'></a><a href='user/favorite?action=Add&bid=19&id=293470' target='_blank'><img src='images_zh_TW/icons/icon_favorite.gif' border=0 alt='add this post to my favorite list' align='absmiddle'></a>
+<hr size=1 noshade color=#000000>
+<span class=javascript id=text293470>
+第八篇 -- 以 Ant 使用 JAXB xjc<BR><BR><FONT COLOR="green"><BR><B><BR>1. 以 Ant 轉換 schema 為 java 檔<BR></B><BR></FONT><BR><BR>Ant 也可以用來將 xjc 的功能自動化,<BR><BR>讓我們不必再重覆 搬移 schema 檔案 下指令 搬回物件檔案 這些動作,<BR><BR>環境說明<BR><BR>這裡以 第七篇 -- 分門別類 - customize package bindings 的情況為例,<BR><BR>我們要撰寫一個 build.xml, 準備好 xsd 檔及 binding file,<BR><BR>執行它後就會把 java 檔 產生出來放到正確的位置<BR><BR>build.xml 如下<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"BIG5"</font>?&gt;
+&nbsp;
+&lt;project name=<font class="java-string">"genXsdClasses"</font> default=<font class="java-string">"genClass"</font> basedir=<font class="java-string">"."</font>&gt;
+&nbsp;&nbsp;&lt;!-- 上面一行是 project 的進入點  --&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Define JAXB home, 請依個人檔案路徑修改 --&gt;
+&nbsp;&nbsp;&lt;property name=<font class="java-string">"jaxb.home"</font> value=<font class="java-string">"C:/java/jaxb-ri-20101209"</font> /&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Define <font class="java-reserved_word"><b>class</b></font> path, 同上 --&gt;
+&nbsp;&nbsp;&lt;path id=<font class="java-string">"classpath"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"src"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"classes"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"schemas"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileset dir=<font class="java-string">"lib"</font> includes=<font class="java-string">"*.jar"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>this</b></font> example only need <font class="java-reserved_word"><b>this</b></font> one below, above 4 just <font class="java-reserved_word"><b>for</b></font> example --&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileset dir=<font class="java-string">"${jaxb.home}"</font> includes=<font class="java-string">"lib/*.jar"</font> /&gt;
+&nbsp;&nbsp;&lt;/path&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- This maps XJCTask to an Ant task named xjc.
+&nbsp;&nbsp;&nbsp;&nbsp;Refer to any of the build.xml under jaxb.home/samples <font class="java-reserved_word"><b>for</b></font> detail. --&gt;
+&nbsp;&nbsp;&lt;taskdef name=<font class="java-string">"xjc"</font> classname=<font class="java-string">"com.sun.tools.xjc.XJCTask"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;classpath refid=<font class="java-string">"classpath"</font> /&gt;
+&nbsp;&nbsp;&lt;/taskdef&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Generate .java files by defined task xjc. --&gt;
+&nbsp;&nbsp;&lt;target name=<font class="java-string">"genClass"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;xjc destdir=<font class="java-string">"src"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;schema dir=<font class="java-string">"xmlSchema/drink"</font> includes=<font class="java-string">"MixedSugerWater.xsd"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;binding dir=<font class="java-string">"xmlSchema"</font> includes=<font class="java-string">"customBinding.xml"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xjc&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;/target&gt;
+&nbsp;
+&lt;/project&gt;
+</pre></td></tr></table><BR><BR>以下為執行前及執行後的截圖<BR><BR>首先是執行前 src 下的情形<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298357388351.jpg" BORDER="0"><BR><BR>執行後將 src 重新整理後的情形 以及執行的訊息<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298357433154.png" BORDER="0"><BR><BR>寫得更完整, 加入清除舊檔的部份<BR><BR><table border="0" cellspacing="1" cellpadding="3" class="java" bgcolor="#999999"><tr><td width="1" align="left"  bgcolor="#dddddd" valign="top"><pre><font color="#555555">1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br></font></pre></td><td align="left" bgcolor="#ffffff" valign="top"><pre>&lt;?xml version=<font class="java-string">"1.0"</font> encoding=<font class="java-string">"BIG5"</font>?&gt;
+&nbsp;
+&lt;project name=<font class="java-string">"genXsdClasses"</font> default=<font class="java-string">"genClass"</font> basedir=<font class="java-string">"."</font>&gt;
+&nbsp;&nbsp;&lt;!-- 上面一行是 project 的進入點  --&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Define JAXB home, 請依個人檔案路徑修改 --&gt;
+&nbsp;&nbsp;&lt;property name=<font class="java-string">"jaxb.home"</font> value=<font class="java-string">"C:/java/jaxb-ri-20101209"</font> /&gt;
+&nbsp;&nbsp;&lt;!-- Define source and destnation, 同上 --&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Define <font class="java-reserved_word"><b>class</b></font> path --&gt;
+&nbsp;&nbsp;&lt;path id=<font class="java-string">"classpath"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"src"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"classes"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pathelement path=<font class="java-string">"schemas"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileset dir=<font class="java-string">"lib"</font> includes=<font class="java-string">"*.jar"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- <font class="java-reserved_word"><b>this</b></font> example only need <font class="java-reserved_word"><b>this</b></font> one below, above 4 just <font class="java-reserved_word"><b>for</b></font> example --&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;fileset dir=<font class="java-string">"${jaxb.home}"</font> includes=<font class="java-string">"lib/*.jar"</font> /&gt;
+&nbsp;&nbsp;&lt;/path&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- This maps XJCTask to an Ant task named xjc.
+&nbsp;&nbsp;&nbsp;&nbsp;Refer to any of the build.xml under jaxb.home/samples <font class="java-reserved_word"><b>for</b></font> detail. --&gt;
+&nbsp;&nbsp;&lt;taskdef name=<font class="java-string">"xjc"</font> classname=<font class="java-string">"com.sun.tools.xjc.XJCTask"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;classpath refid=<font class="java-string">"classpath"</font> /&gt;
+&nbsp;&nbsp;&lt;/taskdef&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- clear old files --&gt;
+&nbsp;&nbsp;&lt;target name=<font class="java-string">"clean"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;delete dir=<font class="java-string">"src/org/iii/test/jaxb/drink"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;delete dir=<font class="java-string">"src/org/iii/test/jaxb/suger"</font> /&gt;
+&nbsp;&nbsp;&lt;/target&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;!-- Generate .java files by defined task xjc. --&gt;
+&nbsp;&nbsp;&lt;target name=<font class="java-string">"genClass"</font> depends=<font class="java-string">"clean"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;xjc destdir=<font class="java-string">"src"</font>&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;schema dir=<font class="java-string">"xmlSchema/drink"</font> includes=<font class="java-string">"MixedSugerWater.xsd"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;binding dir=<font class="java-string">"xmlSchema"</font> includes=<font class="java-string">"customBinding.xml"</font> /&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/xjc&gt;
+&nbsp;
+&nbsp;&nbsp;&lt;/target&gt;
+&nbsp;
+&lt;/project&gt;
+</pre></td></tr></table><BR><BR>執行結果如下<BR><BR><IMG SRC="http://www.javaworld.com.tw/jute/gallery/Y/m/YmVuYmFpMTIz/1298357572279.png" BORDER="0"><BR><BR><FONT COLOR="green"><BR><B><BR>2. References<BR></B><BR></FONT><BR><BR>官網<BR><BR><A HREF="http://jaxb.java.net/jaxb20-ea/docs/xjcTask.html" TARGET=_blank class=ilink>http://jaxb.java.net/jaxb20-ea/docs/xjcTask.html</A><BR><BR>注意, Parameter Attributes 表格中的 target 應改為 destdir 才能動 
+	</span>
+<br><br>
+<div align=right>
+
+<div class="vote">
+<g:plusone size="tall" href="http://www.javaworld.com.tw/jute/post/view?bid=19&id=293470&sty=3"></g:plusone>
+</div>
+
+</div>
+<a href='post/reply?bid=19&parent=293470&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=0'><img src='images_zh_TW/icons/icon_reply.gif' border=0 alt='reply to post' align='absmiddle'></a><a href='post/reply?bid=19&parent=293470&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455&quote=1'><img src='images_zh_TW/icons/icon_quote.gif' border=0 alt='reply to post' align='absmiddle'></a><hr size=1 noshade color=#000000>
+
+</td></tr>
+</table>
+
+<a href="http://azure.microsoft.com/zh-tw/"><img src="http://www.javaworld.com.tw/jute/upload/advertisement/azure.gif"  /> </a><!-- google_ad_section_end -->
+<table width='95%'  cellspacing=0 cellpadding=2 border=0>
+<tr><td>
+<b><font size=3 face=arial><b>&#187;</b></font>&nbsp;<a href='index.html' class=nav><b>JWorld@TW</b></a>
+
+<font size=3 face=arial><b>&#187;</b></font>&nbsp;
+<a href='post/page?bid=19&sty=1&age=0&tpg=1' class=nav><b>Java & XML、Web Service</b></a>
+</td>
+
+</tr></table>
+<br/>
+<table width='95%'  cellspacing=0 cellpadding=2 border=0>
+<tr>
+<td align='left'>
+<a href='post/reply?bid=19&parent=293455&done=%2Fjute%2Fpost%2Fview%3Fbid%3D19%26id%3D293455'><img src='images_zh_TW/newreply_index.gif' alt='reply to topic' border=0 align='absmiddle'></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=3&age=0#293455'><img src='images_zh_TW/threaded_index.gif' border=0 align='absmiddle' alt='threaded mode'></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=1&age=0&prev=1'><img src='images_zh_TW/prev_index.gif' align='absmiddle' alt='go to previous topic' border=0></a><a href='post/view?bid=19&id=293455&tpg=1&ppg=1&sty=1&age=0&next=1'><img src='images_zh_TW/next_index.gif' border=0 align='absmiddle' alt='go to next topic'></a>
+</td></tr>
+</table>
+
+
+<table border=0 width=95%>
+<tr valign=top><td><IMG SRC='images_zh_TW/post.gif' BORDER=0 ALIGN='absmiddle'><font class=text>&nbsp; 已讀文章</font><br><IMG SRC='images_zh_TW/post_n.gif' BORDER=0 ALIGN='absmiddle'><font class=text>&nbsp; 新的文章</font><br><IMG SRC='images_zh_TW/post_d.gif' BORDER=0 ALIGN='absmiddle'><font class=text>&nbsp; 被刪除的文章</font></td>
+</tr>
+</table>
+
+
+<div style="clear:both; width:100%;">
+<table width=95%>
+<tr><td align=right>
+<a name="bottom"></a><a href="javascript:jumpTo('top')"><img src="images_zh_TW/up.gif" border=0 alt="Jump to the top of page"></a>
+</td></tr>
+</table>
+</div>
+<br/>
+<div style="clear:both; width:100%;">
+<a href="index.html">JWorld@TW</a>
+<a href="page/trademarks.htm">本站商標資訊</a><br><br>
+<!--
+<a href='http://www.cjsdn.com' target=_blank><img src="images_zh_TW/powered.gif" border=0></a> 
+<br>
+-->
+<font class=text><FONT COLOR='#808080'>Powered by <a href='http://www.cjsdn.com' target=_blank>Powerful JuteForum</a>&reg; Version Jute 1.5.8 
+<!--
+<br> Copyright&copy; 2002-2003 Rainman Zhu,Zua,Netboy,Scott. All Rights Reserved.
+-->
+</FONT></font>
+</div>
+</BODY>
+</HTML>
