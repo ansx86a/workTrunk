@@ -10,8 +10,13 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLInputFactory;
 
 import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
@@ -20,11 +25,11 @@ public class Jaxb {
 	// 已經把八成的用處實現出來了，如有更難的就參照java world的jaxb新手學習筆記，已放到package下
 	public static void main(String[] args) throws Exception {
 		Jaxb p = new Jaxb();
-		// p.$1物件寫出xml();
-		// p.$2xml轉物件();
+		p.$1物件寫出xml();
+		 p.$2xml轉物件();
 		// p.$3多層物件轉xml();
 		// p.$4物件轉xml有namespace();
-		p.$5物件轉xml客製namespace();
+		// p.$5物件轉xml客製namespace();
 
 	}
 
@@ -130,8 +135,24 @@ public class Jaxb {
 
 		private Date mydate = new Date();
 
+		private MyAttribute mmyyaatt = new MyAttribute();
+
 		public String getMystr() {
 			return mystr;
+		}
+
+		@Override
+		public String toString() {
+			return "Obj1 [mystr=" + mystr + ", myint=" + myint + ", mydouble=" + mydouble + ", mydate=" + mydate
+					+ ", mmyyaatt=" + mmyyaatt + "]";
+		}
+
+		public MyAttribute getMmyyaatt() {
+			return mmyyaatt;
+		}
+
+		public void setMmyyaatt(MyAttribute mmyyaatt) {
+			this.mmyyaatt = mmyyaatt;
 		}
 
 		@XmlElement
@@ -157,18 +178,49 @@ public class Jaxb {
 			this.mydouble = mydouble;
 		}
 
+		@XmlElement
 		public Date getMydate() {
 			return mydate;
 		}
 
-		@XmlElement
 		public void setMydate(Date mydate) {
 			this.mydate = mydate;
 		}
 
-		@Override
-		public String toString() {
-			return "Obj1 [mystr=" + mystr + ", myint=" + myint + ", mydouble=" + mydouble + ", mydate=" + mydate + "]";
+		@XmlAccessorType(XmlAccessType.FIELD)
+		@XmlType(name = "MyType")
+		static class MyAttribute {
+
+			@XmlAttribute
+			private String type = "type1";
+
+			@XmlAttribute
+			private String group = "group1";
+
+			@XmlValue
+			private String value = "庫嗶不要棒賽";
+
+			public String getType() {
+				return type;
+			}
+
+			public void setType(String type) {
+				this.type = type;
+			}
+
+			public String getGroup() {
+				return group;
+			}
+
+			public void setGroup(String group) {
+				this.group = group;
+			}
+
+			@Override
+			public String toString() {
+				return "MyAttribute [type=" + type + ", group=" + group + ", value=" + value + "]";
+			}
+
 		}
 	}
 
