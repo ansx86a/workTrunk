@@ -60,7 +60,6 @@
 			<version>3.2.1</version>
 		</dependency>
 
-
 		<!-- 常用 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -367,5 +366,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<packaging>war</packaging>
 </project>

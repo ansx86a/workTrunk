@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -14,30 +15,29 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLInputFactory;
-
-import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
 
 public class Jaxb {
 	// 已經把八成的用處實現出來了，如有更難的就參照java world的jaxb新手學習筆記，已放到package下
 	public static void main(String[] args) throws Exception {
 		Jaxb p = new Jaxb();
-		p.$1物件寫出xml();
-		 p.$2xml轉物件();
-		// p.$3多層物件轉xml();
-		// p.$4物件轉xml有namespace();
-		// p.$5物件轉xml客製namespace();
-
+		//p.$1物件寫出xml();
+		//p.$2xml轉物件();
+		 p.$3多層物件轉xml();
+		 p.$4物件轉xml有namespace();
+		 p.$5物件轉xml客製namespace();
 	}
 
 	public String $1取得物件的xmlString(Object o) throws Exception {
 		return $1取得物件的xmlString(o, null);
 	}
 
-	public String $1取得物件的xmlString(Object o, NamespacePrefixMapper mapper) throws Exception {
+	public String $1取得物件的xmlString(Object o, Object mapper) throws Exception {
 		StringWriter sw = new StringWriter();
 		JAXBContext jaxbContext = JAXBContext.newInstance(o.getClass());
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -55,8 +55,8 @@ public class Jaxb {
 		// 設定namespace
 		if (mapper != null) {
 			try {
-				jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", mapper);
-			} catch (PropertyException e) {
+				// jaxbMarshaller.setProperty("com.sun.xml.internal.bind.namespacePrefixMapper", mapper);
+			} catch (Exception e) {
 				// In case another JAXB implementation is used
 				e.printStackTrace();
 			}
@@ -117,7 +117,9 @@ public class Jaxb {
 		Obj3 obj = new Obj3();
 		obj.setId(999999999);
 
-		Mynamespace m = new Mynamespace();
+		Object m = null;
+		// Mynamespace m = new Mynamespace();
+
 		String resultXml = $1取得物件的xmlString(obj, m);
 		System.out.println(resultXml);
 		Object o2 = $2xml轉物件(resultXml, Obj3.class);
@@ -288,28 +290,33 @@ public class Jaxb {
 
 	}
 
-	static class Mynamespace extends NamespacePrefixMapper {
-
-		private static final String FOO_PREFIX = "foo"; // DEFAULT NAMESPACE
-		private static final String FOO_URI = "http://www.example.com/FOO";
-
-		private static final String BAR_PREFIX = "bar";
-		private static final String BAR_URI = "http://www.example.com/BAR";
-
-		@Override
-		public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
-			if (FOO_URI.equals(namespaceUri)) {
-				return FOO_PREFIX;
-			} else if (BAR_URI.equals(namespaceUri)) {
-				return BAR_PREFIX;
-			}
-			return suggestion;
-		}
-
-		@Override
-		public String[] getPreDeclaredNamespaceUris() {
-			return new String[] { FOO_URI, BAR_URI };
-		}
-	}
+	//修改$5物件轉xml客製namespace可以回復namesapce
+	
+	// NamespacePrefixMapper有問題，不用:{
+	// import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
+	// static class Mynamespace extends NamespacePrefixMapper {
+	//
+	// private static final String FOO_PREFIX = "foo"; // DEFAULT NAMESPACE
+	// private static final String FOO_URI = "http://www.example.com/FOO";
+	//
+	// private static final String BAR_PREFIX = "bar";
+	// private static final String BAR_URI = "http://www.example.com/BAR";
+	//
+	// @Override
+	// public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
+	// if (FOO_URI.equals(namespaceUri)) {
+	// return FOO_PREFIX;
+	// } else if (BAR_URI.equals(namespaceUri)) {
+	// return BAR_PREFIX;
+	// }
+	// return suggestion;
+	// }
+	//
+	// @Override
+	// public String[] getPreDeclaredNamespaceUris() {
+	// return new String[] { FOO_URI, BAR_URI };
+	// }
+	// }
+	// }
 
 }
