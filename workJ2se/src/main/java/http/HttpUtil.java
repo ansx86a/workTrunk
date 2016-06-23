@@ -9,7 +9,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-//這裡份還沒有要著墨，先用蘇凱的版本頂住
+//這裡份還沒有要著墨，先用書凱的版本頂住
+
 public class HttpUtil {
 
 	public static String doGetRequest(String urlStr) throws IOException {

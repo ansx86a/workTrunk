@@ -75,7 +75,7 @@ public class Java2D {
 		// return bo.toByteArray();
 	}
 
-	// 參考培源和蘇凱的例子
+	// 參考培源和書凱的例子
 	public static void 建立文字透明的圖2() throws IOException {
 		File sourceImageFile = Utils.getResourceFromRoot("image/aaa.png");
 		String text = "什麼鬼啊";

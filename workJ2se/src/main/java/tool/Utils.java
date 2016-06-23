@@ -8,7 +8,9 @@ public class Utils {
 
 	public static File getRootFile() {
 		try {
-			File f = new File(ClassLoader.getSystemResource("").toURI());
+			// File f = new File(ClassLoader.getSystemResource("").toURI());
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			File f = new File(classLoader.getResource("").toURI());
 			return f;
 		} catch (URISyntaxException e) {
 			e.printStackTrace();

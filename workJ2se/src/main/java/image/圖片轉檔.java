@@ -207,7 +207,7 @@ public class 圖片轉檔 {
 		ImageIO.write(bf, "png", new File("z:/009右轉90度.png"));// 輸出新圖
 
 		/**
-		 * 套用培源和蘇凱的方式，如下，仍然不行
+		 * 套用培源和書凱的方式，如下，仍然不行
 		 */
 		Iterator writers = ImageIO.getImageWritersBySuffix("jpeg");
 		ImageWriter writer = (ImageWriter) writers.next();

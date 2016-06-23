@@ -22,7 +22,7 @@ public class AES加密 {
 			IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
 			SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-			// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");//蘇凱的方式，要算到16個位元才不會出錯
+			// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");//書凱的方式，要算到16個位元才不會出錯
 			cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
 
 			byte[] encrypted = cipher.doFinal(value.getBytes());
@@ -38,7 +38,7 @@ public class AES加密 {
 			IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
 			SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-			// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");//蘇凱的方式，要算到16個位元才不會出錯
+			// Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");//書凱的方式，要算到16個位元才不會出錯
 			cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 			byte[] original = cipher.doFinal(Base64.decodeBase64(encrypted));
 			return new String(original);

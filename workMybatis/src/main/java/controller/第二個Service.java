@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tool.Utils;
+import tool.ThreadLocalUtils;
 import dao.CustomerMapperExt;
 
 @Service
@@ -26,7 +26,7 @@ public class 第二個Service {
 		System.out.println(list.get(0));
 		System.out.println(list.get(1));
 		System.out.println(list.get(2));
-		Utils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list.get(1) + "<br>" + list.get(2) + "<br>");
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list.get(1) + "<br>" + list.get(2) + "<br>");
 	}
 
 	public void 動態sqlIf() {
@@ -38,7 +38,7 @@ public class 第二個Service {
 		c2.setCompanyname("公司2");
 		List<HashMap> list2 = customerMapperExt.動態sqlIf(c2);
 		System.out.println(list2.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0));
 	}
 
 	public void 動態sqlCaseWhen() {
@@ -57,7 +57,7 @@ public class 第二個Service {
 		c2.setFax("百分比");
 		List<HashMap> list2 = customerMapperExt.動態sqlCaseWhen(c2);
 		System.out.println(list2.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0) + "<br>" + list3.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0) + "<br>" + list3.get(0));
 	}
 
 	public void 動態sqlIf去化where1等於1() {
@@ -69,7 +69,7 @@ public class 第二個Service {
 		c2.setCompanyname("公司2");
 		List<HashMap> list2 = customerMapperExt.動態sqlIf去化where1等於1(c2);
 		System.out.println(list2.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0));
 	}
 
 	public void 動態sqlIf去化結尾的逗號() {
@@ -80,7 +80,7 @@ public class 第二個Service {
 		System.out.println(newAddress);
 		int result = customerMapperExt.動態sqlIf去化結尾的逗號(c);
 		System.out.println(result);
-		Utils.getRequest().setAttribute("test2", result);
+		ThreadLocalUtils.getRequest().setAttribute("test2", result);
 	}
 
 	public void 動態sqlIf內部參數組合Class() {
@@ -88,7 +88,7 @@ public class 第二個Service {
 		c.setCustomerid("ANAT");
 		List<HashMap> list = customerMapperExt.動態sqlIf內部參數組合Class(c);
 		System.out.println(list.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0));
 	}
 
 	public void 動態sqlIf內部參數組合Map() {
@@ -96,7 +96,7 @@ public class 第二個Service {
 		c.put("customerid", "ALFK");
 		List<HashMap> list = customerMapperExt.動態sqlIf內部參數組合Map(c);
 		System.out.println(list.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0));
 	}
 
 	public void 動態sqlForEachMap() {
@@ -109,7 +109,7 @@ public class 第二個Service {
 		List<HashMap> list2 = customerMapperExt.動態sqlForEachMap(c);
 		System.out.println(list2.get(0));
 		System.out.println(list2.get(1));
-		Utils.getRequest().setAttribute("test2", "" + list2.get(0) + "\r\n" + list2.get(1));
+		ThreadLocalUtils.getRequest().setAttribute("test2", "" + list2.get(0) + "\r\n" + list2.get(1));
 	}
 
 	public void 動態sqlForEachClass() {
@@ -121,19 +121,19 @@ public class 第二個Service {
 		List<HashMap> list2 = customerMapperExt.動態sqlForEachClass(c);
 		System.out.println(list2.get(0));
 		System.out.println(list2.get(1));
-		Utils.getRequest().setAttribute("test2", "" + list2.get(0) + "\r\n" + list2.get(1));
+		ThreadLocalUtils.getRequest().setAttribute("test2", "" + list2.get(0) + "\r\n" + list2.get(1));
 	}
 
 	public void 多種db支援1() {
 		int result = customerMapperExt.多種db支援1();
 		System.out.println(result);
-		Utils.getRequest().setAttribute("test2", result);
+		ThreadLocalUtils.getRequest().setAttribute("test2", result);
 	}
 
 	public void 多種db支援2() {
 		int result = customerMapperExt.多種db支援2();
 		System.out.println(result);
-		Utils.getRequest().setAttribute("test2", result);
+		ThreadLocalUtils.getRequest().setAttribute("test2", result);
 	}
 
 	@Transactional(readOnly = false, rollbackFor = Exception.class)
@@ -142,11 +142,11 @@ public class 第二個Service {
 		動態sqlIf去化結尾的逗號();
 		if (System.currentTimeMillis() % 2 == 0) {
 			System.out.println("exception");
-			Utils.getRequest().setAttribute("test2", "交易失敗");
+			ThreadLocalUtils.getRequest().setAttribute("test2", "交易失敗");
 			throw new RuntimeException("這裡故意錯誤測試rollback");
 		} else {
 			System.out.println("ok");
-			Utils.getRequest().setAttribute("test2", "交易ok");
+			ThreadLocalUtils.getRequest().setAttribute("test2", "交易ok");
 		}
 	}
 
@@ -155,7 +155,7 @@ public class 第二個Service {
 		map.put("參數1", "Beverages");
 		List<HashMap> list = customerMapperExt.預存程序帶參數的Select(map);
 		System.out.println(list.get(0));
-		Utils.getRequest().setAttribute("test2", list.get(0));
+		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0));
 	}
 
 }

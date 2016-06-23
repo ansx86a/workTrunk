@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
 	<display-name>mybatis實作站</display-name>
-
-	<!-- 處理UTF-8轉碼  -->
+	
+	<filter>
+		<display-name>springMultipartFilter</display-name>
+		<filter-name>springMultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springMultipartFilter</filter-name>
+		<url-pattern>/testHttp/ppp.mvc</url-pattern>
+	</filter-mapping>
+	
+	<!-- 處理UTF-8轉碼 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>
 		<filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -16,8 +28,8 @@
 		<filter-name>characterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-	<!--  spring mvc -->
+
+	<!-- spring mvc -->
 	<servlet>
 		<servlet-name>webServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -27,19 +39,18 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>webServlet</servlet-name>
 		<url-pattern>*.mvc</url-pattern>
-	</servlet-mapping>	
-	
-	
-	<!--  spring的起始設定檔，因為有mvc了，所以這個載不載入應該沒什麼太大的關係
-			我的想法有兩個
-			一是所有的設定都寫在web-context.xml算了，rootContext只寫一些共同的jndi之類的，或許可以拿掉也沒關系
-			二是web-context都只導contorller，其它的全寫在rootContext兩種
-			如果要包war和可執行檔的話，最好把web另外包成xml，root跑j2se，然後讓mvc可以抽出
-	 -->
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	</servlet-mapping>
+
+
+	<!-- spring的起始設定檔，因為有mvc了，所以這個載不載入應該沒什麼太大的關係 
+		我的想法有兩個 
+		一是所有的設定都寫在web-context.xml算了，rootContext只寫一些共同的jndi之類的，或許可以拿掉也沒關系 
+		二是web-context都只導contorller，其它的全寫在rootContext兩種 如果要包war和可執行檔的話，最好把web另外包成xml，root跑j2se，然後讓mvc可以抽出 -->
+	<!-- The definition of the Root Spring Container shared by all Servlets 
+		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/root-context.xml</param-value>
@@ -48,8 +59,8 @@
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>	
-	
+	</listener>
+
 	<session-config>
 		<session-timeout>60</session-timeout>
 	</session-config>

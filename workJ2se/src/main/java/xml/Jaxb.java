@@ -5,19 +5,15 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.PropertyException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlNsForm;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchema;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLInputFactory;
@@ -25,12 +21,15 @@ import javax.xml.stream.XMLInputFactory;
 public class Jaxb {
 	// 已經把八成的用處實現出來了，如有更難的就參照java world的jaxb新手學習筆記，已放到package下
 	public static void main(String[] args) throws Exception {
+		// cdata幾乎無解，解法可參照一下http://blog.csdn.net/wantken/article/details/50675549
+		// namespace修改前端pre部分也很難解，雖然可以用NamespacePrefixMapper來解，但感覺不順不好用
+
 		Jaxb p = new Jaxb();
-		//p.$1物件寫出xml();
-		//p.$2xml轉物件();
-		 p.$3多層物件轉xml();
-		 p.$4物件轉xml有namespace();
-		 p.$5物件轉xml客製namespace();
+		p.$1物件寫出xml();
+		p.$2xml轉物件();
+		// p.$3多層物件轉xml();
+		// p.$4物件轉xml有namespace();
+		// p.$5物件轉xml客製namespace();
 	}
 
 	public String $1取得物件的xmlString(Object o) throws Exception {
@@ -129,7 +128,7 @@ public class Jaxb {
 	@XmlRootElement(name = "myobj1")
 	static class Obj1 {
 
-		private String mystr = "myStrValue";
+		private String mystr = "<html>aaabbcc<br>ddddd<br></html>";
 
 		private int myint = 199;
 
@@ -290,8 +289,8 @@ public class Jaxb {
 
 	}
 
-	//修改$5物件轉xml客製namespace可以回復namesapce
-	
+	// 修改$5物件轉xml客製namespace可以回復namesapce
+
 	// NamespacePrefixMapper有問題，不用:{
 	// import com.sun.xml.internal.bind.marshaller.NamespacePrefixMapper;
 	// static class Mynamespace extends NamespacePrefixMapper {

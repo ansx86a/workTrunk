@@ -13,6 +13,7 @@
 
 	<!-- <context:component-scan base-package="controller" /> -->
 	<mvc:annotation-driven />
+	<!-- 如果把像下面一樣有自已的filter後，@Controller可以不用貼 -->
 	<context:component-scan base-package="controller"
 		use-default-filters="false">
 		<context:include-filter type="regex"
