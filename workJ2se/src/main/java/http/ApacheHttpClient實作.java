@@ -1,7 +1,6 @@
 package http;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,14 +11,17 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
+import net.sf.json.JSONObject;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
@@ -31,6 +33,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -42,6 +45,7 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.InputStreamEntity;
@@ -59,6 +63,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.client.ProxyClient;
 import org.apache.http.impl.client.WinHttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HTTP;
@@ -81,10 +86,10 @@ public class ApacheHttpClient實作 {
 		// 感覺下面的apache範例有點太難，由21開始自已做一下範例來用
 		// p.$21最簡單的get加參數();
 		// p.$22最簡單的post未測試();
-		 p.$23檔案上傳未測試();
+		// p.$23檔案上傳未測試();
 		// p.$24最簡單的post();
-		p.$25捉圖();
-		p.$26();
+		// p.$25捉圖();
+		p.$26Cookies測試成功了嗎();
 		p.$27();
 		p.$28();
 		p.$29();
@@ -813,7 +818,58 @@ public class ApacheHttpClient實作 {
 
 	}
 
-	public void $26() {
+	// 先把一些看起來比較沒關系的註解掉，不行再打開回來，配合chrome的editthisCookie把cookie匯出成json再匯進去
+	public void $26Cookies測試成功了嗎() throws ClientProtocolException, IOException {
+
+		// Use custom cookie store if necessary.
+		CookieStore cookieStore = new BasicCookieStore();
+		setCookies(cookieStore);
+
+		HttpGet httpget = new HttpGet("https://mg.mail.yahoo.com/neo/launch?.rand=am9jg399ocvpj");
+		// 設定config，例如timeout的時間，1000是1秒的意思吧
+		RequestConfig requestConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.DEFAULT).setSocketTimeout(1000)
+				.setConnectTimeout(1000).build();
+		httpget.setConfig(requestConfig);
+		// HttpClientContext context = HttpClientContext.create();
+		// context.setCookieStore(cookieStore);
+
+		// RequestConfig localConfig = RequestConfig.copy(requestConfig).setCookieSpec(CookieSpecs.STANDARD_STRICT)
+		// .build();
+		// httpget.setConfig(localConfig);
+
+		CloseableHttpClient httpclient = HttpClients.custom().setDefaultRequestConfig(requestConfig)
+				.setDefaultCookieStore(cookieStore).build();
+		CloseableHttpResponse response = httpclient.execute(httpget);
+		// CloseableHttpResponse response = httpclient.execute(httpget, context);
+		try {
+			HttpEntity entity = response.getEntity();
+			if (entity != null) {
+				System.out.println(EntityUtils.toString(entity, "utf8"));
+			}
+			EntityUtils.consume(entity);
+		} finally {
+			response.close();
+			httpclient.close();
+		}
+	}
+
+	public void setCookies(CookieStore cookieStore) throws IOException {
+		String str = FileUtils.readFileToString(Utils.getResourceFromRoot("http/cookies.txt"));
+		for (String s : str.split("},")) {
+			if (!s.endsWith("}")) {
+				s += "}";
+			}
+			JSONObject json = JSONObject.fromObject(s);
+
+			BasicClientCookie bc = new BasicClientCookie(json.getString("name"), json.getString("value"));
+			bc.setDomain(json.getString("domain"));
+			bc.setPath(json.getString("path"));
+			bc.setExpiryDate(DateUtils.addDays(new Date(), 1));
+			bc.setSecure(json.getBoolean("secure"));
+			bc.setAttribute(ClientCookie.PATH_ATTR, bc.getPath());
+			bc.setAttribute(ClientCookie.DOMAIN_ATTR, bc.getDomain());
+			cookieStore.addCookie(bc);
+		}
 	}
 
 	public void $27() {
