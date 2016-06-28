@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configMap>
+	<map key="html1"><![CDATA[
+<html>
+	<p>
+		bbb
+	</p>
+</html>
+]]></map>
+	<map key="html2">xxx\r\n不錯換行</map>
+</configMap>

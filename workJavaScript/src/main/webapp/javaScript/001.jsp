@@ -44,6 +44,13 @@
 		<p>
 			<a href="#id9">日期範例</a>
 		</p>
+		<p>
+			<a href="#id10">陣列範例</a>
+		</p>
+		<p>
+			<a href="#id11">數學範例</a>
+		</p>
+
 
 		<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
@@ -354,7 +361,25 @@ Numeric");
 			spellcheck="false">
 <script>
 	document.write("今天的日期：new Date()=" + new Date() + "<br>");
+	document.write("今天的日期(localString)：new Date().toLocaleString()=" + new Date().toLocaleString() + "<br>");
+	document
+			.write("今天的日期(localdateString)：new Date().toLocaleDateString()=" + new Date().toLocaleDateString() + "<br>");
+	document
+			.write("今天的日期(localtimeString)：new Date().toLocaleTimeString()=" + new Date().toLocaleTimeString() + "<br>");
+	var d = new Date();
+	d.setFullYear(2016, 11, 22);
+	document.write("設定日期(setFullYear(2016,11,22))：d.toLocaleString()=" + d.toLocaleString() + "<br>");
 	document.write("取得日(1-31)：new Date().getDate()=" + new Date().getDate() + "<br>");
+	document.write("取得星期(日0-6六)：new Date().getDay()=" + new Date().getDay() + "<br>");
+	document.write("取得月份(一0-11十二)：new Date().getMonth()=" + new Date().getMonth() + "<br>");
+	document.write("取得小時(0-23)：new Date().getHours()=" + new Date().getHours() + "<br>");
+	document.write("取得分(0-59)：new Date().getMinutes()=" + new Date().getMinutes() + "<br>");
+	document.write("取得秒(0-59)：new Date().getSeconds()=" + new Date().getSeconds() + "<br>");
+	document.write("取得毫秒(0-999)：new Date().getMilliseconds()=" + new Date().getMilliseconds() + "<br>");
+	document.write("取得1970年到現在的ms：new Date().getTime()=" + new Date().getTime() + "<br>");
+	document.write("取得 (GMT)分鐘差：new Date().getTimezoneOffset()=" + new Date().getTimezoneOffset() + "<br>");
+	document.write("取得UTC小時(0-23)，其它同理可證：new Date().getUTCHours()=" + new Date().getUTCHours() + "<br>");
+	document.write("其它同理可證：new Date().setUTCHours(),new Date().setHours(),new Date().setTime() <br>");
 </script>
 		</textarea>
 		<br>
@@ -365,7 +390,24 @@ Numeric");
 		<textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
-	
+	var a = [ 1, 2 ];
+	var b = [ "A", "B" ];
+	document.write("合併陣列：[].concat(a,b,'zz','xx')=" + [].concat(a, b, 'zz', 'xx') + "<br>");
+	document.write("修改分隔符號：[].concat(a,b,'zz','xx').join('冏')=" + [].concat(a, b, 'zz', 'xx').join('冏') + "<br>");
+	document.write("pop取出最後一個並刪除：(b.pop() --> b) =" + (b.pop() + "-->" + b) + "<br>");
+	document.write("push加入多個元素：(b.push('kk','ff','cc','dd','ww','zz','yy')-->b) ="
+			+ (b.push('kk', 'ff', 'cc', 'dd', 'ww', 'zz', 'yy') + "-->" + b) + "<br>");
+	document.write("反轉陣列值：b.reverse() =" + b.reverse() + "<br>");
+	document.write("反pop取出第一個並刪除：(b.shift() --> b) =" + (b.shift() + "-->" + b) + "<br>");
+	document.write("反push加入多個元素：(b.unshift(1,2,3) --> b) =" + (b.unshift(1, 2, 3) + "-->" + b) + "<br>");
+
+	document.write("取回最後2個元素：b.slice(-2) =" + b.slice(-2) + "<br>");
+	document.write("取回2,3個元素：b.slice(1,3) =" + b.slice(1, 3) + "<br>");
+	document.write("排序陣列值：b.sort()-->b =" + (b.sort() + "-->" + b) + "<br>");
+	document.write("sort(sortNumber)可自已定義排序的method：function sortNumber(a, b){return a - b}<br>");
+
+	document.write("刪除最後2個元素：(b.splice(-2) -->b) =" + (b.splice(-2) + "-->" + b) + "<br>");
+	document.write("刪除第2個元素並加入2個元素：(b.splice(1,1,'冏','囧') -->b) =" + (b.splice(1, 1, '冏', '囧') + "-->" + b) + "<br>");
 </script>
 		</textarea>
 		<br>
@@ -376,7 +418,34 @@ Numeric");
 		<textarea id="id11" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
-	
+	document.write("絕對值:Math.abs(-7.25)=" + Math.abs(-7.25) + "<br>");
+	document.write("三角函數：acos(x),asin(x),atan(x),atan2(y,x),cos(x),sin(x),tan(x)<br>");
+	document.write("取自然對數e的指數：Math.exp(1)=" + Math.exp(1) + "<br />")
+	document.write("取log自然對數e為底：Math.log(2.7183)=" + Math.log(2.7183) + "<br />")
+	document
+			.write("正數無絛件進位，負數捨去：Math.ceil(0.40),Math.ceil(-3.4)=" + Math.ceil(0.40) + "," + Math.ceil(-3.4) + "<br />")
+	document.write("正數無條件捨去，負數進位：Math.floor(2.40),Math.floor(-3.4)=" + Math.floor(2.40) + "," + Math.floor(-3.4)
+			+ "<br />")
+	document.write("四捨五入，正數小於捨去，負數小於也捨去：Math.round(0.40),Math.round(-3.4)=" + Math.round(0.40) + "," + Math.round(-3.4)
+			+ "<br />")
+	document.write("四捨五入，正數大於進位，負數大於也進位：Math.round(0.60),Math.round(-3.6)=" + Math.round(0.60) + "," + Math.round(-3.6)
+			+ "<br />")
+
+	document.write("取較大值：Math.max(-3,-5)=" + Math.max(-3, -5) + "<br />")
+	document.write("取較小值：Math.min(-3,-5)=" + Math.min(-3, -5) + "<br />")
+	document.write("產生0-1之間的亂數：Math.random()=" + Math.random() + "<br />")
+	document.write("取數值的幾次方：Math.pow(2,10)=" + Math.pow(2, 10) + "<br />")
+	document.write("開根號：	Math.sqrt(9)=" + Math.sqrt(9) + "<br />")
+
+	document.write("<br>");
+	document.write("Math.E=" + Math.E + "<br>");
+	document.write("Math.LN2=" + Math.LN2 + "<br>");
+	document.write("Math.LN10=" + Math.LN10 + "<br>");
+	document.write("Math.LOG2E=" + Math.LOG2E + "<br>");
+	document.write("Math.LOG10E=" + Math.LOG10E + "<br>");
+	document.write("Math.PI=" + Math.PI + "<br>");
+	document.write("Math.SQRT1_2=" + Math.SQRT1_2 + "<br>");
+	document.write("Math.SQRT2=" + Math.SQRT2 + "<br>");
 </script>
 		</textarea>
 		<br>

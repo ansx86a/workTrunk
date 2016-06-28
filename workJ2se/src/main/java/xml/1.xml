@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+	<map>
+		<entry>
+			<key>html1</key>
+			<value><![CDATA[
+											<html>
+												<p>
+													aaaa
+												</p>
+											</html>
+]]></value>
+		</entry>
+		<entry>
+			<key>html2</key>
+			<value><![CDATA[
+<html>
+	<p>
+		bbb
+	</p>
+</html>
+]]></value>
+		</entry>
+	</map>
+</config>

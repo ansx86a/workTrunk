@@ -1,9 +1,11 @@
 package xml;
 
+import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -18,6 +20,11 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.stream.XMLInputFactory;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.ss.formula.functions.T;
+
+import tool.Utils;
+
 public class Jaxb {
 	// 已經把八成的用處實現出來了，如有更難的就參照java world的jaxb新手學習筆記，已放到package下
 	public static void main(String[] args) throws Exception {
@@ -25,11 +32,13 @@ public class Jaxb {
 		// namespace修改前端pre部分也很難解，雖然可以用NamespacePrefixMapper來解，但感覺不順不好用
 
 		Jaxb p = new Jaxb();
-		p.$1物件寫出xml();
-		p.$2xml轉物件();
+		// p.$1物件寫出xml();
+		// p.$2xml轉物件();
 		// p.$3多層物件轉xml();
 		// p.$4物件轉xml有namespace();
 		// p.$5物件轉xml客製namespace();
+		// p.$6map設定值();
+		p.$7map設定值簡化xml();
 	}
 
 	public String $1取得物件的xmlString(Object o) throws Exception {
@@ -70,7 +79,7 @@ public class Jaxb {
 		System.out.println($1取得物件的xmlString(o));
 	}
 
-	public Object $2xml轉物件(String xml, Class cls) throws Exception {
+	public <T extends Object> T $2xml轉物件(String xml, Class<T> cls) throws Exception {
 		XMLInputFactory xif = XMLInputFactory.newInstance();
 
 		xif.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, false);// 禁止插入實體，安全性考慮
@@ -80,7 +89,7 @@ public class Jaxb {
 		Unmarshaller jaxbUnmarshaller = jaxbContext2.createUnmarshaller();
 
 		Object output = jaxbUnmarshaller.unmarshal(xif.createXMLStreamReader(new StringReader(xml)));
-		return output;
+		return (T) output;
 	}
 
 	public void $2xml轉物件() throws Exception {
@@ -90,7 +99,7 @@ public class Jaxb {
 		o.setMystr("changeStr");
 		String resultXml = $1取得物件的xmlString(o);
 
-		Object o2 = $2xml轉物件(resultXml, Obj1.class);
+		Obj1 o2 = $2xml轉物件(resultXml, Obj1.class);
 		System.out.println(o2);
 	}
 
@@ -108,7 +117,7 @@ public class Jaxb {
 		obj.setId(999999999);
 		String resultXml = $1取得物件的xmlString(obj);
 		System.out.println(resultXml);
-		Object o2 = $2xml轉物件(resultXml, Obj3.class);
+		Obj3 o2 = $2xml轉物件(resultXml, Obj3.class);
 		System.out.println(o2);
 	}
 
@@ -121,8 +130,38 @@ public class Jaxb {
 
 		String resultXml = $1取得物件的xmlString(obj, m);
 		System.out.println(resultXml);
-		Object o2 = $2xml轉物件(resultXml, Obj3.class);
+		Obj3 o2 = $2xml轉物件(resultXml, Obj3.class);
 		System.out.println(o2);
+	}
+
+	// 雖然可行，但是問題<>這兩個變換後的問題還蠻大的，在不會有html特別字元出現的地方才使用吧
+	public void $6map設定值() throws Exception {
+		JaxbMap map = new JaxbMap();
+		String html = "<html>\n\t<p>\n\t\taaaa\n\t</p>\n</html>";
+		// System.out.println(html);
+		// map.getMap().put("html1", html);
+		String resultXml = FileUtils.readFileToString(Utils.getResourceFromRoot("xml/1.xml"));
+		// System.out.println(resultXml);
+		map = $2xml轉物件(resultXml, JaxbMap.class);
+		System.out.println(map.getMap());
+	}
+
+	public void $7map設定值簡化xml() throws Exception {
+		JaxbConfig map = new JaxbConfig();
+		寫出測試: {
+			// String html = "<html>\n\t<p>\n\t\taaaa\n\t</p>\n</html>";
+			// map.add("html1", html);
+			// map.add("html2", html);
+			// String resultXml = $1取得物件的xmlString(map);
+			// System.out.println(resultXml);
+		}
+
+		讀取測試: {
+			String resultXml = FileUtils.readFileToString(Utils.getResourceFromRoot("xml/2.xml"));
+			map = $2xml轉物件(resultXml, JaxbConfig.class);
+			System.out.println(map);
+		}
+
 	}
 
 	@XmlRootElement(name = "myobj1")
@@ -317,5 +356,86 @@ public class Jaxb {
 	// }
 	// }
 	// }
+	@XmlRootElement(name = "config")
+	static class JaxbMap {
+		HashMap<String, String> map = new HashMap<>();
+
+		public HashMap<String, String> getMap() {
+			return map;
+		}
+
+		@XmlElement
+		public void setMap(HashMap<String, String> map) {
+			this.map = map;
+		}
+
+	}
+
+	@XmlRootElement(name = "configMap")
+	static class JaxbConfig {
+		private ArrayList<MapAttribute> list = new ArrayList<MapAttribute>();
+
+		public ArrayList<MapAttribute> getList() {
+			return list;
+		}
+
+		@XmlElement(name = "map")
+		// 這行可以沒有，tag就會變list
+		public void setList(ArrayList<MapAttribute> list) {
+			this.list = list;
+		}
+
+		public void add(String key, String value) {
+			this.list.add(new MapAttribute(key, value));
+		}
+
+		@Override
+		public String toString() {
+			return "JaxbConfig [list=" + list + "]";
+		}
+
+	}
+
+	@XmlAccessorType(XmlAccessType.FIELD)
+	@XmlType(name = "map")
+	static class MapAttribute {
+
+		@XmlAttribute
+		private String key;
+
+		@XmlValue
+		private String value;
+
+		// 一定要有空白的建構子，不然讀取時會有錯誤
+		public MapAttribute() {
+		};
+
+		public MapAttribute(String key, String value) {
+			this.key = key;
+			this.value = value;
+		}
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return "MapAttribute [key=" + key + ", value=" + value + "]";
+		}
+
+	}
 
 }
