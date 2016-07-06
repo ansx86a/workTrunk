@@ -15,7 +15,7 @@
 	<div id="div0" align="center">
 		<p>ECMAScript :http://www.w3school.com.cn/js/index_pro.asp</p>
 		<p>JavaScript Number 对象 :http://www.w3school.com.cn/jsref/jsref_obj_number.asp</p>
-		<a href="#id1">測試用document寫出文字，用javascript替換文字和style</a>
+		<a href="#id1">測試用document寫出文字、escape文字，用javascript替換文字和style</a>
 		<p>如果在html載入完成後執行document.write，整個 HTML將被覆盖：</p>
 		<p>外部javascript匯入語法 &ltscript src="myScript.js"> &lt/script>(可放head，也可以放在body中用document.write產生文字)</p>
 		<p>
@@ -50,7 +50,27 @@
 		<p>
 			<a href="#id11">數學範例</a>
 		</p>
-
+		<p>
+			<a href="#id12">正規表示式範例</a>
+		</p>
+		<p>
+			<a href="#id13">browser物件</a>
+		</p>
+		<p>
+			<a href="#id14">Screen物件</a>
+		</p>
+		<p>
+			<a href="#id15">Location物件</a>
+		</p>
+		<p>
+			<a href="#id16">History 物件</a>
+		</p>
+		<p>
+			<a href="#id17">Navigator 物件</a>
+		</p>
+		<p>
+			<a href="#id18">Cookies 物件</a>
+		</p>
 
 		<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
@@ -63,6 +83,7 @@
 	document.write("<h1>This is a\
 			heading</h1>");//字串可以用一個\換行
 	document.write("<p>This is a paragraph.</p>");
+	document.write(escape("<p>This is a paragraph.</p>"));//用unescape可以回來
 	x = document.getElementById("div1") //查找元素
 	x.innerHTML = "Hello JavaScript"; //改变内容	
 	x = document.getElementById("div2") //找到元素
@@ -152,7 +173,7 @@ Numeric");
 	document.write(" 三個等於也會判斷型別測試<br>");
 	document.write("(5 == '5'),(5 === '5')):");
 	document.write((5 == '5') + "," + (5 === '5') + "<br>");
-	document.write(" Number toString ttt=255，轉16進式測試<br>");
+	document.write(" Number toString ttt=255，轉16進制測試<br>");
 	var ttt = 255;
 	document.write("ttt.toString(16):" + ttt.toString(16) + "<br>");
 </script>
@@ -341,7 +362,7 @@ Numeric");
 	document.write("全部替換： 'a1b2c33aABb44b'.replace(/b/,'冏')  =" + 'a1b2c33aABb44b'.replace(/b/g, '冏') + "<br>");
 	document.write("替換不分大小寫： 'a1b2c33aABb44b'.replace(/b/ig,'冏')  =" + 'a1b2c33aABb44b'.replace(/b/ig, '冏') + "<br>");
 	document.write("找出出現位置不分大小寫:'a1B2c33aABb44b'.search(/B/i) =" + 'a1B2c33aABb44b'.search(/b/i) + "<br>");
-	document.write("substr()在ECMAscript 沒標準化，最好不要用，而substring可用但不接受負數，slice看來最強<br>");
+	document.write("substr()在ECMAscript 沒標準化，最好不要用，而substring可用但不接受負數[會變成0，ex：substring(3,-2)等於substring(0,3)]，slice看來最強<br>");
 	document.write("捉最後3字： 'a1B2c33aABb44b'.slice(-3)=" + 'a1B2c33aABb44b'.slice(-3) + "<br>");
 	document.write("捉3-6字： 'a1B2c33aABb44b'.slice(2,5)=" + 'a1B2c33aABb44b'.slice(2, 5) + "<br>");
 	document.write("拆分字串：'a1B2c33aABb44b'.split('B')=" + 'a1B2c33aABb44b'.split('B') + "<br>");
@@ -352,6 +373,11 @@ Numeric");
 	document.write("轉大寫： 'a1B2c33aABb44b'.toUpperCase()=" + 'a1B2c33aABb44b'.toUpperCase() + "<br>");
 	document.write("轉大小寫有local方法，如土耳其語會用local才會正確，一般不需要local方法<br>");
 </script>
+<pre>
+\0nnn	八進制代碼 nnn 表示的字符（n 是 0 到 7 中的一個八進制數字）
+\xnn	十六進制代碼 nn 表示的字符（n 是 0 到 F 中的一個十六進制數字）
+\unnnn	十六進制代碼 nnnn 表示的 Unicode 字符（n 是 0 到 F 中的一個十六進制數字）
+</pre>
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -455,7 +481,26 @@ Numeric");
 		<textarea id="id12" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
-	
+	document.writeln("宣告=/pattern/attributes  or  new RegExp(pattern, attributes);" + "<br>");
+	document.writeln("attributes為i大小寫，g全域，m多行於ECMAScript 標準化後支援" + "<br>");
+	document.writeln("找出有出現all的單字：'Is this all there is'.match(/[a-z]+(?= all)/ig)="
+			+ 'Is this all there is'.match(/[a-z]+(?= all)/ig) + "<br>");
+	document.writeln("下例是非貪婪的匹配，出乎我的意料之外<br>");
+	document.writeln("找出沒有出現all的單字：'Is this all there is'.match(/[a-z]+(?! all)/ig)="
+			+ 'Is this all there is'.match(/[a-z]+(?! all)/ig) + "<br>");
+	document.writeln("顯示attributes：/a/.global,/a/g.global,/a/.ignoreCase,/a/i.ignoreCase=" + /a/.global + ","
+			+ /a/g.global + "," + /a/.ignoreCase + "," + /a/i.ignoreCase + "<br>");
+	document.writeln("顯示attributes：/a/.multiline,/a/m.global=" + /a/.multiline + "," + /a/m.multiline + "<br>");
+	document.writeln("compile用途不明，直接patt=/xxx/比較快，為什麼還要patt.compile(/xxx/)" + "<br>");
+	document.writeln("compile用法應該是patt.compile('[a-z]+','g') ，沒試過不過差不多是這樣子" + "<br>");
+	//var patt = new RegExp("W3School","g");
+	var patt = /w3s/ig;
+	document.writeln("patt = /w3s/ig，和string.match類似的功能，但一次回傳一個，加上回傳index：<br>");
+	document.writeln("patt.exec('Visw3sit W3School'),patt.exec('Visw3sit W3School'),patt.lastIndex="
+			+ patt.exec('Visw3sit W3Schoo') + "，" + patt.exec('Visw3sit W3Schoo') + "，" + patt.lastIndex + "<br>");
+	document.writeln("index停在S，把g拿掉index會變0，但仍會捉到後面的W3S：<br>");
+	document.writeln("test： patt.test('abc'), patt.test('aaw3saa') '=" + patt.test('abc') + "," + patt.test('aaw3saa')
+			+ "<br>");
 </script>
 		</textarea>
 		<br>
@@ -465,8 +510,87 @@ Numeric");
 		<textarea id="id13" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
-	
+	//w3c的範例，說適用全部的browser了
+	var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	document.writeln("視窗的寬高：" + w + "," + h + "<br>");
+	document.writeln("子視窗或frame的最上層視窗：window.top.location=" + window.top.location + "<br>");
+	document.writeln("自已視窗是不是最上層：window.top==window.self=" + (window.top == window.self) + "<br>");
+	document.writeln("這裡的視窗要再研究一下，會不會是opne的參數null開的新視窗沒有opener呢？，還是top是看iframe的而已<br>")
+	document.writeln("setInterval和clearInterval[週期],setTimeout和clearTimeout[一次性]<br>")
+	document.writeln("控制滾輪：scrollBy(x,y) , scrollTo(x,y) <br>");
 </script>
+<br>
+<input type="button" value="確認視窗" onclick='confirm("確認資訊，你腋下如何啊")?alert("可"):alert("不可");' /><br>
+<input type="button" value="輸入視窗" onclick='alert("我叫:" +prompt("你叫啥米名","預設值"));' /><br>
+
+<input type="button" onclick="window.open('http://www.kimo.com.tw');" value="open開新分頁[最簡單的例子]" /><br>
+<input type="button" value="開新視窗加一堆設定"
+				onclick='window.open("http://www.kimo.com.tw","_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400")' />
+<div>
+<h2 id="windowfeatures">窗口特征（Window Features）</h2>
+<table class="dataintable">
+    <tr>
+    <td>channelmode=yes|no|1|0</td>
+    <td>是否使用剧院模式显示窗口。默认为 no。</td>
+    </tr>
+    <tr>
+    <td>directories=yes|no|1|0</td>
+    <td>是否添加目录按钮。默认为 yes。</td>
+    </tr>
+    <tr>
+    <td>fullscreen=yes|no|1|0</td>
+    <td>是否使用全屏模式显示浏览器。默认是 no。处于全屏模式的窗口必须同时处于剧院模式。</td>
+    </tr>
+    <tr>
+    <td>height=pixels</td>
+    <td>窗口文档显示区的高度。以像素计。</td>
+    </tr>
+    <tr>
+    <td>left=pixels</td>
+    <td>窗口的 x 坐标。以像素计。</td>
+    </tr>
+    <tr>
+    <td>location=yes|no|1|0</td>
+    <td>是否显示地址字段。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>menubar=yes|no|1|0</td>
+    <td>是否显示菜单栏。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>resizable=yes|no|1|0</td>
+    <td>窗口是否可调节尺寸。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>scrollbars=yes|no|1|0</td>
+    <td>是否显示滚动条。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>status=yes|no|1|0</td>
+    <td>是否添加状态栏。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>titlebar=yes|no|1|0</td>
+    <td>是否显示标题栏。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>toolbar=yes|no|1|0</td>
+    <td>是否显示浏览器的工具栏。默认是 yes。</td>
+    </tr>
+    <tr>
+    <td>top=pixels</td>
+    <td>窗口的 y 坐标。</td>
+    </tr>
+    <tr>
+    <td>width=pixels</td>
+    <td>窗口的文档显示区的宽度。以像素计。</td>
+    </tr>
+</table>
+</div>
+
+
+
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -475,7 +599,53 @@ Numeric");
 		<textarea id="id14" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
-	
+	document.writeln("屏幕的高度 (除Windows不含命令列)：screen.availHeight=" + screen.availHeight + "<br>");
+	document.writeln("屏幕的寬度 (除Windows不含命令列)：screen.availWidth=" + screen.availWidth + "<br>");
+	document.writeln("返回顯示器屏幕的寬度：screen.width=" + screen.width + "<br>");
+	document.writeln("返回顯示屏幕的高度：screen.height=" + screen.height + "<br>");
+	document.writeln("設置或返回調色板的比特深度：screen.bufferDepth=" + screen.bufferDepth + "<br>");
+	document.writeln("返回目標設備或緩衝器上的調色板的比特深度：screen.colorDepth=" + screen.colorDepth + "<br>");
+	document.writeln("返回顯示屏幕的每英吋水平點數：screen.deviceXDPI=" + screen.deviceXDPI + "<br>");
+	document.writeln("返回顯示屏幕的每英吋垂直點數：screen.deviceYDPI=" + screen.deviceYDPI + "<br>");
+	document.writeln("返回顯示屏幕每英吋的水平方向的常規點數：screen.logicalXDPI=" + screen.logicalXDPI + "<br>");
+	document.writeln("返回顯示屏幕每英吋的垂直方向的常規點數：screen.logicalYDPI=" + screen.logicalYDPI + "<br>");
+	document.writeln("返回顯示屏幕的顏色分辨率（比特每像素）：screen.pixelDepth=" + screen.pixelDepth + "<br>");
+	document.writeln("設置或返回屏幕的刷新率：screen.updateInterval=" + screen.updateInterval + "<br>");
+	document.writeln("返回用戶是否在顯示控制面板中啟用了字體平滑：screen.fontSmoothingEnabled=" + screen.fontSmoothingEnabled + "<br>");
+
+	document.write("Screen resolution: ")
+	document.write(screen.width + "*" + screen.height)
+	document.write("<br />")
+	document.write("Available view area: ")
+	document.write(screen.availWidth + "*" + screen.availHeight)
+	document.write("<br />")
+	document.write("Color depth: ")
+	document.write(screen.colorDepth)
+	document.write("<br />")
+	document.write("Buffer depth: ")
+	document.write(screen.bufferDepth)
+	document.write("<br />")
+	document.write("DeviceXDPI: ")
+	document.write(screen.deviceXDPI)
+	document.write("<br />")
+	document.write("DeviceYDPI: ")
+	document.write(screen.deviceYDPI)
+	document.write("<br />")
+	document.write("LogicalXDPI: ")
+	document.write(screen.logicalXDPI)
+	document.write("<br />")
+	document.write("LogicalYDPI: ")
+	document.write(screen.logicalYDPI)
+	document.write("<br />")
+	document.write("FontSmoothingEnabled: ")
+	document.write(screen.fontSmoothingEnabled)
+	document.write("<br />")
+	document.write("PixelDepth: ")
+	document.write(screen.pixelDepth)
+	document.write("<br />")
+	document.write("UpdateInterval: ")
+	document.write(screen.updateInterval)
+	document.write("<br />")
 </script>
 		</textarea>
 		<br>
@@ -483,6 +653,125 @@ Numeric");
 		<button type="button" onclick="javascriptWindow(document.getElementById('id15').value );">測試15</button>
 		<br>
 		<textarea id="id15" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	document.writeln("設置或返回主機名和當前URL:端口號：location.host	=" + location.host + "<br>");
+	document.writeln("設置或返回當前 URL 的主機名：location.hostname	=" + location.hostname + "<br>");
+	document.writeln("設置或返回完整的 URL：location.href	=" + location.href + "<br>");
+	document.writeln("設置或返回當前 URL 的路徑部分：location.pathname	=" + location.pathname + "<br>");
+	document.writeln("設置或返回當前 URL 的端口號：location.port	=" + location.port + "<br>");
+	document.writeln("設置或返回當前 URL 的協議：location.protocol	=" + location.protocol + "<br>");
+	document.writeln("設置或返回從問號 (?) 開始的 URL（查詢部分）：location.search	=" + location.search + "<br>");
+</script>
+<br>
+		<input type="button" value="window.location.assign(url)等於location = url等於location.href = url"
+				onclick="location.assign('http://www.kimo.com');" /><br>
+	<input type="button" value="location.reload(true)[暫存=false]等於history.go(0)" onclick="location.reload(true);" /><br>
+	<input type="button" value="location.replace('http://www.kimo.com')，和href差在history，但還是可以上一頁，所以我分不出差在那"
+				onclick="location.replace('http://www.kimo.com');" /><br>
+		</textarea>
+		<br>
+		<input type="button" value="印出錨點" onclick="alert(location.hash);" />
+		<br>
+		<input type="button" value="跳到開頭錨點" onclick="location.hash='div0';" />
+		<br> <br>
+
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id16').value );">測試16</button>
+		<br>
+		<textarea id="id16" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	document.write("目前的網扯記錄長度：history.length=" + history.length + "<br>");
+	document.write("上一頁：history.back()<br>");
+	document.write("上上一頁：history.go(-2)<br>");
+	document.write("下一頁=history.forward() or history.go(1)<br>");
+</script>
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id17').value );">測試17</button>
+		<br>
+		<textarea id="id17" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	document.writeln("返回瀏覽器的代碼名：navigator.appCodeName	=" + navigator.appCodeNam + "<br>");
+	document.writeln("返回瀏覽器的次級版本：navigator.appMinorVersion	=" + navigator.appMinorVersion + "<br>");
+	document.writeln("返回瀏覽器的名稱：navigator.appName	=" + navigator.appName + "<br>");
+	document.writeln("返回瀏覽器的平台和版本信息：navigator.appVersion	=" + navigator.appVersion + "<br>");
+	document.writeln("返回當前瀏覽器的語言：navigator.browserLanguage	=" + navigator.browserLanguage + "<br>");
+	document.writeln("返回是否啟用 cookie：navigator.cookieEnabled	=" + navigator.cookieEnabled + "<br>");
+	document.writeln("返回瀏覽器系統的 CPU 等級：navigator.cpuClass	=" + navigator.cpuClass + "<br>");
+	document.writeln("返回指明系統是否處於脫機模式：navigator.onLine	=" + navigator.onLine + "<br>");
+	document.writeln("返回運行瀏覽器的操作系統平台：navigator.platform	=" + navigator.platform + "<br>");
+	document.writeln("返回 OS 使用的默認語言：navigator.systemLanguage	=" + navigator.systemLanguage + "<br>");
+	document.writeln("返回由客戶機發送服務器的 user-agent 頭部的值：navigator.userAgent	=" + navigator.userAgent + "<br>");
+	document.writeln("返回 OS 的自然語言設置：navigator.userLanguage	=" + navigator.userLanguage + "<br>");
+	document.writeln("返回當前瀏覽器是否已啟用 Java ：navigator.javaEnabled()	=" + navigator.javaEnabled() + "<br>");
+	document.writeln("返回當前瀏覽器是否已啟用 data tainting ：navigator.taintEnabled()	=" + navigator.taintEnabled() + "<br>");
+</script>
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id18').value );">測試18</button>
+		<br>
+		<textarea id="id18" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	document.writeln("cookies的生命如果沒設定expires，關掉ie後就死了<br>")
+	document.writeln("cookies長度：document.cookie.length=" + document.cookie.length + "<br>")
+	document.writeln("設cookies：document.cookie= ('ckName=' + escape('ab//cc'))  <br>");
+	document.cookie = ('ckName=' + escape('ab//cc'));
+	document.writeln("cookies長度：document.cookie.length=" + document.cookie.length + "<br>")
+	document.writeln("讀cookies：getCookie('ckName')= " + getCookie('ckName') + " <br>");
+	document.writeln("設定有到期日的cookie<br>")
+	x = getCookie('ckName2');
+	document.writeln("讀cookies：getCookie('ckName2')=" + x + " <br>");
+	var d = new Date();
+	d.setMinutes(d.getMinutes() + 2);
+	document.writeln("設定到期日2" + d.toGMTString() + "<br>")
+	document
+			.writeln("設cookies：document.cookie= ('ckName2=' + escape('cccc//ddd')+';expires=' + d.toGMTString())  <br>");
+	document.cookie = ('ckName2=' + escape('cccc//ddd') + ';expires=' + d.toGMTString());
+	function getCookie(c_name) {
+		if (document.cookie.length > 0) {
+			c_start = document.cookie.indexOf(c_name + "=")
+			if (c_start != -1) {
+				c_start = c_start + c_name.length + 1
+				c_end = document.cookie.indexOf(";", c_start)
+				if (c_end == -1) c_end = document.cookie.length
+				return unescape(document.cookie.substring(c_start, c_end))
+			}
+		}
+		return ""
+	}
+</script>
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id19').value );">測試195</button>
+		<br>
+		<textarea id="id19" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	
+</script>
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id20').value );">測試20</button>
+		<br>
+		<textarea id="id20" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+<script>
+	
+</script>
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id21').value );">測試21</button>
+		<br>
+		<textarea id="id21" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 <script>
 	
@@ -505,7 +794,7 @@ Numeric");
 		開新視窗: {
 			var x = screen.width / 2 - 600 / 2;
 			var y = screen.height / 2 - 500 / 2;
-			var w = window.open("", "", "width=600,height=500,left=" + x + ",top=" + y);
+			var w = window.open("", "", "scrollbars=1;width=600,height=500,left=" + x + ",top=" + y);
 			w.document.open();
 			w.document.write(txt);
 			w.document.close();
