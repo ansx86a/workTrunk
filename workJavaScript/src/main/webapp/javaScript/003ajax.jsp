@@ -25,6 +25,49 @@
 			<a href="#id3">id3</a>
 		</p>
 
+<div align="left">
+<pre>
+其它的ajax+xml的應該參考jquery後再說吧
+
+
+/**
+ * 公用js
+ * 統一管理前端各種提示信息、URL等
+ * @author William
+ * @version 1.0,2014/02/06
+ */
+
+var url=$('#projectName').val()+"/resources/data/";
+
+/**
+ * 提示信息方法：輸入message的name代號，從而在message.xml文件中
+ * 找到對應的text
+ * 傳入：message的name代號
+ * 輸出：提示信息
+ */
+function getMessage(messageName) {
+	var messageUrl = url+"message.xml";
+	var message = "";
+	$
+			.ajax({
+				url : messageUrl,
+				dataType : "xml",
+				type : "GET",
+				async : false,
+				success : function(xml) {
+					message = $(xml)
+							.find("message[name='" + messageName + "']").text();
+				}
+			});
+	return message;
+}
+</pre>
+
+</div>
+
+
+
+
 		<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
 		<br>
@@ -88,6 +131,7 @@
 				var ary = [];
 				for (i = 0; i < tes.length; i++) {
 					ary.push(tes[i].childNodes[0].nodeValue);
+					ary.push(tes[i].getAttributeNode("lang").nodeValue);
 				}
 				alert(ary);
 			} else {
@@ -98,10 +142,49 @@
 		xhttp.open("GET", "books.xml", true);//open(method,url,async)
 		xhttp.send();
 	}
+
+	function loadDoc2() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+				var xmlDoc = xhttp.responseXML;
+				//var path = "/bookstore/book/title";//捉全部的書
+				//var path = "/bookstore/book[1]/title";//只捉第一本書
+				var path = "/bookstore/book/title[@lang='en' and @abc='12']";//只英文名字的書，
+				微軟: {
+					//因為ie對xpath的寫法有，所以放棄用xpath的方式來寫了
+
+				}
+				其它: {
+					if (!(document.implementation && document.implementation.createDocument)) {
+						break 其它;
+					}
+					//evaluate(xpathText,contextNode,namespaceURLMapper,resultType,result)
+					var nodes = xmlDoc.evaluate(path, xmlDoc, null, XPathResult.ANY_TYPE, null);
+					var result = nodes.iterateNext();
+					while (result) {
+						alert(result.childNodes[0].nodeValue);
+						result = nodes.iterateNext();
+					}
+					return;
+				}
+				alret("無法判別xml的xpath解析方法")
+			} else {
+				//這裡我不懂errorHandle怎麼做
+				//alert("" + xhttp.readyState + "," + xhttp.status);
+			}
+		};
+		xhttp.open("GET", "books.xml", true);//open(method,url,async)
+		xhttp.send();
+	}
 </script>
 <button type="button" onclick="loadDoc1()">發ajaxXml</button><br>
-<button type="button" onclick="loadDoc2()">發ajaxXpath</button><br>
-參考這裡吧https://www.nczonline.net/blog/2009/04/04/xpath-in-javascript-part-3/
+<button type="button" onclick="loadDoc2()">發ajaxXpath，ie掛點</button><br>
+參考這裡吧http://www.w3schools.com/xsl/xpath_examples.asp
+<br>http://www.w3schools.com/xml/xml_xpath.asp
+<br>xmlDoc.getElementsByTagName("title")[0].getAttributeNode("lang").nodeValue->http://www.w3schools.com/xml/dom_nodes_get.asp
+<br>xmldom->http://www.w3school.com.cn/xmldom/dom_document.asp
+
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->

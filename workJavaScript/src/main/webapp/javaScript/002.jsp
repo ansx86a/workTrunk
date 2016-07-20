@@ -217,7 +217,7 @@ with
 	document.writeln("sayColor.apply(obj, ['開頭apply', '結尾apply']);" + "<br>");
 	sayColor.apply(obj, [ '開頭apply', '結尾apply' ]);
 	document.writeln("同理，call可以用在繼承，ex:ClassB(sColor) call super ClassA -> ClassA.call(this, sColor);<br>");
-	document.writeln("同理，apply可以用在繼承，ex:ClassB(sColor) call super ClassA -> ClassA.call(this, [sColor]);<br>");
+	document.writeln("同理，apply可以用在繼承，ex:ClassB(sColor) call super ClassA -> ClassA.apply(this, [sColor]);<br>");
 	document.writeln("call和apply區別大至上就是call傳多個apply傳陣列的區別吧<br>");
 </script>
 		</textarea>

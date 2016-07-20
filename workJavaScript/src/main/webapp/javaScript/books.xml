@@ -3,25 +3,25 @@
 <!-- W3School.com.cn bookstore example -->
 <bookstore>
 	<book category="children">
-		<title lang="en">Harry Potter來個中文吧</title>
+		<title lang="tw">Harry Potter來個中文吧</title>
 		<author>J K. Rowling</author>
 		<year>2005</year>
 		<price>29.99</price>
 	</book>
 	<book category="cooking">
-		<title lang="en">Everyday Italian</title>
+		<title lang="en" abc='123'>Everyday Italian</title>
 		<author>Giada De Laurentiis</author>
 		<year>2005</year>
 		<price>30.00</price>
 	</book>
 	<book category="web" cover="paperback">
-		<title lang="en">Learning XML</title>
+		<title lang="en" abc='456'>Learning XML</title>
 		<author>Erik T. Ray</author>
 		<year>2003</year>
 		<price>39.95</price>
 	</book>
 	<book category="web">
-		<title lang="en">XQuery Kick Start</title>
+		<title lang="en" abc='12'>XQuery Kick Start</title>
 		<author>James McGovern</author>
 		<author>Per Bothner</author>
 		<author>Kurt Cagle</author>
