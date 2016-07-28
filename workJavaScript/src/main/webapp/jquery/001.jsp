@@ -39,7 +39,7 @@
 			<a href="#id8">noConflict，釋放錢字號或用其它的變數取代錢字號</a>
 		</p>
 		<p>
-			<a href="#id9">id9</a>
+			<a href="#id9">jquery資訊</a>
 		</p>
 		<p>
 			<a href="#id10">id10</a>
@@ -136,30 +136,9 @@
 			<br>
 			<button id="stopAll" type="button">停止全部的動畫</button>
 			<button id="stopSkip" type="button">跳過全部的動畫</button>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
-
+			<pre>
+			參照.queue()，dequeue()，clearQueue()
+			</pre>
 	<script>
 		$(document).ready(function() {
 			$("#moveRight").on("click", function() {
@@ -204,19 +183,29 @@
 		});
 	</script>
 	</textarea>
-	<br>
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id3').value );">測試3</button>
-	<br>
-	<textarea id="id3" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
-			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id3').value );">測試3</button>
+		<br>
+		<textarea id="id3" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
+			<style type="text/css">
+div {
+	background-color: yellow;
+	padding: 10px;
+}
+</style>
 			<p id="test">測試<b>粗體的</b>內容。<input type="text" id="valtxt" value="ttt" />
-		</p>
+			</p>
+			<p clone="1" onclick="alert('aaa');">aaa</p>
+			
 			<button id="htmlBtn">html()</button>
 			<button id="textBtn">text()</button>
 			<button id="valBtn">val()</button>
 			<button id="attrBtn">attr('value')</button>
+			<button id="getBtn">get() 捉到htmlDOM</button>
+			<button id="toArrayBtn">toArray()，用起來和get()差不多</button>
 			<br>
 			<button id="htmlBtn2">html(html()+"a|")</button>
 			<button id="textBtn2">text()</button>
@@ -228,12 +217,28 @@
 			<button id="prependBtn">prepend("abc")[p元素之內]</button>
 			<button id="afterBtn">after("abc")[p元素之外]</button>
 			<button id="beforeBtn">before("abc")[p元素之外]</button>
+			<pre>
+			insertAfter()	把匹配的元素插入到另一個指定的元素集合的後面。
+			insertBefore()	把匹配的元素插入到另一個指定的元素集合的前面。
+			appendTo()	向目標結尾插入匹配元素集合中的每個元素。
+			prependTo()	向目標開頭插入匹配元素集合中的每個元素。
+			removeAttr()	從所有匹配的元素中移除指定的屬性。
+			removeClass()	從所有匹配的元素中刪除全部或者指定的類。
+			</pre>
 			<br>
 			<button id="emptyBtn">empty清空子元素，以下都用檢查元素驗証</button>
 			<button id="removeBtn">remove刪除自已加子元素</button>
 			<button id="removeBtn2">remove刪除加條件</button>
 			<br>
 			<button id="sizeBtn">取得p元素的長寬等等</button>
+			<button id="cloneBtn">clone->複製p元素加到這個button後面</button>
+			<button id="detachBtn">detach->移動p元素，事件不會被刪</button>
+			<button id="replaceBtn">replaceAll->替換掉p元素</button>
+			<button id="replaceBtn2">replaceWith->替換掉p元素和all順序對調</button>
+			<br>
+			<button id="wrapBtn">wrap unwrap[另外參照wrapAll()wrapinner()]</button>
+			<button id="mapBtn">用map取得p的值[感覺用each會比較順，但map會比較短]</button>
+			
 <script>
 	$(document).ready(function() {
 		var a = $("#test").html();
@@ -248,6 +253,13 @@
 		});
 		$("#attrBtn").click(function() {
 			alert($("#valtxt").attr('value'));
+		});
+		$("#getBtn").click(function() {
+			alert($("p").get()[0].innerHTML);
+			alert($("p").get(1).innerHTML);
+		});
+		$("#toArrayBtn").click(function() {
+			alert($("p").toArray()[0].innerHTML);
 		});
 		$("#htmlBtn2").click(function() {
 			$("#test").html(a + ">a|");
@@ -325,15 +337,44 @@
 			$("#test").width(600);
 			$("#test").height(200);
 		});
+		$("#cloneBtn").click(function() {
+			$("#cloneBtn").after($("p[clone='1']").clone());
+			//$("#cloneBtn").after($("p[clone='1']").clone(true));//包含事件處理，上面的預設沒有包含事件
+		});
+		$("#detachBtn").click(function() {
+			$("#detachBtn").after($("p[clone='1']").detach());//單純用detach會移除元素，但事件不會被刪除
+		});
+		$("#replaceBtn").click(function() {
+			$("<p>new p1</p>").replaceAll("p");
+		});
+		$("#replaceBtn2").click(function() {
+			$("p").replaceWith("<p>with p2</p>");
+		});
+		var toggle = 0;
+		$("#wrapBtn").click(function() {
+			//wrap為用每個p都用一個div包起來，wrapAll為多個p用一個div包起來，wrapinner為p裡面的內容用div包起來
+			if (toggle++ % 2 == 0) {
+				$("p").wrap("<div></div>");
+				return;
+			}
+			$("p").unwrap();
+		});
+		$("#mapBtn").click(function() {
+			var result = $("p").map(function() {
+				return $(this).text();
+			}).get().join("------------");
+			alert(result);
+		});
+
 	});
 </script>
 		</textarea>
-	<br>
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id4').value );">測試4</button>
-	<br>
-	<textarea id="id4" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id4').value );">測試4</button>
+		<br>
+		<textarea id="id4" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 			<style type="text/css">
 .important {
@@ -357,6 +398,17 @@
 <button id="toggleCssBtn">toggle css p div(blue)</button>
 <button id="getSetCssBtn">取回第一個p的css並設置第r個p的css</button>
 <button id="setMoreCssBtn">設定多組css</button>
+<button id="hasClassBtn">hasClass找出有無blue(true|false)</button>
+<button id="offsetBtn">offset讀取和設定</button>
+<button id="scrollBtn">scroll水平和垂直</button>
+<div test='1' style="border: 1px solid black; width: 100px; height: 50px; overflow: auto">
+The longest word in the english dictionary is: pneumonoultramicroscopicsilicovolcanoconiosis.
+</div>
+<pre>
+另外可以參照
+匹配元素的高度 $(selector).height() $(selector).height(length) 另參照width()
+position().left = 相對座標X軸 (父容器) offset().left = 絕對座標X軸
+</pre>
 <script>
 	$(document).ready(function() {
 		$("#addCssBtn").click(function() {
@@ -380,16 +432,29 @@
 				"background-color" : "gray"
 			});
 		});
-
+		$("#hasClassBtn").click(function() {
+			alert($("h1,h2,p").hasClass("blue"));
+		});
+		$("#offsetBtn").click(function() {
+			var offset = $("#offsetBtn").offset();
+			//alert(JSON.stringify(offset));
+			offset.top += 10;
+			offset.left += 10;
+			$("#offsetBtn").offset(offset);
+		});
+		$("#scrollBtn").click(function() {
+			$("div[test='1']").scrollLeft(50);
+			$("div[test='1']").scrollTop(50);
+		});
 	});
 </script>
 		</textarea>
-	<br>
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id5').value );">測試5</button>
-	<br>
-	<textarea id="id5" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id5').value );">測試5</button>
+		<br>
+		<textarea id="id5" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 			<p>Body</p>
   <div style="width: 500px;">
@@ -406,7 +471,6 @@
   <br>
   <button id="childrenBtn">div children()，只能一層</button>
   <button id="findBtn">div find()，能多層</button>
-  
 <script>
 	$(document).ready(function() {
 		$("span").parents().css({
@@ -451,13 +515,13 @@
 	});
 </script>
 		</textarea>
-	<br>
+		<br>
 
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id6').value );">測試6</button>
-	<br>
-	<textarea id="id6" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id6').value );">測試6</button>
+		<br>
+		<textarea id="id6" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 <div>div (父)
   <p>p</p>
@@ -476,6 +540,9 @@
   <button id="prevBtn">h2 prev</button>
   <button id="prevAllBtn">h2 prev All</button>
   <button id="prevUntilBtn">h2 prevUntill</button>  <br>
+   <pre>
+  addSelf()過時，addBack()替代，表示由select往上再捉一個dom{猜測，未實作>}
+  </pre>
 <script>
 	var redBorderCss = {
 		"color" : "red",
@@ -509,24 +576,24 @@
 	});
 </script>
 		</textarea>
-	<br>
+		<br>
 
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id7').value );">測試7</button>
-	<br>
-	<textarea id="id7" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id7').value );">測試7</button>
+		<br>
+		<textarea id="id7" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 <div>div (父)
-  <p>p</p>
-  <span>span</span>
-  <h3 test="1">h3</h3>  
-  <h2>h2</h2>
-  <h3 test="2">h3</h3>
-  <span>span</span>
-  <h3>h3</h3>  
-  <p>p</p>
-  <h3>h3</h3>  
+  <p>p 1</p>
+  <span>span 1</span>
+  <h3 test="1">h3 1</h3>  
+  <h2>h2 1</h2>
+  <h3 test="2">h3 2</h3>
+  <span>span 2</span>
+  <h3>h3 3</h3>  
+  <p>p 2</p>
+  <h3>h3 4</h3>  
 </div>
 		 <button id="removeCssBtn">移除css</button>
 		 <button id="firstBtn">h3 first</button>		 
@@ -534,6 +601,12 @@
  		 <button id="eqBtn">h3 eq(1)</button>	
  		 <button id="filterBtn">h3 filter(test='2')</button>	
  		 <button id="notBtn">h3 not(test='2')</button>	
+ 		 <button id="addBtn">add p and h3 </button>
+ 		 <button id="sliceBtn">slice(start:-2,end:-1)取倒數第二個</button>
+<pre>
+end() 回到前次的選擇ex:$('ul').find('.foo').css(xxx).end().css(xxx)，第2次的css只對到ul
+.is("form") .is("li") ，還可以用function來判斷 $li.is(function() {return $('strong', this).length === 2; });
+</pre> 		 
 <script>
 	var redBorderCss = {
 		"color" : "red",
@@ -558,16 +631,26 @@
 		$("#notBtn").click(function() {
 			$("h3").not("[test='2']").css(redBorderCss);
 		});
+		$("#addBtn").click(function() {
+			//除了add( selector, context )之外，其它都很好理解
+			$("h3").add("p").css(redBorderCss);//add( selector )add( elements )add( html )add( selection )add( selector, context )
+		});
+		$("#notBtn").click(function() {
+			$("h3").not("[test='2']").css(redBorderCss);
+		});
+		$("#sliceBtn").click(function() {
+			$("h3").slice(-2, -1).css(redBorderCss);
+		});
 	});
 </script>
 		</textarea>
-	<br>
+		<br>
 
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id8').value );">測試8</button>
-	<br>
-	<textarea id="id8" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id8').value );">測試8</button>
+		<br>
+		<textarea id="id8" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 <pre>
 noConflict() 方法會釋放會 $ 標識符的控制，這樣其他腳本就可以使用它了
@@ -596,14 +679,34 @@ jQuery(document).ready(function($){
 	
 </script>
 		</textarea>
-	<br>
+		<br>
 
 
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id9').value );">測試9</button>
-	<br>
-	<textarea id="id9" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id9').value );">測試9</button>
+		<br>
+		<textarea id="id9" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+			<p id="p1">這裡是p1的內文</p>
+<script>
+	$(document).ready(function() {
+		var result = "";
+		result += ("版本號：" + $().jquery + "<br>");
+		var support = JSON.stringify(jQuery.support).replace(/,/g, '<br>');
+		result += ("jQuery.support：" + support + "<br>");
+		$("p").html(result);
+
+	});
+</script>
+		</textarea>
+		<br>
+
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id10').value );">測試10</button>
+		<br>
+		<textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
 			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 			<p id="p1">這裡是p1的內文</p>
 <script>
@@ -612,22 +715,7 @@ jQuery(document).ready(function($){
 	});
 </script>
 		</textarea>
-	<br>
-
-	<!-- ******************************************************************************************** -->
-	<button type="button" onclick="javascriptWindow(document.getElementById('id10').value );">測試10</button>
-	<br>
-	<textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-		spellcheck="false">
-			<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
-			<p id="p1">這裡是p1的內文</p>
-<script>
-	$(document).ready(function() {
-		alert("ready");
-	});
-</script>
-		</textarea>
-	<br>
+		<br>
 
 	</div>
 

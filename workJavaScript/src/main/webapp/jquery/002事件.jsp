@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>template</title>
+<title>事件</title>
 </head>
 <body>
 
@@ -11,30 +11,27 @@
 		<a href="#div0">回開頭</a>
 	</div>
 	<pre>
-$(selector).load(url,data,callback)	把遠程數據加載到被選的元素中
-$.ajax(options)	把遠程數據加載到 XMLHttpRequest 對象中
-$.get(url,data,callback,type)	使用 HTTP GET 來加載遠程數據
-$.post(url,data,callback,type)	使用 HTTP POST 來加載遠程數據
-$.getJSON(url,data,callback)	使用 HTTP GET 來加載遠程 JSON 數據
-$.getScript(url,callback)	加載並執行遠程的 JavaScript 文件
-
-(url) 被加載的數據的 URL（地址）
-(data) 發送到服務器的數據的鍵/值對象
-(callback) 當數據被加載時，所執行的函數
-(type) 被返回的數據的類型 (html,xml,json,jasonp,script,text)
-(options) 完整 AJAX 請求的所有鍵/值對選項
+e.preventDefault();            //阻止預設要執行的行為
+e.stopPropagation()         //阻止默認（冒泡）行為
+return false：包含上述兩點，並停止回調函數執行並返回
+//停止callback function執行並立即return
+使用原生js時，若要阻止默認行為，最好還是用event.preventDefault（針對非IE）或event.returnValue=false（針對IE）來設定。
+若使用的是jquery，return false 即會阻止默認行為，也會阻止事件的冒泡。在jquery中，一般使用return false.
 </pre>
 
 	<div id="div0" align="center">
 		<p>
-			<a href="#id1">get的用法</a>
+			<a href="#id1">on的應用(1.7後的jquery動態bind，也可以參考bind和delgate)<br>
+			動態關掉事件用off，1.7之前用live()和die
+			</a>
+
 		</p>
 		<p>
-			<a href="#id2">id2</a>
+			<a href="#id2">嘗試用preventDefault停止事件</a>
 		</p>
 
 		<p>
-			<a href="#id3">id3</a>
+			<a href="#id3">trigger</a>
 		</p>
 		<p>
 			<a href="#id4">id4</a>
@@ -54,9 +51,11 @@ $.getScript(url,callback)	加載並執行遠程的 JavaScript 文件
 		<p>
 			<a href="#id9">id9</a>
 		</p>
+
 		<p>
 			<a href="#id10">id10</a>
 		</p>
+
 
 		<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
@@ -64,72 +63,33 @@ $.getScript(url,callback)	加載並執行遠程的 JavaScript 文件
 		<textarea id="id1" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
-		<p>
-		jQuery.get( url(Sting) [, data(PlainObject or String) ] <br>
-		[, success Function( PlainObject data, String textStatus, jqXHR jqXHR )] <br>
-		[, dataType（xml, json, script, text，html ] )<br>
-		<button id="getBtn">get基本，不能跨網域</button>
-		<button id="getBtn2">get基本2，有參數，不能跨網域</button>
-		<button id="getBtn3">get基本3，設回傳type，不能跨網域</button>
-		<button id="getBtn4">get複雜一點的，不能跨網域</button>
-		</p>
-<pre>等同ajax的同法如下
-$.ajax({
-  url: url,
-  data: data,
-  success: success,
-  dataType:dataType
+		<p>.on( events [, selector ] [, data ], handler )</p>
+		<span>span1，events [, selector ],handler</span>
+		<span>span2，events,handler</span>
+		<span>span3，events,data,handler</span>
+		<pre>
+on可以寫兩個事件，下面是滑鼠的進出去toggleClass		
+$( "#cart" ).on( "mouseenter mouseleave", function( event ) {
+  $( this ).toggleClass( "active" );
 });		
-post不再重覆，和get九成像
-$.ajax({
-  type: "POST",
-  url: url,
-  data: data,
-  success: success,
-  dataType: dataType
-});
-</pre>
+</pre>		
 <script>
-	$(document).ready(
-			function() {
-				$("#getBtn").on("click", function() {
-					$.get("${pageContext.request.contextPath}/jquery001.mvc", function(data) {
-						alert(JSON.stringify(data));
-					});
-				});
-				$("#getBtn2").on("click", function() {
-					//$.get("${pageContext.request.contextPath}/jquery001.mvc",{"a":"b","c":"dddd"}, function(data) {
-					$.get("${pageContext.request.contextPath}/jquery001.mvc", "a=bc&c=ddaa", function(data) {//上面用json寫法也ok
-						alert(JSON.stringify(data));
-					});
-				});
-				$("#getBtn3").on("click", function() {
-					$.get("${pageContext.request.contextPath}/jquery001.mvc", function(data) {
-						alert(data);
-					}, "text");
-				});
-				$("#getBtn4").on(
-						"click",
-						function() {
-							var xhr = $.get("${pageContext.request.contextPath}/jquery001.mvc", "a=bc&c=ddaa",
-									function(data, textStatus, jqXHR) {
-										alert("ok:" + data);
-										alert("status:" + textStatus);
-										alert("" + jqXHR.readyState + "\n" + jqXHR.responseText + "\n" + jqXHR.status
-												+ "\n" + jqXHR.statusText);
-									}, "json");
-							//這裡可以修改網扯成錯的，就會彈出fail出來，舊版的是用jqXHR.success(), jqXHR.error(), 和 jqXHR.complete()
-							xhr.done(function() {
-								alert("done")
-							});
-							xhr.fail(function() {
-								alert("fail")
-							});
-							xhr.always(function() {
-								alert("always")
-							});
-						});
-			});
+	$(document).ready(function() {
+		$("span").css({
+			"border" : "2px solid red"
+		});
+		$("body").on("click", "span:contains('span1')", function() {
+			alert("span1");
+		});
+		$("span:contains('span2')").on("click", function() {
+			alert("span2");
+		});
+		$("span:contains('span3')").on("click", {
+			"ttt" : "this is ttt"
+		}, function(event) {
+			alert(event.data + "-" + JSON.stringify(event.data));//Object可以直接用點屬性來存取
+		});
+	});
 </script>
 		</textarea>
 		<br>
@@ -138,9 +98,26 @@ $.ajax({
 		<br>
 		<textarea id="id2" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-    	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+<form id="form1" action="http://www.kimo.com.tw">
+	<input type="submit" value="送出1" />
+</form>
+<form id="form2" action="http://www.kimo.com.tw">
+	<input type="submit" value="送出2" />
+</form>
+<form id="form3" action="http://www.kimo.com.tw">
+	<input type="submit" value="送出3，只有這個會轉頁" />
+</form>
 <script>
-	
+	$(document).ready(function() {
+		$("#form1").on("submit", false);
+		$("#form2").on("submit", function(event) {
+			event.preventDefault();
+		});
+		$("#form3").on("submit", function(event) {
+			event.stopPropagation();
+		});
+	});
 </script>
 		</textarea>
 		<br>
@@ -149,9 +126,31 @@ $.ajax({
 		<br>
 		<textarea id="id3" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
+		<span>span1，一般的click事件</span>
+		<span>span2，tiggerSpan1的click事件</span>
+		<span>span3，自定事件</span>		
+		<span>span4，tigger自定事件</span>			
 <script>
-	
+	$(document).ready(function() {
+		$("span").css({
+			"border" : "2px solid red"
+		});
+		$("body").on("click", "span:contains('span1')", function(event, Objdata) {
+			alert("span1-" + Objdata);
+		});
+		$("span:contains('span2')").on("click", function() {
+			$("span:contains('span1')").trigger("click", "objdataOOOO");
+		});
+
+		$("span:contains('span3')").on("myevent", function() {
+			alert("this is my event");
+		});
+		$("span:contains('span4')").on("click", function() {
+			$("span:contains('span3')").trigger("myevent");
+		});
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -160,9 +159,11 @@ $.ajax({
 		<br>
 		<textarea id="id4" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -171,9 +172,11 @@ $.ajax({
 		<br>
 		<textarea id="id5" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -182,9 +185,11 @@ $.ajax({
 		<br>
 		<textarea id="id6" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -193,9 +198,11 @@ $.ajax({
 		<br>
 		<textarea id="id7" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -204,9 +211,11 @@ $.ajax({
 		<br>
 		<textarea id="id8" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -215,9 +224,11 @@ $.ajax({
 		<br>
 		<textarea id="id9" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -226,13 +237,14 @@ $.ajax({
 		<br>
 		<textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+		<script type="text/javascript" src="jquery-3.0.0.min.js"></script>			
 <script>
-	
+	$(document).ready(function() {
+
+	});
 </script>
 		</textarea>
 		<br>
-
 
 
 	</div>
