@@ -16,6 +16,9 @@ import javax.naming.ldap.LdapContext;
  * @author Adam Retter <adam.retter@googlemail.com>
  */
 // 這個不知道是那裡抄的，應該算是很標準的ldap登入測試，注意LdapContext沒有close的話會一直多出執行緒出來
+//下面的ldap的寫法還蠻簡單的，看起來不錯用，先記下位置
+//http://linliangyi2007.iteye.com/blog/167128
+
 public class LDAPTest {
 
 	/**

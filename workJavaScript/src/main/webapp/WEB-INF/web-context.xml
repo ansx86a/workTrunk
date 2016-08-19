@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="    
-        http://www.springframework.org/schema/beans     
-        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd    
-        http://www.springframework.org/schema/context     
-        http://www.springframework.org/schema/context/spring-context-4.2.xsd    
-        http://www.springframework.org/schema/mvc     
-        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+	<description>Spring公共配置</description>
+
 
 	<context:component-scan base-package="controller" />
+	<context:component-scan base-package="controller2" />
 	<mvc:annotation-driven />
-</beans:beans>
+	<!-- 要加這一行，不然multipart的東西上來，回去的頁面都會是找不到網頁 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<context:annotation-config />
+
+	<!-- 請求轉由Web應用服務器默認的Servlet處理，如果不是靜態資源的請求，才由DispatcherServlet繼續處理 -->
+	<mvc:default-servlet-handler />
+
+	<!-- <mvc:default-servlet-handler />將靜態資源的處理經由Spring MVC框架交回Web應用服務器處理。而<mvc:resources 
+		/>更進一步，由Spring MVC框架自己處理靜態資源，並添加一些有用的附加值功能。 -->
+	<!-- <mvc:resources location="/,classpath:/META-INF/publicResources/" mapping="/resources/**"/> -->
+
+</beans>

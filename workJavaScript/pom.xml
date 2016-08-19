@@ -29,6 +29,14 @@
 			<version>2.6.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+
+
 		<!-- 為了讓maven可以build tomcat的東西 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
