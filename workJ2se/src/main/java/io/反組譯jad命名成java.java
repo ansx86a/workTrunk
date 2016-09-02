@@ -6,7 +6,7 @@ public class 反組譯jad命名成java {
 
 	public static void main(String[] args) {
 
-		File fs = new File("z:/2");
+		File fs = new File("z:/1");
 		for (File f : fs.listFiles()) {
 			if (f.isDirectory()) {
 				run(f);

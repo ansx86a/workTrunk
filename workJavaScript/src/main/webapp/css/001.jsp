@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>workJavascript ´ú¸Õ­¶</h1>
+		<p>µæ³¾±Ðµ{(§Ûw3c)¡Ghttp://www.runoob.com/</p>
 </body>
 </html>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>workJavascript ´ú¸Õ­¶</h1>
+main jsp page
 </body>
 </html>

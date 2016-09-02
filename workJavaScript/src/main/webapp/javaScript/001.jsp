@@ -13,6 +13,7 @@
 
 
 	<div id="div0" align="center">
+		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
 		<p>ECMAScript :http://www.w3school.com.cn/js/index_pro.asp</p>
 		<p>JavaScript Number 对象 :http://www.w3school.com.cn/jsref/jsref_obj_number.asp</p>
 		<a href="#id1">測試用document寫出文字、escape文字，用javascript替換文字和style</a>
@@ -72,7 +73,7 @@
 			<a href="#id18">Cookies 物件</a>
 		</p>
 
-		<!-- ******************************************************************************************** -->
+	<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
 		<br>
 		<textarea id="id1" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
@@ -362,7 +363,8 @@ Numeric");
 	document.write("全部替換： 'a1b2c33aABb44b'.replace(/b/,'冏')  =" + 'a1b2c33aABb44b'.replace(/b/g, '冏') + "<br>");
 	document.write("替換不分大小寫： 'a1b2c33aABb44b'.replace(/b/ig,'冏')  =" + 'a1b2c33aABb44b'.replace(/b/ig, '冏') + "<br>");
 	document.write("找出出現位置不分大小寫:'a1B2c33aABb44b'.search(/B/i) =" + 'a1B2c33aABb44b'.search(/b/i) + "<br>");
-	document.write("substr()在ECMAscript 沒標準化，最好不要用，而substring可用但不接受負數[會變成0，ex：substring(3,-2)等於substring(0,3)]，slice看來最強<br>");
+	document
+			.write("substr()在ECMAscript 沒標準化，最好不要用，而substring可用但不接受負數[會變成0，ex：substring(3,-2)等於substring(0,3)]，slice看來最強<br>");
 	document.write("捉最後3字： 'a1B2c33aABb44b'.slice(-3)=" + 'a1B2c33aABb44b'.slice(-3) + "<br>");
 	document.write("捉3-6字： 'a1B2c33aABb44b'.slice(2,5)=" + 'a1B2c33aABb44b'.slice(2, 5) + "<br>");
 	document.write("拆分字串：'a1B2c33aABb44b'.split('B')=" + 'a1B2c33aABb44b'.split('B') + "<br>");
@@ -780,7 +782,7 @@ Numeric");
 		<br>
 
 
-	</div>
+		</div>
 
 
 

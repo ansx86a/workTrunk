@@ -13,6 +13,7 @@
 
 
 	<div id="div0" align="center">
+		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
 		<p>
 			<a href="#id1">顯示、淡入淡出、滑動相關</a>
 		</p>
