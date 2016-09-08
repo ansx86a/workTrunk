@@ -5,12 +5,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=BIG5">
 <title>Insert title here</title>
 </head>
-<body>red jsp page
+<body>i am blue
+
+
 </body>
 <script>
-	alert(mainPage + " has a length = " + $("a").length);
-	alert(maina + "\n" + reda);
-	mainPage += "r";
+	mainppp();
+	function mainppp() {
+		alert("i am blue");
+	}
 	mainppp();
 </script>
 </html>

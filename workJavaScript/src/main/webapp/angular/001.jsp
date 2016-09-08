@@ -14,10 +14,15 @@
 
 	<div id="div0" align="center">
 		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
+		<p>(抄w3c，額外有很多有的沒的)http://www.w3ii.com/zh-TW/design_pattern/default.html</p>
 		<pre>一些網站
 http://ithelp.ithome.com.tw/articles/10132196
 https://www.gitbook.com/book/114000/angularjs-chinese-api/details
 https://114000.gitbooks.io/angularjs-chinese-api/content/index.html
+下載改1.5.8和後面的xxx.min有無.js就可以下載angular很多套件
+http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.min.js
+
+ng-cloak->避免節點閃爍，還沒遇過，等遇到再說
 </pre>
 		<p>
 			<a href="#id1">表示式</a>
@@ -73,21 +78,54 @@ https://114000.gitbooks.io/angularjs-chinese-api/content/index.html
 			spellcheck="false">
 		 <script type="text/javascript" src="jquery-3.0.0.min.js"></script>
 		 <script type="text/javascript" src="angular.1.5.8.min.js"></script>
-		 <div ng-app="" ng-init="myCol='lightblue';quantity=3;cost=5;person={firstName:'John',lastName:'Doe'}";>
+		 <script type="text/javascript" src="angular-sanitize.min.js"></script>		 
+<style>
+.sky {
+	background-color: lightblue;
+}
+
+.sky2 {
+	background-color: gray;
+}
+</style>		 
+		 <div ng-app="myApp" ng-controller="myCtrl"
+				ng-init="myCol='lightblue';quantity=3;cost=5;person={firstName:'John',lastName:'Doe'}";>
 		  	<p>初始化參數:ng-init="myCol='lightblue';quantity=3;cost=5;person={firstName:'John',lastName:'Doe'}"</p>
+		  	<p ng-non-bindable>不要bind 第一個表示式 ：{ { quantity * cost }}: {{ quantity * cost }} </p>
  			<p>第一個表示式 ：{ { quantity * cost }}: {{ quantity * cost }} </p>
  			<p>表示式ng-bind(單向)的寫法：span ng-bind="quantity * cost" ：<span ng-bind="quantity * cost" />
 				</p>
-			<p>表示式加工 ：{ {"什麼鬼=" + quantity * cost }}: {{"什麼鬼="+ quantity * cost }} </p>
-			<p>表示式可以用Object方式存取 { { person.lastName }}： {{ person.lastName }}</p>
+			<p>有點多此一舉的做法ng-bind-template，和直接放在body本文效果差不多->
+				<span ng-bind-template="我姓：{{person.firstName}} 叫我{{person.lastName}}就可以了"></span>
+			</p>
+				
+ 			<div>
+ 				ng-bind-html(模組'ngSanitize')先試試< h1>內容< /h1>
+ 				<input ng-model="myhtml">	<span ng-bind-html="myhtml"></span>
+ 				<p>input的單邊繫結，在手動修改值後會失去擊結 ，不太想用<input ng-value="myhtml">
+					</p>
+ 			</div>
+ 		
+			<p>表示式加工 ：{ {"什麼鬼=" + quantity * cost } }: {{"什麼鬼="+ quantity * cost }} </p>
+			<p>表示式可以用Object方式存取 { { person.lastName } }： {{ person.lastName }}</p>
  			<p>
- 					input style="background-color:{ {myCol}}" ng-model="myCol" value="{ {myCol}}"<br>
-					雙向綁定value值和style，ie看不到，用chrome測：<input style="background-color: {{myCol" ng-model="myCol" value="{{myCol}}">
+ 					input style="background-color:{ {myCol} }" ng-model="myCol" value="{ {myCol} }"<br>
+					雙向綁定value值和style，ie看不到，用chrome測：(不知為什麼eclipse格式化會吃掉右括號)<input ng-model="myCol" style='background-color: {{myCol' />
+					<br />ng-style能在ie跑，2waybind以後再試<input ng-init="mystyle={'background-color': 'lightblue'}" ng-style="mystyle" />;
+					<br />
+					上面的不好用，改用class綁定好些，sky和sky2<input ng-class="myclass" ng-model="myclass">
+										
  			</p>
+ 			
  			
 		 </div>
 <script>
-	
+	var app = angular.module("myApp", [ 'ngSanitize' ]);
+
+	app.controller("myCtrl", function($scope) {//這裡的$scope不能亂改變數名字
+		//$scope.myhtml = "John";
+
+	});
 </script>
 		</textarea>
 		<br>
@@ -111,6 +149,17 @@ https://114000.gitbooks.io/angularjs-chinese-api/content/index.html
 				<button id="easyTest">測試</button>
 				</p>
 				<p>測rootScope in ctrl1，自已有color={{color}}</p>
+				<div>
+				自定義2waybind的觸發點
+				 <input ng-model="name" ng-model-options="{updateOn: 'blur'}">
+				 {{name}}
+				 <pre>{updateOn: 'event'} specifies that the binding should happen when the specific event occur.
+{debounce : 1000} specifies how many milliseconds to wait with the binding.
+{allowInvalid : true|false} specify if the binding can happen if the value did not validate.
+{getterSetter : true|false} specifies if functions bound to the model should be treated as getters/setters.
+{timezone : '0100'} Specifies what timezone should be used when working with the Date object.</pre>
+				</div>
+				
 		 </div>
 	 	<div ng-controller="myCtrl2">
 				<p>證明兩個control的socpe不影嚮{ {lastName}}={{lastName}}</p>
@@ -249,12 +298,49 @@ table tr:nth-child(odd) {
 table tr:nth-child(even) {
 	background-color: #ffffff;
 }
+
+table tr.sky {
+	background-color: lightblue;
+}
+
+table tr.sky2 {
+	background-color: gray;
+}
 </style>		 	
 		 <div ng-app="myApp" ng-controller="myCtrl">
+		 <p>
+		 <input ng-model="myVar" ng-init="myVar = 'http://www.w3schools.com'">
+		 ng-href，確保angular已執行完成，ng-src也相同，ng-srcset用在rwd先跳過不看
+		 <a ng-href="{{myVar}}">{{myVar}}</a>一般的link，感覺沒什麼差別 <a href="{{myVar}}">{{myVar}}</a>
+
+		<br>	<input ng-model="myVar2" ng-init="myVar2='http://www.w3schools.com/angular/pic_angular.jpg'" />
+		 <img width="30" heigth="30" ng-src="{{myVar2}}" />
+		 </p>
+		 <p>
+		 input的值，預設用,分開陣列化，此例可以把=的值去掉就變回預設值，分開字可用多個字也ok
+		 <input ng-model="customers" ng-list=";" />{{customers}}
+		 </p>
+		 <div>由ng-model(ture or false)去強制選一個option，false就回預設值(?maybe 回index 0)
+		 <input type="checkbox" ng-model="mySel">
+					<select>
+  						<option>Volvo</option>
+  						<option ng-selected="mySel">BMW</option>
+  						<option>Ford</option>
+					</select>
+		 </div>
+		 <div>
+					<input type="checkbox" ng-model="showDetails">
+				<details ng-open="showDetails">
+  					<summary>ng-open ie不能用的點擊展開，html5的語法，注意ng-open好像是單向的，沒辦法雙向回去scope</summary>
+  					<p> - 展開1</p>
+  					<p> - 展開2</p>
+				</details>
+		 </div>
 		 <p>
 		 ng-repeat的用法：<span ng-repeat="x in names">	我是{{ x.name }}住{{x.country}}，</span>
 		 </p>
 		 <div>
+		 <p>第3列靠css設定顏色的，css可以分出even和odd，好強，此例還有ngif，可以出現或是不見dom，後3列改成用ng-class-even ng-class-odd</p>
 				<table>
   				<tr ng-repeat="x in names">
   						<td>{{ $index + 1 }}</td>
@@ -263,21 +349,30 @@ table tr:nth-child(even) {
     					<td ng-if="$odd">if is odd = {{$odd}}</td>
     					<td ng-if="$even">if is even = {{$even}}</td>
   				</tr>
+  				 <tr ng-repeat="x in names" ng-class-even="'sky'" ng-class-odd="'sky2'">
+  						<td>{{ $index + 1 }}</td>
+    					<td>{{ x.name }}</td>
+    					<td>{{ x.country| uppercase  }}</td>
+    					<td ng-if="$odd">if is odd = {{$odd}}</td>
+    					<td ng-if="$even">if is even = {{$even}}</td>
+  				</tr>
 			</table>
 			一般的select綁定(default null option)：	<select ng-model="s1" ng-options="x.name for x in names"></select>
-			<br>y.name for (x,y) in names->x變成陣列索引，y變成物件
-				<select ng-model="s2" ng-options="y.name for (x,y) in names"></select>
-					<br>x for (x,y) in cars物件來說，x是key，y是值
+			<br>y.name for (x,y) in names->x變成陣列索引，y變成物件，在ng-init給初值
+				<select ng-model="s2" ng-options="y.name for (x,y) in names" ng-init="s2=names[1];"></select>
+					<br>x for (x,y) in cars物件來說，x是key，y是值，另外在controller設初值
 				<select ng-model="s3" ng-options="x for (x,y) in cars"></select>
 					<br>用repeat做掉option(default select first option):<select>
 						<option ng-repeat="x in names" value="{{x.name}}">{{x.name}}</option>
 				</select>
 				<p>select的值:{{s1}},{{s2}},{{s3}}，第4個要用jquery來取值</p>
+				
 		 </div>
 		 <div>
 		 		<input type="checkbox" ng-model="myBoolean">boolean設定</input>
 		 		myBoolean={{myBoolean}}
 		 		<button ng-disabled="myBoolean">禁用ng-disabled</button>
+		 		<input ng-readonly="myBoolean" value="readonlytest" />
 		 		<p ng-show="myBoolean">顯示ng-show</p>
 		 		<p ng-hide="myBoolean">顯示ng-hide</p>
 		 		<input type="radio" ng-model="myVar" value="dogs">Dogs
@@ -285,10 +380,34 @@ table tr:nth-child(even) {
 				<input type="radio" ng-model="myVar" value="cars">Cars
 		 		<p>radio的值:{{myVar}}</p>
 		 </div>
+		 <div ng-switch="myswitch">
+		 	用switch做掉dom裡面的show、hide控制<input ng-model="myswitch" />
+  			<span ng-switch-when="a">aaaaa</span>
+  			<span ng-switch-when="b">bbbb</span>
+  			<span ng-switch-when="c">ccccc</span>
+  			<span ng-switch-default>default</span>
+		</div>
+		 <div>
+		 ng-submit適合做ajax的處理，可以攔截submit的動作，去做自已的function
+		 <form ng-submit="beforeSubmit = 'ng-submit適合做ajax' ;">
+  				<input type="text" ng-model="beforeSubmit"> 
+  				<input type="submit">
+		</form>
+		 
+		 </div>
+		 <div>
+		 		ng-checked，用來全選或是全不選用的
+		 		<input type="checkbox" ng-model="all"> Check all<br><br>
+		 		<input type="checkbox" ng-checked="all">Volvo<br>
+		 		<input type="checkbox" ng-checked="all">Ford<br>
+		 		<input type="checkbox" ng-checked="all">Mercedes
+		 </div>		 
+		 <p>ng-include 有不跨網域和跨網域的寫法</p>
 		 <div ng-include="'${pageContext.request.contextPath}/test.jsp'">不能跨網域啦</div>
   		 <div ng-include="'http://www.w3schools.com/angular/customers.php'">設白名單就能跨網域啦，但是要加localhost進去不然本來的會掛掉</div>
 				
 		 </div>
+
 <script>
 	var app = angular.module("myApp", []);
 	app.controller("myCtrl", function($scope) {//這裡的$scope不能亂改變數名字
@@ -307,6 +426,8 @@ table tr:nth-child(even) {
 			car02 : "Fiat",
 			car03 : "Volvo"
 		};
+		//給初值
+		$scope.s3 = $scope.cars[1];
 	});
 	//設白名單
 	app.config(function($sceDelegateProvider) {
@@ -345,11 +466,12 @@ form.ng-invalid {
 </style>		
 		  <div ng-app="myApp" ng-controller="myCtrl">
 		       <form name="myForm">
-		       <p>css的設定，下面的會蓋掉上面的</p>
-    			    Email:<input type="email" name="myAddress" ng-model="text">
+		       <p>css的設定，下面的會蓋掉上面的，綠色過關水色卡關</p>
+		       		<input type="checkbox" ng-model="myVar">ng-required動態必填，一般沒有必填是預設過驗証<br>
+    			    Email:<input type="email" name="myAddress" ng-model="text" ng-required="myVar">
 					<!-- 這裡的ng-model是？？？ -->
 					<span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
-					Email2:<input type="email" name="myAddress2" ng-model="myText" required>
+					Email2:<input type="email" name="myAddress2" ng-model="myText" required ng-minlength="5" ng-maxlength="10">
 					<p>欄位=======================================</p>
 					<p>Valid: {{myForm.myAddress2.$valid}} (if true, the value meets all criteria，符不符合驗証).
 					<br>invalid: {{myForm.myAddress2.$invalid}}和上面相反
@@ -441,7 +563,10 @@ ng-invalid-key Example: ng-invalid-required
 		  <br>只比name：<span ng-repeat="x in names | filter :{name:aaa}">{{ x.name+'-'+x.country + ', '  }}</span>
 		  <br>單字大小寫全同(可空白間隔單字)：<span ng-repeat="x in names | filter :aaa:true">{{ x.name+'-'+x.country + ', '  }}</span>
 		  </p>	
-		  
+		  <p>
+		  自定filter(客製filter)[我設成前後都加一些中文字]
+		  <input ng-model="myfStr" />{{myfStr}}，{{myfStr|myFormat}}
+		  </p>
 		  
 		  </div>
 <pre>
@@ -475,6 +600,16 @@ uppercase Format a string to upper case.
 			country : 'Norway'
 		} ];
 
+	});
+
+	app.filter('myFormat', function() {
+		return function(x) {
+			var i, txt = "";
+			for (i = 0; i < x.length; i++) {
+				txt += x[i];
+			}
+			return "什麼" + txt + "鬼玩意";
+		};
 	});
 </script>
 		</textarea>
@@ -591,7 +726,8 @@ uppercase Format a string to upper case.
 		  <input type="text" ng-blur="a1=a1+1" ng-copy="a3=a3+1" ng-cut="a4=a4+1" ng-focus="a5=a5+1" ng-paste="a6=a6+1"
 					ng-keydown="a7=a7+1" ng-keypress="a8=a8+1" ng-keyup="a9=a9+1"></input>
 		  <p>blur:{{a1}},copy:{{a3}},cut:{{a4}},focus:{{a5}},paste:{{a6}},keydown:{{a7}},keypress:{{a8}},keyup:{{a9}}</p>
-		  <p>ng-change卡住了，晚點再測</p>
+		  <p>ng-change放上面出錯，大概是因為要綁一個ng-model才能正常？ <input ng-change="cc=cc+1" ng-model="myValue" />changed {{cc}} times</p>
+
 		  </div>		 	
 <pre>
 ng-blur
@@ -619,7 +755,6 @@ ng-paste
 			$scope.x = event.clientX;
 			$scope.y = event.clientY;
 		};
-
 	});
 </script>
 		</textarea>
@@ -711,20 +846,39 @@ div div {
 		 <script type="text/javascript" src="angular.1.5.8.min.js"></script>
 		 <script type="text/javascript" src="angular-route.min.js"></script>		 
 		  <div ng-app="myApp" ng-controller="myCtrl">
+		  		<input ng-model="txt" />
 				<a href="#/">Main</a>
 				<a href="#red">Red</a>
+				<a href="#blue">blue</a>
+				<a href="#txt">txt</a>
 				<div ng-view></div>
+				<ng-view></ng-view>
+				<div class="ng-view"></div>
 		  </div>		 			
+<pre>
+ng-view可以當成swith子網頁來用，不錯用，可以存取main網頁的東西
+但是每次點別的連結就會重load執行，點一樣的連結不會動作，javascript公用變數會共用可覆寫
+在不include新的javascript或css來說應該是不錯用，另外不太建議用共用變數，除非特別的需求(ex:spa)
+沒辦法像iframe分離的那麼乾淨
+viewPort裡的東西是純html是最好的用法，其次是配javascript 一次執行的script
+再其次有function，會依自已的function為優先，沒有的話會拿最後一次覆寫的function
+不應該有include或css，會增加複雜度，有需求的話放在第一頁主頁吧
+</pre>		  
 <script>
+	var mainPage = "route 主頁";
 	var app = angular.module("myApp", [ "ngRoute" ]);
 	app.controller("myCtrl", function($scope) {//這裡的$scope不能亂改變數名字
-
+		$scope.txt = "什麼鬼毛";
 	});
 	app.config(function($routeProvider) {
 		$routeProvider.when("/", {
 			templateUrl : "main.jsp"
 		}).when("/red", {
 			templateUrl : "red.jsp"
+		}).when("/txt", {
+			template : "<h1>我是templete {{txt}}</h1>"
+		}).when("/blue", {
+			templateUrl : "blue.jsp"
 		});
 	});
 </script>
