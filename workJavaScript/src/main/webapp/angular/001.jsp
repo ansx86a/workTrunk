@@ -547,12 +547,21 @@ ng-invalid-key Example: ng-invalid-required
 		  <div ng-app="myApp" ng-controller="myCtrl">
 		  <p>轉小寫： {{ lastName | lowercase }}</p>
 		  <p>轉大寫： {{ lastName | uppercase }}</p>
-		  <p>轉金額會有3位逗號和小數點： {{ price | currency }}-{{ price | currency:"NT$" }}</p>
+		  <p>轉金額會有3位逗號，另外設1位小數點： {{ price | currency }}->變成{{ price | currency:"NT$" :1}}</p>
+		  <p>
+		  限制只能輸出2個<span ng-repeat="x in names | orderBy:'name' |limitTo:2">{{ x.name + ', '  }}</span>
+		  限制只能輸出最後3個<span ng-repeat="x in names | orderBy:'name' |limitTo:-3">{{ x.name + ', '  }}</span>
+		  限制只能輸出2個從第2(index:1)個開始算<span ng-repeat="x in names | orderBy:'name' |limitTo:2:1">{{ x.name + ', '  }}</span>
+		  可以用來限制字串:{{'123456789' | limitTo:5}}
+		  </p>
+		  <p>數字格式化(加入,去小數0)={{12345.67890 | number}}，設定小數點數目帶四捨五入{{12345.67890 | number:2}}，
+		  錯誤值={{'d11223345'|number}}</p>
 		  <p>
 		  排序<span ng-repeat="x in names | orderBy:'name'">{{ x.name + ', '  }}</span>
 		  </p>
 		  <p>
 		  排序倒序<span ng-repeat="x in names | orderBy:'name':true">{{ x.name+'-'+x.country + ', '  }}</span>
+		  倒序2<span ng-repeat="x in names | orderBy:'-name'">{{ x.name+'-'+x.country + ', '  }}</span>
 		  </p>
 		  <p>
 		  過濾no字串，隨1屬性符合即可不分大小寫<span ng-repeat="x in names | filter :'no'">{{ x.name+'-'+x.country + ', '  }}</span>
@@ -560,17 +569,25 @@ ng-invalid-key Example: ng-invalid-required
 		  <p>
 		  過濾<input ng-model="aaa">
 					<span ng-repeat="x in names | filter :aaa">{{ x.name+'-'+x.country + ', '  }}</span>
-		  <br>只比name：<span ng-repeat="x in names | filter :{name:aaa}">{{ x.name+'-'+x.country + ', '  }}</span>
+		  <br>只比object.name：<span ng-repeat="x in names | filter :{name:aaa}">{{ x.name+'-'+x.country + ', '  }}</span>
 		  <br>單字大小寫全同(可空白間隔單字)：<span ng-repeat="x in names | filter :aaa:true">{{ x.name+'-'+x.country + ', '  }}</span>
 		  </p>	
 		  <p>
 		  自定filter(客製filter)[我設成前後都加一些中文字]
 		  <input ng-model="myfStr" />{{myfStr}}，{{myfStr|myFormat}}
 		  </p>
+		  <p>日期 預設={{today  | date }},
+		  fullDate={{ today | date : "fullDate" }},
+		  自定= {{ today | date :  "yyyy年MM月dd日Z" }},
+		  字串={{ "2016-01-05T09:05:05.035Z" | date }},
+		  時區一定要配格式?[+1200]-[-1200]={{ "2016-01-05T09:05:05.035Z" | date:"yyyy年MM月dd日":"-1200" }}
+		  </p>
+		  <p>說是javascript obj轉json，感覺本來的單向bind就可以轉了。格式化12個空白？看元素原始碼吧:{{obj}} -> {{obj|json:12}}</p>
+
+		  
 		  
 		  </div>
-<pre>
-currency Format a number to a currency format.
+<pre>currency Format a number to a currency format.
 date Format a date to a specified format.
 filter Select a subset of items from an array.
 json Format an object to a JSON string.
@@ -578,14 +595,55 @@ limitTo Limits an array/string, into a specified number of elements/characters.
 lowercase Format a string to lower case.
 number Format a number to a string.
 orderBy Orders an array by an expression.
-uppercase Format a string to upper case.
+uppercase Format a string to upper case.</pre>		  		  
+<pre>日期格式表
+"yyyy" year (2016)
+"yy" year (16)
+"y" year (2016)
+"MMMM" month (January)
+"MMM" month (Jan)
+"MM" month (01)
+"M" month (1)
+"dd" day (06) 
+"d" day (6)
+"EEEE" day (Tuesday)
+"EEE" day (Tue)
+"HH" hour, 00-23 (09)
+"H" hour 0-23 (9)
+"hh" hour in AM/PM, 00-12 (09)
+"h" hour in AM/PM, 0-12 (9)
+"mm" minute (05)
+"m" minute (5)
+"ss" second (05)
+"s" second (5)
+"sss" millisecond (035)
+"a" (AM/PM)
+"Z" timezone (from -1200 to +1200)
+"ww" week (00-53)
+"w" week (0-53)
+"G" era (AD)
+"GG" era (AD)
+"GGG" era (AD)
+"GGGG" era (Anno Domini)
+
+The format value can also be one of the following predefined formats:
+"short" same as "M/d/yy h:mm a" (1/5/16 9:05 AM)
+"medium" same as "MMM d, y h:mm:ss a" (Jan 5, 2016 9:05:05 AM)
+"shortDate" same as "M/d/yy" (1/5/16)
+"mediumDate" same as "MMM d, y" (Jan 5, 2016)
+"longDate" same as "MMMM d, y" (January 5, 2016)
+"fullDate" same as "EEEE, MMMM d, y" (Tuesday, January 5, 2016)
+"shortTime" same as "h:mm a" (9:05 AM)
+"mediumTime" same as "h:mm:ss a" (9:05:05 AM)
 </pre>		  
+
 		  
 <script>
 	var app = angular.module("myApp", []);
 	app.controller("myCtrl", function($scope) {//這裡的$scope不能亂改變數名字
 		$scope.lastName = "myLastName";
 		$scope.price = 58123;
+		$scope.today = new Date();
 		$scope.names = [ {
 			name : 'Jani',
 			country : 'Norway'
@@ -599,6 +657,11 @@ uppercase Format a string to upper case.
 			name : 'Hege',
 			country : 'Norway'
 		} ];
+		var obj = new Object();
+		obj.a = "aaa";
+		obj.b = "bbb";
+		obj.ccc = "ccc";
+		$scope.obj = obj;
 
 	});
 
@@ -769,7 +832,11 @@ ng-paste
 		  <div ng-app="myApp" ng-controller="myCtrl">
 		  <p>copy:{{copy}}</p>
 		  <p>轉小寫：{{lower}}，轉大寫:{{upper}}</p>
-  		  <p>是字串：{{isString}}，是數字:{{isNumber}}</p>
+		  <p>是字串：{{isString}}，是數字:{{isNumber}}，是陣列{{isArray}}，是日期{{isDate}}，
+		  無定義{{isUndefined}}，有定義{{isDefined}}，是物件{{isObject}}，是元素{{isElement}}，
+		  是方法{{isFunction}}，是否相等太概是3等於吧{{equals}}</p>
+			<p>{{myjson}}</p>
+			<p>{{myjson2}}</p>
 		  </div>		 			
 <script>
 	var app = angular.module("myApp", []);
@@ -789,7 +856,18 @@ ng-paste
 		$scope.upper = angular.uppercase($scope.names[0].name);
 		$scope.isString = angular.isString("123");
 		$scope.isNumber = angular.isNumber("123");
-
+		$scope.isArray = angular.isArray([ "123" ]);
+		$scope.isDate = angular.isDate(new Date());
+		$scope.isUndefined = angular.isUndefined(undefined);
+		$scope.isDefined = angular.isDefined(undefined);
+		$scope.isObject = angular.isObject(new Object());
+		$scope.isElement = angular.isElement(new Object());
+		$scope.isFunction = angular.isFunction(angular.copy);
+		$scope.equals = angular.equals("123", 123);
+		$scope.myjson = angular.fromJson($scope.names[0]);
+		$scope.myjson2 = angular.toJson($scope.myjson);
+		alert("json轉物件-"+$scope.myjson+" , name="+$scope.myjson.name);
+		alert($scope.myjson2);
 	});
 </script>
 		</textarea>
