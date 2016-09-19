@@ -13,6 +13,7 @@
 
 
 	<div id="div0" align="center">
+		<p>官方文件，有一些教程和概念https://docs.angularjs.org/api</p>	
 		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
 		<p>(抄w3c，額外有很多有的沒的)http://www.w3ii.com/zh-TW/design_pattern/default.html</p>
 		<pre>一些網站
@@ -93,6 +94,7 @@ ng-cloak->避免節點閃爍，還沒遇過，等遇到再說
 		  	<p>初始化參數:ng-init="myCol='lightblue';quantity=3;cost=5;person={firstName:'John',lastName:'Doe'}"</p>
 		  	<p ng-non-bindable>不要bind 第一個表示式 ：{ { quantity * cost }}: {{ quantity * cost }} </p>
  			<p>第一個表示式 ：{ { quantity * cost }}: {{ quantity * cost }} </p>
+ 			<p>表示式加預設值 ：{ { quantity * cost||'預設值' }}: {{ quantity * cost||'預設值' }} </p> 			
  			<p>表示式ng-bind(單向)的寫法：span ng-bind="quantity * cost" ：<span ng-bind="quantity * cost" />
 				</p>
 			<p>有點多此一舉的做法ng-bind-template，和直接放在body本文效果差不多->
@@ -389,8 +391,9 @@ table tr.sky2 {
 		</div>
 		 <div>
 		 ng-submit適合做ajax的處理，可以攔截submit的動作，去做自已的function
-		 <form ng-submit="beforeSubmit = 'ng-submit適合做ajax' ;">
-  				<input type="text" ng-model="beforeSubmit"> 
+		 <form ng-submit="beforeSubmit = 'ng-submit適合做ajax' ;goSubmit();">
+  				function=<input type="text" ng-model="beforeSubmit"> 
+  				,data=<input type="text" ng-model="submit.data"> 
   				<input type="submit">
 		</form>
 		 
@@ -402,6 +405,12 @@ table tr.sky2 {
 		 		<input type="checkbox" ng-checked="all">Ford<br>
 		 		<input type="checkbox" ng-checked="all">Mercedes
 		 </div>		 
+		 <div>
+  		 	改變checkBox的值，
+		 	對照組<input ng-model="cbTest1"  type="checkbox"  />
+		 	修改後<input ng-model="cbTest2"  type="checkbox"  ng-true-value="'YES'" ng-false-value="'NO'" />
+		 	<br>對照組{{cbTest1}}  修改後{{cbTest2}}
+		 </div>
 		 <p>ng-include 有不跨網域和跨網域的寫法</p>
 		 <div ng-include="'${pageContext.request.contextPath}/test.jsp'">不能跨網域啦</div>
   		 <div ng-include="'http://www.w3schools.com/angular/customers.php'">設白名單就能跨網域啦，但是要加localhost進去不然本來的會掛掉</div>
@@ -428,6 +437,9 @@ table tr.sky2 {
 		};
 		//給初值
 		$scope.s3 = $scope.cars[1];
+		$scope.goSubmit=function(){
+			alert("goSubmit"+angular.toJson($scope.submit));
+		}
 	});
 	//設白名單
 	app.config(function($sceDelegateProvider) {
@@ -472,6 +484,12 @@ form.ng-invalid {
 					<!-- 這裡的ng-model是？？？ -->
 					<span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
 					Email2:<input type="email" name="myAddress2" ng-model="myText" required ng-minlength="5" ng-maxlength="10">
+					<br>
+					正規表示式:<input ng-model="myreg" ng-init="myreg='\\d+'"/> 
+					正規表示式驗証:<input ng-model="myregTxt"  ng-pattern="myreg"/>  
+					<br>
+					只要綁model就會列入驗証，沒有就不會<input ng-model="aaasss"  />  
+					
 					<p>欄位=======================================</p>
 					<p>Valid: {{myForm.myAddress2.$valid}} (if true, the value meets all criteria，符不符合驗証).
 					<br>invalid: {{myForm.myAddress2.$invalid}}和上面相反
