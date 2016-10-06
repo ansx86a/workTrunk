@@ -9,6 +9,7 @@ import model.Employee;
 import model.input.MyInput;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.session.RowBounds;
 
 public interface CustomerMapperExt extends CustomerMapper {
 
@@ -62,4 +63,9 @@ public interface CustomerMapperExt extends CustomerMapper {
 	int 多種db支援2();
 
 	List<HashMap> 預存程序帶參數的Select(HashMap c);
+
+	List<HashMap> 邏輯分頁(RowBounds rowBounds, HashMap c);
+
+//	List<HashMap> 物理分頁(PageBounds pageBound, HashMap c);
+
 }

@@ -26,11 +26,10 @@ public class Java6beforeEx {
 		}
 	};
 
-
 	public static void main(String[] args) throws Exception {
 		Java6beforeEx j = new Java6beforeEx();
-		System.out.println(j.匿名加內容的List);
-		
+		System.out.println("匿名add List內容：" + j.匿名加內容的List);
+
 		j.$1靜態導入();
 		j.$2printf();
 		j.$3邊界和浮點誤差();
@@ -39,7 +38,7 @@ public class Java6beforeEx {
 		// new Scanner(System.in) while(.nextInt()!=0)，用來玩輸入選擇題用的
 		// interface中 [public abstract] void method(); ，中括號的東西可以被省略
 		// 判斷is a 的時候用
-		System.out.println("xxx" instanceof String);// true
+		System.out.println("字串 instanceof String："+("xxx" instanceof String));// true
 		// properties的測試
 		propertiesTest();
 		// finally的測試
@@ -50,14 +49,19 @@ public class Java6beforeEx {
 
 	public void $1靜態導入() {
 		// 靜態導入，參看最上面
-		System.out.println(abs(-987));// 987
+		System.out.println("靜態導入 abs(-987)=" + abs(-987));// 987
 	}
 
 	public void $2printf() {
+		// 可以參考這裡，很詳細 http://blog.csdn.net/lonely_fireworks/article/details/7962171
 		// printf範列
 		System.out.println("十進整%d,十進浮%.2f,科學%.2e,八進%o,16進%x%h,換行%n字串%s,char%C%c,布林%b有值為%b");
-		System.out.printf("十進整%d,十進浮%.2f,科學%.2e,八進%o,16進%x%h,換行%n字串%s,char%C%c,布林%b有值為%b", 077, 21.23456, 3210.234,
+		System.out.printf("十進整%d,十進浮%.2f,科學%.2e,八進%o,16進%x%h,換行%n字串%s,char%C%c,布林%b有值為%b\r\n", 077, 21.23456, 3210.234,
 				123, 123, 123, 123, 'a', 97, false, "false");// 十進整63,十進浮21.23,科學3.21e+03,八進173,16進7b7b,換行//字串123,charAa,布林false有值為true
+		System.out.printf("printf 左靠|%-5s|%-5d|\r\n", 20, 20);
+		System.out.printf("printf 數字補0|%05d|\r\n", 20);
+		System.out.printf("printf 16進制補0|%02x|\r\n", 11);
+
 	}
 
 	public void $3邊界和浮點誤差() {
@@ -66,9 +70,9 @@ public class Java6beforeEx {
 		// 沒有溢位的exception
 		int a = Integer.MAX_VALUE;
 		a++;
-		System.out.println(a);// -2147483648
+		System.out.println("int溢位：" + a);// -2147483648
 		// double會有誤差，不好用來算錢，雖然誤差很小
-		System.out.println("" + (1.0 - 0.8));// 0.19999999999999996
+		System.out.println("浮點數誤差1.0-0.8：" + (1.0 - 0.8));// 0.19999999999999996
 	}
 
 	public void $4泛型類別() {
@@ -80,7 +84,7 @@ public class Java6beforeEx {
 	}
 
 	public void $5不定參數(int a, String b, int... c) {
-		System.out.println(b + Arrays.toString(c));
+		System.out.println("不定參數(int a, String b, int... c)" + b + Arrays.toString(c));
 	}
 
 	private static void tryLog() {
@@ -94,13 +98,14 @@ public class Java6beforeEx {
 	}
 
 	private static void propertiesTest() throws Exception {
+		System.out.println("properties的應用==========================");
 		Properties ps = new Properties();
 		ps.setProperty("key1", "value1\r\n有換行耶\t有跳脫鍵");
 		ps.setProperty("key2", "value2");
 		StringWriter sw = new StringWriter();
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		ps.store(sw, "comments string");
-		ps.storeToXML(out, "comments xml");
+		ps.store(sw, "comments string 序列化的時候可以加一行註解");
+		ps.storeToXML(out, "comments xml序列化的時候可以加一行註解");
 		// 可以寫出string 也可以寫出xml
 		sw.flush();
 		sw.close();
@@ -115,14 +120,14 @@ public class Java6beforeEx {
 
 		ps = new Properties();
 		ps.load(new StringReader(sw.toString()));
-		System.out.println(ps.getProperty("key1"));// value1
+		System.out.println("讀取properties的值，驗証\\字元的功能："+ps.getProperty("key1"));// value1
 
 	}
 
 	private static void trytryFinally() {
 
 		try {
-			System.out.println("start try");
+			System.out.println("start try==================");
 			return;
 		} finally {
 			System.out.println("就算在try或catch return，也會跑finally");

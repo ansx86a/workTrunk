@@ -23,6 +23,7 @@
 		select *
 		from
 		customers
+		order by customerid
 	</select>
 	<resultMap id="carResult" type="java.util.HashMap"
 		autoMapping="false">
@@ -161,5 +162,17 @@
 	<select id="預存程序帶參數的Select" resultType="map" statementType="CALLABLE">
 		<!-- EXEC [SalesByCategory] @CategoryName = #{參數1} -->
 		EXEC [SalesByCategory] #{參數1}
+	</select>
+	<!-- 邏輯分頁=========================================================================== -->
+	<select id="邏輯分頁" resultType="map">
+		select * from customers where
+		companyname like #{keyword}
+		order by companyname
+	</select>
+	<!-- 物理分頁=========================================================================== -->
+	<select id="物理分頁" resultType="map">
+		select * from customers where
+		companyname like #{keyword}
+		order by companyname
 	</select>
 </mapper>

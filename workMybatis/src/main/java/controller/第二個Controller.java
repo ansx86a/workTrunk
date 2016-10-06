@@ -133,4 +133,22 @@ public class 第二個Controller {
 		System.out.println("myTest");
 		return "/jsp/test2.jsp";
 	}
+	
+	@RequestMapping(value = "/test034.mvc", method = RequestMethod.GET)
+	public String test034(HttpServletRequest request, HttpServletResponse response) {
+		ThreadLocalUtils.setRequest(request);
+		service.邏輯分頁();
+		request.setAttribute("test", "邏輯分頁");
+		System.out.println("myTest");
+		return "/jsp/test2.jsp";
+	}
+	
+	@RequestMapping(value = "/test035.mvc", method = RequestMethod.GET)
+	public String test035(HttpServletRequest request, HttpServletResponse response) {
+		ThreadLocalUtils.setRequest(request);
+		service.物理分頁();
+		request.setAttribute("test", "物理分頁");
+		System.out.println("myTest");
+		return "/jsp/test2.jsp";
+	}
 }

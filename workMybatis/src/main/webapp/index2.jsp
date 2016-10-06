@@ -22,8 +22,8 @@
 <a href="http://127.0.0.1:8080/workMybatis/test032.mvc">測試交易</a><br>
 
 <a href="http://127.0.0.1:8080/workMybatis/test033.mvc">預存程序帶參數的Select</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test034.mvc">34</a><br>
-<a href="http://127.0.0.1:8080/workMybatis/test035.mvc">35</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test034.mvc">邏輯分頁</a><br>
+<a href="http://127.0.0.1:8080/workMybatis/test035.mvc">物理分頁</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test036.mvc">36</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test037.mvc">37</a><br>
 <a href="http://127.0.0.1:8080/workMybatis/test038.mvc">38</a><br>

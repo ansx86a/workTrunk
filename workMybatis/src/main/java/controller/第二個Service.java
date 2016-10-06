@@ -7,11 +7,15 @@ import java.util.List;
 import model.Customer;
 import model.input.MyInput;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import tool.ThreadLocalUtils;
+
+import com.github.pagehelper.PageHelper;
+
 import dao.CustomerMapperExt;
 
 @Service
@@ -26,7 +30,8 @@ public class 第二個Service {
 		System.out.println(list.get(0));
 		System.out.println(list.get(1));
 		System.out.println(list.get(2));
-		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list.get(1) + "<br>" + list.get(2) + "<br>");
+		ThreadLocalUtils.getRequest().setAttribute("test2",
+				list.get(0) + "<br>" + list.get(1) + "<br>" + list.get(2) + "<br>");
 	}
 
 	public void 動態sqlIf() {
@@ -57,7 +62,8 @@ public class 第二個Service {
 		c2.setFax("百分比");
 		List<HashMap> list2 = customerMapperExt.動態sqlCaseWhen(c2);
 		System.out.println(list2.get(0));
-		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0) + "<br>" + list2.get(0) + "<br>" + list3.get(0));
+		ThreadLocalUtils.getRequest()
+				.setAttribute("test2", list.get(0) + "<br>" + list2.get(0) + "<br>" + list3.get(0));
 	}
 
 	public void 動態sqlIf去化where1等於1() {
@@ -158,4 +164,43 @@ public class 第二個Service {
 		ThreadLocalUtils.getRequest().setAttribute("test2", list.get(0));
 	}
 
+	public void 邏輯分頁() {
+		// 第幾筆開始，捉幾筆
+		RowBounds r = new RowBounds(3, 5);// 第index 3(第4筆)筆開始捉5筆
+		// 注意，如果導入了物理分頁，這裡會變成第3頁(因為plugin設了offsetAsPageNum)，每頁5筆，另外物理分頁都必須要有order by 怪怪
+		// 另外如果用spring導入plugin(因為plugin沒設了offsetAsPageNum)，就又回復正常的第index 3(第4筆)筆開始捉5筆
+
+		HashMap<String, String> map = new HashMap<>();
+		map.put("keyword", "%a%");
+		List<HashMap> result = customerMapperExt.邏輯分頁(r, map);
+		System.out.println(result);
+		StringBuffer html = new StringBuffer();
+		result.forEach(o -> {
+			System.out.println(o);
+			html.append("" + o + "<br>");
+		});
+		ThreadLocalUtils.getRequest().setAttribute("test2", html.toString());
+	}
+
+	public void 物理分頁() {
+		// 物理分頁的方法1是直接套用本來的RowBounds，就會從邏輯分頁變成物理分頁，但是變數代表的意義會變，而且一定要加order by
+		// 方法2就是加入靜態呼叫，我反極不太喜歡這種用法，我會怕同步的問題
+		PageHelper.startPage(1, 5);
+		List<HashMap> result = customerMapperExt.caseWhen的應用();
+		// 注意一般的hashmap會多一個序號的值，但是resultmap有封裝成物件，就會失去序號值
+		System.out.println(result);
+		StringBuffer html = new StringBuffer();
+		result.forEach(o -> {
+			System.out.println(o);
+			html.append("" + o + "<br>");
+		});
+		// 注PageInfo 可以把result的包起來wrap成一個另外使用的物件，類似 page.isHasNextPage()等方式可以用，不太考慮用
+		ThreadLocalUtils.getRequest().setAttribute("test2", html.toString());
+	}
+
+	public void testPager() {
+		// http://www.hifreud.com/2015/03/06/mybatis-7-Pagination/
+
+		// https://github.com/miemiedev/mybatis-paginator
+	}
 }
