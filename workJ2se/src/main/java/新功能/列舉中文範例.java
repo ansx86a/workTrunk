@@ -1,5 +1,9 @@
 package 新功能;
 
+import java.util.List;
+
+import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 public class 列舉中文範例 {
@@ -25,10 +29,32 @@ public class 列舉中文範例 {
 		throw new RuntimeException("not this enum value - " + value);
 	}
 
+	public static <T extends Enum> T 取得列舉用字串(Class<T> classOfT, String value) {
+		List<T> list = EnumUtils.getEnumList(classOfT);
+		for (T t : list) {
+			if (StringUtils.equals(t.toString(), value)) {
+				return t;
+			}
+		}
+		return null;
+	}
+
 	public static void main(String... arg) {
-		System.out.println(FN_TYPE.$新增);
 		FN_TYPE f = getEnumValue(FN_TYPE.class, "D");
+		System.out.println(f + "--" + f.name());
+		f = 取得列舉用字串(FN_TYPE.class, "X");
+		System.out.println(f + "--" + f.name());
+		System.out.println(取得列舉用字串(FN_TYPE2.class, "$刪除"));
+		System.out.println("取得列舉List====================================");
+		System.out.println(EnumUtils.getEnumList(FN_TYPE.class));
+		System.out.println(EnumUtils.getEnumList(FN_TYPE2.class));
+		System.out.println("由列舉的名稱取出列舉的值====================================");
+		f = EnumUtils.getEnum(FN_TYPE.class, "$新增");
 		System.out.println(f);
+		System.out.println(f.name());
+		FN_TYPE2 f2 = EnumUtils.getEnum(FN_TYPE2.class, "$新增");
+		System.out.println(f2);
+
 	}
 
 	/**
@@ -52,5 +78,9 @@ public class 列舉中文範例 {
 		public String toString() {
 			return value;
 		}
+	}
+
+	public enum FN_TYPE2 {
+		$新增, $刪除, $變更, $查詢, $報表, $匯出下載, $列印, $登入, $登出;
 	}
 }
