@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="db.ISqlDao">
+	<select id="test" resultType="int">
+		select 100
+	</select>
+	<select id="撈取moePost資料" resultType="map">
+		select * from moePool
+		<where>
+			<if test="postid != null">and postid = #{postid,jdbcType=INTEGER}	</if>
+			<if test="title1 != null">and title1 = #{title1,jdbcType=NVARCHAR}</if>
+			<if test="title2 != null">and title2 = #{title2,jdbcType=NVARCHAR}</if>
+			<if test="url != null">and url = #{url,jdbcType=NVARCHAR}</if>
+			<if test="absurl != null">and absurl = #{absurl,jdbcType=NVARCHAR}</if>
+			<if test="file_path != null">and file_path =#{file_path,jdbcType=NVARCHAR}</if>
+		</where>
+	</select>
+
+	<insert id="新增一筆moePost資料" parameterType="map">
+		insert into moePool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="postid != null"> postid,</if>
+			<if test="title1 != null">title1,</if>
+			<if test="title2 != null">title2,</if>
+			<if test="url != null">url,</if>
+			<if test="absurl != null">absurl,</if>
+			<if test="file_path != null">file_path,</if>
+			<if test="download != null">download,</if>
+			<if test="absdownload != null">absdownload,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="postid != null"> #{postid,jdbcType=INTEGER},	</if>
+			<if test="title1 != null">#{title1,jdbcType=NVARCHAR},	</if>
+			<if test="title2 != null">#{title2,jdbcType=NVARCHAR},	</if>
+			<if test="url != null">#{url,jdbcType=NVARCHAR},</if>
+			<if test="absurl != null"> #{absurl,jdbcType=NVARCHAR},</if>
+			<if test="file_path != null">#{file_path,jdbcType=NVARCHAR},</if>
+			<if test="download != null">#{download,jdbcType=NVARCHAR},</if>
+			<if test="absdownload != null">#{absdownload,jdbcType=NVARCHAR},</if>
+		</trim>
+	</insert>
+
+	<insert id="新增一筆紳士comic資料" parameterType="map">
+		insert into hcomicPool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="comicid != null"> comicid,</if>
+			<if test="title1 != null">title1,</if>
+			<if test="url != null">url,</if>
+			<if test="absurl != null">absurl,</if>
+			<if test="file_path != null">file_path,</if>
+			<if test="absdownload != null">absdownload,</if>
+			<if test="type != null">type,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="comicid != null"> #{comicid,jdbcType=INTEGER},	</if>
+			<if test="title1 != null">#{title1,jdbcType=NVARCHAR},	</if>
+			<if test="url != null">#{url,jdbcType=NVARCHAR},</if>
+			<if test="absurl != null"> #{absurl,jdbcType=NVARCHAR},</if>
+			<if test="file_path != null">#{file_path,jdbcType=NVARCHAR},</if>
+			<if test="absdownload != null">#{absdownload,jdbcType=NVARCHAR},</if>
+			<if test="type != null">#{type,jdbcType=NVARCHAR},</if>
+		</trim>
+	</insert>
+	<select id="撈取紳士comic資料" resultType="map">
+		select * from hcomicPool
+		<where>
+			<if test="comicid != null">and comicid = #{comicid,jdbcType=INTEGER}</if>
+			<if test="title1 != null">and title1 = #{title1,jdbcType=NVARCHAR}</if>
+			<if test="url != null">and url = #{url,jdbcType=NVARCHAR}</if>
+			<if test="absurl != null">and absurl = #{absurl,jdbcType=NVARCHAR}</if>
+			<if test="file_path != null">and file_path =#{file_path,jdbcType=NVARCHAR}</if>
+			<if test="downloaded != null">and downloaded =#{downloaded,jdbcType=INTEGER}</if>
+			<if test="type != null">and type =#{type,jdbcType=NVARCHAR}</if>
+		</where>
+	</select>
+
+	<update id="更新紳士comic資料">
+		update hcomicPool
+		<set>
+			<if test="title1 != null">title1 = #{title1,jdbcType=NVARCHAR},</if>
+			<if test="url != null">url = #{url,jdbcType=NVARCHAR},</if>
+			<if test="absurl != null">absurl = #{absurl,jdbcType=NVARCHAR},</if>
+			<if test="file_path != null">file_path =#{file_path,jdbcType=NVARCHAR},</if>
+			<if test="downloaded != null">downloaded =#{downloaded,jdbcType=INTEGER},</if>
+			<if test="type != null">type =#{type,jdbcType=NVARCHAR},</if>
+		</set>
+		where comicid=#{comicid}
+	</update>
+
+	<select id="撈取ex資料" resultType="map">
+		select * from exPool
+		<where>
+			<if test="exid != null">and exid = #{exid,jdbcType=INTEGER}</if>
+			<if test="title1 != null">and title1 = #{title1,jdbcType=NVARCHAR}</if>
+			<if test="url != null">and url = #{url,jdbcType=NVARCHAR}</if>
+			<if test="downloaded != null">and downloaded =#{downloaded,jdbcType=INTEGER}</if>
+			<if test="looked != null">and looked =#{looked,jdbcType=INTEGER}</if>
+		</where>
+	</select>
+	<insert id="新增一筆ex資料" parameterType="map">
+		insert into exPool
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="exid != null"> exid,</if>
+			<if test="title1 != null">title1,</if>
+			<if test="url != null">url,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="exid != null"> #{exid,jdbcType=INTEGER},	</if>
+			<if test="title1 != null">#{title1,jdbcType=NVARCHAR},	</if>
+			<if test="url != null">#{url,jdbcType=NVARCHAR},</if>
+		</trim>
+	</insert>
+	<update id="更新ex資料">
+		update exPool
+		<set>
+			<if test="title1 != null">title1 = #{title1,jdbcType=NVARCHAR},</if>
+			<if test="url != null">url = #{url,jdbcType=NVARCHAR},</if>
+			<if test="downloaded != null">downloaded =#{downloaded,jdbcType=INTEGER},</if>
+			<if test="looked != null">looked =#{looked,jdbcType=NVARCHAR},</if>
+		</set>
+		where exid=#{exid}
+	</update>
+</mapper>

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/*顏色===================================*/
+/*大小===================================*/
+/* 有*的註解會出現 */
+a {
+  color: #888777; }
+
+/* method的宣告要放前面 */
+/* 這裡是由呼叫method產出的 */
+.我的87顏色 {
+  background-color: #888777;
+  padding: "14px"; }
+
+/* 巢狀的寫法css的排版會有點問題，可以手動再用css format */
+.container {
+  width: 1170px;
+  margin: 0 auto; }
+  .container .文章 {
+    border: solid 1px #ccc;
+    padding: 10px; }
+    .container .文章 .文章內容 {
+      background: #eee;
+      font-size: 12px;
+      padding: 10px; }
+      .container .文章 .文章內容 p, .container .文章 .文章內容 h1 {
+        color: #333; }
+
+/*繼承*/
+h1 {
+  color: #888777; }

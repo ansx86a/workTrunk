@@ -20,12 +20,16 @@ public class Lambda整理 {
 	// good:http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
 	// https://www.oreilly.com/learning/java-8-functional-interfaces
 	public static void main(String[] args) {
+		// 迴圈寫法，先記一下IntStream.range(0, 10).parallel().forEach
+		// 設定可並行的管線數目，設x就程示同時跑x+1個，不用參數的話要研究ForkJoinPool，太麻煩了
+		// System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "2");
+
 		Lambda整理 l = new Lambda整理();
 		l.$8轉成map或list();
-		
-		//要管線作業不可缺的東西
-		//IntStream.range(1, 4)
-		
+
+		// 要管線作業不可缺的東西
+		// IntStream.range(1, 4)
+
 	}
 
 	public void $1無參數寫法() {
