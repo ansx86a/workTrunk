@@ -1,44 +1,5 @@
-﻿@import "myVar";
+﻿@import "mycss/myVar";//先匯入變數
+@import "mycss/mixin";//再匯入function
 
-/* 有*的註解會出現 */// ／／註解不會出現喔
-a {
-  color: $我的87顏色;
-}
-
-/* method的宣告要放前面 */
-@mixin myp($color, $size) {
-  background-color: $color;
-  padding: $size;
-}
-
-/* 這裡是由呼叫method產出的 */
-.我的87顏色 {
-  @include myp($我的87顏色, "14px");
-}
-
-/* 巢狀的寫法css的排版會有點問題，可以手動再用css format */
-.container {
-  width: 1170px;
-  margin: 0 auto;
-
-  .文章 {
-    border: solid 1px #ccc;
-    padding: 10px;
-
-    .文章內容 {
-      background: #eee;
-      font-size: 12px;
-      padding: 10px;
-
-      p {
-        color: #333;
-      }
-    }
-  }
-}
-
-/*繼承*/
-h1 {
-  @extend p;
-  color: $我的87顏色;
-}
+// Core CSS
+@import "mycss/test";//測試用的
