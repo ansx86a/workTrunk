@@ -1,10 +1,8 @@
 @charset "UTF-8";
+/**全域變數*/
 /*顏色===================================*/
 /*大小===================================*/
 /* 有*的註解會出現 */
-a {
-  color: #888777; }
-
 /* method的宣告要放前面 */
 /* 這裡是由呼叫method產出的 */
 .我的87顏色 {
@@ -28,3 +26,35 @@ a {
 /*繼承*/
 h1 {
   color: #888777; }
+
+/**背景相關的樣式======================================================*/
+.灰色背景 {
+  /*transparent 透明，#00ff00，rgb(250,0,255)*/
+  background-color: gray;
+  padding: 20px; }
+
+/**圖片用相對路徑，如要共用的話，要加個變數存專案名字，再放到url中*/
+.圖片背景, .圖片背景x, .圖片背景y, .圖片背景不repeat, .圖片背景放右上角 {
+  background-image: url("/workJavaScript/css/g.png");
+  padding: 60px; }
+
+.圖片背景x {
+  background-repeat: repeat-x; }
+
+.圖片背景y {
+  background-repeat: repeat-y; }
+
+.圖片背景不repeat, .圖片背景放右上角 {
+  background-color: gray;
+  background-repeat: no-repeat;
+  background-position: center; }
+
+.圖片背景放右上角 {
+  background-color: aqua;
+  background-position: 66% 5%;
+  /* background-position:50px 100px;//用像素定位 */
+  /* background-attachment:fixed;	//背景图像是否固定或者随着页面的其余部分滚动。*/ }
+
+/*本文相關的樣式=========================================*/
+.開頭縮排 {
+  text-indent: 50px; }
