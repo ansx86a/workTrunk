@@ -1,15 +1,44 @@
 ﻿/**背景相關的樣式======================================================*/
 .灰色背景 {
+
 	/*transparent 透明，#00ff00，rgb(250,0,255)*/
 	background-color: gray;
-	padding: 20px;//加上一點點間距
-
+	padding: 20px;
+	//加上一點點間距
+}
+.淺藍色背景 {
+	background-color: powderblue;
+}
+.天空藍色背景 {
+	background-color: SkyBlue;
+}
+.巧克力色背景 {
+	background-color: Chocolate;
+}
+.暗海綠色背景 {
+	background-color: DarkSeaGreen;
+}
+.印第安紅色背景 {
+	background-color: IndianRed;
+}
+.淡粉紅色背景 {
+	background-color: LightPink;
+}
+.橘色背景 {
+	background-color: Orange;
+}
+.橘紅色背景 {
+	background-color: OrangeRed;
+}
+.銀色背景{
+	background-color: Silver;
 }
 
 /**圖片用相對路徑，如要共用的話，要加個變數存專案名字，再放到url中*/
 .圖片背景 {
 	background-image: url('/'+$專案名字+'/css/g.png');
-	padding: 60px;//加上一點點間距
+	padding: 60px;
+	//加上一點點間距
 }
 .圖片背景x {
 	@extend .圖片背景;
@@ -23,12 +52,15 @@
 	@extend .圖片背景;
 	background-color: gray;
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
 .圖片背景放右上角 {
 	@extend .圖片背景不repeat;
 	background-color: aqua;
-	background-position:66% 5%;//left 66%，top 5%
+	background-position: 66% 5%;
+	//left 66%，top 5%//也可能left top 不寫%數
+
 	/* background-position:50px 100px;//用像素定位 */
+
 	/* background-attachment:fixed;	//背景图像是否固定或者随着页面的其余部分滚动。*/
 }

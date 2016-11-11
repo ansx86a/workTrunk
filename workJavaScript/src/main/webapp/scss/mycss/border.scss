@@ -1,12 +1,87 @@
 ﻿/*邊框*/
-.點點邊框 {border-style: dotted;}
-.虛線邊框 {border-style: dashed;}
-.單線邊框 {border-style: solid;}
-.雙線邊框 {border-style: double;}
-.凹線邊框 {border-style: groove;}
-.凸線邊框 {border-style: ridge;}
-.嵌入邊框 {border-style: inset;}
-.浮出邊框 {border-style: outset;}
-.沒有邊框 {border-style: none;}
-.隱藏邊框 {border-style: hidden;}
-.複和邊框 {border-style: dotted dashed solid double;}
+.點點邊框 {
+	border-style: dotted;
+}
+.虛線邊框 {
+	border-style: dashed;
+}
+.單線邊框 {
+	border-style: solid;
+}
+.雙線邊框 {
+	border-style: double;
+}
+.凹線邊框 {
+	border-style: groove;
+}
+.凸線邊框 {
+	border-style: ridge;
+}
+.嵌入邊框 {
+	border-style: inset;
+}
+.浮出邊框 {
+	border-style: outset;
+}
+.沒有邊框 {
+	border-style: none;
+}
+.隱藏邊框 {
+	border-style: hidden;
+}
+.複和邊框 {
+	border-style: dotted dashed solid double;
+}
+.複和邊框2 {
+	border-top-style: dotted;
+	border-right-style: solid;
+	border-bottom-style: dotted;
+	border-left-style: solid;
+}
+.不同邊粗顏色的邊框 {
+	border-style: solid;
+	border-width: 2px 4px 6px 8px;
+	//border-width: medium;
+	border-color: red green blue yellow;
+}
+.圓角邊框 {
+	border: 2px solid red;
+	border-radius: 12px;
+}
+.外圍線 {
+	border: 1px solid blue;
+	outline-color: red;
+	outline-width: 5px;
+}
+.點點外圍線 {
+	@extend .外圍線;
+	outline-style: dotted;
+}
+.虛線外圍線 {
+	@extend .外圍線;
+	outline-style: dashed;
+}
+.單線外圍線 {
+	@extend .外圍線;
+	outline-style: solid;
+}
+.雙線外圍線 {
+	@extend .外圍線;
+	outline-style: double;
+}
+.凹線外圍線 {
+	@extend .外圍線;
+	outline-style: groove;
+}
+.凸線外圍線 {
+	@extend .外圍線;
+	outline-style: ridge;
+}
+.嵌入外圍線 {
+	@extend .外圍線;
+	outline-style: inset;
+}
+.浮出外圍線 {
+	@extend .外圍線;
+	outline-style: outset;
+}

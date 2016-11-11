@@ -33,6 +33,33 @@ h1 {
   background-color: gray;
   padding: 20px; }
 
+.淺藍色背景 {
+  background-color: powderblue; }
+
+.天空藍色背景 {
+  background-color: SkyBlue; }
+
+.巧克力色背景 {
+  background-color: Chocolate; }
+
+.暗海綠色背景 {
+  background-color: DarkSeaGreen; }
+
+.印第安紅色背景 {
+  background-color: IndianRed; }
+
+.淡粉紅色背景 {
+  background-color: LightPink; }
+
+.橘色背景 {
+  background-color: Orange; }
+
+.橘紅色背景 {
+  background-color: OrangeRed; }
+
+.銀色背景 {
+  background-color: Silver; }
+
 /**圖片用相對路徑，如要共用的話，要加個變數存專案名字，再放到url中*/
 .圖片背景, .圖片背景x, .圖片背景y, .圖片背景不repeat, .圖片背景放右上角 {
   background-image: url("/workJavaScript/css/g.png");
@@ -56,5 +83,212 @@ h1 {
   /* background-attachment:fixed;	//背景图像是否固定或者随着页面的其余部分滚动。*/ }
 
 /*本文相關的樣式=========================================*/
+.紅色本文 {
+  color: red; }
+
+.綠色本文 {
+  color: green; }
+
+.藍色本文 {
+  color: blue; }
+
+.橘色本文 {
+  color: Orange; }
+
+.置中本文 {
+  text-align: center; }
+
+.左靠本文 {
+  text-align: left; }
+
+.右靠本文 {
+  text-align: right; }
+
+.右靠本文2 {
+  direction: rtl; }
+
+.上底線本文 {
+  text-decoration: overline; }
+
+.刪除線本文 {
+  text-decoration: line-through; }
+
+.底線本文 {
+  text-decoration: underline; }
+
+.無底線本文 {
+  text-decoration: none; }
+
+.陰影本文 {
+  text-shadow: 2px 2px aqua; }
+
+.轉大寫 {
+  text-transform: uppercase; }
+
+.轉小寫 {
+  text-transform: lowercase; }
+
+.單字首字轉大寫 {
+  text-transform: capitalize; }
+
+.反向本文 {
+  direction: rtl;
+  unicode-bidi: bidi-override; }
+
 .開頭縮排 {
   text-indent: 50px; }
+
+.不換行的本文 {
+  white-space: nowrap; }
+
+.增加字母字距 {
+  letter-spacing: 3px; }
+
+.減少字母字距 {
+  letter-spacing: -2px; }
+
+.增加行高 {
+  line-height: 1.8; }
+
+.減小行高 {
+  line-height: 0.75; }
+
+.增加單字字距 {
+  word-spacing: 10px; }
+
+.減少單字字距 {
+  word-spacing: -5px; }
+
+.頂端對齊本文 {
+  /* baseline|length|sub|super|top|text-top|middle|bottom|text-bottom|initial|inherit;
+  */
+  vertical-align: text-top; }
+
+.底部對齊本文 {
+  vertical-align: text-bottom; }
+
+/*邊框*/
+.點點邊框 {
+  border-style: dotted; }
+
+.虛線邊框 {
+  border-style: dashed; }
+
+.單線邊框 {
+  border-style: solid; }
+
+.雙線邊框 {
+  border-style: double; }
+
+.凹線邊框 {
+  border-style: groove; }
+
+.凸線邊框 {
+  border-style: ridge; }
+
+.嵌入邊框 {
+  border-style: inset; }
+
+.浮出邊框 {
+  border-style: outset; }
+
+.沒有邊框 {
+  border-style: none; }
+
+.隱藏邊框 {
+  border-style: hidden; }
+
+.複和邊框 {
+  border-style: dotted dashed solid double; }
+
+.複和邊框2 {
+  border-top-style: dotted;
+  border-right-style: solid;
+  border-bottom-style: dotted;
+  border-left-style: solid; }
+
+.不同邊粗顏色的邊框 {
+  border-style: solid;
+  border-width: 2px 4px 6px 8px;
+  border-color: red green blue yellow; }
+
+.圓角邊框 {
+  border: 2px solid red;
+  border-radius: 12px; }
+
+.外圍線, .點點外圍線, .虛線外圍線, .單線外圍線, .雙線外圍線, .凹線外圍線, .凸線外圍線, .嵌入外圍線, .浮出外圍線 {
+  border: 1px solid blue;
+  outline-color: red;
+  outline-width: 5px; }
+
+.點點外圍線 {
+  outline-style: dotted; }
+
+.虛線外圍線 {
+  outline-style: dashed; }
+
+.單線外圍線 {
+  outline-style: solid; }
+
+.雙線外圍線 {
+  outline-style: double; }
+
+.凹線外圍線 {
+  outline-style: groove; }
+
+.凸線外圍線 {
+  outline-style: ridge; }
+
+.嵌入外圍線 {
+  outline-style: inset; }
+
+.浮出外圍線 {
+  outline-style: outset; }
+
+/**和佈挶切版扯得上邊的就放到這裡*/
+.用外距置中 {
+  margin: auto; }
+
+.四邊不同外距 {
+  margin: 10px 15px 10px 10px; }
+
+.四邊不同外距2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 15px;
+  margin-left: 20px; }
+
+.繼承外距 {
+  margin: inherit; }
+
+.四邊不同內距 {
+  padding: 5px; }
+
+.四邊不同內距2 {
+  padding-top: 5px;
+  padding-right: 3px;
+  padding-bottom: 5px;
+  padding-left: 8px; }
+
+.繼承內距 {
+  padding: inherit; }
+
+.一半寬度 {
+  width: 50%; }
+
+.一半高度 {
+  height: 50%; }
+
+.最大寬度500像素 {
+  max-width: 500px;
+  min-width: 300px; }
+
+.最大高度500像素 {
+  max-height: 500px;
+  min-height: 500px; }
+
+.自動調整寬度 {
+  width: auto; }
+
+.自動調整高度 {
+  height: auto; }

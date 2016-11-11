@@ -1,4 +1,88 @@
 ﻿/*本文相關的樣式=========================================*/
-.開頭縮排{
-	text-indent: 50px;//縮排50個像素字
+.紅色本文 {
+	color: red;
+}
+.綠色本文 {
+	color: green;
+}
+.藍色本文 {
+	color: blue;
+}
+.橘色本文 {
+	color: Orange;
+}
+.置中本文 {
+	text-align: center;
+}
+.左靠本文 {
+	text-align: left;
+}
+.右靠本文 {
+	text-align: right;
+}
+.右靠本文2 {
+	direction: rtl;
+	//ltr|rtl|initial|inherit;
+}
+.上底線本文 {
+	text-decoration: overline;
+}
+.刪除線本文 {
+	text-decoration: line-through;
+}
+.底線本文 {
+	text-decoration: underline;
+}
+.無底線本文 {
+	text-decoration: none;
+}
+.陰影本文 {
+	text-shadow: 2px 2px aqua;
+}
+.轉大寫 {
+	text-transform: uppercase;
+}
+.轉小寫 {
+	text-transform: lowercase;
+}
+.單字首字轉大寫 {
+	text-transform: capitalize;
+}
+.反向本文 {
+    direction: rtl;
+	unicode-bidi: bidi-override;
+}
+.開頭縮排 {
+	text-indent: 50px;
+	//縮排50個像素字
+}
+.不換行的本文 {
+	//normal|nowrap|pre|pre-line|pre-wrap|initial|inherit;
+	white-space: nowrap;
+}
+.增加字母字距 {
+	letter-spacing: 3px;
+}
+.減少字母字距 {
+	letter-spacing: -2px;
+}
+.增加行高 {
+	line-height: 1.8;
+}
+.減小行高 {
+	line-height: 0.75;
+}
+.增加單字字距 {
+	word-spacing: 10px;
+}
+.減少單字字距 {
+	word-spacing: -5px;
+}
+.頂端對齊本文 {
+	/* baseline|length|sub|super|top|text-top|middle|bottom|text-bottom|initial|inherit;
+	*/
+	vertical-align: text-top;
+}
+.底部對齊本文 {
+	vertical-align: text-bottom;
 }
