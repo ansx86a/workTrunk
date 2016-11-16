@@ -167,6 +167,30 @@ h1 {
 .底部對齊本文 {
   vertical-align: text-bottom; }
 
+.正常字型 {
+  font-style: normal;
+  font-weight: normal; }
+
+.斜體字型 {
+  font-style: italic; }
+
+.斜體字型2 {
+  font-style: oblique; }
+
+.粗體字 {
+  font-weight: bold; }
+
+.大字型 {
+  font-size: 2.5em;
+  /* 40px/16=2.5em */ }
+
+.中字型 {
+  font-size: 0.875em;
+  /* 14px/16=0.875em */ }
+
+.特殊轉大寫 {
+  font-variant: small-caps; }
+
 /*邊框*/
 .點點邊框 {
   border-style: dotted; }
@@ -292,3 +316,112 @@ h1 {
 
 .自動調整高度 {
   height: auto; }
+
+/**連結 a 相關的樣式*/
+a.連結點選前綠色:link {
+  color: green; }
+
+a.連結點選後藍色:visited {
+  color: blue; }
+
+a.連結快點選時水色:hover {
+  color: aqua; }
+
+a.連結點選中紅色:active {
+  color: red; }
+
+a.連結點選前沒底線:link {
+  text-decoration: none;
+  background-color: yellow; }
+
+a.連結點選後沒底線:visited {
+  text-decoration: none;
+  background-color: gray; }
+
+a.連結快點選時有底線:hover {
+  text-decoration: underline;
+  background-color: aqua; }
+
+a.連結點選中有底線:active {
+  text-decoration: underline;
+  background-color: lightpink; }
+
+/**實作出一個長得像button的link*/
+a.連結按鈕:link, a.連結按鈕:visited, a.連結按鈕:hover, a.連結按鈕:active {
+  background-color: gray;
+  color: green;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 12px; }
+
+a.連結按鈕:hover, a.連結按鈕:active {
+  background-color: aqua; }
+
+/**ul ol 相關的樣式*/
+ul.空心圓型編號 {
+  list-style-type: circle; }
+
+ul.實心圓型編號 {
+  list-style-type: disc; }
+
+ul.方型編號 {
+  list-style-type: square; }
+
+ul.圖片編號 {
+  list-style-image: url("/workJavaScript/css/g.png"); }
+
+ol.羅馬數字編號 {
+  list-style-type: upper-roman; }
+
+ol.小寫英文編號 {
+  list-style-type: lower-alpha; }
+
+ol.大寫英文編號 {
+  list-style-type: upper-alpha; }
+
+ol.布臘編號 {
+  list-style-type: lower-greek; }
+
+ol.數字編號 {
+  list-style-type: decimal; }
+
+ol.中文數字編號 {
+  list-style-type: cjk-ideographic; }
+
+ol.數字編號補0 {
+  list-style-type: decimal-leading-zero; }
+
+ol.日文平假名五十音編號 {
+  list-style-type: hiragana; }
+
+ol.日文平假名伊呂波編號 {
+  list-style-type: hiragana-iroha; }
+
+ol.日文片假名五十音編號 {
+  list-style-type: katakana; }
+
+ol.日文片假名伊呂波編號 {
+  list-style-type: katakana-iroha; }
+
+ul.列表位置內縮, ol.列表位置內縮 {
+  list-style-position: inside; }
+
+ul.列表位置外擴, ol.列表位置外擴 {
+  list-style-position: outside; }
+
+ul.左邊有紅線 {
+  border-left: 5px solid red;
+  background-color: #f1f1f1;
+  list-style-type: none;
+  padding: 10px 20px; }
+
+ul.手機清單樣式 {
+  list-style-type: none;
+  padding: 0;
+  border: 1px dashed red; }
+
+ul.手機清單樣式 li {
+  padding: 8px 16px;
+  border-bottom: 1px solid aqua; }

@@ -86,3 +86,33 @@
 .底部對齊本文 {
 	vertical-align: text-bottom;
 }
+
+
+.正常字型 {
+    font-style: normal;
+	font-weight: normal;    
+}
+
+.斜體字型 {
+    font-style: italic;
+}
+
+.斜體字型2 {//支援度比較少，和上面的斜體字很像，少用吧
+    font-style: oblique;
+}
+.粗體字 {
+    font-weight: bold;//可填數字，ex:900，normal|bold|bolder|lighter|number|initial|inherit;
+}
+
+
+.大字型 {
+    font-size: 2.5em; /* 40px/16=2.5em */
+}
+
+.中字型 {
+    font-size: 0.875em; /* 14px/16=0.875em */
+}
+
+.特殊轉大寫 {
+    font-variant: small-caps;
+}

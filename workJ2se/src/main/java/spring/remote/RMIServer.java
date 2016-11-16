@@ -3,6 +3,7 @@ package spring.remote;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,6 +41,13 @@ public class RMIServer implements Irmi {
 	public int sayHowMach(int a, int b) {
 		System.out.println("client " + a + " - " + b);
 		return a + b;
+	}
+
+	@Override
+	public HashMap masterMethod(HashMap map) {
+		System.out.println(map);
+		map.put("output", "回傳結果");
+		return map;
 	}
 
 }

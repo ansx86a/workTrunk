@@ -1,0 +1,71 @@
+﻿/**ul ol 相關的樣式*/
+ul.空心圓型編號 {
+	list-style-type: circle;
+}
+ul.實心圓型編號 {
+	list-style-type: disc;
+}
+ul.方型編號 {
+	list-style-type: square;
+}
+ul.圖片編號 {
+	list-style-image: url('/'+$專案名字+'/css/g.png');
+}
+ol.羅馬數字編號 {
+	//另有小寫的編號，但我想用大寫的比較明顯，小寫只是upper變lower
+	list-style-type: upper-roman;
+}
+ol.小寫英文編號 {
+	list-style-type: lower-alpha;
+}
+ol.大寫英文編號 {
+	list-style-type: upper-alpha;
+}
+ol.布臘編號 {
+	list-style-type: lower-greek;
+}
+ol.數字編號 {
+	list-style-type: decimal;
+}
+ol.中文數字編號 {
+	list-style-type: cjk-ideographic;
+}
+ol.數字編號補0 {
+	list-style-type: decimal-leading-zero;
+}
+ol.日文平假名五十音編號 {
+	list-style-type: hiragana;
+}
+ol.日文平假名伊呂波編號 {
+	list-style-type: hiragana-iroha;
+}
+ol.日文片假名五十音編號 {
+	list-style-type: katakana;
+}
+ol.日文片假名伊呂波編號 {
+	list-style-type: katakana-iroha;
+}
+ul.列表位置內縮, ol.列表位置內縮 {
+	list-style-position: inside;
+}
+ul.列表位置外擴, ol.列表位置外擴 {
+	list-style-position: outside;
+}
+ul.左邊有紅線 {
+	border-left: 5px solid red;
+	background-color: #f1f1f1;
+	list-style-type: none;
+	padding: 10px 20px;
+}
+ul.手機清單樣式 {
+	list-style-type: none;
+	padding: 0;
+	border: 1px dashed red;
+}
+ul.手機清單樣式 li {
+	padding: 8px 16px;
+	border-bottom: 1px solid aqua;
+}
+ul.手機清單樣式 li:last-child {
+	//border-bottom: none
+}

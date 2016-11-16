@@ -1,0 +1,49 @@
+﻿/**連結 a 相關的樣式*/
+a.連結點選前綠色:link {
+	color: green;
+}
+a.連結點選後藍色:visited {
+	color: blue;
+}
+a.連結快點選時水色:hover {
+	color: aqua;
+}
+a.連結點選中紅色:active {
+	color: red;
+}
+a.連結點選前沒底線:link {
+	text-decoration: none;
+	background-color: yellow;
+}
+a.連結點選後沒底線:visited {
+	text-decoration: none;
+	background-color: gray;
+}
+a.連結快點選時有底線:hover {
+	text-decoration: underline;
+	background-color: aqua;
+}
+a.連結點選中有底線:active {
+	text-decoration: underline;
+	background-color: lightpink;
+}
+/**實作出一個長得像button的link*/
+a.連結按鈕:link {
+	background-color: gray;
+	color: green;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 12px;
+}
+a.連結按鈕:visited {
+	@extend a.連結按鈕:link;
+}
+a.連結按鈕:hover {
+	@extend a.連結按鈕:link;
+	background-color: aqua;
+}
+a.連結按鈕:active  {
+	@extend a.連結按鈕:hover;
+}
