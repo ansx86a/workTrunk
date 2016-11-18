@@ -1,0 +1,34 @@
+﻿/*表格*/
+table.普通的表格線框, table.普通的表格線框 th, table.普通的表格線框 td {
+	//width: 95%;
+	text-align: right;
+	vertical-align: bottom;
+	border: 1px solid red;
+	//background-color: skyblue;
+	//border-style: solid;
+	//border-bottom: 1px solid #ddd;
+	//border-color: #ff0000 #0000ff;
+	//border-color: color|transparent|initial|inherit;
+	//border-spacing: 10px;
+	//border雙線之間的間隔變大，沒什麼屁用的感覺
+	empty-cells: hide;
+	//empty-cells: show|hide|initial|inherit;
+	//table-layout: auto|fixed|initial|inherit;
+	//設成fix的話，就會像excel最後一格一樣有資料跑出表格外的情況出現
+}
+table.單線的表格線框, table.單線的表格線框 th, table.單線的表格線框 td {
+	@extend table.普通的表格線框;
+	border-collapse: collapse;
+	//border-collapse: separate|collapse|initial|inherit;
+}
+
+table.標題放到下方 {
+	caption-side: bottom;
+	//caption-side: top|bottom|initial|inherit;
+}
+table.跨在上方變色 td:hover {
+	background-color: aqua;
+}
+table.單數列變色 tr:nth-child(even) {
+	background-color: pink;
+}

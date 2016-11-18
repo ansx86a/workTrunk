@@ -27,24 +27,85 @@
 .繼承內距 {
 	padding: inherit;
 }
-
-.一半寬度{
-	 width: 50%;
+.一半寬度 {
+	width: 50%;
 }
-.一半高度{
-	 height: 50%;
+.一半高度 {
+	height: 50%;
 }
-.最大寬度500像素{
-	 max-width: 500px;
-	 min-width: 300px;
+.最大寬度500像素 {
+	max-width: 500px;
+	min-width: 300px;
 }
-.最大高度500像素{
-	 max-height: 500px;
-	 min-height: 500px;
+.最大高度500像素 {
+	max-height: 500px;
+	min-height: 500px;
 }
-.自動調整寬度{
-	 width: auto;
+.自動調整寬度 {
+	width: auto;
 }
-.自動調整高度{
-	 height: auto;
+.自動調整高度 {
+	height: auto;
+}
+.行內顯示 {
+	display: inline;
+}
+.區塊顯示 {
+	display: block;
+}
+.不佔位隱藏 {
+	display: none;
+}
+.佔位隱藏 {
+	visibility: hidden;
+	//visibility: visible|hidden|collapse|initial|inherit;
+	//collapse好像是用來隱藏table用的，也可以用在tr和td上面，應該用display就夠了
+}
+.元素預設位置 {
+	//由瀏覽器去排，定位偏移好像也沒用
+	position: static;
+	border-width: 3px;
+}
+.元素位置加偏移並重新定位子容器 {
+	position: relative;
+	left: 100px;
+	border-width: 3px;
+}
+.元素相對於視窗畫面的位置 {
+	position: fixed;
+	bottom: 10px;
+	right: 100px;
+	width: 300px;
+	border-width: 3px;
+}
+.元素的絕對位置 {
+	//如果父容器是relative，就以父容器定位
+	position: absolute;
+	left: 70px;
+	Top: 70px;
+	width: 200px;
+	height: 100px;
+	border-width: 3px;
+}
+.顯示超出的部分 {
+	overflow: visible;
+}
+.隱藏超出的部分 {
+	overflow: hidden;
+}
+.超出的部分可捲動 {
+	overflow: scroll;
+}
+.超出的部分自動判斷可捲動 {
+	overflow: auto;
+}
+.超出的部分可水平捲動 {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	//可visible、hidden、auto
+}
+.超出的部分可垂直捲動 {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	//可visible、hidden、auto
 }
