@@ -69,3 +69,9 @@ ul.手機清單樣式 li {
 ul.手機清單樣式 li:last-child {
 	//border-bottom: none
 }
+ul.選單樣式 {
+	list-style-type: none;
+}
+ul.選單樣式 li {
+	float: left;
+}

@@ -385,6 +385,21 @@ h1 {
   overflow-y: scroll;
   overflow-x: hidden; }
 
+.左邊的文遶圖 {
+  float: left; }
+
+.右邊的文遶圖 {
+  float: right; }
+
+.結束左邊的文遶圖 {
+  clear: left; }
+
+.結束右邊的文遶圖 {
+  clear: right; }
+
+.調整文遶圖的父容器大小 {
+  overflow: auto; }
+
 /**連結 a 相關的樣式*/
 a.連結點選前綠色:link {
   color: green; }
@@ -425,6 +440,17 @@ a.連結按鈕:link, a.連結按鈕:visited, a.連結按鈕:hover, a.連結按�
   border-radius: 12px; }
 
 a.連結按鈕:hover, a.連結按鈕:active {
+  background-color: aqua; }
+
+a.選單連結, a.選單連結:hover {
+  background-color: green;
+  color: blue;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block; }
+
+a.選單連結:hover {
   background-color: aqua; }
 
 /**ul ol 相關的樣式*/
@@ -494,6 +520,12 @@ ul.手機清單樣式 li {
   padding: 8px 16px;
   border-bottom: 1px solid aqua; }
 
+ul.選單樣式 {
+  list-style-type: none; }
+
+ul.選單樣式 li {
+  float: left; }
+
 /*表格*/
 table.普通的表格線框, table.單線的表格線框, table.單線的表格線框 th, table.單線的表格線框 td, table.普通的表格線框 th, table.單線的表格線框 th, table.普通的表格線框 td, table.單線的表格線框 td {
   text-align: right;
@@ -512,3 +544,132 @@ table.跨在上方變色 td:hover {
 
 table.單數列變色 tr:nth-child(even) {
   background-color: pink; }
+
+/*凝態、假冒的樣式、用起來像filter，等同於filter或是某些暫時狀態會產生效果的class，如hover=========================*/
+.點選時變色:active {
+  background-color: yellow; }
+
+.橫跨時變色:hover {
+  background-color: blue; }
+
+input.選取後變色:checked + span {
+  background-color: yellow; }
+
+input.禁用後變色:disabled + span {
+  background-color: gray; }
+
+input.致能後變色:enabled + span {
+  background-color: aqua; }
+
+input.聚焦時變色:focus {
+  background-color: pink; }
+
+.沒有子元素變色:empty + span {
+  background-color: gray; }
+
+p.選取每個容器中出現的第一個元素:first-child, h1.選取每個容器中出現的第一個元素:first-child {
+  background-color: green; }
+
+p.選取出現的第一個元素:first-of-type, h1.選取出現的第一個元素:first-of-type {
+  background-color: green; }
+
+input.數字區間變色:in-range {
+  background-color: green; }
+
+input.數字區間變色:out-of-range {
+  background-color: pink; }
+
+input.資料驗証變色:invalid {
+  background-color: pink; }
+
+input.資料驗証變色:valid {
+  background-color: green; }
+
+.反相選取變色:not(p):not(h1) {
+  background-color: yellow; }
+
+span.第2個變色:nth-child(2) {
+  background-color: yellow; }
+
+span.第偶數個變色:nth-child(even) {
+  background-color: yellow; }
+
+span.第奇數個變色:nth-child(odd) {
+  background-color: yellow; }
+
+span.第3倍加1個變色:nth-child(3n+1) {
+  background-color: yellow; }
+
+.父容器只有這一個這種元素 span:only-of-type {
+  background-color: yellow; }
+
+input.必填欄位變色:optional {
+  background-color: green; }
+
+input.必填欄位變色:required {
+  background-color: pink; }
+
+input.唯讀變色:read-only {
+  background-color: gray; }
+
+input.唯讀變色:read-write {
+  background-color: blue; }
+
+/*:root{background: #ff0000;} //等同直接設定body or html元素吧**/
+.錨點變色:target {
+  background-color: red; }
+
+.在後面加東西::after {
+  content: "(後面加了粗體紅字)";
+  background-color: yellow;
+  color: red;
+  font-weight: bold; }
+
+.在前面加東西::before {
+  content: "(前面加了粗體紅字)";
+  background-color: yellow;
+  color: red;
+  font-weight: bold; }
+
+.修改第一個字::first-letter {
+  font-size: 200%;
+  color: red;
+               /**
+		font properties
+		color properties 
+		background properties
+		margin properties
+		padding properties
+		border properties
+		text-decoration
+		vertical-align (only if float is 'none')
+		text-transform
+		line-height
+		float
+		clear*/ }
+
+.修改第一個行::first-line {
+  font-size: 150%;
+  color: blue;
+            /**
+		font properties
+		color properties 
+		background properties
+		word-spacing
+		letter-spacing
+		text-decoration
+		vertical-align
+		text-transform
+		line-height
+		clear*/ }
+
+.被選取的部分::selection {
+  color: red;
+  background: yellow; }
+
+.被選取的部分::-moz-selection {
+  /* Code for Firefox */
+  color: red;
+  background: yellow; }
+
+/*影音圖的處理和轉換的樣式=========================================*/

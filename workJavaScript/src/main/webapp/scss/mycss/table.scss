@@ -14,7 +14,7 @@ table.普通的表格線框, table.普通的表格線框 th, table.普通的表�
 	empty-cells: hide;
 	//empty-cells: show|hide|initial|inherit;
 	//table-layout: auto|fixed|initial|inherit;
-	//設成fix的話，就會像excel最後一格一樣有資料跑出表格外的情況出現
+	//設成fix的話，就會像excel最後一格一樣有資料跑出表格外的情況出現，我猜auto是由內容分配td寬度，fix相反吧，實際要等應用
 }
 table.單線的表格線框, table.單線的表格線框 th, table.單線的表格線框 td {
 	@extend table.普通的表格線框;

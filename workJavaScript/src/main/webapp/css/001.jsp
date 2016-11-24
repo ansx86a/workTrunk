@@ -10,7 +10,8 @@
 		<a href="#div0">回開頭</a>
 	</div>
 	<div id="div0" align="center">
-		<pre>position 做到More Examples</pre>
+		<pre>float要多花點時間搞，參考http://zh-tw.learnlayout.com/float.html
+		目前看到Combinators</pre>
 		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
 		<p>CSS 語法 http://www.1keydata.com/css-tutorial/tw/syntax.php</p>
 		<p>scss 語法 http://www.w3cplus.com/sassguide/syntax.html</p>
@@ -45,10 +46,31 @@
 			<a href="#id10">滑鼠指標種類</a>
 		</p>
 		<p>
-			<a href="#id11">id11</a>
+			<a href="#id11">Pseudo (filter凝態)</a>
 		</p>
 		<p>
 			<a href="#id12">id12</a>
+		</p>
+		<p>
+			<a href="#id13">id13</a>
+		</p>
+		<p>
+			<a href="#id14">id14</a>
+		</p>
+		<p>
+			<a href="#id15">id15</a>
+		</p>
+		<p>
+			<a href="#id16">id16</a>
+		</p>
+		<p>
+			<a href="#id17">id17</a>
+		</p>
+		<p>
+			<a href="#id18">id18</a>
+		</p>
+		<p>
+			<a href="#id19">id19</a>
 		</p>
 		<!-- ******************************************************************************************** -->
 		<button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
@@ -196,7 +218,16 @@
 		<a class="連結點選前綠色 連結點選後藍色 連結快點選時水色 連結點選中紅色" href="http://www.kimo.com.tw">測試連結的顏色</a><br />
 		<a class="連結點選前沒底線 連結點選後沒底線 連結快點選時有底線 連結點選中有底線" href="http://www.kimo.com.tw">測試連結的底線</a>
 		<a class="連結按鈕" href="http://www.kimo.com.tw">一個長得像button的link</a>
-		
+		<br>
+		<a class="選單連結" href="#">選單連結1</a>
+		<a class="選單連結" href="#">選單連結2</a>
+		<a class="選單連結" href="#">選單連結3</a>
+		<a class="選單連結" href="#">選單連結4</a>
+		<br><br>
+		<a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結1</a>
+		<a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結2</a>
+		<a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結3</a>
+		<a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結4</a>		
 		
 		</textarea>
 		<br>
@@ -244,6 +275,13 @@
 			<li>手機清單樣式Coffee</li>
 			<li>手機清單樣式Tea</li>
 		</ul>
+		<ul class="選單樣式">
+			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結1</a></li>
+			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結2</a></li>
+			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結3</a></li>
+			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結4</a></li>
+		</ul>
+		
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -253,7 +291,7 @@
 			spellcheck="false">
 		<link rel="stylesheet" type="text/css" href="mycss.css">
 		<table class="普通的表格線框 標題放到下方">
-		<caption>這個是table的標題，caption</caption>
+			<caption>這個是table的標題，caption</caption>
 			<tr>
 				<th>Firstname</th>
 				<th>Lastname</th>
@@ -284,12 +322,12 @@
 			<tr>
 				<td>單線的表格線框Lois</td>
 				<td>單線的表格線框Griffin</td>
-			</tr>			
+			</tr>
 			<tr>
 				<td>單線的表格線框Lois</td>
 				<td>單線的表格線框Griffin</td>
-			</tr>						
-		</table>		
+			</tr>
+		</table>
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -297,28 +335,76 @@
 		<br>
 		<textarea id="id9" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-					<link rel="stylesheet" type="text/css" href="mycss.css">
-					<p style=" z-index: 3; position: absolute; Top:0px;color:white;font-size:20px">→→→→→→→→→→→→</p>
-					<p style=" z-index: 1; position: absolute; Top:0px;color:black;font-size:20px">●●●●●●●●●●●●●●●Z-index比較大的會蓋過比較小的，此例白字就蓋過了黑字，用滑鼠選取可看出效果</p>
-					<br><br>
-					<p class="行內顯示 單線邊框 橘色邊框">p行內顯示</p>
-					<p class="行內顯示 單線邊框 橘色邊框">p行內顯示</p>
-					<span class="區塊顯示 單線邊框 橘色邊框">span區塊顯示</span>
-					<span class="區塊顯示 單線邊框 橘色邊框">span區塊顯示</span>
-					<div class="元素預設位置 單線邊框 淺藍色邊框" style="left: 500px;">position: static;由瀏覽器去排，定位偏移好像也沒用</div>
-					<div class="元素位置加偏移並重新定位子容器 單線邊框 淺藍色邊框">position: relative;.元素位置加偏移並重新定位子容器</div>
-					<div class="元素位置加偏移並重新定位子容器 單線邊框 淺藍色邊框" style="height: 300px;">position: relative;
-						<div class="元素的絕對位置 單線邊框 暗海綠色邊框">position: absolute;元素的絕對位置，此例受父容器relative影嚮</div>
-					</div>
-<div class="元素預設位置 單線邊框 淺藍色邊框" ">position: static;包紅字絕對的div
-<div class="元素的絕對位置 單線邊框 " style="color: red; border-color:red;">position: absolute;元素的絕對位置，此例不受父容器static影嚮</div>
-</div>					
-					<div class="顯示超出的部分 單線邊框 橘色邊框" style="width:100px;height:60px;position: absolute;left:0px">測試overflow顯示超出的部分33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
-					<div class="隱藏超出的部分 單線邊框 橘色邊框" style="width:100px;height:60px;position: absolute;left:120px">測試overflow隱藏超出的部分33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
-					<div class="超出的部分可捲動 單線邊框 橘色邊框" style="width:100px;height:160px;position: absolute;left:240px">測試overflow超出的部分可捲動33333333333333333 看到鬼了</div>					
-					<div class="超出的部分自動判斷可捲動 單線邊框 橘色邊框" style="width:100px;height:160px;position: absolute;left:360px">測試overflow超出的部分自動判斷可捲動33333333333333333 看到鬼了</div>					
-<div class="超出的部分可水平捲動 單線邊框 橘色邊框" style="width:100px;height:60px;position: absolute;left:480px">測試overflow超出的部分可水平捲動33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
-<div class="超出的部分可垂直捲動 單線邊框 橘色邊框" style="width:100px;height:60px;position: absolute;left:600px">測試overflow超出的部分可垂直捲動33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>					
+		<link rel="stylesheet" type="text/css" href="mycss.css">
+		<p style="z-index: 3; position: absolute; Top: 0px; color: white; font-size: 20px">→→→→→→→→→→→→</p>
+		<p style="z-index: 1; position: absolute; Top: 0px; color: black; font-size: 20px">●●●●●●●●●●●●●●●Z-index比較大的會蓋過比較小的，此例白字就蓋過了黑字，用滑鼠選取可看出效果</p>
+		<br><br>
+		<p class="行內顯示 單線邊框 橘色邊框">p行內顯示</p>
+		<p class="行內顯示 單線邊框 橘色邊框">p行內顯示</p>
+		<span class="區塊顯示 單線邊框 橘色邊框">span區塊顯示</span>
+		<span class="區塊顯示 單線邊框 橘色邊框">span區塊顯示</span>
+		<div class="元素預設位置 單線邊框 淺藍色邊框" style="left: 500px;">position: static;由瀏覽器去排，定位偏移好像也沒用</div>
+		<div class="元素位置加偏移並重新定位子容器 單線邊框 淺藍色邊框">position: relative;.元素位置加偏移並重新定位子容器</div>
+		<div class="元素位置加偏移並重新定位子容器 單線邊框 淺藍色邊框" style="height: 300px;">position: relative;
+			<div class="元素的絕對位置 單線邊框 暗海綠色邊框">position: absolute;元素的絕對位置，此例受父容器relative影嚮</div>
+		</div>
+		<div class="元素預設位置 單線邊框 淺藍色邊框">position: static;包紅字絕對的div
+			<div class="元素的絕對位置 單線邊框 " style="color: red; border-color: red;">position: absolute;元素的絕對位置，此例不受父容器static影嚮</div>
+		</div>
+		<div class="單線邊框 暗海綠色邊框" style="width: 800px; height: 160px">
+			<div class="顯示超出的部分 單線邊框 橘色邊框" style="width: 100px; height: 60px; position: absolute; left: 0px">測試overflow顯示超出的部分33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
+			<div class="隱藏超出的部分 單線邊框 橘色邊框" style="width: 100px; height: 60px; position: absolute; left: 120px">測試overflow隱藏超出的部分33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
+			<div class="超出的部分可捲動 單線邊框 橘色邊框" style="width: 100px; height: 160px; position: absolute; left: 240px">測試overflow超出的部分可捲動33333333333333333 看到鬼了</div>
+			<div class="超出的部分自動判斷可捲動 單線邊框 橘色邊框" style="width: 100px; height: 160px; position: absolute; left: 360px">測試overflow超出的部分自動判斷可捲動33333333333333333 看到鬼了</div>
+			<div class="超出的部分可水平捲動 單線邊框 橘色邊框" style="width: 100px; height: 60px; position: absolute; left: 480px">測試overflow超出的部分可水平捲動33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
+			<div class="超出的部分可垂直捲動 單線邊框 橘色邊框" style="width: 100px; height: 60px; position: absolute; left: 600px">測試overflow超出的部分可垂直捲動33333333333333333 看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了看到鬼了</div>
+			<div class="絕對位置的元件剪裁(寫在style非scss) 單線邊框 印第安紅色背景"
+					style="width: 100px; height: 160px; position: absolute; left: 720px; clip: rect(0px, 40px, 40px, 0px);">位置要絕對才能用？怪怪，rect (top, right, bottom, left)</div>
+		</div>
+		<br>
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框" style="width: 100px; height: 100px">測試一般沒有float的方式</div>
+	<p>第1行</p>
+	<p>第2行</p>
+	<p>第3行</p>
+	<p>第4行</p>
+		</div>
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 左邊的文遶圖" style="width: 100px; height: 100px">測試float=left</div>
+	<p>第1行</p>
+	<p>第2行</p>
+	<p>第3行</p>
+	<p>第4行</p>
+		</div>		
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 左邊的文遶圖" style="width: 100px; height: 100px">測試float=left</div>
+	<p>第1行</p>
+	<p class="結束左邊的文遶圖">第2行+clear 結束左邊的文遶圖</p>
+	<p>第3行</p>
+	<p>第4行</p>
+		</div>				
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 右邊的文遶圖" style="width: 100px; height: 100px">測試float=right</div>
+	<p>第1行</p>
+	<p>第2行，單字太長會跳aaaaaaaaaaaaaaaa</p>
+	<p>第3行</p>
+	<p>第4行</p>
+		</div>				
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 右邊的文遶圖" style="width: 100px; height: 100px">測試float=right</div>
+	<p>第1行</p>
+	<p class="結束右邊的文遶圖">第2行+clear 結束右邊的文遶圖</p>
+	<p>第3行</p>
+	<p>第4行</p>
+		</div>					
+		<div class="單線邊框 暗海綠色邊框" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 右邊的文遶圖" style="width: 100px; height: 100px">測試float=right</div>
+			float的內容可能超出父容器
+		</div>								
+		<div class="單線邊框 暗海綠色邊框 調整文遶圖的父容器大小" style="width: 200px;">
+			<div class="單線邊框  淺藍色邊框 右邊的文遶圖" style="width: 100px; height: 100px">測試float=right</div>
+			利用overflow調整父容器的大小
+		</div>			
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -326,25 +412,25 @@
 		<br>
 		<textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
-<span style="cursor:auto">auto</span><br>
-<span style="cursor:crosshair">crosshair</span><br>
-<span style="cursor:default">default</span><br>
-<span style="cursor:e-resize">e-resize</span><br>
-<span style="cursor:help">help</span><br>
-<span style="cursor:move">move</span><br>
-<span style="cursor:n-resize">n-resize</span><br>
-<span style="cursor:ne-resize">ne-resize</span><br>
-<span style="cursor:nw-resize">nw-resize</span><br>
-<span style="cursor:pointer">pointer</span><br>
-<span style="cursor:progress">progress</span><br>
-<span style="cursor:s-resize">s-resize</span><br>
-<span style="cursor:se-resize">se-resize</span><br>
-<span style="cursor:sw-resize">sw-resize</span><br>
-<span style="cursor:text">text</span><br>
-<span style="cursor:w-resize">w-resize</span><br>
-<span style="cursor:wait">wait</span><br>
-			
-			
+		<span style="cursor: auto">auto</span><br>
+		<span style="cursor: crosshair">crosshair</span><br>
+		<span style="cursor: default">default</span><br>
+		<span style="cursor: e-resize">e-resize</span><br>
+		<span style="cursor: help">help</span><br>
+		<span style="cursor: move">move</span><br>
+		<span style="cursor: n-resize">n-resize</span><br>
+		<span style="cursor: ne-resize">ne-resize</span><br>
+		<span style="cursor: nw-resize">nw-resize</span><br>
+		<span style="cursor: pointer">pointer</span><br>
+		<span style="cursor: progress">progress</span><br>
+		<span style="cursor: s-resize">s-resize</span><br>
+		<span style="cursor: se-resize">se-resize</span><br>
+		<span style="cursor: sw-resize">sw-resize</span><br>
+		<span style="cursor: text">text</span><br>
+		<span style="cursor: w-resize">w-resize</span><br>
+		<span style="cursor: wait">wait</span><br>
+		
+		
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -352,6 +438,88 @@
 		<br>
 		<textarea id="id11" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
+				<link rel="stylesheet" type="text/css" href="mycss.css">
+		<div class="點選時變色">點選時變色</div>
+		<div class="橫跨時變色">橫跨時變色</div>
+		<input type="checkbox" class="選取後變色" /><span>選取後變色</span>
+		<input type="checkbox" class="禁用後變色" disabled /><span>禁用後變色</span>
+		<input type="checkbox" class=致能後變色 /><span>致能後變色</span>
+		<input class="聚焦時變色" value="聚焦時變色" />
+		<p class="沒有子元素變色"></p><span>p沒有子元素變色</span>
+		<br>
+		<span>ie不支援，input的type、min、max設好後，當數字在5-10之間會變色</span>
+		<input class="數字區間變色" type="number" min="5" max="10" value="7">
+		<br>
+		<span>資料驗証錯誤變色，只有email有這個功能吧，我猜</span>
+		<input class="資料驗証變色" type="email" value="請填入正確的email">
+		<div class="單線邊框">
+		<p class="反相選取變色">就p不變色，其它的都變色</p>
+		<span class="反相選取變色">span1</span>,,,,,<span class="反相選取變色">span2</span>
+		</div>
+		<div class="單線邊框">
+		第2個變色
+		<span class="第2個變色">span1</span>
+		<span class="第2個變色">span2</span>
+		<span class="第2個變色">span3</span>
+		<span class="第2個變色">span4</span>
+		<span class="第2個變色">span5</span>
+		</div>
+		<div class="單線邊框">
+		第偶數個變色
+		<span class="第偶數個變色">span1</span>
+		<span class="第偶數個變色">span2</span>
+		<span class="第偶數個變色">span3</span>
+		<span class="第偶數個變色">span4</span>
+		<span class="第偶數個變色">span5</span>
+		</div>		
+		<div class="單線邊框">
+		第奇數個變色
+		<span class="第奇數個變色">span1</span>
+		<span class="第奇數個變色">span2</span>
+		<span class="第奇數個變色">span3</span>
+		<span class="第奇數個變色">span4</span>
+		<span class="第奇數個變色">span5</span>
+		</div>				
+		<div class="單線邊框">
+		第3倍加1個變色
+		<span class="第3倍加1個變色">span1</span>
+		<span class="第3倍加1個變色">span2</span>
+		<span class="第3倍加1個變色">span3</span>
+		<span class="第3倍加1個變色">span4</span>
+		<span class="第3倍加1個變色">span5</span>
+		</div>					
+		<div class="單線邊框 父容器只有這一個這種元素" >
+		父容器只有這一個這種元素
+		<span >span1</span>
+		<b>bbbbbb</b>
+		</div>			
+		<div class="單線邊框 父容器只有這一個這種元素">
+		父容器只有這一個這種元素，失敗的對照組
+		<span>span1</span>
+		<b>bbbbbb</b>
+		<span>span2</span>				
+		</div>							
+		<div>
+			<input class="必填欄位變色"  value="非必填欄位">
+			<input class="必填欄位變色"  value="必填欄位" required>
+			<input class="唯讀變色"  value="唯讀ie失效" readonly>
+			<input class="唯讀變色"  value="非唯讀ie失效">
+		</div>
+		<div>
+			<a href="#錨點變色1">錨點1</a>	<a href="#錨點變色2">錨點2</a><a href="#錨點變色3">錨點3</a>
+			<p id="錨點變色1" class="錨點變色">錨點變色1</p>
+			<p id="錨點變色2" class="錨點變色">錨點變色2</p>
+			<p id="錨點變色3" >錨點變色3沒設class</p>
+			<p>可以用這個原理做tab，但是因為只能有一個錨點，第2個會照成第1個失效</p>
+		</div>
+		<div>
+			<p class="在後面加東西">我是ppp會被css3加東西，也可以加圖耶</p>
+			<p class="在前面加東西">我是ppp會被css3加東西，也可以加圖耶</p>
+			<p class="修改第一個字">我是ppp會被修改第一個字</p>
+			<p class="修改第一個字 修改第一個行">我是ppp會被修改第一個字和第一行，第一個字優先<br>第二行行行</p>
+			<p class="被選取的部分">我是ppp會被css3修改被選取的部分</p>
+		</div>
+		
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -360,6 +528,58 @@
 		<textarea id="id12" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
 		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->		
+		
+		<button type="button" onclick="javascriptWindow(document.getElementById('id13').value );">測試13</button>
+		<br>
+		<textarea id="id13" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id14').value );">測試14</button>
+		<br>
+		<textarea id="id14" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id15').value );">測試15</button>
+		<br>
+		<textarea id="id15" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id16').value );">測試16</button>
+		<br>
+		<textarea id="id16" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id17').value );">測試17</button>
+		<br>
+		<textarea id="id17" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id18').value );">測試18</button>
+		<br>
+		<textarea id="id18" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
+		<button type="button" onclick="javascriptWindow(document.getElementById('id19').value );">測試19</button>
+		<br>
+		<textarea id="id19" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+			spellcheck="false">
+		</textarea>
+		<br>
+		<!-- ******************************************************************************************** -->
 		<br>
 	</div>
 </body>
@@ -375,7 +595,5 @@
 		}
 	}
 </script>
-
-
 </body>
 </html>

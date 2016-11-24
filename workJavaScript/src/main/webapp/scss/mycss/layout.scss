@@ -109,3 +109,18 @@
 	overflow-x: hidden;
 	//可visible、hidden、auto
 }
+.左邊的文遶圖 {
+	float: left;
+}
+.右邊的文遶圖 {
+	float: right;
+}
+.結束左邊的文遶圖 {
+	clear: left;
+}
+.結束右邊的文遶圖 {
+	clear: right;
+}
+.調整文遶圖的父容器大小{
+	 overflow: auto;
+}

@@ -47,3 +47,16 @@ a.連結按鈕:hover {
 a.連結按鈕:active  {
 	@extend a.連結按鈕:hover;
 }
+
+a.選單連結{
+	background-color: green;
+	color: blue;
+	padding: 14px 25px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+}
+a.選單連結:hover{
+	@extend a.選單連結;
+	background-color: aqua;
+}

@@ -1,0 +1,142 @@
+﻿/*凝態、假冒的樣式、用起來像filter，等同於filter或是某些暫時狀態會產生效果的class，如hover=========================*/
+.點選時變色:active {
+	background-color: yellow;
+}
+.橫跨時變色:hover {
+	background-color: blue;
+}
+input.選取後變色:checked+span {
+	background-color: yellow;
+}
+input.禁用後變色:disabled+span {
+	background-color: gray;
+}
+input.致能後變色:enabled+span {
+	background-color: aqua;
+}
+input.聚焦時變色:focus {
+	background-color: pink;
+}
+.沒有子元素變色:empty+span {
+	background-color: gray;
+}
+p.選取每個容器中出現的第一個元素:first-child {
+	//這個就不測了，看w3c的例子還蠻清楚的，body中出現的第1個p和每個div中出現的第1個p
+	//:last-child同理可証
+	background-color: green;
+}
+p.選取出現的第一個元素:first-of-type {
+	//這個就不測了，應該是dom中出現的第一個p
+	//last-of-type同理可證
+	//nth-of-type(n) 同理可證為第n次出現的此元素 
+	//nth-last-of-type(n)同理可證，只是倒過來數而已
+	background-color: green;
+}
+input.數字區間變色:in-range {
+	//ie不支援
+	background-color: green;
+}
+input.數字區間變色:out-of-range {
+	//ie不支援
+	background-color: pink;
+}
+input.資料驗証變色:invalid {
+	background-color: pink;
+}
+input.資料驗証變色:valid {
+	background-color: green;
+}
+.反相選取變色:not(p) {
+	background-color: yellow;
+}
+span.第2個變色:nth-child(2) {
+	//同理可證nth-last-child 為倒數第x個元素
+	background-color: yellow;
+}
+span.第偶數個變色:nth-child(even) {
+	//同理可證nth-last-child(even)只是反過來數而已
+	background-color: yellow;
+}
+span.第奇數個變色:nth-child(odd) {
+	//同理可證nth-last-child(odd)只是反過來數而已
+	background-color: yellow;
+}
+span.第3倍加1個變色:nth-child(3n+1) {
+	//同理可證nth-last-child(3n+1)只是反過來數而已
+	background-color: yellow;
+}
+.父容器只有這一個這種元素 span:only-of-type {
+	//only-child同理可證，只有一個元素沒有分種類
+	background-color: yellow;
+}
+input.必填欄位變色:optional {
+	background-color: green;
+}
+input.必填欄位變色:required {
+	background-color: pink;
+}
+input.唯讀變色:read-only {
+	background-color: gray;
+}
+input.唯讀變色:read-write {
+	background-color: blue;
+}
+
+/*:root{background: #ff0000;} //等同直接設定body or html元素吧**/
+.錨點變色:target {
+	background-color: red;
+}
+.在後面加東西::after {
+	content: "(後面加了粗體紅字)";
+	//content: url(smiley.gif);
+	background-color: yellow;
+	color: red;
+	font-weight: bold;
+}
+.在前面加東西::before {
+	content: "(前面加了粗體紅字)";
+	background-color: yellow;
+	color: red;
+	font-weight: bold;
+}
+.修改第一個字::first-letter {
+	font-size: 200%;
+	color: red;    /**
+			font properties
+			color properties 
+			background properties
+			margin properties
+			padding properties
+			border properties
+			text-decoration
+			vertical-align (only if float is 'none')
+			text-transform
+			line-height
+			float
+			clear*/
+}
+.修改第一個行::first-line {
+	font-size: 150%;
+	color: blue;/**
+			font properties
+			color properties 
+			background properties
+			word-spacing
+			letter-spacing
+			text-decoration
+			vertical-align
+			text-transform
+			line-height
+			clear*/
+}
+.被選取的部分::selection {
+	color: red;
+	background: yellow;
+	// color, background, cursor, and outline.
+}
+.被選取的部分::-moz-selection {
+
+	/* Code for Firefox */
+	color: red;
+	background: yellow;
+}
