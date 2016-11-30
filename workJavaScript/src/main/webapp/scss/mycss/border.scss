@@ -44,9 +44,7 @@
 	//border-width: medium;
 	border-color: red green blue yellow;
 }
-
-
-.淺藍色邊框{
+.淺藍色邊框 {
 	border-color: powderblue;
 }
 .淡粉紅色邊框 {
@@ -58,10 +56,46 @@
 .橘色邊框 {
 	border-color: Orange;
 }
-
 .圓角邊框 {
+	//css3
 	border: 2px solid red;
 	border-radius: 12px;
+	//border-radius: 15px 50px 30px 5px://四個角
+	//border-radius:50px/15px;
+	//由大角度變小角度
+	//border-radius: 50%;
+	//幾乎變一個圓
+	//border-top-left-radius: 12px;
+	//border-top-right-radius: 12px;
+	//border-bottom-right-radius: 12px;
+	//border-bottom-left-radius: 12px;
+}
+.圖片邊框 {
+	//css3
+	border: 10px solid transparent;
+	padding: 15px;/**
+	  border-image-repeat：邊框圖片中間重覆設定，共有三個參數可作控制。
+	　　stretch：延展方式填滿。
+	　　repeat：重複方式填滿。
+	　　round：重複方式填滿。當無法以整數的倍數填滿時，就會依照整數倍數來縮放圖片並填滿。
+	　　space：重複填滿。用整數倍數填滿，其它不足的部分，再縮放圖片填滿。
+	*/
+}
+.圖片邊框round {
+	//這邊的長度用30，正常來說是圖片/3，但w3c的例子用30不用27，邊框才有連起來的感覺，亂設的話邊框會變得很奇怪的
+	@extend .圖片邊框;
+	-webkit-border-image: url(border.png) 30 round; /* Safari 3.1-5 */
+	-o-border-image: url(border.png) 30 round; /* Opera 11-12.1 */
+	border-image: url(border.png) 30 round;
+	//border-image-slice:30;
+}
+.圖片邊框stretch {
+	@extend .圖片邊框;
+	-webkit-border-image: url(border.png) 30 stretch; /* Safari 3.1-5 */
+	-o-border-image: url(border.png) 30 stretch; /* Opera 11-12.1 */
+	border-image: url(border.png) 30 stretch;
+	//border-image-slice:30;
+	//border-image-width: 10px;//設這個可以把圖片放大縮小
 }
 .外圍線 {
 	border: 1px solid blue;

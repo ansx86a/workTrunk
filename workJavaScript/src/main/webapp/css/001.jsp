@@ -34,7 +34,7 @@
 			<a href="#id6">link</a>
 		</p>
 		<p>
-			<a href="#id7">list</a>
+			<a href="#id7">list,dropdown,tooltip</a>
 		</p>
 		<p>
 			<a href="#id8">table表格</a>
@@ -43,13 +43,13 @@
 			<a href="#id9">顯示、layout</a>
 		</p>
 		<p>
-			<a href="#id10">滑鼠指標種類</a>
+			<a href="#id10">滑鼠指標種類，切圖</a>
 		</p>
 		<p>
 			<a href="#id11">Pseudo (filter凝態)</a>
 		</p>
 		<p>
-			<a href="#id12">id12</a>
+			<a href="#id12">透明度、transform</a>
 		</p>
 		<p>
 			<a href="#id13">id13</a>
@@ -84,6 +84,17 @@
 		<p class="圖片背景y">圖片背景y的測試</p>
 		<p class="圖片背景不repeat">圖片背景不repeat的測試</p>
 		<p class="圖片背景放右上角">圖片背景不repeat的測試</p>
+		<p class="圖片背景多張">圖片背景多張的測試</p>
+		<div>
+		<span class="漸層紅到黃預設上到下" style="display:inline-block;height:100px;width:100px;">預設上到下</span>
+		<span class="漸層紅到黃左到右" style="display:inline-block;height:100px;width:100px;">左到右</span>
+		<span class="漸層紅到黃左上到右下" style="display:inline-block;height:100px;width:100px;">左上到右下</span>
+		<span class="多重漸層左到右" style="display:inline-block;height:100px;width:200px;">多重漸層左到右</span>		
+		<span class="多段漸層" style="display:inline-block;height:200px;width:100px;">多段漸層，第1段到10%，第2段到20%，重覆5次</span>
+		<span class="中心點圓形漸層" style="display:inline-block;height:100px;width:100px;">圓形漸層</span>
+		<span class="中心點圓形漸層" style="display:inline-block;height:100px;width:100px;">圓形漸層</span>
+		<span class="中心點圓形多段漸層" style="display:inline-block;height:200px;width:200px;">中心點圓形多段漸層</span>
+		</div>
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -163,6 +174,8 @@
 		<p class="複和邊框2">複和邊框2</p>
 		<p class="不同邊粗顏色的邊框">不同邊粗顏色的邊框</p>
 		<p class="圓角邊框">圓角邊框</p>
+		<p class="圖片邊框round">圖片邊框，圖片81*81，圖片設成30理應27，框線透明，round</p>
+		<p class="圖片邊框stretch">圖片邊框，圖片81*81，圖片設成30理應27，框線透明，stretch</p>
 		
 		<p class="點點外圍線">點點外圍線</p>
 		<p class="虛線外圍線">虛線外圍線</p>
@@ -281,6 +294,35 @@
 			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結3</a></li>
 			<li><a class="選單連結" style="float: left; border-right-style: solid;" href="#">選單連結4</a></li>
 		</ul>
+		ccccccc<span class="dropdown主體 單線邊框 橘色邊框">
+			只要滑鼠在這裡，就秀出dropdown清單列表
+			<div class="dropdown清單內容 虛線邊框 暗海綠色邊框">
+				<p>dropdown清單1</p>
+				<p>dropdown清單2</p>
+				<p>dropdown清單3</p>
+			</div>
+		</span>
+		<div style="text-align:center;">
+			<div class="tooltip主體">重點是內容對齊text-align:center;
+			<br>chrome顯示用visibility先佔位才能置中(display會跑到字首)
+			<br>ie會接在屁股，冏死了
+			<span class="tooltip內容">提示內容</span>
+			</div>
+			<div class="tooltip主體">
+			測試提示內容彈的地方
+			<br>幹，用border做箭頭超醜超麻煩的，又有不同瀏覽器的問題，半放棄
+			<span class="tooltip內容 tooltip內容上彈">上彈提示內容</span>
+			<span class="tooltip內容 tooltip內容下彈">下彈提示內容</span>
+			<span class="tooltip內容 tooltip內容左彈">左彈提示內容</span>
+			<span class="tooltip內容 tooltip內容右彈">右彈提示內容</span>
+			</div>
+			
+			<br>
+			<br>
+			<br>
+			一堆空白行，沒什麼用處就只是為了排一下版而已
+		</div>
+		
 		
 		</textarea>
 		<br>
@@ -429,7 +471,17 @@
 		<span style="cursor: text">text</span><br>
 		<span style="cursor: w-resize">w-resize</span><br>
 		<span style="cursor: wait">wait</span><br>
-		
+		<div>
+			<p>原圖<img src="2.gif"/></p>
+			<p>切圖1 0 0：<img  style="width:40px;height:40px;background: url(2.gif) 0 0;"/></p>
+			<p>切圖2 10 10：<img   style="width:40px;height:40px;background: url(2.gif) 10 10;"/></p>
+			<p>切圖3 20 20：<img   style="width:40px;height:40px;background: url(2.gif) 20 20;"/></p>
+			<p>切圖4 -10 -10：<img   style="width:40px;height:40px;background: url(2.gif) -10 -10;"/></p>
+			<p>切圖5 -20 -20：<img   style="width:40px;height:40px;background: url(2.gif) -20 -20;"/></p>
+			<p>結論，可以正向切圖或反向切圖都可以，放在a元素的部分要用時再實作或參考w3c
+			，原理大概是父元素放背景圖，a元素空值但把width和height調成和父元素一樣大
+			</p>
+		</div>
 		
 		</textarea>
 		<br>
@@ -453,7 +505,7 @@
 		<span>資料驗証錯誤變色，只有email有這個功能吧，我猜</span>
 		<input class="資料驗証變色" type="email" value="請填入正確的email">
 		<div class="單線邊框">
-		<p class="反相選取變色">就p不變色，其它的都變色</p>
+		<p class="反相選取變色">反相選取p，就p不變色，其它的都變色</p>
 		<span class="反相選取變色">span1</span>,,,,,<span class="反相選取變色">span2</span>
 		</div>
 		<div class="單線邊框">
@@ -527,6 +579,12 @@
 		<br>
 		<textarea id="id12" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
+			<link rel="stylesheet" type="text/css" href="mycss.css">		
+			<div class="橘色背景">橘色背景</div>	
+			<div class="透明度五十啪 橘色背景">透明度五十啪 橘色背景</div>
+			<div style="background: rgba(76, 175, 80, 0.3)"> background: rgba(76, 175, 80, 0.3) /* Green background with 30% opacity */</div>
+			
+			
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->		

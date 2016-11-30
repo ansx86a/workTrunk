@@ -30,7 +30,7 @@
 .橘紅色背景 {
 	background-color: OrangeRed;
 }
-.銀色背景{
+.銀色背景 {
 	background-color: Silver;
 }
 
@@ -63,4 +63,91 @@
 	/* background-position:50px 100px;//用像素定位 */
 
 	/* background-attachment:fixed;	//背景图像是否固定或者随着页面的其余部分滚动。*/
+}
+.圖片背景多張 {
+	padding: 60px;
+	background-image: url(g.png), url(g.png);
+	background-position: right bottom, left top;
+	//調整圖片位置
+	background-repeat: no-repeat, no-repeat;
+	background-size: 100px 80px, 50px 40px;	/**調整圖片大小  background-size: auto|length|cover|contain|initial|inherit;
+	ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130px, auto;
+	//cover是填滿的意思Fill the entire page with the image (no white space)
+	*/
+	background-color: aqua;
+	//background-origin表示背景顯示的box區塊有沒有包含border或是padding的部分
+	//background-origin: padding-box|border-box|content-box|initial|inherit;
+	//background-clip表示背景顯示的區塊，和origin不同，origin是顯示原圖，而clip是指可見區塊
+	//background-clip: border-box|padding-box|content-box|initial|inherit;
+}
+
+/**
+漸層的部分，可設rgba的顏色有透明的效果
+*/
+.漸層紅到黃預設上到下 {
+	background: red; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(red, yellow); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(red, yellow); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(red, yellow); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(red, yellow); /* Standard syntax */
+
+	/*
+	順時針轉90,180,-90度
+	background: linear-gradient(-90deg, red, yellow);*/
+}
+.漸層紅到黃左到右 {
+	background: red; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left, red, yellow); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(right, red, yellow); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(right, red, yellow); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to right, red, yellow); /* Standard syntax */
+}
+.漸層紅到黃左上到右下 {
+	background: red; /* For browsers that do not support gradients */
+	background: -webkit-linear-gradient(left top, red, yellow); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(bottom right, red, yellow); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(bottom right, red, yellow); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(to bottom right, red, yellow); /* Standard syntax */
+}
+.多重漸層左到右 {
+	background: red; /* For browsers that do not support gradients */
+
+	/* For Safari 5.1 to 6.0 */
+	background: -webkit-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);  /* For Opera 11.1 to 12.0 */
+	background: -o-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);  /* For Fx 3.6 to 15 */
+	background: -moz-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet);  /* Standard syntax */
+	background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+}
+.多段漸層 {
+
+	/*第1段10%，第2段到20%，所以佔20%會重覆5次*/
+	background: -webkit-repeating-linear-gradient(red, yellow 10%, green 20%); /* For Safari 5.1 to 6.0 */
+	background: -o-repeating-linear-gradient(red, yellow 10%, green 20%); /* For Opera 11.1 to 12.0 */
+	background: -moz-repeating-linear-gradient(red, yellow 10%, green 20%); /* For Firefox 3.6 to 15 */
+	background: repeating-linear-gradient(red, yellow 10%, green 20%); /* Standard syntax (must be last) */
+}
+.中心點圓形漸層 {
+
+	/*background: radial-gradient(shape size at position, start-color, ..., last-color);*/
+	/*background: radial-gradient(circle, white, green);//可以把擴散的漸層本來是依背景的比例擴散的改成正圓形擴散*/
+	background: red; /* For browsers that do not support gradients */
+	background: -webkit-radial-gradient(red, yellow, green); /* Safari 5.1 to 6.0 */
+	background: -o-radial-gradient(red, yellow, green); /* For Opera 11.6 to 12.0 */
+	background: -moz-radial-gradient(red, yellow, green); /* For Firefox 3.6 to 15 */
+	background: radial-gradient(red, yellow, green); /* Standard syntax */
+
+	/*可指定%數如右：background: radial-gradient(red 5%, yellow 15%, green 60%);	
+	如果設定的%數沒有填滿100%，可以設定對外放大的設定，圓形的適用，方形的不知道
+	closest-side最近側
+	farthest-side最遠端
+	closest-corner最近角
+	farthest-corner最遠角落
+	background: radial-gradient(closest-side at 60% 55%, red, yellow, black); /* Standard syntax (must be last) 
+	*/
+}
+.中心點圓形多段漸層 {
+	background: -webkit-repeating-radial-gradient(red, yellow 10%, green 15%); /* For Safari 5.1 to 6.0 */
+	background: -o-repeating-radial-gradient(red, yellow 10%, green 15%); /* For Opera 11.6 to 12.0 */
+	background: -moz-repeating-radial-gradient(red, yellow 10%, green 15%); /* For Firefox 3.6 to 15 */
+	background: repeating-radial-gradient(red, yellow 10%, green 15%); /* Standard syntax (must be last) */
 }

@@ -71,7 +71,73 @@ ul.手機清單樣式 li:last-child {
 }
 ul.選單樣式 {
 	list-style-type: none;
+	overflow: auto;
 }
 ul.選單樣式 li {
 	float: left;
+}
+.dropdown主體 {
+	position: relative;
+	display: inline-block;
+}
+.dropdown清單內容 {
+	display: none;
+	position: absolute;
+	background-color: skyblue;
+	//min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+}
+.dropdown主體:hover .dropdown清單內容 {
+	display: block;
+}
+.tooltip主體 {
+	position: relative;
+	display: inline-block;
+	background-color: skyblue;
+}
+.tooltip內容 {
+	position: absolute;
+	visibility: hidden;
+	//這裡使用visibility要先佔位，顯示會和display: none有差異, visibility會受到textalign影嚮，display會切到和主體相同的地方排列
+	width:120px;
+	background-color: gray;
+	border-radius: 6px;
+	z-index: 1;	/**做透明度彈出的動畫*/
+	opacity: 0;
+	transition: opacity 1s;
+}
+.tooltip內容右彈 {
+	top: -5px;
+	left: 105%;/**主體的105%，剛如彈到主體的右邊5%*/
+}
+.tooltip內容右彈::after {
+	//幹，用border做箭頭超醜超麻煩的，又有不同瀏覽器的問題，半放棄
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: -10px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent  gray transparent  transparent;
+}
+.tooltip內容左彈 {
+	top: -5px;
+	right: 105%;/**主體的105%，剛如彈到主體的左邊5%*/
+}
+.tooltip內容上彈 {
+	width: 120px;
+	bottom: 105%;
+	left: 50%;
+	margin-left: -60px; /* 置中=50%的left-一半的寬度 */
+}
+.tooltip內容下彈 {
+	width: 120px;
+	top: 105%;
+	left: 50%;
+	margin-left: -60px;  /* 置中=50%的left-一半的寬度 */
+}
+.tooltip主體:hover .tooltip內容 {
+	visibility: visible;
+	opacity: 1;
 }
