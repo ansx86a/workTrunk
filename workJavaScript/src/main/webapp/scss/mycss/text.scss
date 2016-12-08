@@ -37,7 +37,15 @@
 	text-decoration: none;
 }
 .陰影本文 {
+
+	/*css3 x軸 y軸 (模糊) 顏色
+	text-shadow: 2px 2px 5px red;
+
+	*/
 	text-shadow: 2px 2px aqua;
+}
+.多重陰影本文 {
+	text-shadow: 1px 2px 13px red, 3px 4px 15px blue;
 }
 .轉大寫 {
 	text-transform: uppercase;
@@ -49,7 +57,7 @@
 	text-transform: capitalize;
 }
 .反向本文 {
-    direction: rtl;
+	direction: rtl;
 	unicode-bidi: bidi-override;
 }
 .開頭縮排 {
@@ -59,6 +67,9 @@
 .不換行的本文 {
 	//normal|nowrap|pre|pre-line|pre-wrap|initial|inherit;
 	white-space: nowrap;
+}
+.單字強制換行 {
+	word-wrap: break-word;
 }
 .增加字母字距 {
 	letter-spacing: 3px;
@@ -79,6 +90,7 @@
 	word-spacing: -5px;
 }
 .頂端對齊本文 {
+
 	/* baseline|length|sub|super|top|text-top|middle|bottom|text-bottom|initial|inherit;
 	*/
 	vertical-align: text-top;
@@ -86,33 +98,35 @@
 .底部對齊本文 {
 	vertical-align: text-bottom;
 }
-
-
 .正常字型 {
-    font-style: normal;
-	font-weight: normal;    
+	font-style: normal;
+	font-weight: normal;
 }
-
 .斜體字型 {
-    font-style: italic;
+	font-style: italic;
 }
-
-.斜體字型2 {//支援度比較少，和上面的斜體字很像，少用吧
-    font-style: oblique;
+.斜體字型2 {
+	//支援度比較少，和上面的斜體字很像，少用吧
+	font-style: oblique;
 }
 .粗體字 {
-    font-weight: bold;//可填數字，ex:900，normal|bold|bolder|lighter|number|initial|inherit;
+	font-weight: bold;
+	//可填數字，ex: 900，normal|bold|bolder|lighter|number|initial|inherit;
 }
-
-
 .大字型 {
-    font-size: 2.5em; /* 40px/16=2.5em */
+	font-size: 2.5em; /* 40px/16=2.5em */
 }
-
 .中字型 {
-    font-size: 0.875em; /* 14px/16=0.875em */
+	font-size: 0.875em; /* 14px/16=0.875em */
 }
-
 .特殊轉大寫 {
-    font-variant: small-caps;
+	font-variant: small-caps;
+}
+.過長的文字轉點點點 {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	//clip|ellipsis|string|initial|inherit;
+	//預設是截斷text-overflow: clip;
+	//可以在hover的時候改成initial(string), overflow改成visible就可以看到本文
 }

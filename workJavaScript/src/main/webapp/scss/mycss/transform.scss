@@ -1,5 +1,65 @@
 ﻿/*影音圖的處理和轉換的樣式=========================================*/
-.透明度五十啪{
-    opacity: 0.5;
-    filter: alpha(opacity=50); /* For IE8 and earlier */
+.透明度五十啪 {
+	opacity: 0.5;
+	filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+.位移轉換 {
+	-ms-transform: translate(50px, 10px); /* IE 9 */
+	-webkit-transform: translate(50px, 10px); /* Safari */
+	transform: translate(50px, 10px); /* Standard syntax */
+}
+.角度轉換 {
+	-ms-transform: rotate(-2deg); /* IE 9 */
+	-webkit-transform: rotate(-2deg); /* Safari */
+	transform: rotate(-2deg);
+}
+.角度x軸心轉換 {
+	-webkit-transform: rotateX(180deg); /* Safari */
+	transform: rotateX(180deg);
+}
+.角度y軸心轉換 {
+    -webkit-transform: rotateY(180deg); /* Safari */
+    transform: rotateY(180deg);
+}
+.角度z軸心轉換 {
+  -webkit-transform: rotateZ(45deg); /* Safari */
+    transform: rotateZ(45deg);
+}
+
+
+
+.縮放轉換 {
+	-ms-transform: scale(2, 3); /* IE 9 */
+	-webkit-transform: scale(2, 3); /* Safari */
+	transform: scale(2, 3);
+}
+.水平斜轉轉換 {
+	-ms-transform: skewX(20deg); /* IE 9 */
+	-webkit-transform: skewX(20deg); /* Safari */
+	transform: skewX(20deg);
+	//transform: skew(20deg); /* 相同 */
+}
+.垂直斜轉轉換 {
+	-ms-transform: skewY(20deg); /* IE 9 */
+	-webkit-transform: skewY(20deg); /* Safari */
+	transform: skewY(20deg);
+}
+.斜轉轉換 {
+	-ms-transform: skew(20deg, 20deg); /* IE 9 */
+	-webkit-transform: skew(20deg, 20deg); /* Safari */
+	transform: skew(20deg, 20deg); /* Standard syntax */
+}
+.綜合轉換 {
+
+	/*matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY()):*/
+	-ms-transform: matrix(1, -0.3, 0, 1, 0, 0); /* IE 9 */
+	-webkit-transform: matrix(1, -0.3, 0, 1, 0, 0); /* Safari */
+	transform: matrix(1, -0.3, 0, 1, 0, 0);
+}
+.改變軸心 {
+
+	/*可以用負的px來當軸心*/
+	-ms-transform-origin: 20% 20%; /* IE 9 */
+	-webkit-transform-origin: 20% 20%; /* Chrome, Safari, Opera */
+	transform-origin: 20% 20%;
 }

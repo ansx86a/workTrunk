@@ -60,6 +60,9 @@ h1 {
 .銀色背景 {
   background-color: Silver; }
 
+.背景的陰影 {
+  box-shadow: 10px 10px 5px grey; }
+
 /**圖片用相對路徑，如要共用的話，要加個變數存專案名字，再放到url中*/
 .圖片背景, .圖片背景x, .圖片背景y, .圖片背景不repeat, .圖片背景放右上角 {
   background-image: url("/workJavaScript/css/g.png");
@@ -229,7 +232,14 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
   text-decoration: none; }
 
 .陰影本文 {
+  	/*css3 x軸 y軸 (模糊) 顏色
+  	text-shadow: 2px 2px 5px red;
+  
+  	*/
   text-shadow: 2px 2px aqua; }
+
+.多重陰影本文 {
+  text-shadow: 1px 2px 13px red, 3px 4px 15px blue; }
 
 .轉大寫 {
   text-transform: uppercase; }
@@ -249,6 +259,9 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
 
 .不換行的本文 {
   white-space: nowrap; }
+
+.單字強制換行 {
+  word-wrap: break-word; }
 
 .增加字母字距 {
   letter-spacing: 3px; }
@@ -299,6 +312,11 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
 
 .特殊轉大寫 {
   font-variant: small-caps; }
+
+.過長的文字轉點點點 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
 
 /*邊框*/
 .點點邊框 {
@@ -879,3 +897,143 @@ input.唯讀變色:read-write {
   opacity: 0.5;
   filter: alpha(opacity=50);
   /* For IE8 and earlier */ }
+
+.位移轉換 {
+  -ms-transform: translate(50px, 10px);
+  /* IE 9 */
+  -webkit-transform: translate(50px, 10px);
+  /* Safari */
+  transform: translate(50px, 10px);
+  /* Standard syntax */ }
+
+.角度轉換 {
+  -ms-transform: rotate(-2deg);
+  /* IE 9 */
+  -webkit-transform: rotate(-2deg);
+  /* Safari */
+  transform: rotate(-2deg); }
+
+.角度x軸心轉換 {
+  -webkit-transform: rotateX(180deg);
+  /* Safari */
+  transform: rotateX(180deg); }
+
+.角度y軸心轉換 {
+  -webkit-transform: rotateY(180deg);
+  /* Safari */
+  transform: rotateY(180deg); }
+
+.角度z軸心轉換, .動畫特效:hover {
+  -webkit-transform: rotateZ(45deg);
+  /* Safari */
+  transform: rotateZ(45deg); }
+
+.縮放轉換 {
+  -ms-transform: scale(2, 3);
+  /* IE 9 */
+  -webkit-transform: scale(2, 3);
+  /* Safari */
+  transform: scale(2, 3); }
+
+.水平斜轉轉換 {
+  -ms-transform: skewX(20deg);
+  /* IE 9 */
+  -webkit-transform: skewX(20deg);
+  /* Safari */
+  transform: skewX(20deg); }
+
+.垂直斜轉轉換 {
+  -ms-transform: skewY(20deg);
+  /* IE 9 */
+  -webkit-transform: skewY(20deg);
+  /* Safari */
+  transform: skewY(20deg); }
+
+.斜轉轉換 {
+  -ms-transform: skew(20deg, 20deg);
+  /* IE 9 */
+  -webkit-transform: skew(20deg, 20deg);
+  /* Safari */
+  transform: skew(20deg, 20deg);
+  /* Standard syntax */ }
+
+.綜合轉換 {
+  /*matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY()):*/
+  -ms-transform: matrix(1, -0.3, 0, 1, 0, 0);
+  /* IE 9 */
+  -webkit-transform: matrix(1, -0.3, 0, 1, 0, 0);
+  /* Safari */
+  transform: matrix(1, -0.3, 0, 1, 0, 0); }
+
+.改變軸心 {
+  /*可以用負的px來當軸心*/
+  -ms-transform-origin: 20% 20%;
+  /* IE 9 */
+  -webkit-transform-origin: 20% 20%;
+  /* Chrome, Safari, Opera */
+  transform-origin: 20% 20%; }
+
+/*動畫相關的樣式=========================================*/
+.動畫長度 {
+  width: 200px; }
+
+.動畫長度:hover {
+  width: 500px; }
+
+.動畫高度 {
+  height: 20px; }
+
+.動畫高度:hover {
+  height: 100px; }
+
+.動畫特效:hover {
+  background: red; }
+
+.長度轉換兩秒 {
+  /*
+   transition-property: width;
+   transition-duration: 2s;
+  */
+  -webkit-transition: width 2s;
+  /* Safari */
+  transition: width 2s; }
+
+.高度轉換三秒 {
+  -webkit-transition: height 3s;
+  /* Safari */
+  transition: height 3s; }
+
+.同時轉換高度和長度 {
+  transition-property: width, height;
+  transition-duration: 2s, 3s; }
+
+.動畫特效轉換 {
+  -webkit-transition: -webkit-transform 2s;
+  /* Safari */
+  transition: background 2s, transform 2s; }
+
+/*
+transition-timing-function: linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit;
+*/
+.線性轉換 {
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear; }
+
+.慢快慢的轉換 {
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease; }
+
+.起步較慢的轉換 {
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in; }
+
+.結束較慢的轉換 {
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out; }
+
+.起步和結束較慢的轉換 {
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out; }
+
+.轉換的廷遲 {
+  transition-delay: 2s; }

@@ -52,7 +52,7 @@
 			<a href="#id12">透明度、transform</a>
 		</p>
 		<p>
-			<a href="#id13">id13</a>
+			<a href="#id13">動畫(Transitions,animation)</a>
 		</p>
 		<p>
 			<a href="#id14">id14</a>
@@ -79,6 +79,8 @@
 			spellcheck="false">
 		<link rel="stylesheet" type="text/css" href="mycss.css">
 		<p class="灰色背景">灰色背景的測試</p>
+		<p class="橘色背景 背景的陰影">背景的陰影</p>
+		
 		<p class="圖片背景">圖片背景的測試</p>
 		<p class="圖片背景x">圖片背景x的測試</p>
 		<p class="圖片背景y">圖片背景y的測試</p>
@@ -104,12 +106,13 @@
 			spellcheck="false">
 		<link rel="stylesheet" type="text/css" href="mycss.css">
 		<div>
-			<p class="紅色本文 置中本文">紅色本文 置中本文</p>
-			<p class="藍色本文 左靠本文">藍色本文 左靠本文</p>
-			<p class="橘色本文 右靠本文">橘色本文 右靠本文</p>
-			<p class="綠色本文 右靠本文2">綠色本文 右靠本文2</p>
+			<p class="紅色本文 置中本文 單線邊框">紅色本文 置中本文</p>
+			<p class="藍色本文 左靠本文 單線邊框">藍色本文 左靠本文</p>
+			<p class="橘色本文 右靠本文 單線邊框">橘色本文 右靠本文</p>
+			<p class="綠色本文 右靠本文2 單線邊框">綠色本文 右靠本文2</p>
 			<p>
-				<span class="陰影本文">陰影本文</span>
+				<span class="陰影本文 單線邊框">陰影本文</span>
+				<span class="多重陰影本文 單線邊框">多重陰影本文(紅 藍)</span>
 				<span class="上底線本文">上底線本文</span>
 				<span class="刪除線本文">刪除線本文</span>
 				<span class="底線本文">底線本文</span>
@@ -123,12 +126,20 @@
 			</p>
 			<p class="反向本文">反向本文 this is a pen</p>
 			
-			<p class="開頭縮排" style="width: 100px">
-				1234567890123456789什麼鬼東西啊什麼鬼東西啊
+			<p class="開頭縮排 單線邊框" style="width: 100px">
+				開頭縮排1234567890123456789什麼鬼東西啊什麼鬼東西啊
 			</p>
-			<p class="不換行的本文" style="width: 100px">
-				1234567890123456789什麼鬼東西啊什麼鬼東西啊
+			<p class="不換行的本文 單線邊框" style="width: 100px">
+				不換行的本文1234567890123456789什麼鬼東西啊什麼鬼東西啊
 			</p>
+			<p class="單字強制換行 單線邊框" style="width: 100px">
+				單字強制換行1234567890123456789什麼鬼東西啊什麼鬼東西啊
+			</p>			
+			<p class="過長的文字轉點點點 單線邊框" style="width: 200px">
+				過長的文字轉點點點1234567890123456789什麼鬼東西啊什麼鬼東西啊
+			</p>
+
+			
 			<p>
 				<span class="增加字母字距">增加字母字距 this is a pen</span>
 				<span class="減少字母字距">減少字母字距 this is a pen</span>
@@ -583,6 +594,24 @@
 			<div class="橘色背景">橘色背景</div>	
 			<div class="透明度五十啪 橘色背景">透明度五十啪 橘色背景</div>
 			<div style="background: rgba(76, 175, 80, 0.3)"> background: rgba(76, 175, 80, 0.3) /* Green background with 30% opacity */</div>
+			<div class="位移轉換 單線邊框">位移轉換50px,10 px</div>
+			<div class="角度轉換 單線邊框 淡粉紅色邊框">角度轉換-2度</div>
+			<div class="角度轉換 單線邊框 改變軸心 淺藍色邊框">改變軸心 角度轉換-2度</div>
+			<div class="縮放轉換 單線邊框" style="margin: 100px;width:50px;height:50px">縮放轉換(2,3)倍</div>
+			<div class="水平斜轉轉換 單線邊框" style="width:50px;height:50px">水平斜轉轉換</div>
+			<div class="垂直斜轉轉換 單線邊框" style="width:50px;height:50px">垂直斜轉轉換</div>
+			<div class="斜轉轉換 單線邊框" style="width:50px;height:50px">斜轉轉換</div>
+			<div class="綜合轉換 單線邊框" style="width:150px;height:150px">綜合轉換，只是把位移、角度、斜轉寫在一起而已</div>
+			<p>以上是2d，以下是3d===============</p>
+			<div class="單線邊框 淺藍色邊框">角度x軸心轉換，180度像水面映射的感覺</div>
+			<div class="角度x軸心轉換 單線邊框 淺藍色邊框">角度x軸心轉換，180度像水面映射的感覺</div>
+			<div class="單線邊框 淺藍色邊框">角度y軸心轉換，180度有點像左頁的書翻到右頁的感覺</div>
+			<div class="角度y軸心轉換 單線邊框 淺藍色邊框">角度y軸心轉換，180度有點像左頁的書翻到右頁的感覺</div>
+			<div class="單線邊框 淺藍色邊框">角度z軸心轉換，45度，感覺像是時鐘的時針旋轉的感覺</div>
+			<div class="角度z軸心轉換 單線邊框 淺藍色邊框" style="width:150px;height:150px">角度z軸心轉換，45度，感覺像是時鐘的時針旋轉的感覺</div>
+			<p>略過比較難懂不會用的方法</p>
+			<p>transform-style:不懂，perspective:遠近透視法，近的會變大遠的會變小，backface-visibility：不懂</p>
+			
 			
 			
 		</textarea>
@@ -593,6 +622,23 @@
 		<br>
 		<textarea id="id13" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
+			<link rel="stylesheet" type="text/css" href="mycss.css">
+			<div class="動畫長度 淺藍色背景 單線邊框" >hover動畫長度改變</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒" >hover動畫長度改變 長度轉換兩秒</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 轉換的廷遲" >hover動畫長度改變 長度轉換兩秒 轉換的廷遲兩秒</div>
+			<div class="動畫高度 淺藍色背景 單線邊框 高度轉換三秒" >hover動畫高度改變 高度轉換三秒</div>
+			<div class="動畫長度 動畫高度 淺藍色背景 單線邊框 長度轉換兩秒 高度轉換三秒 " >長度高度一起做，長度會失敗</div>
+			<div class="動畫長度 動畫高度 淺藍色背景 單線邊框 同時轉換高度和長度" >長度高度一起做，css寫一起會成功</div>
+			<img src="ease.png"/>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 線性轉換" >hover動畫長度改變 linear</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 慢快慢的轉換" >hover動畫長度改變 ease</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 起步較慢的轉換" >hover動畫長度改變 ease-in</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 結束較慢的轉換 " >hover動畫長度改變 ease-out</div>
+			<div class="動畫長度 淺藍色背景 單線邊框 長度轉換兩秒 起步和結束較慢的轉換" >hover動畫長度改變 ease-in-out</div>
+			
+			<div class="動畫特效 淺藍色背景 單線邊框" >hover動畫特效 transform</div>
+			<div class="動畫特效 動畫特效轉換 淺藍色背景 單線邊框" >hover動畫特效 動畫特效轉換</div>
+			
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->

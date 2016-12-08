@@ -33,6 +33,10 @@
 .銀色背景 {
 	background-color: Silver;
 }
+.背景的陰影{
+	//x軸 y (模糊 選填) 顏色 
+	 box-shadow: 10px 10px 5px grey;
+}
 
 /**圖片用相對路徑，如要共用的話，要加個變數存專案名字，再放到url中*/
 .圖片背景 {
@@ -129,6 +133,7 @@
 .中心點圓形漸層 {
 
 	/*background: radial-gradient(shape size at position, start-color, ..., last-color);*/
+
 	/*background: radial-gradient(circle, white, green);//可以把擴散的漸層本來是依背景的比例擴散的改成正圓形擴散*/
 	background: red; /* For browsers that do not support gradients */
 	background: -webkit-radial-gradient(red, yellow, green); /* Safari 5.1 to 6.0 */

@@ -1,0 +1,74 @@
+﻿/*動畫相關的樣式=========================================*/
+.動畫長度 {
+	width: 200px;
+}
+.動畫長度:hover {
+	width: 500px;
+}
+.動畫高度 {
+	height: 20px;
+}
+.動畫高度:hover {
+	height: 100px;
+}
+.動畫特效:hover {
+	@extend .角度z軸心轉換;
+	background: red;
+}
+.長度轉換兩秒 {
+
+	/*
+	 transition-property: width;
+	 transition-duration: 2s;
+	*/
+	-webkit-transition: width 2s; /* Safari */
+	transition: width 2s;
+}
+.高度轉換三秒 {
+	//transition: width 2s, height 4s;
+	-webkit-transition: height 3s; /* Safari */
+	transition: height 3s;
+}
+.同時轉換高度和長度 {
+	//transition: width 2s, height 4s;
+	transition-property: width, height;
+	transition-duration: 2s, 3s;
+}
+.動畫特效轉換 {
+	-webkit-transition: -webkit-transform 2s; /* Safari */
+	transition: background 2s, transform 2s;
+}
+
+/*
+transition-timing-function: linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int,start|end)|cubic-bezier(n,n,n,n)|initial|inherit;
+*/
+.線性轉換 {
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
+	//equivalent to cubic-bezier(0, 0, 1, 1)
+}
+.慢快慢的轉換 {
+	-webkit-transition-timing-function: ease;
+	transition-timing-function: ease;
+	//equivalent to cubic-bezier(0.25, 0.1, 0.25, 1)
+}
+.起步較慢的轉換 {
+	-webkit-transition-timing-function: ease-in;
+	transition-timing-function: ease-in;
+	//equivalent to cubic-bezier(0.42, 0, 1, 1)
+}
+.結束較慢的轉換 {
+	-webkit-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	//equivalent to cubic-bezier(0, 0, 0.58, 1)
+}
+.起步和結束較慢的轉換 {
+	-webkit-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
+	//equivalent to cubic-bezier(0.42, 0, 0.58, 1)
+}
+.轉換的廷遲 {
+	//transition: width 2s linear 1s;
+	//第四個參數為廷遲
+	transition-delay: 2s;
+}

@@ -52,7 +52,7 @@
 						}
 					}).done(function(data) {
 						//alert("done-success->" + JSON.stringify(data));
-						x.done="ok";
+						x.done="ok"+action;
 					});
 			};
 			$scope.openTab=function(url){
