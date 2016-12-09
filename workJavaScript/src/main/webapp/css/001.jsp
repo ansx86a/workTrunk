@@ -11,7 +11,9 @@
 	</div>
 	<div id="div0" align="center">
 		<pre>float要多花點時間搞，參考http://zh-tw.learnlayout.com/float.html
-		目前看到Combinators</pre>
+(-webkit for Chrome, Safari; -moz for Firefox, -o for Opera, -ms for Internet Explorer)		
+
+</pre>
 		<p>菜鳥教程(抄w3c)：http://www.runoob.com/</p>
 		<p>CSS 語法 http://www.1keydata.com/css-tutorial/tw/syntax.php</p>
 		<p>scss 語法 http://www.w3cplus.com/sassguide/syntax.html</p>
@@ -55,7 +57,7 @@
 			<a href="#id13">動畫(Transitions,animation)</a>
 		</p>
 		<p>
-			<a href="#id14">id14</a>
+			<a href="#id14">image相關</a>
 		</p>
 		<p>
 			<a href="#id15">id15</a>
@@ -638,7 +640,20 @@
 			
 			<div class="動畫特效 淺藍色背景 單線邊框" >hover動畫特效 transform</div>
 			<div class="動畫特效 動畫特效轉換 淺藍色背景 單線邊框" >hover動畫特效 動畫特效轉換</div>
-			
+			<hr>
+			<div class="背景動畫效果元件 單線邊框">用animation做特效，不一定要綁hover，可直接有效果，動畫效果結束會變回原形</div>
+			<div class="背景動畫效果元件 單線邊框 保留動畫效果">用animation做特效，動畫效果結束不會變回原形</div>			
+			<div class="背景動畫效果元件2 單線邊框">用animation做特效，這次有多段的變化</div>
+			<div class="背景動畫效果元件3 單線邊框">用animation做特效，位置加顏色的變化，廷遲2秒重覆3次，正反正向，速度用ease區線</div>
+			<div class="背景動畫效果元件4 單線邊框">用animation做特效，碰到才會動，離開就不動</div>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->
@@ -646,6 +661,16 @@
 		<br>
 		<textarea id="id14" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
 			spellcheck="false">
+			<link rel="stylesheet" type="text/css" href="mycss.css">
+			圓角的圖片
+			<img class="圓角的圖片" src="2.png" alt="Paris" width="200" height="100">
+			<br>圓形的圖片
+			<img class="圓形的圖片" src="2.png" alt="Paris" width="200" height="100">
+			<br>
+			連結圖片框
+			<a class="連結圖片框" href="2.png">  <img src="2.png" alt="Paris" width="200" height="100"></a>			
+			
+			
 		</textarea>
 		<br>
 		<!-- ******************************************************************************************** -->

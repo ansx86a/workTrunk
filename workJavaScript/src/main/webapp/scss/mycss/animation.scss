@@ -72,3 +72,175 @@ transition-timing-function: linear|ease|ease-in|ease-out|ease-in-out|step-start|
 	//第四個參數為廷遲
 	transition-delay: 2s;
 }
+
+/*以下專門處理css3的keyframes動畫===========================================================*/
+@keyframes 背景動畫效果 {
+	from {
+		background-color: red;
+	}
+	to {
+		background-color: yellow;
+	}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes 背景動畫效果 {
+	from {
+		background-color: red;
+	}
+	to {
+		background-color: yellow;
+	}
+}
+.保留動畫效果 {
+	animation-fill-mode: forwards;
+	//animation-fill-mode: none|forwards|backwards|both|initial|inherit;
+	//保前只看得懂forwards，none會回復原來的狀態，而其它的看不懂應用應該也比較少一點
+}
+.背景動畫效果元件 {
+	background-color: aqua;
+}
+.背景動畫效果元件:hover {
+	-webkit-animation-name: 背景動畫效果; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+	animation-name: 背景動畫效果;
+	animation-duration: 4s;
+	//animation-delay: 2s;
+}
+/////////////////////////////////////////////////////
+@keyframes 背景動畫效果2 {
+	0% {
+		background-color: red;
+	}
+	25% {
+		background-color: yellow;
+	}
+	50% {
+		background-color: blue;
+	}
+	100% {
+		background-color: green;
+	}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes 背景動畫效果2 {
+	0% {
+		background-color: red;
+	}
+	25% {
+		background-color: yellow;
+	}
+	50% {
+		background-color: blue;
+	}
+	100% {
+		background-color: green;
+	}
+}
+.背景動畫效果元件2 {
+	background-color: aqua;
+}
+.背景動畫效果元件2:hover {
+	-webkit-animation-name: 背景動畫效果2; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+	animation-name: 背景動畫效果2;
+	animation-duration: 4s;
+	//animation-delay: 2s;
+}
+////////////////////////////////////////////////////////////
+@keyframes 背景動畫效果3 {
+	0% {
+		background-color: red;
+		left: 0px;
+		top: 0px;
+	}
+	25% {
+		background-color: yellow;
+		left: 200px;
+		top: 0px;
+	}
+	50% {
+		background-color: blue;
+		left: 200px;
+		top: 200px;
+	}
+	75% {
+		background-color: green;
+		left: 0px;
+		top: 200px;
+	}
+	100% {
+		background-color: red;
+		left: 100px;
+		top: 100px;
+	}
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes 背景動畫效果3 {
+	0% {
+		background-color: red;
+		left: 0px;
+		top: 0px;
+	}
+	25% {
+		background-color: yellow;
+		left: 200px;
+		top: 0px;
+	}
+	50% {
+		background-color: blue;
+		left: 200px;
+		top: 200px;
+	}
+	75% {
+		background-color: green;
+		left: 0px;
+		top: 200px;
+	}
+	100% {
+		background-color: red;
+		left: 100px;
+		top: 100px;
+	}
+}
+.背景動畫效果元件3 {
+	background-color: aqua;
+	height: 100px;
+	width: 100px;
+	position: relative;
+}
+.背景動畫效果元件3:hover {
+	-webkit-animation-name: 背景動畫效果3; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+	-webkit-animation-iteration-count: 3; /* Safari 4.0 - 8.0 */
+	-webkit-animation-direction: alternate; /* Safari 4.0 - 8.0 */
+	-webkit-animation-timing-function: ease;
+	//animation-timing-function: linear|ease|ease-in|ease-out|ease-in-out|step-start|step-end|steps(int, start|end)|cubic-bezier(n, n, n, n)|initial|inherit;
+	animation-name: 背景動畫效果3;
+	animation-duration: 4s;
+	animation-delay: 2s;
+	//可以負數，如-2表示略過前2秒的動畫
+	animation-iteration-count: 3;	/*   animation-iteration-count: infinite;//無限次*/
+	animation-direction: alternate;
+	//animation-direction: normal|reverse|alternate|alternate-reverse|initial|inherit;
+	animation-timing-function: ease;
+	// 簡寫：動畫名稱 秒數 線性 廷遲 次數 方向
+	// animation: 背景動畫效果3 3s ease 2s infinite alternate;
+}
+.背景動畫效果元件4 {
+	background-color: aqua;
+	height: 100px;
+	width: 100px;
+	position: relative;
+	animation-name: 背景動畫效果3;
+	animation-duration: 4s;
+	animation-iteration-count: 13;
+	animation-play-state: paused;
+	//animation-play-state: paused|running|initial|inherit;
+}
+.背景動畫效果元件4:hover {
+	//animation-play-state: paused|running|initial|inherit;
+	animation-play-state: running;
+}
