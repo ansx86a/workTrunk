@@ -1,0 +1,35 @@
+﻿/*rwd相關的的樣式=========================================*/
+@media screen and (max-width:480px) {
+	.小螢幕改變顏色 {
+		background-color: gray;
+	}
+}
+
+@media screen and (min-width:480px) and (max-width: 700px) {
+	.中螢幕改變顏色 {
+		background-color: lightgreen;
+	}
+}
+@media screen and (min-width: 700px) {
+	.大螢幕改變顏色 {
+		background-color: aqua;
+	}
+}
+@media screen and (min-width: 700px),screen and (max-width:480px) {
+	.小或大螢幕改變顏色 {
+		background-color: lightpink;
+	}
+}
+
+
+@media screen and  (orientation: portrait) {
+  .直立螢幕改變顏色{
+  	background-color: gray;
+  }
+}
+
+@media screen and  (orientation: landscape) {
+  .橫向螢幕改變顏色{
+  	background-color: lightgreen;
+  }
+}

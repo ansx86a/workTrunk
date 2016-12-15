@@ -27,6 +27,10 @@
 .繼承內距 {
 	padding: inherit;
 }
+.長度包含內距 {
+	box-sizing: border-box;
+	//content-box|border-box|initial|inherit;
+}
 .一半寬度 {
 	width: 50%;
 }
@@ -121,6 +125,65 @@
 .結束右邊的文遶圖 {
 	clear: right;
 }
-.調整文遶圖的父容器大小{
-	 overflow: auto;
+.調整文遶圖的父容器大小 {
+	overflow: auto;
+}
+.可調整大小 {
+	resize: both;
+	//horizontal vertical
+	overflow: auto;
+}
+.flex容器1 {
+	display: -webkit-flex;
+	display: flex;
+	width: 600px;
+	height: 250px;
+	background-color: lightgrey;
+}
+.fles元件1 {
+	background-color: cornflowerblue;
+	width: 180px;
+	height: 150px;
+	margin: 5px;
+}
+.flex容器2 {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	width: 600px;
+	height: 250px;
+	background-color: lightgrey;
+}
+.flex水平排版後靠 {
+	-webkit-justify-content: flex-end;
+	justify-content: flex-end;
+}
+.flex水平排版置中 {
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.flex水平排版均分空白部分 {
+	-webkit-justify-content: space-between;
+	justify-content: space-between;
+}
+.flex水平排版均分空白部分2 {
+	-webkit-justify-content: space-around;
+	justify-content: space-around;
+}
+.flex垂直排版填滿 {
+	-webkit-align-items: stretch;
+	align-items: stretch;
+}
+.flex垂直排版往上 {
+	-webkit-align-items: flex-start;
+	align-items: flex-start;
+}
+.flex垂直排版往下 {
+	-webkit-align-items: flex-end;
+	align-items: flex-end;
+}
+.flex垂直排版置中 {
+	-webkit-align-items: center;
+	align-items: center;
 }

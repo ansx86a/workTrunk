@@ -15,3 +15,57 @@
 .連結圖片框:hover {
 	box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
+.濾鏡模糊 {
+	-webkit-filter: blur(5px); /* Safari 6.0 - 9.0 */
+	filter: blur(5px);
+}
+.濾鏡亮度 {
+	-webkit-filter: brightness(50%); /* Safari 6.0 - 9.0 */
+	filter: brightness(50%);
+}
+.濾鏡對比 {
+	-webkit-filter: contrast(200%); /* Safari */
+	filter: contrast(200%);
+}
+.濾鏡陰影 {
+	-webkit-filter: drop-shadow(8px 8px 10px red); /* Safari */
+	filter: drop-shadow(8px 8px 10px red);
+}
+.濾鏡灰階 {
+	-webkit-filter: grayscale(50%); /* Safari */
+	filter: grayscale(50%);
+}
+.濾鏡色調位移 {
+	-webkit-filter: hue-rotate(90deg); /* Safari */
+	filter: hue-rotate(90deg);
+}
+.濾鏡色調反轉 {
+	-webkit-filter: invert(100%); /* Safari */
+	filter: invert(100%);
+}
+.濾鏡透明度 {
+	-webkit-filter: opacity(30%); /* Safari */
+	filter: opacity(30%);
+}
+.濾鏡飽合度 {
+	-webkit-filter: saturate(800%); /* Safari */
+	filter: saturate(800%);
+}
+.濾鏡墨色 {
+	-webkit-filter: sepia(100%); /* Safari */
+	filter: sepia(100%);
+}
+.多重濾鏡 {
+	-webkit-filter: blur(5px) brightness(50%);  /* Safari */
+	filter: blur(5px) brightness(50%);
+}
+@media only screen and (min-width: 100px){
+    .嚮應式圖片大小1 {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 800px){
+    .嚮應式圖片大小1 {
+        width: 40%;
+    }
+}

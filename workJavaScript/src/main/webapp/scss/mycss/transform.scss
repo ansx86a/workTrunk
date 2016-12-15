@@ -7,6 +7,7 @@
 	-ms-transform: translate(50px, 10px); /* IE 9 */
 	-webkit-transform: translate(50px, 10px); /* Safari */
 	transform: translate(50px, 10px); /* Standard syntax */
+	//置中可以使用-50%,-50%來處理width的問題
 }
 .角度轉換 {
 	-ms-transform: rotate(-2deg); /* IE 9 */

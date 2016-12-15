@@ -39,6 +39,7 @@
 
 /*繼承*/
 h1 {
-  @extend p;
-  color: $我的87顏色;
+  //這個測試碼影嚮到我的bootstrap測試，註解掉
+  //@extend p;
+  //color: $我的87顏色;
 }

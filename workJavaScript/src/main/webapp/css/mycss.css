@@ -20,13 +20,10 @@
       background: #eee;
       font-size: 12px;
       padding: 10px; }
-      .container .文章 .文章內容 p, .container .文章 .文章內容 h1 {
+      .container .文章 .文章內容 p {
         color: #333; }
 
 /*繼承*/
-h1 {
-  color: #888777; }
-
 /**背景相關的樣式======================================================*/
 .灰色背景 {
   /*transparent 透明，#00ff00，rgb(250,0,255)*/
@@ -433,6 +430,9 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
 .浮出外圍線 {
   outline-style: outset; }
 
+.外移外圍線 {
+  outline-offset: 5px; }
+
 /**和佈挶切版扯得上邊的就放到這裡*/
 .用外距置中 {
   margin: auto; }
@@ -460,6 +460,9 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
 
 .繼承內距 {
   padding: inherit; }
+
+.長度包含內距 {
+  box-sizing: border-box; }
 
 .一半寬度 {
   width: 50%; }
@@ -551,6 +554,64 @@ ex:background-size: 100% 100%;background-size: cover;background-size: 50px, 130p
 
 .調整文遶圖的父容器大小 {
   overflow: auto; }
+
+.可調整大小 {
+  resize: both;
+  overflow: auto; }
+
+.flex容器1 {
+  display: -webkit-flex;
+  display: flex;
+  width: 600px;
+  height: 250px;
+  background-color: lightgrey; }
+
+.fles元件1 {
+  background-color: cornflowerblue;
+  width: 180px;
+  height: 150px;
+  margin: 5px; }
+
+.flex容器2 {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 600px;
+  height: 250px;
+  background-color: lightgrey; }
+
+.flex水平排版後靠 {
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end; }
+
+.flex水平排版置中 {
+  -webkit-justify-content: center;
+  justify-content: center; }
+
+.flex水平排版均分空白部分 {
+  -webkit-justify-content: space-between;
+  justify-content: space-between; }
+
+.flex水平排版均分空白部分2 {
+  -webkit-justify-content: space-around;
+  justify-content: space-around; }
+
+.flex垂直排版填滿 {
+  -webkit-align-items: stretch;
+  align-items: stretch; }
+
+.flex垂直排版往上 {
+  -webkit-align-items: flex-start;
+  align-items: flex-start; }
+
+.flex垂直排版往下 {
+  -webkit-align-items: flex-end;
+  align-items: flex-end; }
+
+.flex垂直排版置中 {
+  -webkit-align-items: center;
+  align-items: center; }
 
 /**連結 a 相關的樣式*/
 a.連結點選前綠色:link {
@@ -787,10 +848,10 @@ input.聚焦時變色:focus {
 .沒有子元素變色:empty + span {
   background-color: gray; }
 
-p.選取每個容器中出現的第一個元素:first-child, h1.選取每個容器中出現的第一個元素:first-child {
+p.選取每個容器中出現的第一個元素:first-child {
   background-color: green; }
 
-p.選取出現的第一個元素:first-of-type, h1.選取出現的第一個元素:first-of-type {
+p.選取出現的第一個元素:first-of-type {
   background-color: green; }
 
 input.數字區間變色:in-range {
@@ -805,7 +866,7 @@ input.資料驗証變色:invalid {
 input.資料驗証變色:valid {
   background-color: green; }
 
-.反相選取變色:not(p):not(h1) {
+.反相選取變色:not(p) {
   background-color: yellow; }
 
 span.第2個變色:nth-child(2) {
@@ -1190,3 +1251,84 @@ transition-timing-function: linear|ease|ease-in|ease-out|ease-in-out|step-start|
 
 .連結圖片框:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5); }
+
+.濾鏡模糊 {
+  -webkit-filter: blur(5px);
+  /* Safari 6.0 - 9.0 */
+  filter: blur(5px); }
+
+.濾鏡亮度 {
+  -webkit-filter: brightness(50%);
+  /* Safari 6.0 - 9.0 */
+  filter: brightness(50%); }
+
+.濾鏡對比 {
+  -webkit-filter: contrast(200%);
+  /* Safari */
+  filter: contrast(200%); }
+
+.濾鏡陰影 {
+  -webkit-filter: drop-shadow(8px 8px 10px red);
+  /* Safari */
+  filter: drop-shadow(8px 8px 10px red); }
+
+.濾鏡灰階 {
+  -webkit-filter: grayscale(50%);
+  /* Safari */
+  filter: grayscale(50%); }
+
+.濾鏡色調位移 {
+  -webkit-filter: hue-rotate(90deg);
+  /* Safari */
+  filter: hue-rotate(90deg); }
+
+.濾鏡色調反轉 {
+  -webkit-filter: invert(100%);
+  /* Safari */
+  filter: invert(100%); }
+
+.濾鏡透明度 {
+  -webkit-filter: opacity(30%);
+  /* Safari */
+  filter: opacity(30%); }
+
+.濾鏡飽合度 {
+  -webkit-filter: saturate(800%);
+  /* Safari */
+  filter: saturate(800%); }
+
+.濾鏡墨色 {
+  -webkit-filter: sepia(100%);
+  /* Safari */
+  filter: sepia(100%); }
+
+.多重濾鏡 {
+  -webkit-filter: blur(5px) brightness(50%);
+  /* Safari */
+  filter: blur(5px) brightness(50%); }
+
+@media only screen and (min-width: 100px) {
+  .嚮應式圖片大小1 {
+    width: 100%; } }
+@media only screen and (min-width: 800px) {
+  .嚮應式圖片大小1 {
+    width: 40%; } }
+/*rwd相關的的樣式=========================================*/
+@media screen and (max-width: 480px) {
+  .小螢幕改變顏色 {
+    background-color: gray; } }
+@media screen and (min-width: 480px) and (max-width: 700px) {
+  .中螢幕改變顏色 {
+    background-color: lightgreen; } }
+@media screen and (min-width: 700px) {
+  .大螢幕改變顏色 {
+    background-color: aqua; } }
+@media screen and (min-width: 700px), screen and (max-width: 480px) {
+  .小或大螢幕改變顏色 {
+    background-color: lightpink; } }
+@media screen and (orientation: portrait) {
+  .直立螢幕改變顏色 {
+    background-color: gray; } }
+@media screen and (orientation: landscape) {
+  .橫向螢幕改變顏色 {
+    background-color: lightgreen; } }
