@@ -8,38 +8,50 @@
   <body>
     <div style="position: fixed; bottom: 10px; right: 10px; width: 50px; border: 3px solid #73AD21;">
       <a href="#div0">回開頭</a>
+      <p>目前看到禁用 fieldset，從這裡接下去看</p>
+      
+      
     </div>
-                                <pre>
-                                                Bootstrap 所有 JavaScript 外掛都相依於 jQuery
-                                                目前 Bootstrap 3 為了相容性考量，支援 jQuery 1.9.1 之後的版本，請勿使用 jQuery 2.x
-                                                3.37好像有支援jquery3，以後再看看
-                                                Internet Explorer 8(6-8?) 需要使用 Respond.js才能支援Media Query
-                                                引入respond.min.js，但要在css的后面（越早引入越好，在ie下面看到页面闪屏的概率就越低，因为最初css会先渲染出来，如果respond.js加载得很后面，这时重新根据media query解析出来的css会再改变一次页面的布局等，所以看起来有闪屏的现象）
-                                                Bootstrap 3 不支援舊版本 IE 相容性模式。為了確保 IE 是使用最新的呈現模式，考慮將下列 <meta> 加入你的頁面：
-                                                ＜meta http-equiv="X-UA-Compatible" content="IE=edge"＞
-                                                
+                                    <pre>
+                                                      Bootstrap 所有 JavaScript 外掛都相依於 jQuery
+                                                      目前 Bootstrap 3 為了相容性考量，支援 jQuery 1.9.1 之後的版本，請勿使用 jQuery 2.x
+                                                      3.37好像有支援jquery3，以後再看看
+                                                      Internet Explorer 8(6-8?) 需要使用 Respond.js才能支援Media Query
+                                                      引入respond.min.js，但要在css的后面（越早引入越好，在ie下面看到页面闪屏的概率就越低，因为最初css会先渲染出来，如果respond.js加载得很后面，这时重新根据media query解析出来的css会再改变一次页面的布局等，所以看起来有闪屏的现象）
+                                                      Bootstrap 3 不支援舊版本 IE 相容性模式。為了確保 IE 是使用最新的呈現模式，考慮將下列 <meta> 加入你的頁面：
+                                                      ＜meta http-equiv="X-UA-Compatible" content="IE=edge"＞
+                                                      
     </pre>
     <div id="div0" align="center">
       <p>
         <a href="#id1">格線grid</a>
       </p>
       <p>
-        <a href="#id2">顯示和排版</a>
+        <a href="#id2">顯示和排版(文字排版、程式碼使用)</a>
       </p>
       <p>
-        <a href="#id3">id3</a>
+        <a href="#id3">表格</a>
       </p>
       <p>
-        <a href="#id4">id4</a>
+        <a href="#id4">表單</a>
       </p>
       <p>
-        <a href="#id5">id5</a>
+        <a href="#id5">input項目</a>
       </p>
       <p>
         <a href="#id6">id6</a>
       </p>
       <p>
         <a href="#id7">id7</a>
+      </p>
+      <p>
+        <a href="#id8">id8</a>
+      </p>
+      <p>
+        <a href="#id9">id9</a>
+      </p>
+      <p>
+        <a href="#id10">id10</a>
       </p>
       <!-- ******************************************************************************************** -->
       <button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
@@ -437,34 +449,204 @@
         <dd class="單線邊框">相關描述3</dd>
       </dl>
       <dl class="dl-horizontal 單線邊框">
-  <dt class="單線邊框">專業術語1</dt>
-  <dd class="單線邊框">相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1</dd>  
-  <dt class="單線邊框">專業術語2</dt>
-  <dd class="單線邊框">相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2</dd>  
-  <dt class="單線邊框">專業術語3</dt>
-  <dd class="單線邊框">相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3</dd>
-</dl>
+        <dt class="單線邊框">專業術語1</dt>
+        <dd class="單線邊框">相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1相關描述1</dd>
+        <dt class="單線邊框">專業術語2</dt>
+        <dd class="單線邊框">相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2相關描述2</dd>
+        <dt class="單線邊框">專業術語3</dt>
+        <dd class="單線邊框">相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3相關描述3</dd>
+      </dl>
       
     </div>
     <br>
     <div class="container-fluid 單線邊框 橘色邊框">
       <div class="alert alert-success" role="alert">
-        <p><b>aaaaaaaaaaaaaaaaa</b></p>
+        <p><b>code標籤，用來表示程式碼font-size: 90%;color:#c7254e;background-color: #f9f2f4;......</b></p>
+        <p><b>pre-scrollable類別，max-height: 340px;overflow-y: scroll;</b></p>
+        <p><b>kbd標籤來指出要經由鍵盤來輸入的內容。font-size: 90%;color: #fff;background-color: #333;......</b></p>
+        <p><b>var標籤用來包變數，samp標籤用來包電腦的輸出，由於樣式改變很小，就不做範例了</b></p>
       </div>
+      <p>code標籤<code>public static void main (String args){<br>//hello world<br>}</code></p>
+      純pre如下，使用pre+code標籤看不出任何效果
+    <pre class="pre-scrollable">public static void main (String args){<br>//hello world<br>}</pre>
+    <p>kbd單一使用，key <kbd>ipconfig</kbd> 和複合使用 <kbd><kbd>ctrl</kbd> + <kbd>c</kbd></kbd></p>
+  </div>
+  <br>
+</html>
+</textarea>
+<br>
+<!-- ******************************************************************************************** -->
+<button type="button" onclick="javascriptWindow(document.getElementById('id3').value );">測試3</button>
+<br>
+<textarea id="id3" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+spellcheck="false">
+<html lang="zh-Hant-TW">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <div class="container-fluid 單線邊框 橘色邊框">
+    <div class="alert alert-success" role="alert">
+      <p><b>table類別，會把裡面的th、td調整如右padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd</b></p>
+      <p><b>table-striped類別，單數例變色，ie8以下不支援，tr:nth-child(odd){background-color: #f9f9f9;}</b></p>
     </div>
-    <br>
+    加上class=table的表格
+    <table class="table table-striped">
+      <caption>Optional 表格標題選填.</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-success" role="alert">
+      <p><b>table-bordered類別，加上邊框 border: 1px solid #ddd;</b></p>
+      <p><b>table-hover類別，hover變色，.table-hover>tbody>tr:hover {background-color: #f5f5f5;}</b></p>
+    </div>
+    加上class=table的表格
+    <table class="table table-bordered table-hover">
+      <caption>Optional 表格標題選填.</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-success" role="alert">
+      <p><b>table-condensed類別，縮小間距讓表格更緊實，th和td padding: 5px;</b></p>
+      <p><b>.active類別  當滑鼠移入某個 row 或儲存格（cell）時設置顏色。background-color: #f5f5f5;</b></p>
+      <p><b>.success類別 指出一個成功或積極的動作。background-color: #dff0d8;</b></p>
+      <p><b>.info類別  background-color: #d9edf7;</b></p>
+      <p><b>.warning類別 指出一個需要注意的警告。background-color: #fcf8e3;</b></p>
+      <p><b>.danger類別  指出一個危險或潛在有害的行為。background-color: #f2dede;</b></p>
+    </div>
+    加上class=table的表格
+    <table class="table table-condensed">
+      <caption>Optional 表格標題選填.</caption>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr >
+          <td>1</td>
+          <td>沒有設class</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr class="active">
+          <td>2</td>
+          <td>class="active"</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr class="success">
+          <td>3</td>
+          <td>class="success"</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+        <tr class="info">
+          <td>1</td>
+          <td>class="info"</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr class="warning">
+          <td>2</td>
+          <td>class="warning"</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr class="danger">
+          <td>3</td>
+          <td>class="danger"</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alert alert-success" role="alert">
+      <p><b>table-responsive類別，實作自適應表格，上層用div設class=table-responsive，就可以在小於768時長出水平捲軸(overflow-x: auto;)</b></p>
+      <p><b>firefox中，fieldset會有問題，要自行修正@-moz-document url-prefix() {  fieldset { display: table-cell; }}</b></p>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+        </tbody>
+      </table>
+      
+    </div>
     
-  </html>
-  </textarea>
+  </div>
   <br>
-  <!-- ******************************************************************************************** -->
-  <button type="button" onclick="javascriptWindow(document.getElementById('id3').value );">測試3</button>
-  <br>
-  <textarea id="id3" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
-  spellcheck="false">
-  <script>
-  
-  </script>
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
@@ -472,9 +654,114 @@
   <br>
   <textarea id="id4" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
-  
-  </script>
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>help-block類別，說明註解文字，適用p標籤，display: block;margin-top: 5px;margin-bottom: 10px;color: #737373;</b></p>
+        <p><b>form-control類別，會設置input(check和file不用設？)、textarea、select相關的寬100%，行高、字型大小、背景色、外框圓角…</b></p>
+        <p><b>form-group類別，適合包一個lable和一個輸入的form-control，文件說包裝在一起以取得最佳的排列組合，我認為只是控元件間隔而已，margin-bottom: 15px;</b></p>
+        <p><b>checkbox and radio類別，position: relative;display: block;margin-top: 10px;margin-bottom: 10px;;</b></p>
+        <p><b>form標籤的role="form"，是為了無障礙閱讀器的加強功能而已，就加上吧</b></p>
+        <p><b>總結：form標籤加上role="form"，輸入欄div的class用form-group，input輸入欄的class用form-control，checkbox和radio的div的class用checkbox和radio</b></p>
+      </div>
+      <form role="form">
+        <div class="form-group 單線邊框">
+          <label for="exampleInputEmail1">電子郵件</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" placeholder="輸入電子郵件">
+        </div>
+        <div class="form-group 單線邊框">
+          <label for="exampleInputPassword1">密碼</label>
+          <input type="密碼" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group 單線邊框">
+          <label for="exampleInputFile">檔案上傳</label>
+          <input type="file" id="exampleInputFile">
+          <p class="help-block">在此示範區塊層級輔助說明文字。</p>
+        </div>
+        <div class="checkbox 單線邊框">
+          <label>
+            <input type="checkbox"> 勾選我
+          </label>
+        </div>
+        <button type="submit" class="btn btn-default">送出</button>
+      </form>
+    </div>
+    <br>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>form-inline類別，子元件繼承position: relative;display: table;border-collapse: separate;</b></p>
+        <p><b>form-inline類別 (form-group,checkbox,radio,form-control)類別改變了div為inline-block(768px以上)，才能一行多個div,input</b></p>
+        <p><b>sr-only類別，不顯示，閱讀器會唸出來，每個輸入欄都有label應該是標準做法</b></p>
+        <p><b>input-group後補，在元件的單元再看看，input-group不能和form-group混用，但可放到form-group中</b></p>
+        <p><b>總結：不要用，因為加上form-inline，元件width會被設成auto，要改的話要自已想辦法設width</b></p>
+      </div>
+      <form class="form-inline" role="form">
+        <div class="form-group 單線邊框">
+          <div class="input-group 單線邊框 橘色邊框">
+            <label class="sr-only" for="exampleInputEmail2">電子郵件</label>
+            <div class="input-group-addon">@</div>
+            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="輸入電子郵件">
+          </div>
+        </div>
+        <div class="form-group 單線邊框">
+          <label class="sr-only" for="exampleInputPassword2">密碼</label>
+          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="密碼">
+        </div>
+        <div class="checkbox 單線邊框">
+          <label>
+            <input type="checkbox"> 記住我
+          </label>
+        </div>
+        <button type="submit" class="btn btn-default">登入</button>
+      </form>
+    </div>
+    <br>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>form-horizontal類別，用來12個col排版表單元件(768px以上有用)</b></p>
+        <p><b>control-label類別，form-horizontal底下會文字右靠，padding-top: 7px;margin-bottom: 0;text-align: right;</b></p>
+        <p><b>label可以直接設col，我想input和(checkbox,radio的div)都視為元件，再包1層div設col</b></p>
+        <p><b>form-control-static類別，適合放在p標籤，用來顯示純文字</b></p>
+        <p><b>總結：感覺應該不錯用，1行pc分2-4欄，平板2欄，手機1欄</b></p>
+      </div>
+      <form class="form-horizontal" role="form">
+        <div class="form-group 單線邊框">
+          <label for="inputEmail3" class="col-sm-2 control-label 單線邊框 橘色邊框">電子郵件</label>
+          <div class="col-sm-10 單線邊框 橘色邊框">
+            <p class="form-control-static">靜態控制email@example.com</p>
+          </div>
+        </div>
+        <div class="form-group 單線邊框">
+          <label for="inputPassword3" class="col-sm-2 control-label 單線邊框 橘色邊框">密碼</label>
+          <div class="col-sm-10 單線邊框 橘色邊框">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="密碼">
+          </div>
+        </div>
+        <div class="form-group 單線邊框">
+          <div class="col-sm-offset-2 col-sm-10 單線邊框 橘色邊框">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> 記住我
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group 單線邊框">
+          <div class="col-sm-offset-2 col-sm-10 單線邊框 橘色邊框">
+            <button type="submit" class="btn btn-default">登入</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br>
+  </html>
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
@@ -482,9 +769,123 @@
   <br>
   <textarea id="id5" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+    <script src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <div class="container-fluid 單線邊框 橘色邊框">
+    <div class="alert alert-success" role="alert">
+      <p><b>input 的type的東西有夠多，以後再用w3c的例子補完</b></p>
+      <p><b>checkbox-inline和radio-inline，display: inline-block;和字型之類的…</b></p>
+      <p><b>checkbox的label空值的時候可設定aria-label告訴閱讀器</b></p>
+    </div>
+    type=text
+    <input type="text" class="form-control" placeholder="請輸入文字">
+    <input class="form-control"  type="text" placeholder="禁用的樣式..." disabled>
+    <input class="form-control" type="text" placeholder="唯讀的樣式，可focus…" readonly>
+    <hr>
+    checkbox
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="">
+        checkbox1
+      </label>
+    </div>
+    <div class="checkbox disabled">
+      <label>
+        <input type="checkbox" value="" disabled>
+        checkbox disabled
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        radio  value="option1"
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+        radio  value="option2"
+      </label>
+    </div>
+    <div class="radio disabled">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+        radio disabled
+      </label>
+    </div>
+    設定成inline
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+    </label>
+    <label class="checkbox-inline">
+      <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+    </label>
+    
+    
+    <hr>
+     textarea 會有錯誤，所以用jsp註解掉無法看效果
+    <%--  <textarea class="form-control" rows="3"></textarea> --%>
+    <hr>
+    label沒有填值的時候，可在aria-label設定值告訴閱讀器
+    <div class="checkbox">
+  <label>
+    <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+  </label>
+</div>
+    
+
+    
+  </div>
   
-  </script>
+  <br>
+          <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>很單純地展現單選和複選的select</b></p>
+      </div>
+    </div>
+    <select class="form-control">
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+</select>
+
+<select multiple class="form-control">
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+  <option>5</option>
+</select>
+    <br>
+  
+</html>
+
+  
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
@@ -542,9 +943,24 @@
   <br>
   <textarea id="id11" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>aaaaaaaaaaaaaaaaa</b></p>
+      </div>
+    </div>
+    <br>
+    
+    
+  </html>
   
-  </script>
   </textarea>
   <br>
 </div>
