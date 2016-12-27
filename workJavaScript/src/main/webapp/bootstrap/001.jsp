@@ -8,19 +8,18 @@
   <body>
     <div style="position: fixed; bottom: 10px; right: 10px; width: 50px; border: 3px solid #73AD21;">
       <a href="#div0">回開頭</a>
-      <p>目前看到禁用 fieldset，從這裡接下去看</p>
-      
-      
     </div>
-                                    <pre>
-                                                      Bootstrap 所有 JavaScript 外掛都相依於 jQuery
-                                                      目前 Bootstrap 3 為了相容性考量，支援 jQuery 1.9.1 之後的版本，請勿使用 jQuery 2.x
-                                                      3.37好像有支援jquery3，以後再看看
-                                                      Internet Explorer 8(6-8?) 需要使用 Respond.js才能支援Media Query
-                                                      引入respond.min.js，但要在css的后面（越早引入越好，在ie下面看到页面闪屏的概率就越低，因为最初css会先渲染出来，如果respond.js加载得很后面，这时重新根据media query解析出来的css会再改变一次页面的布局等，所以看起来有闪屏的现象）
-                                                      Bootstrap 3 不支援舊版本 IE 相容性模式。為了確保 IE 是使用最新的呈現模式，考慮將下列 <meta> 加入你的頁面：
-                                                      ＜meta http-equiv="X-UA-Compatible" content="IE=edge"＞
-                                                      
+    <p>
+   
+    </p>
+    <pre>
+Bootstrap 所有 JavaScript 外掛都相依於 jQuery
+目前 Bootstrap 3 為了相容性考量，支援 jQuery 1.9.1 之後的版本，請勿使用 jQuery 2.x
+3.37好像有支援jquery3，以後再看看
+Internet Explorer 8(6-8?) 需要使用 Respond.js才能支援Media Query
+引入respond.min.js，但要在css的后面（越早引入越好，在ie下面看到页面闪屏的概率就越低，因为最初css会先渲染出来，如果respond.js加载得很后面，这时重新根据media query解析出来的css会再改变一次页面的布局等，所以看起来有闪屏的现象）
+Bootstrap 3 不支援舊版本 IE 相容性模式。為了確保 IE 是使用最新的呈現模式，考慮將下列 <meta> 加入你的頁面：
+meta http-equiv="X-UA-Compatible" content="IE=edge"＞
     </pre>
     <div id="div0" align="center">
       <p>
@@ -39,13 +38,13 @@
         <a href="#id5">input項目</a>
       </p>
       <p>
-        <a href="#id6">id6</a>
+        <a href="#id6">按鈕</a>
       </p>
       <p>
-        <a href="#id7">id7</a>
+        <a href="#id7">圖片</a>
       </p>
       <p>
-        <a href="#id8">id8</a>
+        <a href="#id8">顯示，輔助類主攻顏色變化，浮動顯示、輔助圖示</a>
       </p>
       <p>
         <a href="#id9">id9</a>
@@ -669,9 +668,10 @@ spellcheck="false">
         <p><b>form-group類別，適合包一個lable和一個輸入的form-control，文件說包裝在一起以取得最佳的排列組合，我認為只是控元件間隔而已，margin-bottom: 15px;</b></p>
         <p><b>checkbox and radio類別，position: relative;display: block;margin-top: 10px;margin-bottom: 10px;;</b></p>
         <p><b>form標籤的role="form"，是為了無障礙閱讀器的加強功能而已，就加上吧</b></p>
+        <p><b>form-group-lg和input-lg的效果相同，只是廣域設在form，form-group-sm同理就不測了</b></p>
         <p><b>總結：form標籤加上role="form"，輸入欄div的class用form-group，input輸入欄的class用form-control，checkbox和radio的div的class用checkbox和radio</b></p>
       </div>
-      <form role="form">
+      <form role="form" class="form-group-lg">
         <div class="form-group 單線邊框">
           <label for="exampleInputEmail1">電子郵件</label>
           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="輸入電子郵件">
@@ -769,122 +769,225 @@ spellcheck="false">
   <br>
   <textarea id="id5" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-  <head>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/mycss.css">
-    <script src="js/jquery-1.12.4.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-  </head>
-  <div class="container-fluid 單線邊框 橘色邊框">
-    <div class="alert alert-success" role="alert">
-      <p><b>input 的type的東西有夠多，以後再用w3c的例子補完</b></p>
-      <p><b>checkbox-inline和radio-inline，display: inline-block;和字型之類的…</b></p>
-      <p><b>checkbox的label空值的時候可設定aria-label告訴閱讀器</b></p>
-    </div>
-    type=text
-    <input type="text" class="form-control" placeholder="請輸入文字">
-    <input class="form-control"  type="text" placeholder="禁用的樣式..." disabled>
-    <input class="form-control" type="text" placeholder="唯讀的樣式，可focus…" readonly>
-    <hr>
-    checkbox
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="">
-        checkbox1
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>input 的type的東西有夠多，以後再用w3c的例子補完</b></p>
+        <p><b>checkbox-inline和radio-inline，display: inline-block;和字型之類的…</b></p>
+        <p><b>checkbox的label空值的時候可設定aria-label告訴閱讀器</b></p>
+      </div>
+      type=text
+      <input type="text" class="form-control" placeholder="請輸入文字">
+      <input class="form-control"  type="text" placeholder="禁用的樣式..." disabled>
+      <input class="form-control" type="text" placeholder="唯讀的樣式，可focus…" readonly>
+      <input class="form-control input-lg" type="text" placeholder=".input-lg，大字型的input">
+	  <input class="form-control" type="text" placeholder="Default input，預設大小的input">
+	  <input class="form-control input-sm" type="text" placeholder=".input-sm，小型的input">
+      <span id="helpBlock" class="help-block">help-block類別的文字樣式，用在表單的輔助說明用的</span>
+      <hr>
+      checkbox
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="">
+          checkbox1
+        </label>
+      </div>
+      <div class="checkbox disabled">
+        <label>
+          <input type="checkbox" value="" disabled>
+          checkbox disabled
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+          radio  value="option1"
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+          radio  value="option2"
+        </label>
+      </div>
+      <div class="radio disabled">
+        <label>
+          <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+          radio disabled
+        </label>
+      </div>
+      設定成inline
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
       </label>
-    </div>
-    <div class="checkbox disabled">
-      <label>
-        <input type="checkbox" value="" disabled>
-        checkbox disabled
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
       </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-        radio  value="option1"
+      <label class="checkbox-inline">
+        <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
       </label>
-    </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-        radio  value="option2"
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
       </label>
-    </div>
-    <div class="radio disabled">
-      <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-        radio disabled
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
       </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+      </label>
+      
+      
+      <hr>
+      textarea 會有錯誤，所以用jsp註解掉無法看效果
+      <%--  <textarea class="form-control" rows="3"></textarea> --%>
+      <hr>
+      label沒有填值的時候，可在aria-label設定值告訴閱讀器
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+        </label>
+      </div>
+      
+      
     </div>
-    設定成inline
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-    </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
-    </label>
-    <label class="checkbox-inline">
-      <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
-    </label>
     
-    
-    <hr>
-     textarea 會有錯誤，所以用jsp註解掉無法看效果
-    <%--  <textarea class="form-control" rows="3"></textarea> --%>
-    <hr>
-    label沒有填值的時候，可在aria-label設定值告訴閱讀器
-    <div class="checkbox">
-  <label>
-    <input type="checkbox" id="blankCheckbox" value="option1" aria-label="...">
-  </label>
-</div>
-<div class="radio">
-  <label>
-    <input type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
-  </label>
-</div>
-    
-
-    
-  </div>
-  
-  <br>
-          <div class="container-fluid 單線邊框 橘色邊框">
+    <br>
+    <div class="container-fluid 單線邊框 橘色邊框">
       <div class="alert alert-success" role="alert">
         <p><b>很單純地展現單選和複選的select</b></p>
+        <p><b>fieldset標籤有相容性問題，所以不建議使用啦</b></p>
+      </div>
+      <select class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      <select multiple class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+      <br>
+      
+      <div class=" 單線邊框 ">
+        使用fieldset，disabled後，裡面的就都disabled，連結部分ie11以下有問題，要用 JavaScript 去禁用連結
+        ie9以下也不支援fieldset元素中設置 disabled 屬性，較安全性的作法是，使用自訂的 JavaScript 去禁用 fieldset
+        <fieldset disabled >
+          <div class="form-group">
+            <label for="disabledTextInput">禁用 input</label>
+            <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+          </div>
+          <div class="form-group">
+            <label for="disabledSelect">禁用下拉選單</label>
+            <select id="disabledSelect" class="form-control">
+              <option>Disabled select</option>
+            </select>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> 禁用 checkbox
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">禁用按鈕</button>
+        </fieldset>
       </div>
     </div>
-    <select class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
-
-<select multiple class="form-control">
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-</select>
     <br>
-  
-</html>
-
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>has-success類別，改變底下控制項的顏色，color: #3c763d;</b></p>
+        <p><b>has-warning類別，改變底下控制項的顏色，color: #8a6d3b;</b></p>
+        <p><b>has-error類別，改變底下控制項的顏色，color: #a94442;</b></p>
+        <p><b>has-xxx類別，對應到checkbox或radio的div層(視div)層為控制項</b></p>
+        <p><b>control-label類別，設置在label上面，會對應has-xxx 改變顏色</b></p>
+      </div>
+      <div class="form-group has-success">
+        <label class="control-label" for="inputSuccess1">Input成功</label>
+        <input type="text" class="form-control" id="inputSuccess1">
+      </div>
+      <div class="form-group has-warning">
+        <label class="control-label" for="inputWarning1">Input警告</label>
+        <input type="text" class="form-control" id="inputWarning1">
+      </div>
+      <div class="form-group has-error">
+        <label class="control-label" for="inputError1">Input錯誤</label>
+        <input type="text" class="form-control" id="inputError1">
+      </div>
+      <div class="has-success">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxSuccess" value="option1">
+            Checkbox成功
+          </label>
+        </div>
+      </div>
+      <div class="has-warning">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxWarning" value="option1">
+            Checkbox警告
+          </label>
+        </div>
+      </div>
+      <div class="has-error">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" id="checkboxError" value="option1">
+            Checkbox錯誤
+          </label>
+        </div>
+      </div>
+      
+      
+      
+    </div>
+    <br>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>sr-only類別，會不顯示但是閱讀器會念</b></p>
+        <p><b>aria-hidden="true"，閱讀器會忽略這個控制項</b></p>
+        <p><b>aria-describedby，可以指個id，閱讀器會去找那個id</b></p>
+        <p><b>has-feedback類別，會將div的position: relative;</b></p>
+        <p><b>form-control-feedback類別，position: absolute;right: 0;z-index: 2</b></p>
+        <p><b>glyphicon glyphicon-ok，原理是先設字型檔後，用before寫字產生圖示吧，反正依樣畫胡盧就好了</b></p>
+      </div>
+      <div class="form-group has-success has-feedback">
+        <label class="control-label" for="inputSuccess2">Input with success</label>
+        <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+      </div>
+      <div class="form-group has-warning has-feedback">
+        <label class="control-label" for="inputWarning2">Input with warning</label>
+        <input type="text" class="form-control" id="inputWarning2" aria-describedby="inputWarning2Status">
+        <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+        <span id="inputWarning2Status" class="sr-only">(warning)</span>
+      </div>
+      <div class="form-group has-error has-feedback">
+        <label class="control-label" for="inputError2">Input with error</label>
+        <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
+        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+        <span id="inputError2Status" class="sr-only">(error)</span>
+      </div>
+    </div>
+    <br>
+  </html>
   
   </textarea>
   <br>
@@ -893,9 +996,57 @@ spellcheck="false">
   <br>
   <textarea id="id6" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
-  
-  </script>
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>按鈕的樣式的展式</b></p>
+        <p><b>作為最佳實踐，我們強烈建議盡可能的使用button元素以確保在跨瀏覽器上能有一致的呈現</b></p>
+      </div>
+<button type="button" class="btn btn-default">Default標準按鈕btn-default</button>
+<br>
+<button type="button" class="btn btn-primary">Primary主要的操作項目btn-primary</button>
+<br>
+<button type="button" class="btn btn-success">Success成功或積極的操作btn-success</button>
+<br>
+<button type="button" class="btn btn-info">Info訊息提示btn-info</button>
+<br>
+<button type="button" class="btn btn-warning">Warning指出應謹慎採取此一行動btn-warning</button>
+<br>
+<button type="button" class="btn btn-danger">Danger指出危險或潛在負面作用的行動btn-danger</button>
+<br>
+<button type="button" class="btn btn-link">Link連結並同時保持按鈕行為btn-link</button>      
+<br>
+  <button type="button" class="btn btn-primary btn-lg">大按鈕btn-lg</button>
+<br>
+  <button type="button" class="btn btn-success">預試按鈕</button>
+<br>
+  <button type="button" class="btn btn-info btn-sm">小按鈕btn-sm</button>
+<br>
+  <button type="button" class="btn btn-warning btn-xs">最小按鈕btn-xs</button>
+<br>
+  <button type="button" class="btn btn-danger btn-block">填滿寬度的按鈕btn-block</button>
+<br>
+ <button type="button" class="btn btn-info"  disabled="disabled">disabled的樣式，對比右邊的按鈕</button>
+ <button type="button" class="btn btn-info">對比右邊的按鈕，按下去比對樣式</button>
+  <button type="button" class="btn btn-info active">展示active按下去的class</button>
+
+ <p>雖然按鈕類別可以套用至 a 和button元素上，但僅有button元素是被巡覽列和巡覽元件所支援，
+ .disabled 類別使用 pointer-events: none (css3滑鼠事件會穿透到下面的元件)樣式設置去禁用 a 的連結功能，有相容問題
+ </p>
+ <a href="http://www.kimo.com.tw" class="btn btn-primary" role="button">a標籤button樣式，可用#id來link錨點</a>
+ <a href="http://www.kimo.com.tw" class="btn btn-primary disabled" role="button">a標籤button樣式，加入disable樣式，也真的會disable</a>
+    </div>
+    <br>
+    
+    
+  </html>
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
@@ -903,9 +1054,34 @@ spellcheck="false">
   <br>
   <textarea id="id7" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
-  
-  </script>
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>aaaaaaaaaaaaaaaaa</b></p>
+      </div>
+      加入 .img-responsive 類別，套用display: block;max-width: 100%; 和 height: auto; 屬性
+      <img src="../css/2.png" class="img-responsive" alt="Responsive image">
+      Internet Explorer 8 不支援 CSS3 的圓角屬性。
+      <br>
+      img-rounded類別，圓角圖border-radius: 6px;
+      <img src="../css/2.png" alt="..." class="img-responsive img-rounded">
+      img-circle類別，圖形圖border-radius: 50%;
+<img src="../css/2.png" alt="..." class="img-responsive img-circle">
+img-thumbnail類別，圖片快取縮圖樣式，display: inline-block;會蓋過img-responsive的block
+，padding: 4px;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;
+<br>
+<img src="../css/2.png" alt="..." class="img-responsive img-thumbnail">
+      
+    </div>
+    <br>
+    
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
@@ -913,9 +1089,126 @@ spellcheck="false">
   <br>
   <textarea id="id8" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
   spellcheck="false">
-  <script>
-  
-  </script>
+  <!DOCTYPE html>
+  <html lang="zh-Hant-TW">
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+      <script src="js/jquery-1.12.4.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+    </head>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>顯示一些顏色代表的意義而已</b></p>
+      </div>
+      <p class="text-muted">text-muted 靜態文字</p>
+<p class="text-primary">text-primary 主要的重點文字</p>
+<p class="text-success">text-success 成功文字</p>
+<p class="text-info">text-info 訊息文字</p>
+<p class="text-warning">text-warning 警告文字</p>
+<p class="text-danger">text-danger 危險文字</p>
+<p class="bg-primary">bg-primary重點背景</p>
+<p class="bg-success">bg-success成功背景</p>
+<p class="bg-info">bg-info訊息背景</p>
+<p class="bg-warning">bg-warning警告背景</p>
+<p class="bg-danger">bg-danger危險背景</p>     
+    </div>
+    <br>
+    <div class="container-fluid 單線邊框 橘色邊框">
+      <div class="alert alert-success" role="alert">
+        <p><b>顯示一些特別的圖示</b></p>
+      </div>
+      <div class="單線邊框" style="width:200px">
+      關閉按鈕(float: right;)
+      <button type="button" class="close"><span aria-hidden="true">x</span><span class="sr-only">Close</span></button>
+      </div>
+      三角下拉caret(用border畫出來的)<span class="caret"></span>
+    
+    <div class="center-block" style="width:200px;background-color:#aaa;">center-block類別，用margin置中，要width小於容器才有用</div>  
+    <div class="單線邊框" style="width:800px;">
+    <div class="pull-right">pull-right類別，右靠 float: right !important;</div>
+    <div class="pull-left">pull-left類別，左靠 float: left !important;</div>
+    </div>
+    <p style="background-color:aqua;color:red;">沒有clearfix的結果</p>
+ 
+    <div class="clearfix 單線邊框" style="width:800px;">
+    <div class="pull-right">pull-right類別，右靠 float: right !important;</div>
+    <div class="pull-left">pull-left類別，左靠 float: left !important;</div>
+    </div>
+    <p style="background-color:aqua;color:red;">有clearfix的結果</p>
+    <p>類別show(display: block !important;)</p>
+    <p>類別hidden(display: none !important;visibility: hidden !important;)</p>
+    <p>類別.invisible(visibility: hidden;)</p>
+    <p class="is-visible">is-visible類別，表示顯示，is-hidden類別，表示不顯示，在table中會變成變色，在其它中會影嚮顯示</p>
+    <p class="is-hidden">is-hidden類別，表示不顯示</p>
+    <table class="table table-bordered table-hover">
+    <tr>
+    <td><span class="hidden-xs">hidden-xs 768以下(display: none!important;)</span></td>
+    <td><span class="visible-xs-inline">visible-xs-inline 768以下顯示(display: inline!important;)</span></td>    
+    <td><span class="visible-xs-inline-block">visible-xs-inline-block 768以下顯示(display: inline-block!important;)</span></td>
+    <td><span class="visible-xs-block">visible-xs-block 768以下顯示(display: block!important;)</span></td>
+    </tr>
+    <tr>
+    <td><span class="hidden-sm">hidden-sm 768-992(display: none!important;)</span></td>
+    <td><span class="visible-sm-inline">visible-sm-inline 768-992顯示(display: inline!important;)</span></td>    
+    <td><span class="visible-sm-inline-block">visible-sm-inline-block 768-992顯示(display: inline-block!important;)</span></td>
+    <td><span class="visible-sm-block">visible-sm-block 768-992顯示(display: block!important;)</span></td>
+    </tr>
+    <tr>
+    <td><span class="hidden-md">hidden-md 992-1200(display: none!important;)</span></td>
+    <td><span class="visible-md-inline">visible-md-inline 992-1200顯示(display: inline!important;)</span></td>    
+    <td><span class="visible-md-inline-block">visible-md-inline-block 992-1200顯示(display: inline-block!important;)</span></td>
+    <td><span class="visible-md-block">visible-md-block 992-1200顯示(display: block!important;)</span></td>
+    </tr>
+    <tr>
+    <td><span class="hidden-lg">hidden-md 1200以上(display: none!important;)</span></td>
+    <td><span class="visible-lg-inline">visible-md-inline 1200以上(display: inline!important;)</span></td>    
+    <td><span class="visible-lg-inline-block">visible-md-inline-block 1200以上(display: inline-block!important;)</span></td>
+    <td><span class="visible-lg-block">visible-md-block 1200以上(display: block!important;)</span></td>
+    </tr>
+    </table>
+    列印如下
+    <table class="table table-bordered table-striped responsive-utilities">
+      <thead>
+        <tr>
+          <th>類別<!--Classes--></th>
+          <th>瀏覽器<!--Browser--></th>
+          <th>列印<!--Print--></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>
+            <code>.visible-print-block</code><br>
+            <code>.visible-print-inline</code><br>
+            <code>.visible-print-inline-block</code>
+          </th>
+          <td class="is-hidden">隱藏<!--Hidden--></td>
+          <td class="is-visible">顯示<!--Visible--></td>
+        </tr>
+        <tr>
+          <th><code>.hidden-print</code></th>
+          <td class="is-visible">顯示<!--Visible--></td>
+          <td class="is-hidden">隱藏<!--Hidden--></td>
+        </tr>
+      </tbody>
+    </table>
+    
+	
+	
+	<br>
+    
+    
+    </div>
+    
+    
+    
+    <br>
+    
+    
+    
+    
+  </html>
   </textarea>
   <br>
   <!-- ******************************************************************************************** -->
