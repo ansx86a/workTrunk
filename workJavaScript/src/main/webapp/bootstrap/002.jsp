@@ -12,7 +12,7 @@
     <p>
       
     </p>
-            <pre>
+                    <pre>
     </pre>
     <div id="div0" align="center">
       <p>
@@ -31,20 +31,32 @@
         <a href="#id5">巡覽列</a>
       </p>
       <p>
-        <a href="#id6">id6</a>
+        <a href="#id6">麵包屑巡覽，分頁巡覽</a>
       </p>
       <p>
-        <a href="#id7">id7</a>
+        <a href="#id7">標籤、大螢幕</a>
       </p>
       <p>
-        <a href="#id8">id8</a>
+        <a href="#id8">縮圖樣式</a>
       </p>
       <p>
-        <a href="#id9">id9</a>
+        <a href="#id9">警告、進度條</a>
       </p>
       <p>
-        <a href="#id10">id10</a>
+        <a href="#id10">媒體物件</a>
       </p>
+      <p>
+        <a href="#id11">id11</a>
+      </p>
+      <p>
+        <a href="#id12">id12</a>
+      </p>
+      <p>
+        <a href="#id13">id13</a>
+      </p>
+      <p>
+        <a href="#id14">id14</a>
+      </p>                        
       <!-- ******************************************************************************************** -->
       <button type="button" onclick="javascriptWindow(document.getElementById('id1').value );">測試1</button>
       <br>
@@ -230,69 +242,69 @@
           <div class="alert alert-success" role="alert">
             <p><b>button加dropdown的組合</b></p>
           </div>
-       button下拉選單，原本是用button的本文包text+span來實作，下面改成用btn-group來連結兩個button，第一個button取代text，第2個button包span來實作下拉的部分   
-      <div class="btn-group">
-      <button type="button" class="btn btn-primary">Primary</button>
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <span class="caret"></span>
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">Action</a></li>
-        <li><a href="#">Another action</a></li>
-        <li><a href="#">Something else here</a></li>
-        <li class="divider"></li>
-        <li><a href="#">Separated link</a></li>
-      </ul>
-    </div>
-       <br>
-             
-    <br>
-      官網的範例class="btn-group"，修改裡面的btn的大小，回復本來的dropdown的做法
-    ，特別要注意的是，本來div的class由dropdown改成了btn-group，跑起來的感覺是完全相同
-   <div class="btn-group">
-        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Large button <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
-        </ul>
-      </div>
-    class="dropdown"對照組，我想只要有position: relative;即可，而btn-group也有此設定
-<div class="dropdown">
-        <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-          Large button <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
-        </ul>
-      </div>      
-    往上彈dropup，好像沒有右彈或是左彈
-<div class="btn-group dropup">
-        <button type="button" class="btn btn-primary">Right dropup</button>
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </div>
-    
+          button下拉選單，原本是用button的本文包text+span來實作，下面改成用btn-group來連結兩個button，第一個button取代text，第2個button包span來實作下拉的部分
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          <br>
+          
+          <br>
+          官網的範例class="btn-group"，修改裡面的btn的大小，回復本來的dropdown的做法
+          ，特別要注意的是，本來div的class由dropdown改成了btn-group，跑起來的感覺是完全相同
+          <div class="btn-group">
+            <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            Large button <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
+            </ul>
+          </div>
+          class="dropdown"對照組，我想只要有position: relative;即可，而btn-group也有此設定
+          <div class="dropdown">
+            <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            Large button <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
+            </ul>
+          </div>
+          往上彈dropup，好像沒有右彈或是左彈
+          <div class="btn-group dropup">
+            <button type="button" class="btn btn-primary">Right dropup</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          
         </div>
-        <br>        
+        <br>
         
         
       </html>
@@ -321,159 +333,161 @@
           </div>
           div用input-group，內容用span(input-group-addon)+text(form-control)
           <div class="input-group">
-  <span class="input-group-addon">@</span>
-  <input type="text" class="form-control" placeholder="Username">
-</div>
-
-<div class="input-group">
-  <input type="text" class="form-control">
-  <span class="input-group-addon">.00</span>
-</div>
-
-<div class="input-group">
-  <span class="input-group-addon">$</span>
-  <input type="text" class="form-control">
-  <span class="input-group-addon">.00</span>
-</div>
-         <hr>
-         同上例，只是加入了大小的調整<br>
-         大型:input-group-lg
-<div class="input-group input-group-lg">
-  <span class="input-group-addon">@</span>
-  <input type="text" class="form-control" placeholder="Username">
-</div>
-預設大小
-<div class="input-group">
-  <span class="input-group-addon">@</span>
-  <input type="text" class="form-control" placeholder="Username">
-</div>
-小型:input-group-lg
-<div class="input-group input-group-sm">
-  <span class="input-group-addon">@</span>
-  <input type="text" class="form-control" placeholder="Username">
-</div>         
-         
-以下範例是用grid大螢幕 6-6分，放2個input-group，附加span放checkbox和radio          
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox">
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="radio">
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->          
-
-同上，改放button而已          
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
-      </span>
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->          
-          
-同上，改成了dropdown而已，注意的是dropdown div的class用input-group-btn          
-<div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <div class="input-group">
-      <input type="text" class="form-control">
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
-      </div><!-- /btn-group -->
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->          
-          
-同上，只是dropdown btn改成下三角，前面再加了一個button，特別注意的是button是連在一起的<br> 
-.input-group-btn:last-child>.btn, {margin-left: -1px;}<br>
-有需要時可能要用btn-group來把button連在一起
-         
-<div class="row">
-      <div class="col-lg-6">
-        <div class="input-group">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default" tabindex="-1">Action</button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
+            <span class="input-group-addon">@</span>
+            <input type="text" class="form-control" placeholder="Username">
           </div>
-          <input type="text" class="form-control">
-        </div><!-- /.input-group -->
-      </div><!-- /.col-lg-6 -->
-      <div class="col-lg-6">
-        <div class="input-group">
-          <input type="text" class="form-control">
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-default" tabindex="-1">Action</button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <span class="caret"></span>
-              <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
+          <div class="input-group">
+            <input type="text" class="form-control">
+            <span class="input-group-addon">.00</span>
           </div>
-        </div><!-- /.input-group -->
-      </div><!-- /.col-lg-6 -->
-    </div>          
+          <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input type="text" class="form-control">
+            <span class="input-group-addon">.00</span>
+          </div>
+          <hr>
+          同上例，只是加入了大小的調整<br>
+          大型:input-group-lg
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+          預設大小
+          <div class="input-group">
+            <span class="input-group-addon">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+          小型:input-group-lg
+          <div class="input-group input-group-sm">
+            <span class="input-group-addon">@</span>
+            <input type="text" class="form-control" placeholder="Username">
+          </div>
+          
+          以下範例是用grid大螢幕 6-6分，放2個input-group，附加span放checkbox和radio
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox">
+                </span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="radio">
+                </span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+          </div>
+          同上，改放button而已
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Go!</button>
+                </span>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Go!</button>
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          同上，改成了dropdown而已，注意的是dropdown div的class用input-group-btn
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span></button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            
+            <div class="col-lg-6">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle"
+                  data-toggle="dropdown" aria-expanded="false">Action <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          同上，只是dropdown btn改成下三角，前面再加了一個button，特別注意的是button是連在一起的<br>
+          .input-group-btn:last-child>.btn, {margin-left: -1px;}<br>
+          有需要時可能要用btn-group來把button連在一起
+          
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="input-group">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" tabindex="-1">Action</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+                <input type="text" class="form-control">
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default" tabindex="-1">Action</button>
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <span class="caret"></span>
+                  <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
         </div>
         <br>
-      </html>      
+      </html>
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -481,7 +495,7 @@
       <br>
       <textarea id="id4" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
-<!DOCTYPE html>
+      <!DOCTYPE html>
       <html lang="zh-Hant-TW">
         <head>
           <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -497,57 +511,57 @@
           </div>
           最簡單的基本樣式nav-tabs
           <ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
-</ul>
-        <hr>  
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+          </ul>
+          <hr>
           藥片樣式nav-pills，影嚮到active類別的顯示
           <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">Home</a></li>
-  <li role="presentation"><a href="#">Profile</a></li>
-  <li role="presentation"><a href="#">Messages</a></li>
-</ul>
-                <hr>  
-藥片+垂直佈局
-<ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#">Profile</a></li>
-      <li role="presentation"><a href="#">Messages</a></li>
-    </ul>          
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+          </ul>
           <hr>
-平分的佈局nav-justified，實作方式應該是用css的table佈局吧          
-<ul class="nav nav-pills nav-justified">
-      <li role="presentation" class="active"><a href="#">Home</a></li>
-      <li role="presentation"><a href="#">Profile</a></li>
-      <li role="presentation"><a href="#">Messages</a></li>
-    </ul>          
+          藥片+垂直佈局
+          <ul class="nav nav-pills nav-stacked" style="max-width: 300px;">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+          </ul>
+          <hr>
+          平分的佈局nav-justified，實作方式應該是用css的table佈局吧
+          <ul class="nav nav-pills nav-justified">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages</a></li>
+          </ul>
           <hr>
           disabled的樣式，但是功能仍然在，可以撰寫 JavaScript 以禁用這裡的連結
-<ul class="nav nav-pills">
-      <li role="presentation"><a href="#">Clickable link</a></li>
-      <li role="presentation"><a href="#">Clickable link</a></li>
-      <li role="presentation" class="disabled"><a href="#" >Disabled link</a></li>
-    </ul>          
-<hr>
-有dropdown的nav，重點是li有class用dropdown，而dropdown的btn改成用a包text和span
-<br>dropdown的第一層的href好像沒什麼用，或許可以拿掉
-<ul class="nav nav-tabs">
-      <li role="presentation" class="active"><a href="https://kkbruce.tw/bs3/Components#">Home</a></li>
-      <li role="presentation"><a href="https://kkbruce.tw/bs3/Components#">Help</a></li>
-      <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="https://kkbruce.tw/bs3/Components#/設這個好像沒什麼用，或許可以拿掉吧" role="button" aria-expanded="false">
-          Dropdown <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
-          <li class="divider"></li>
-          <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
-        </ul>
-      </li>
-    </ul>
+          <ul class="nav nav-pills">
+            <li role="presentation"><a href="#">Clickable link</a></li>
+            <li role="presentation"><a href="#">Clickable link</a></li>
+            <li role="presentation" class="disabled"><a href="#" >Disabled link</a></li>
+          </ul>
+          <hr>
+          有dropdown的nav，重點是li有class用dropdown，而dropdown的btn改成用a包text和span
+          <br>dropdown的第一層的href好像沒什麼用，或許可以拿掉
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="https://kkbruce.tw/bs3/Components#">Home</a></li>
+            <li role="presentation"><a href="https://kkbruce.tw/bs3/Components#">Help</a></li>
+            <li role="presentation" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="https://kkbruce.tw/bs3/Components#/設這個好像沒什麼用，或許可以拿掉吧" role="button" aria-expanded="false">
+                Dropdown <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="https://kkbruce.tw/bs3/Components#">Action</a></li>
+                <li><a href="https://kkbruce.tw/bs3/Components#">Another action</a></li>
+                <li><a href="https://kkbruce.tw/bs3/Components#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="https://kkbruce.tw/bs3/Components#">Separated link</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
         <br>
       </html>
@@ -566,6 +580,8 @@
           <script src="js/jquery-1.12.4.min.js"></script>
           <script src="js/bootstrap.min.js"></script>
         </head>
+        <br>
+        <br>
         <div class="container-fluid 單線邊框 橘色邊框">
           <div class="alert alert-success" role="alert">
             <p><b>注意nav是ie9之後才能用</b></p>
@@ -574,124 +590,219 @@
             <p><b>navbar-header類別，設靠左，float: left;</b></p>
             <p><b>navbar-brand類別，設靠左和高、字大小，float: left;height: 50px;padding: 15px 15px;font-size: 18px;line-height: 20px;</b></p>
           </div>
-
-
-在navbar-header的div，放一個商標圖連結class為navbar-brand
-<nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">
-            <img alt="Brand" height="20" src="data:image/png;base64,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">
-          </a>
-        </div>
-      </div>
-    </nav>
-<hr>
-重點是navbar-header裡的button，在768px以下display:none，用來把nav的detail弄成dropdown
-<nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">Brand</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+          在navbar-header的div，放一個商標圖連結class為navbar-brand
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">
+                  <img alt="Brand" height="20" src="../css/g.png">
+                </a>
+              </div>
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-<hr>
-沒有在form中的button，加入navbar-btn來排版.navbar-btn {    margin-top: 8px;    margin-bottom: 8px;}
-<br>text用p包起來後，class用navbar-text，768px以上float: left;margin-right: 15px;margin-left: 15px;
-<nav class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">Brand</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
-          <p class="navbar-text">文字用p包起來</p>
-          <p class="navbar-text">拿掉class排序會錯亂</p>
-          <button type="button" class="btn btn-default navbar-btn">Sign in</button>
-          <button type="button" class="btn btn-default">Sign in對照組，上下都大8px吧</button>
-        </div>
-      </div>
-    </nav>
-<hr>
-這個例子有點太難，晚點再來看          
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+          </nav>
+          <hr>
+          重點是navbar-header裡的button，在768px以下display:none，用來把nav的detail弄成dropdown
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">Brand</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+          <hr>
+          沒有在form中的button，加入navbar-btn來排版.navbar-btn {    margin-top: 8px;    margin-bottom: 8px;}
+          <br>text用p包起來後，class用navbar-text，768px以上float: left;margin-right: 15px;margin-left: 15px;
+          <br>配合navbar-link可弄出文字型的link非選單型的link，(原理是實作了hover等假類別的樣式)
+          <br>.navbar-left 或 .navbar-right用來排版，我認為用right就好，left不要用
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">Brand</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-3">
+                <p class="navbar-text">文字用p包起來</p>
+                <p class="navbar-text">拿掉class排序會錯亂</p>
+                <button type="button" class="btn btn-default navbar-btn">Sign in</button>
+                <button type="button" class="btn btn-default">Sign in對照組，上下都大8px吧</button>
+                <p class="navbar-text navbar-right">用p(text)和靠右弄出<a href="#" class="navbar-link">(登出連結)</a></p>
+                
+              </div>
+            </div>
+          </nav>
+          <hr>
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">navbar-fixed-top{position: fixed;right: 0;left: 0;z-index: 1030;}</a></li>
+                  <li><a href="#">讓選單列可以固定放在最上面，預設巡覽列的高度是 50px，可用body { padding-top: 70px; }</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
           
+          <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+            <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-7">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+              </div>
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">navbar-fixed-bottom{position: fixed;right: 0;left: 0;z-index: 1030;}</a></li>
+                  <li><a href="#">固定在底部，body的css部分參考頂部的說明</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <hr>
+          navbar-static-top，設了一些nav不重要的格式(ex:border)，感覺是把靜態佈局的nav放在最上面可以加上這個class
+          <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-8">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-8">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">navbar-static-top</a></li>
+                  <li><a href="#">Link</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          <hr>
+          navbar-inverse 白底黑字變成黑底白字
+          <nav class="navbar navbar-inverse" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://kkbruce.tw/bs3/Components#">Brand</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="https://kkbruce.tw/bs3/Components#">Home</a></li>
+                  <li><a href="https://kkbruce.tw/bs3/Components#">Link</a></li>
+                  <li><a href="https://kkbruce.tw/bs3/Components#">Link</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+          
+          <hr>
+          這個例子有點太難，晚點再來看
+          <br>navbar-header，放一個商標和放一個小於768顯示的按鈕來show下拉選單
+          <br>navbar-toggle collapsed是指折疊區塊
+          <br>折疊區塊的第1個區塊放ul，內有2個link，和1個dropdown的link
+          <br>第2區塊為form，不知道navbar-left有放有沒有差，裡面就是textbox和submit button
+          <br>第3區塊類似第1區塊，只是有navbar-right靠右
+          <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Brand</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">Link</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">One more separated link</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                  </div>
+                  <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="#">Link</a></li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#">Separated link</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
         </div>
         <br>
-        
-        
-        
       </html>
       </textarea>
       <br>
@@ -700,6 +811,117 @@
       <br>
       <textarea id="id6" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>麵包屑，原理是用ol和li來實作，分隔是用字型的圖形檔?，實作如下</b></p>
+            <p><b>.breadcrumb>li+li:before {padding: 0 5px;color: #ccc;content: "/\00a0";}</b</b></p>
+          </div>
+          
+          <ol class="breadcrumb">
+            <li class="active">Home</li>
+          </ol>
+          <ol class="breadcrumb">
+            <li><a href="https://kkbruce.tw/bs3/Components#">Home</a></li>
+            <li class="active">Library</li>
+          </ol>
+          <ol class="breadcrumb" style="margin-bottom: 5px;">
+            <li><a href="https://kkbruce.tw/bs3/Components#">Home</a></li>
+            <li><a href="https://kkbruce.tw/bs3/Components#">Library</a></li>
+            <li class="active">Data</li>
+          </ol>
+          
+        </div>
+        <br>
+        
+        
+        
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>有沒有nav看起來差不多，所以就用沒nav來展示範例了</b></p>
+          </div>
+          有nav的實作
+          <nav>
+            <ul class="pagination">
+              <li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
+            </ul>
+          </nav>
+          沒有nav的實作<br>
+          <ul class="pagination">
+            <li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
+          </ul>
+          展示disabled和active 2種樣式，但是這兩種class不影嚮click的事件<br>
+          放span就不會有click事件，但是«後面的sr-only span會多出一欄，先拿掉，也許用label就可以了，有空再試
+          <ul class="pagination">
+            <li class="disabled"><span aria-hidden="true">«(用span實作，不會有click事件</span></li>
+            <li class="disabled"><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+            <li class="active"><span>1(用span實作，不會有click事件) <span class="sr-only">(current)</span></span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+          </ul>
+          
+          <br>大型的pagination pagination-lg，中型，小型的pagination pagination-sm<br>
+          <ul class="pagination pagination-lg">
+            <li><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+          </ul>
+          <ul class="pagination">
+            <li><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+          </ul>
+          <ul class="pagination pagination-sm">
+            <li><a href="#"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+          </ul>
+          <br>
+          更換成pager樣式，我覺得這個比較好看，自動置中，適合簡單的樣式只有上一頁和下一頁沒有中間選單的
+          <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">Next</a></li>
+          </ul>
+          <br>在li加入preious和next樣式來靠左和靠右，disabled一樣只有樣式不影嚮click<br>
+          <ul class="pager">
+            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
+            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+          
+          
+          
+        </div>
+        
+      </html>
+      
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -707,6 +929,84 @@
       <br>
       <textarea id="id7" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>標籤</b></p>
+          </div>
+          展示h1-h6的樣式label label-default(span tag)
+          <h1>Example heading <span class="label label-default">New</span></h1>
+          <h2>Example heading <span class="label label-default">New</span></h2>
+          <h3>Example heading <span class="label label-default">New</span></h3>
+          <h4>Example heading <span class="label label-default">New</span></h4>
+          <h5>Example heading <span class="label label-default">New</span></h5>
+          <h6>Example heading <span class="label label-default">New</span></h6>
+          展示(span tag)label-default、 label-primary、label-success、label-info、label-warning、label-danger
+          <br>
+          <span class="label label-default">Default</span>
+          <span class="label label-primary">Primary</span>
+          <span class="label label-success">Success</span>
+          <span class="label label-info">Info</span>
+          <span class="label label-warning">Warning</span>
+          <span class="label label-danger">Danger</span>
+          <br>
+          氣泡樣式badge，用來提示數量等額外訊息，透過 CSS 的 :empty 選擇器無資料會自動隱藏，ie8不支援
+          <br>
+          <a href="#">Inbox <span class="badge">42</span></a>
+          <button class="btn btn-primary" type="button">
+          Messages <span class="badge">4</span>
+          </button>
+          <br>
+          列後來個應用的範例
+          <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
+            <li role="presentation"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+          </ul>
+          
+        </div>
+        <br>
+        
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>大螢幕，只要在最外層的容器加入div包起來，class設成jumbotron，而子div通常有個container類別？</b></p>
+            <p><b>To make the jumbotron full width, and without rounded corners, place it outside all .containers and instead add a .container within.</b></p>
+          </div>
+        </div>
+        <br>
+        jumbotron類別設置為大螢幕的展示方式，應該是指投影之類的，底層應該只是調了字型大小、邊距之類的
+        <div class="jumbotron">
+          <h1>Hello, world!測試組</h1>
+          <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+        <div >
+          <h1>Hello, world!對照組</h1>
+          <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+        page-header類別，用來設定標題，乍看之下只是多了下面一條border 的線而已
+        <div class="page-header">
+          <h1>測試組Example page header <small>Subtext for header</small></h1>
+          h1之外的文字
+        </div>
+        <div >
+          <h1>對照組Example page header <small>Subtext for header</small></h1>
+          h1之外的文字
+        </div>
+        <br>
+        <br>
+      </html>
+      
+      
+      
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -714,6 +1014,83 @@
       <br>
       <textarea id="id8" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>縮圖佈局</b></p>
+          </div>
+          
+          用row定義md佔3欄，xs佔6欄，a的class thumbnail會設border為藍色，padd 4px、backgruond等等
+          <br>因為第一個圖和後面的圖大小不一樣，所以加上visible-**-block和clearfix
+          <div class="row">
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MiAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjU5Ljk3NjU2MjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcyeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+                寫一些文對照一下
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MiAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjU5Ljk3NjU2MjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcyeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            <div class="visible-sm-block  visible-xs-block  clearfix"></div>
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MiAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjU5Ljk3NjU2MjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcyeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+            <div class="col-xs-6 col-md-3">
+              <a href="#" class="thumbnail">
+                <img data-src="holder.js/100%x180" alt="100%x180" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE3MiAxODAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMTcyIiBoZWlnaHQ9IjE4MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjU5Ljk3NjU2MjUiIHk9IjkwIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MTcyeDE4MDwvdGV4dD48L2c+PC9zdmc+" data-holder-rendered="true" style="height: 180px; width: 100%; display: block;">
+              </a>
+            </div>
+          </div>
+          <br>
+          用row定義md佔3欄，xs佔6欄，和上面差不多，但是a的class thumbnail改成div的class thumbnail
+          <br>div中加入class=caption的div，caption的div內文就可以自已亂填了
+          <div class="row">
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MyAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjk2MDkzNzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMXB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjI0M3gyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <h3>Thumbnail label</h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  <p><a href="https://kkbruce.tw/bs3/Components#" class="btn btn-primary" role="button">Button</a> <a href="https://kkbruce.tw/bs3/Components#" class="btn btn-default" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MyAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjk2MDkzNzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMXB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjI0M3gyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <h3>Thumbnail label</h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  <p><a href="https://kkbruce.tw/bs3/Components#" class="btn btn-primary" role="button">Button</a> <a href="https://kkbruce.tw/bs3/Components#" class="btn btn-default" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                <img data-src="holder.js/100%x200" alt="100%x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDI0MyAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjQzIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjkyLjk2MDkzNzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6I0FBQUFBQTtmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMXB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjI0M3gyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
+                <div class="caption">
+                  <h3>Thumbnail label</h3>
+                  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                  <p><a href="https://kkbruce.tw/bs3/Components#" class="btn btn-primary" role="button">Button</a> <a href="https://kkbruce.tw/bs3/Components#" class="btn btn-default" role="button">Button</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+      </html>
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -721,9 +1098,145 @@
       <br>
       <textarea id="id9" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
-      <script>
-      
-      </script>
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>警告的樣式</b></p>
+          </div>
+          警告 alert-success
+          <div class="alert alert-success" role="alert">
+            <strong>做得好！<!--Well done!--></strong> 你成功的讀取這一條重要的警告訊息。<!--You successfully read this important alert message.-->
+          </div>
+          警告 alert-info
+          <div class="alert alert-info" role="alert">
+            <strong>注意！<!--Heads up!--></strong> 這訊息提醒你需要注意，但它不是那麼重要。<!--This alert needs your attention, but it's not super important.-->
+          </div>
+          警告 alert-warning
+          <div class="alert alert-warning" role="alert">
+            <strong>警告！<!--Warning!--></strong> 檢查一下你自己，你看起來不是很好。<!--Better check yourself, you're not looking too good.-->
+          </div>
+          警告 alert-danger
+          <div class="alert alert-danger" role="alert">
+            <strong>媽呀！<!--Oh snap!--></strong> 做幾個改變並嘗試重新送出。<!--Change a few things up and try submitting again.-->
+          </div>
+          <hr>
+          可關閉的警告，加上 alert-dismissible 類別之外，還要加上一個close的按鈕，當範本寫入即可
+          <div class="alert alert-success 加上 alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>做得好！<!--Well done!--></strong> 你成功的讀取這一條重要的警告訊息。<!--You successfully read this important alert message.-->
+          </div>
+          <hr>
+          強調link 用class="alert-link"，字體會變粗，詳細懶得看
+          <div class="alert alert-success" role="alert">
+            <strong>Well done!</strong> You successfully read <a href="https://kkbruce.tw/bs3/Components#" class="alert-link">this important alert message</a>.
+          </div>
+          <div class="alert alert-info" role="alert">
+            <strong>Heads up!</strong> This <a href="https://kkbruce.tw/bs3/Components#" class="alert-link">alert needs your attention</a>, but it's not super important.
+          </div>
+          <div class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> Better check yourself, you're <a href="https://kkbruce.tw/bs3/Components#" class="alert-link">not looking too good</a>.
+          </div>
+          <div class="alert alert-danger" role="alert">
+            <strong>Oh snap!</strong> <a href="https://kkbruce.tw/bs3/Components#" class="alert-link">Change a few things up</a> and try submitting again.
+          </div>
+          <hr>
+          
+          
+        </div>
+        <br>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>進度條使用了 CSS3 的 transition 和 animation 屬性來實現一些特效。這些功能在 Internet Explorer 9 之前或舊版 Firefox 並不支援。Opera 12 不支援 animation 屬性。</b></p>
+          </div>
+          進度條的範例，外層用div class="progress"，用來畫外框，原理是用div佔位後，再畫background
+          <br>進度條在內層div class=progress-bar，原理是用div佔位，配合css的width畫出來
+          <br>其它那些有的沒的屬性好像沒用，大概是給閱讀器看的
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+              <span class="sr-only">60% Complete</span>
+            </div>
+          </div>
+          為進度條加上進行百分比，只要在內層的div加上text即可，建議加上 min-width 屬性以確保所有標籤文字能完全顯示出來。
+          <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+        60%
+      </div>
+    </div>
+    <hr>
+    展示內層進度條的顏色 progress-bar-success
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+        <span class="sr-only">40% Complete (success)</span>progress-bar-success
+      </div>
+    </div>
+    展示內層進度條的顏色 progress-bar-info
+    <div class="progress">
+      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+        <span class="sr-only">20% Complete</span>progress-bar-info
+      </div>
+    </div>
+    展示內層進度條的顏色 progress-bar-warning
+    <div class="progress">
+      <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+        <span class="sr-only">60% Complete (warning)</span>progress-bar-warning
+      </div>
+    </div>
+    展示內層進度條的顏色 progress-bar-danger
+    <div class="progress">
+      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+        <span class="sr-only">80% Complete (danger)</span>progress-bar-danger
+      </div>
+    </div>
+    <hr>
+    使用 CSS3 的 gradient 屬性建立條紋效果。不支援 IE8。progress-bar-striped
+    <br>將 .active 加入 .progress-bar-striped 類別，以呈現由右向左的條紋動畫效果。IE9 之前並不支援。
+    <br>.activ 加入到其中2個看效果
+    <div class="progress">
+      <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+        <span class="sr-only">40% Complete (success)</span>progress-bar-success progress-bar-striped active
+      </div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+        <span class="sr-only">20% Complete</span>progress-bar-info progress-bar-striped
+      </div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+        <span class="sr-only">60% Complete (warning)</span> progress-bar-warning progress-bar-striped
+      </div>
+    </div>
+    <div class="progress">
+      <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+        <span class="sr-only">80% Complete (danger)</span>progress-bar-danger progress-bar-striped active
+      </div>
+    </div>
+    <hr>
+    可以有多個內層的div progress-bar，產生區塊變色的效果
+<div class="progress">
+      <div class="progress-bar progress-bar-success" style="width: 35%">
+        <span class="sr-only">35% Complete (success)</span>
+      </div>
+      <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
+        <span class="sr-only">20% Complete (warning)</span>
+      </div>
+      <div class="progress-bar progress-bar-danger" style="width: 10%">
+        <span class="sr-only">10% Complete (danger)</span>
+      </div>
+    </div>    
+    
+          
+        </div>
+        
+        
+      </html>
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -731,9 +1244,83 @@
       <br>
       <textarea id="id10" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
       spellcheck="false">
-      <script>
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>媒體物件，簡單來說就是一種佈局樣式</b></p>
+          </div>
+          
+    外層div用media {margin-top: 15px;}<br>
+    <br>內層左側用a.media-left ，設table排版和右邊內縮{padding-right: 10px;}{display: table-cell;vertical-align: top;}
+    <br>內層主體用div.media-body，設table排版{display: table-cell;vertical-align: top;}
+    <br>內層主體div.media-body h4.media-heading，設邊距而已 {margin-top: 0;margin-bottom: 5px;}
+    <div class="media">
+      <a class="media-left" href="https://kkbruce.tw/bs3/Components#">
+        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">Media heading</h4>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+      </div>
+    </div>
+    
+	同上例，只是media的body中又加了一個media
+    <div class="media">
+      <a class="media-left" href="https://kkbruce.tw/bs3/Components#">
+        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">Media heading</h4>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        <div class="media">
+          <a class="media-left" href="https://kkbruce.tw/bs3/Components#">
+            <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Nested media heading</h4>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+          </div>
+        </div>
+      </div>
+    </div>
+    此列是在展示div.media div.media-body後面放a.media-right的例子，這個css只是設一下版面和table排版而已
+    <div class="media">
+      <div class="media-body">
+        <h4 class="media-heading">Media heading</h4>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+      </div>
+      <a class="media-right" href="https://kkbruce.tw/bs3/Components#">
+        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+    </div>
+    <div class="media">
+      <a class="media-left" href="https://kkbruce.tw/bs3/Components#">
+        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">Media heading</h4>
+        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+      </div>
+      <a class="media-right" href="https://kkbruce.tw/bs3/Components#">
+        <img data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEzLjM4MjgxMjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+    </div>
+          
+          
+          
+        </div>
+        <br>
+        
+        
+      </html>
       
-      </script>
       </textarea>
       <br>
       <!-- ******************************************************************************************** -->
@@ -761,6 +1348,70 @@
       
       </textarea>
       <br>
+      <!-- ******************************************************************************************** -->
+      <button type="button" onclick="javascriptWindow(document.getElementById('id12').value );">測試12</button>
+      <br>
+      <textarea id="id12" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+      spellcheck="false">
+      <script>
+      
+      </script>
+      </textarea>
+      <br>
+                  <!-- ******************************************************************************************** -->
+      <button type="button" onclick="javascriptWindow(document.getElementById('id13').value );">測試13</button>
+      <br>
+      <textarea id="id13" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+      spellcheck="false">
+      <script>
+      
+      </script>
+      </textarea>
+      <br>
+      <!-- ******************************************************************************************** -->
+      <button type="button" onclick="javascriptWindow(document.getElementById('id14').value );">測試14</button>
+      <br>
+      <textarea id="id14" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+      spellcheck="false">
+      <script>
+      
+      </script>
+      </textarea>
+      <br>
+      <!-- ******************************************************************************************** -->
+      <button type="button" onclick="javascriptWindow(document.getElementById('id15').value );">測試15</button>
+      <br>
+      <textarea id="id15" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+      spellcheck="false">
+      <script>
+      
+      </script>
+      </textarea>
+      <br>
+      <!-- ******************************************************************************************** -->
+      <button type="button" onclick="javascriptWindow(document.getElementById('id16').value );">測試16</button>
+      <br>
+      <textarea id="id16" style="width: 800px; height: 350px;" autocomplete="off" id="textareaCode" wrap="logical"
+      spellcheck="false">
+      <!DOCTYPE html>
+      <html lang="zh-Hant-TW">
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../css/mycss.css">
+          <script src="js/jquery-1.12.4.min.js"></script>
+          <script src="js/bootstrap.min.js"></script>
+        </head>
+        <div class="container-fluid 單線邊框 橘色邊框">
+          <div class="alert alert-success" role="alert">
+            <p><b>aaaaaaaaaaaaaaaaa</b></p>
+          </div>
+        </div>
+        <br>
+        
+        
+      </html>
+      </textarea>
+      <br>                  
     </div>
   </body>
   <script>
