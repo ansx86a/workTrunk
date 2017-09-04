@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-classic/resources/theme-classic-all.css"
+	rel="stylesheet" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.onReady(function() {
+		obj = Ext.create('Ext.Panel', {
+			viewModel : {
+				data : {
+					firstName : 'John',
+					lastName : 'Doe'
+				},
+				formulas : {
+					fullName : {
+						get : function(get) {
+							var ret = get('firstName') || '', last = get('lastName');
+							if (last) {
+								ret += ' ' + last;
+							}
+							return ret;
+						},
+						set : function(value) {
+							var space = value.indexOf(' '), split = (space < 0) ? value.length : space;
+							this.set({
+								firstName : value.substring(0, split),
+								lastName : value.substring(split + 1)
+							});
+						}
+					}
+				}
+			},
+			defaultType : 'textfield',
+			items : [ {
+				fieldLabel : 'First Name',
+				bind : '{firstName}'
+			}, {
+				fieldLabel : 'Last Name',
+				bind : '{lastName}'
+			}, {
+				fieldLabel : 'Full Name (virtual)',
+				bind : '{fullName}'
+			} ],
+			renderTo : 'helloWorldPanel',
+		});
+		vm = obj.getViewModel();
+	});
+</script>
+</head>
+<body>
+	<div id="helloWorldPanel" />
+</body>
+</html>

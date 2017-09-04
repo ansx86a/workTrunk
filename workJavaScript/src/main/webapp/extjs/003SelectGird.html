@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/classic/theme-classic/resources/theme-classic-all.css"
+	rel="stylesheet" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/extjs/6.0.0/ext-all.js"></script>
+<script type="text/javascript">
+	Ext.define('test.model.Cuestomer', {
+		extend : 'Ext.data.Model',
+		fields : [ 'name', 'phone' ],
+		statics : {
+			generateData : function() {
+				var customers = [ {
+					id : 1,
+					name : 'Customer A',
+					phone : '540-111-1234'
+				}, {
+					id : 2,
+					name : 'Customer B',
+					phone : '650-222-2345'
+				}, {
+					id : 3,
+					name : 'Customer C',
+					phone : '412-333-3456'
+				}, {
+					id : 4,
+					name : 'Customer D',
+					phone : '861-444-4567'
+				} ];
+				return customers;
+			}
+		}
+	});
+
+	Ext.onReady(function() {
+		obj = Ext.create('Ext.Panel', {
+			viewModel : {
+				stores : {
+					customers : {
+						model : 'test.model.Cuestomer',
+						data : test.model.Cuestomer.generateData()
+					}
+				}
+			},
+			items : [ {
+				xtype : 'combobox',
+				margin : '10 0 0 10',
+				forceSelection : true,
+				editable : false,
+				displayField : 'name',
+				valueField : 'id',
+				triggerAction : 'all',
+				queryMode : 'local',
+				labelWidth : 160,
+				bind : {
+					store : '{customers}',
+					selection : '{selectedCustomer000}'
+				},
+				fieldLabel : 'Customer Combo'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'change Name',
+				bind : '{selectedCustomer000.name}'
+			}, {
+				xtype : 'textfield',
+				fieldLabel : 'change Phone',
+				bind : '{selectedCustomer000.phone}'
+			}, {
+				title : 'Customers Grid',
+				xtype : 'grid',
+				bind : {
+					store : '{customers}',
+					selection : '{selectedCustomer000}'
+				},
+				columns : [ {
+					text : 'Name',
+					dataIndex : 'name'
+				}, {
+					text : 'Phone',
+					dataIndex : 'phone'
+				} ]
+			} ],
+			renderTo : 'helloWorldPanel',
+		});
+		vm = obj.getViewModel();
+	});
+</script>
+</head>
+<body>
+	<div id="helloWorldPanel" />
+</body>
+</html>
