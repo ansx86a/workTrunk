@@ -22,7 +22,8 @@ public class Lambda整理 {
 	public static void main(String[] args) {
 		// 迴圈寫法，先記一下IntStream.range(0, 10).parallel().forEach
 		// 設定可並行的管線數目，設x就程示同時跑x+1個，不用參數的話要研究ForkJoinPool，太麻煩了
-		// System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "2");
+		// System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism",
+		// "2");
 
 		Lambda整理 l = new Lambda整理();
 		l.$8轉成map或list();
@@ -30,6 +31,10 @@ public class Lambda整理 {
 		// 要管線作業不可缺的東西
 		// IntStream.range(1, 4)
 
+		// 看到未實作
+		// 參考http://blog.tonycube.com/2015/10/java-java8-3-stream.html
+		// flatMap 平面化集合資料。將不同集合中的資料串接在一起，成為在一起的一組集合
+		// 循序運算(sequential)及並行運算(parallel)
 	}
 
 	public void $1無參數寫法() {
@@ -112,9 +117,11 @@ public class Lambda整理 {
 			System.out.println("key=" + k.getClass() + "," + k + "," + v);
 		});
 		// 等同下行
-		// map.forEach((k, v) -> System.out.println("key=" + k.getClass() + "," + k + "," + v));
+		// map.forEach((k, v) -> System.out.println("key=" + k.getClass() + ","
+		// + k + "," + v));
 		map.keySet().forEach(s -> System.out.println("set->" + s));
 		Arrays.asList(map.keySet().toArray()).forEach(s -> System.out.println("list->" + s));
+		// Arrays.asList("Tony", "Tom", "Jonn");
 
 	}
 

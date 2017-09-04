@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
-
+	
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
@@ -141,5 +141,5 @@
 			</plugin>
 		</plugins>
 	</build>
-<!-- 	<packaging>war</packaging> -->
+	<!-- <packaging>war</packaging> -->
 </project>

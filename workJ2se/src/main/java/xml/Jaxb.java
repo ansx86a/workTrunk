@@ -32,13 +32,13 @@ public class Jaxb {
 		// namespace修改前端pre部分也很難解，雖然可以用NamespacePrefixMapper來解，但感覺不順不好用
 
 		Jaxb p = new Jaxb();
-		// p.$1物件寫出xml();
+		 p.$1物件寫出xml();
 		// p.$2xml轉物件();
 		// p.$3多層物件轉xml();
 		// p.$4物件轉xml有namespace();
 		// p.$5物件轉xml客製namespace();
 		// p.$6map設定值();
-		p.$7map設定值簡化xml();
+		//p.$7map設定值簡化xml();
 	}
 
 	public String $1取得物件的xmlString(Object o) throws Exception {
