@@ -3,6 +3,7 @@ package 驗証;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.GroupSequence;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -20,16 +21,16 @@ import javax.validation.constraints.Size;
  * @author ai
  *
  */
-public class JaxaBean驗証 {
+public class JavaBean驗証 {
 	private Validator validator;
 
-	public JaxaBean驗証() {
+	public JavaBean驗証() {
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
 		this.validator = vf.getValidator();
 	}
 
 	public static void main(String[] args) {
-		JaxaBean驗証 jb = new JaxaBean驗証();
+		JavaBean驗証 jb = new JavaBean驗証();
 
 		jb.$1基本驗証();
 
@@ -38,7 +39,9 @@ public class JaxaBean驗証 {
 	public void $1基本驗証() {
 		Employee e = new Employee();
 
+		e.name = "名字不能超過10個字,,,,,";
 		Set<ConstraintViolation<Employee>> set = validator.validate(e);
+		System.out.println(set.size());
 		for (ConstraintViolation<Employee> constraintViolation : set) {
 			System.out.println(constraintViolation.getMessage());
 		}
@@ -47,6 +50,8 @@ public class JaxaBean驗証 {
 	public void 驗証和輸出LOG() {
 	}
 
+	// 順序？用處？
+	// @GroupSequence({ Employee.class })
 	static class Employee {
 		@NotNull(message = "The id of employee can not be null")
 		private Integer id;
