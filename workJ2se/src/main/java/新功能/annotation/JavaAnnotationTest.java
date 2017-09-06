@@ -2,6 +2,7 @@ package 新功能.annotation;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import 新功能.annotation.MyAnnotaion.Test3;
 import 新功能.annotation.MyAnnotaion.Test33;
@@ -22,6 +23,15 @@ public class JavaAnnotationTest {
 				System.out.println(((Testaa) a).aa());
 				System.out.println(((Testaa) a).bb());
 			}
+			
+			if (a instanceof Test3) {
+				System.out.println(((Test3) a).value());
+
+			}
+			
+			if (a instanceof Testbb) {
+				System.out.println(Arrays.toString(((Testbb) a).args()));
+			}
 		}
 
 		System.out.println("end");
@@ -38,6 +48,8 @@ public class JavaAnnotationTest {
 	}
 
 	@Testaa(aa = 123, bb = "xxxx")
+	@Test3("test3StringValue")
+	@Testbb(args = { "arg1", "arg2" })
 	@Deprecated
 	public void run4() {
 		System.out.println("run4");
