@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.mockito.Mockito;
-import org.mockito.internal.verification.Times;
+import org.mockito.internal.matchers.Contains;
+import org.mockito.internal.matchers.NotNull;
 
 public class Mockito基本應用 {
 
@@ -19,8 +20,8 @@ public class Mockito基本應用 {
 		// TODO Auto-generated method stub
 
 		Mockito基本應用 m = new Mockito基本應用();
-		m.$1最基本的mock和verify();
-		// m.$2設定物件的return和丟例外();
+		// m.$1最基本的mock和verify();
+		m.$2設定物件的return和丟例外();
 
 	}
 
@@ -68,4 +69,20 @@ public class Mockito基本應用 {
 		System.out.println(mockedList.get(1));// 這裡會丟例外，所以放在最後面
 	}
 
+	//學到一半，到時候再補完
+	public void $3() {
+		List<String> mockedList = Mockito.mock(List.class);
+		Mockito.when(mockedList.get(Mockito.anyInt())).thenReturn("element");
+		// Mockito.when(mockedList.contains(Mockito.argThat(isValid()))).thenReturn("element");
+		Mockito.when(mockedList.contains(Mockito.argThat(NotNull.NOT_NULL))).thenReturn(true);
+		Mockito.when(mockedList.contains(Mockito.argThat(new Contains("123")))).thenReturn(true);
+		System.out.println(mockedList.get(999));
+
+		// you can also verify using an argument matcher
+		Mockito.verify(mockedList).get(Mockito.anyInt());
+
+		// argument matchers can also be written as Java 8 Lambdas
+		Mockito.verify(mockedList).add(Mockito.argThat(someString -> someString.length() > 5));
+
+	}
 }
