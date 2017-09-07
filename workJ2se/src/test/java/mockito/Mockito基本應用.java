@@ -3,6 +3,7 @@ package mockito;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.internal.matchers.Contains;
 import org.mockito.internal.matchers.NotNull;
@@ -21,8 +22,8 @@ public class Mockito基本應用 {
 
 		Mockito基本應用 m = new Mockito基本應用();
 		// m.$1最基本的mock和verify();
-		m.$2設定物件的return和丟例外();
-
+		// m.$2設定物件的return和丟例外();
+		m.$3用pattern來假裝傳入值並設定回傳值();
 	}
 
 	/**
@@ -69,20 +70,48 @@ public class Mockito基本應用 {
 		System.out.println(mockedList.get(1));// 這裡會丟例外，所以放在最後面
 	}
 
-	//學到一半，到時候再補完
-	public void $3() {
+	// 學到一半，到時候再補完
+	public void $3用pattern來假裝傳入值並設定回傳值() {
 		List<String> mockedList = Mockito.mock(List.class);
 		Mockito.when(mockedList.get(Mockito.anyInt())).thenReturn("element");
-		// Mockito.when(mockedList.contains(Mockito.argThat(isValid()))).thenReturn("element");
-		Mockito.when(mockedList.contains(Mockito.argThat(NotNull.NOT_NULL))).thenReturn(true);
+
+		// Mockito.when(mockedList.contains(Mockito.argThat(isValid()))).thenReturn("element");//這一行不懂先跳過
+
+		// 這一行是可以檢查傳入的參數有沒有包含123的字串，可參照mockito已實作的ArgumentMatcher
 		Mockito.when(mockedList.contains(Mockito.argThat(new Contains("123")))).thenReturn(true);
+		// 這一行是客制化參數的寫法，讓List的泛型T型別可以檢查
+		// 前面的參數不能直接用int了，怪怪，好像要就全用mockito.xxxx，不然就全用object
+		// 全塞object的會優先被選擇出來
+		Mockito.when(mockedList.set(Mockito.anyInt(), Mockito.argThat(new 檢查String長度等於2()))).thenReturn("回傳string");
+		Mockito.when(mockedList.set(99, "99")).thenReturn("5566");
+
 		System.out.println(mockedList.get(999));
+		System.out.println(mockedList.contains("ddd"));
+		System.out.println(mockedList.contains("123"));
+		System.out.println(mockedList.set(1, "長度3"));
+		System.out.println(mockedList.set(1, "長2"));
+		System.out.println(mockedList.set(1, "xxx"));
+		System.out.println(mockedList.set(99, "99"));
 
 		// you can also verify using an argument matcher
 		Mockito.verify(mockedList).get(Mockito.anyInt());
 
+		mockedList.add("為了下面的verify要新增一筆，怪的是when試不出lambda但是下面的verify就可以");
 		// argument matchers can also be written as Java 8 Lambdas
-		Mockito.verify(mockedList).add(Mockito.argThat(someString -> someString.length() > 5));
+		Mockito.verify(mockedList).add(Mockito.argThat(someString -> someString.length() > 1));
 
+	}
+
+	static class 檢查String長度等於2 implements ArgumentMatcher<String> {
+		public boolean matches(String s) {
+			if (s.length() == 2)
+				return true;
+			return false;
+		}
+
+		public String toString() {
+			// printed in verification errors
+			return "[檢查String長度等於2]";
+		}
 	}
 }
