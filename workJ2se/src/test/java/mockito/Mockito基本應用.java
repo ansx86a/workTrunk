@@ -5,18 +5,33 @@ import java.util.List;
 
 import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.internal.matchers.Contains;
 
+/**
+ * <pre>
+ * http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/Mockito.html#0
+ * </pre>
+ */
 public class Mockito基本應用 {
 
 	/**
 	 * <pre>
-	 * http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/Mockito.html#0
+	 * 要讓annoation生效有3種方法
+	 * 1. 注意要有MockitoAnnotations.initMocks(testClass);
+	 * 2.在Mockito基本應用加上 @RunWith(MockitoJUnitRunner.StrictStubs.class)
+	 * 3.在物件變數中加入@Rule public MockitoRule rule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 	 * </pre>
-	 * 
-	 * @param args
 	 */
+	@Mock
+	private List mlist;
+
+	public Mockito基本應用() {
+		MockitoAnnotations.initMocks(this);
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -26,7 +41,8 @@ public class Mockito基本應用 {
 		// m.$3用pattern來假裝傳入值並設定回傳值();
 		// m.$4Verify的times的寫法();
 		// m.$5Verify需要控制順序的寫法();
-		m.$6Verify();
+		// m.$6Verify();
+		m.$7測試annoation和return控制();
 	}
 
 	/**
@@ -214,4 +230,23 @@ public class Mockito基本應用 {
 
 	}
 
+	public void $7測試annoation和return控制() {
+		mlist.clear();
+		// verification
+		Mockito.verify(mlist).clear();
+
+		// 說明回傳順序for多個return_包含exception:{Mockito.when(mlist.get(1)).thenThrow(new
+		// RuntimeException()).thenReturn("foo");}
+		
+		//最後一個return會持續
+		Mockito.when(mlist.get(1)).thenReturn("one").thenReturn("two", "three");
+		System.out.println(mlist.get(1));
+		System.out.println(mlist.get(1));
+		System.out.println(mlist.get(1));
+		System.out.println(mlist.get(1));
+		System.out.println(mlist.get(1));
+	}
+
+	//再來是11
+	
 }
