@@ -1,14 +1,18 @@
 package mockito;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.internal.matchers.Contains;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 /**
  * <pre>
@@ -42,7 +46,10 @@ public class Mockito基本應用 {
 		// m.$4Verify的times的寫法();
 		// m.$5Verify需要控制順序的寫法();
 		// m.$6Verify();
-		m.$7測試annoation和return控制();
+		// m.$7測試annoation和return控制();
+		// m.$8return相關();
+		// m.$9spy一個已存在的物件();
+		m.$10補捉mock參數();
 	}
 
 	/**
@@ -58,6 +65,7 @@ public class Mockito基本應用 {
 		// using mock object
 		mockedList.add("one");
 		mockedList.add("one");
+		System.out.println(mockedList.get(0));// 就算上面有add，是假的，這裡仍然是null
 		// ↑↑這裡的mockedList裡面的內容仍然是空的
 		// ↑↑主要是說mockedList做的操作，事後只能用verify來驗証
 		mockedList.clear();
@@ -237,8 +245,8 @@ public class Mockito基本應用 {
 
 		// 說明回傳順序for多個return_包含exception:{Mockito.when(mlist.get(1)).thenThrow(new
 		// RuntimeException()).thenReturn("foo");}
-		
-		//最後一個return會持續
+
+		// 最後一個return會持續
 		Mockito.when(mlist.get(1)).thenReturn("one").thenReturn("two", "three");
 		System.out.println(mlist.get(1));
 		System.out.println(mlist.get(1));
@@ -247,6 +255,71 @@ public class Mockito基本應用 {
 		System.out.println(mlist.get(1));
 	}
 
-	//再來是11
-	
+	public void $8return相關() {
+		// 官網不建議用answer，叫你用簡單的doReturn()|doThrow()| doNothing()
+		Mockito.when(mlist.get(1)).thenAnswer(new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				Object mock = invocation.getMock();
+				return "called with arguments: " + Arrays.toString(args);
+			}
+		});
+		System.out.println(mlist.get(1));
+
+		/**
+		 * <pre>
+		 * 有以下這幾項可以用
+		 * doReturn()|doThrow()| doAnswer()|doNothing()|doCallRealMethod() family of methods
+		 * </pre>
+		 */
+		Mockito.doReturn("999").when(mlist).get(111);
+		System.out.println(mlist.get(111));
+
+		// 可以自已額制化預設的Mock回傳值，如果沒有用when then return時就會用到
+		// 覺得用不太到，要用再學吧
+		List mock = Mockito.mock(List.class, Mockito.RETURNS_SMART_NULLS);
+		List mockTwo = Mockito.mock(List.class, new Answer() {
+			public Object answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				Object mock = invocation.getMock();
+				return "我自已客制化的return called with arguments: " + Arrays.toString(args);
+			}
+		});
+		System.out.println(mock.get(135));
+		System.out.println(mock.get(579));
+		System.out.println(mockTwo.get(246));
+		System.out.println(mockTwo.get(680));
+	}
+
+	public void $9spy一個已存在的物件() {
+		// 之前的mock都沒有自已new 物件，spy是來mock已經有instance的
+		List list = new LinkedList();
+		list.add("1");
+		List spy = Mockito.spy(list);
+		list.add("2");// 這一行不被spy吃
+		// 注意，spy後應該是一個新的instance的看法(形容而已不一定正確)，之後都要對spy操作，對list的操作不影嚮spy
+		// 特別的是物件特性存在，可以add、get，不像mock只能verify而已(有return 都會為null吧)
+		// 不然就要寫when return
+		spy.add("one");
+		spy.add("two");
+		System.out.println(spy.get(0));
+		System.out.println(spy.get(1));
+		System.out.println(spy.get(2));
+
+		// 可以用mock來覆來物件的動作，真的是叫spy，只在關鍵動手腳
+		Mockito.when(spy.get(0)).thenReturn("mock one");
+		System.out.println(spy.get(0));
+		System.out.println(spy.get(1));
+	}
+
+	public void $10補捉mock參數() {
+		ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
+		
+		mlist.add("one");//這裡的add只能用一次，才能capture不出錯
+		Mockito.verify(mlist).add(argument.capture());
+		System.out.println(argument.getValue().toString());
+
+	}
+	// 再來是16
+
 }
