@@ -1,11 +1,14 @@
 package mockito;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.vfs2.tasks.MoveTask;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
+import org.mockito.BDDMockito;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -17,6 +20,9 @@ import org.mockito.stubbing.Answer;
 /**
  * <pre>
  * http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/Mockito.html#0
+ * 中文2.026:
+ * http://www.itread01.com/articles/1475901036.html
+ * https://github.com/hehonghui/mockito-doc-zh
  * </pre>
  */
 public class Mockito基本應用 {
@@ -49,7 +55,9 @@ public class Mockito基本應用 {
 		// m.$7測試annoation和return控制();
 		// m.$8return相關();
 		// m.$9spy一個已存在的物件();
-		m.$10補捉mock參數();
+		// m.$10補捉mock參數();
+		// m.$11mock真實的method();
+		m.$12mock的重置();
 	}
 
 	/**
@@ -230,7 +238,9 @@ public class Mockito基本應用 {
 
 		Mockito.verify(mockedList).add("one");
 		Mockito.verify(mockedList).add("two");
-		// 下面這一行不太懂，用下去和下下行一樣，先這樣吧
+
+		// 我事後看到網路是說，驗証零互動
+		// 晚點再試看看
 		// Mockito.verifyZeroInteractions(mockedList);
 
 		// 下面會因為有沒有verify到的東西而產生錯誤
@@ -291,6 +301,13 @@ public class Mockito基本應用 {
 		System.out.println(mockTwo.get(680));
 	}
 
+	/**
+	 * <pre>
+	 * Mockito並不會為真實對象代理函數調用，實際上它會拷貝真實對象。因此如果你保留了真實對象並且與之交互，不要期望從監控對象得到正確的結果。
+	 * 當你在監控對象上調用一個沒有被stub的函數時並不會調用真實對象的對應函數，你不會在真實對象上看到任何效果。
+	 * 因此結論就是 : 當你在監控一個真實對象時，你想在stub這個真實對象的函數，那麽就是在自找麻煩。或者你根本不應該驗證這些函數。
+	 * </pre>
+	 */
 	public void $9spy一個已存在的物件() {
 		// 之前的mock都沒有自已new 物件，spy是來mock已經有instance的
 		List list = new LinkedList();
@@ -314,12 +331,67 @@ public class Mockito基本應用 {
 
 	public void $10補捉mock參數() {
 		ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
-		
-		mlist.add("one");//這裡的add只能用一次，才能capture不出錯
+
+		mlist.add("one");// 這裡的add只能用一次，才能capture不出錯
 		Mockito.verify(mlist).add(argument.capture());
 		System.out.println(argument.getValue().toString());
 
 	}
-	// 再來是16
+
+	public void $11mock真實的method() {
+		// 這裡如果有用到物件變數的可能都會有null point exception
+		// call real method 變得只適用於只用到傳入參數的method
+		// 有用到物件參數的用spy就好
+
+		// 官方說，舊功能(介面)之類無法異動的也許會用call real method
+		// 新寫的code就不要用，保持程式乾淨
+		Mockito基本應用 mm = Mockito.mock(this.getClass());
+		System.out.println(mm.testRealMethod("test"));
+		Mockito.when(mm.testRealMethod("tabc")).thenCallRealMethod();
+		String s = mm.testRealMethod("tabc");
+		System.out.println(s);
+
+	}
+
+	public String testRealMethod(String s) {
+		return s + s + s;
+	}
+
+	public void $12mock的重置() {
+		// 使用reset會將之前做的設定全部清空
+		List mock = Mockito.mock(List.class);
+		Mockito.when(mock.size()).thenReturn(10);
+		System.out.println(mock.size());
+		System.out.println(mock.size());
+		mock.add(1);
+		Mockito.reset(mock);
+		System.out.println(mock.size());
+	}
+
+	// 不太懂什麼是bdd，需補強bdd知識之後才能知道用途
+	public void $13Bdd的寫法() {
+		List mock = Mockito.mock(List.class);
+
+		// given
+		BDDMockito.given(mock.add(100)).willReturn(true);
+
+		// when
+
+		// then
+
+	}
+
+	public void $14序列化() {
+		// 這個功能在unit test不常用，幾乎可以不看，在這裡記錄一下而已
+		List serializableMock = Mockito.mock(List.class, Mockito.withSettings().serializable());
+
+		// 讓一個真實的偵查對象可序列化需要多一些努力，因為 spy(…) 方法沒有接收 MockSettings
+		// 的重載版本。不過不用擔心，你幾乎不可能用到這。
+		List<Object> list = new ArrayList<Object>();
+		List<Object> spy = Mockito.mock(ArrayList.class,
+				Mockito.withSettings().spiedInstance(list).defaultAnswer(Mockito.CALLS_REAL_METHODS).serializable());
+	}
+
+	// 再來是21
 
 }
