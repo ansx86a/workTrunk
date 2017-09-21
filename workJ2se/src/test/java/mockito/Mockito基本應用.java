@@ -5,20 +5,25 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.vfs2.tasks.MoveTask;
 import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.BDDMockito;
+import org.mockito.Captor;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.mockito.internal.matchers.Contains;
+import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mockito.verification.Timeout;
 
 /**
  * <pre>
+ * 什麼是單元測試，為什麼要用單元測試，這一篇寫得不錯:http://chriszou.com/2016/04/13/android-unit-testing-start-from-what.html
+ * 
  * http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/Mockito.html#0
  * 中文2.026:
  * http://www.itread01.com/articles/1475901036.html
@@ -30,13 +35,19 @@ public class Mockito基本應用 {
 	/**
 	 * <pre>
 	 * 要讓annoation生效有3種方法
-	 * 1. 注意要有MockitoAnnotations.initMocks(testClass);
+	 * 1. 注意要有MockitoAnnotations.initMocks(testClass);//可加在unittest 的@before
 	 * 2.在Mockito基本應用加上 @RunWith(MockitoJUnitRunner.StrictStubs.class)
+	 * 2.第2點的補充，有人用這個在class上即可。@RunWith(MockitoJUnitRunner.class)
 	 * 3.在物件變數中加入@Rule public MockitoRule rule = MockitoJUnit.rule().strictness(Strictness.STRICT_STUBS);
 	 * </pre>
 	 */
 	@Mock
 	private List mlist;
+	@Spy
+	private List spyList;//會等於下面，會自已使用空的建構子，？？也可能使用本層其它的mock或spy來注入建構？？
+	//private List spyList = new ArrayList<String>();
+	@Captor
+	ArgumentCaptor argument;
 
 	public Mockito基本應用() {
 		MockitoAnnotations.initMocks(this);
@@ -57,7 +68,14 @@ public class Mockito基本應用 {
 		// m.$9spy一個已存在的物件();
 		// m.$10補捉mock參數();
 		// m.$11mock真實的method();
-		m.$12mock的重置();
+		// m.$12mock的重置();
+		// m.$15Annotation();
+		// m.$16驗証timeout();
+
+		// Mockito will now try to instantiate @Spy and will instantiate @InjectMocks fields 
+		// using constructor injection, setter injection, or field injection.
+		// 意思大概是用spy或是InjectMocks，他會試著替換物件變數成mockito的物件，可能用建構子、setter或是直接用=換吧
+		// 可參考InjectMocks的api  http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/InjectMocks.html
 	}
 
 	/**
@@ -335,7 +353,6 @@ public class Mockito基本應用 {
 		mlist.add("one");// 這裡的add只能用一次，才能capture不出錯
 		Mockito.verify(mlist).add(argument.capture());
 		System.out.println(argument.getValue().toString());
-
 	}
 
 	public void $11mock真實的method() {
@@ -357,6 +374,8 @@ public class Mockito基本應用 {
 		return s + s + s;
 	}
 
+	// 聰明的 Mockito使用者很少會用到這個特性，因為他們知道這是出現糟糕測試單元的信號。
+	// 通常情況下你不會需要重設你的測試單元，只需要為每一個測試方法重新創建一個測試單元就可以了
 	public void $12mock的重置() {
 		// 使用reset會將之前做的設定全部清空
 		List mock = Mockito.mock(List.class);
@@ -392,6 +411,41 @@ public class Mockito基本應用 {
 				Mockito.withSettings().spiedInstance(list).defaultAnswer(Mockito.CALLS_REAL_METHODS).serializable());
 	}
 
-	// 再來是21
+	// 可以參考這一頁http://www.baeldung.com/mockito-annotations
+	public void $15Annotation() {
+		// @ Captor 簡化 ArgumentCaptor 的創建 – 當需要捕獲的參數是一個令人討厭的通用類，而且你想避免編譯時警告。
+		// ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class); 
+		mlist.add("one");// 這裡的add只能用一次，才能capture不出錯
+		Mockito.verify(mlist).add(argument.capture());
+		System.out.println(argument.getValue().toString());
+
+		// @ Spy – 你可以用它代替 spy(Object) 方法
+		// List<String> spyList = Mockito.spy(new ArrayList<String>());
+		spyList.add("111");
+		System.out.println(spyList);
+		Mockito.verify(spyList).add("111");
+
+		/*
+		 * InjectMocks就不做測試了，因為只是有巢狀mock而已，會建一個instance後，
+		 * 裡面的filed會參照貼InjectMocks那一個的mock替換掉，因為比較複雜
+		 * 有問題就參照這裡看看http://chriszou.com/2016/07/16/mockito-annotation.html
+		 */
+		// @ InjectMocks – 自動將模擬對象或偵查域註入到被測試對象中。
+		// 需要註意的是 @InjectMocks 也能與 @Spy 一起使用，這就意味著 Mockito 會註入模擬對象到測試的部分測試中。
+		// 它的復雜度也是你應該使用部分測試原因。
+
+	}
+
+	public void $16驗証timeout() {
+		mlist.add("123");
+		//注意逾時的寫法
+		Mockito.verify(mlist, Mockito.timeout(1000)).add("123");
+		//注意逾時加次數的驗証
+		Mockito.verify(mlist, Mockito.timeout(1000).times(1)).add("123");
+		//用new的寫法
+		Mockito.verify(mlist, new Timeout(1000, VerificationModeFactory.times(1))).add("123");
+	}
+
+	// 再來是22
 
 }
