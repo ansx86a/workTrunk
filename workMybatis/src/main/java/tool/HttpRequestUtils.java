@@ -1,13 +1,10 @@
 package tool;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
+import org.apache.commons.beanutils.BeanUtils;
+import org.json.JSONObject;
 
 import javax.servlet.ServletRequest;
-
-import net.minidev.json.JSONObject;
-
-import org.apache.commons.beanutils.BeanUtils;
+import java.util.Map;
 
 public class HttpRequestUtils {
 

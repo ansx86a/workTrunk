@@ -7,6 +7,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
 public class Slf4j的實作 {
 	// http://www.mkyong.com/spring-mvc/spring-mvc-logback-slf4j-example/
 	// http://note-whu.rhcloud.com/2015/09/28/%E5%9C%A8spring%E4%B8%8B%E4%BD%BF%E7%94%A8slf4jlog4j/
