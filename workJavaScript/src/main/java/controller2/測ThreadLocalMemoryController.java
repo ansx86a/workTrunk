@@ -19,6 +19,8 @@ public class 測ThreadLocalMemoryController {
 
 	private static MyThreadLocal myThreadLocal = new MyThreadLocal();
 
+	// 這邊用新版的tomcat9測試時，發現memory 到2G左右就不會再上去了
+	// 很懷疑是不是只有舊版的才會memory leak
 	@RequestMapping(value = "/thread001.mvc", method = RequestMethod.GET)
 	public String test1(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("gogo2");
@@ -26,6 +28,8 @@ public class 測ThreadLocalMemoryController {
 		if (counter == null) {
 			counter = new MyCounter();
 			myThreadLocal.set(counter);
+//			myThreadLocal.remove();//在thread 結束時懌放是可以100%不增加memory的好方法
+
 		}
 		counter.increment();
 		counter.read(new File("z:/1.bin"));
