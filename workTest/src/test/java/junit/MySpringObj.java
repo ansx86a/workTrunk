@@ -1,4 +1,4 @@
-package testNG;
+package junit;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,7 +17,7 @@ public class MySpringObj {
 	}
 
 	public static void main(String args[]){
-		String path = "springTest/test-context.xml";
+		String path = "junit/junitSpring.xml";
 		ApplicationContext appContext = new ClassPathXmlApplicationContext(path);
 		MySpringObj m = (MySpringObj)appContext.getBean("mySpringObj");
 		System.out.println(m.getAge());

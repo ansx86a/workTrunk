@@ -17,7 +17,8 @@ public class IOUtilsTest {
 		io.好用的method();
 		File tf = Utils.getResourceFromRoot("commonTool/kimo.txt");
 		System.out.println(tf.getAbsolutePath());
-		f.copyURLToFile(new URL("https://tw.yahoo.com/"), tf);
+		//這裡太陽春了，要設User-Agent才不會被擋403
+		f.copyURLToFile(new URL("https://translate.google.com.tw/?hl=en&tab=wT#en/zh-TW/ok"), tf);
 		System.out.println("okok");
 
 	}

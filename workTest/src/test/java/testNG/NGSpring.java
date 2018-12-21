@@ -1,9 +1,9 @@
 package testNG;
 
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.Test;
 
 /**
  * 重點是要繼承一下AbstractTestNGSpringContextTests這個類別

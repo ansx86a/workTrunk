@@ -17,3 +17,9 @@
 /workJ2se/dependency-reduced-pom.xml
 /workJ2se/test-output
 /workMybatis/test-output
+workTest/.project
+workTest/.gitignore
+workTest/.classpath
+workMybatis/workMybatis.iml
+workJavaScript/workJavaScript.iml
+workJ2se/workJ2se.iml

@@ -57,4 +57,15 @@ public class Utils {
 		return result;
 	}
 
+	// https://www.baeldung.com/java-name-of-executing-method
+	public static String getMethodName() {
+		// 同Thread會有一些vm會忽略某些stack，例如ibm的vm？先註解
+		// final StackTraceElement e = Thread.currentThread().getStackTrace()[2];
+		// 改用Exception來處理
+		StackTraceElement e = new Throwable().getStackTrace()[1];
+
+		final String s = e.getClassName();
+		return s.substring(s.lastIndexOf('.') + 1, s.length()) + "." + e.getMethodName();
+	}
+
 }
