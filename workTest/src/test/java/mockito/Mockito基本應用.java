@@ -44,8 +44,8 @@ public class Mockito基本應用 {
 	@Mock
 	private List mlist;
 	@Spy
-	private List spyList;//會等於下面，會自已使用空的建構子，？？也可能使用本層其它的mock或spy來注入建構？？
-	//private List spyList = new ArrayList<String>();
+	private List spyList;// 會等於下面，會自已使用空的建構子，？？也可能使用本層其它的mock或spy來注入建構？？
+	// private List spyList = new ArrayList<String>();
 	@Captor
 	ArgumentCaptor argument;
 
@@ -57,7 +57,7 @@ public class Mockito基本應用 {
 		// TODO Auto-generated method stub
 
 		Mockito基本應用 m = new Mockito基本應用();
-		// m.$1最基本的mock和verify();
+		m.$1最基本的mock和verify();
 		// m.$2設定物件的return和丟例外();
 		// m.$3用pattern來假裝傳入值並設定回傳值();
 		// m.$4Verify的times的寫法();
@@ -72,10 +72,12 @@ public class Mockito基本應用 {
 		// m.$15Annotation();
 		// m.$16驗証timeout();
 
-		// Mockito will now try to instantiate @Spy and will instantiate @InjectMocks fields 
+		// Mockito will now try to instantiate @Spy and will instantiate @InjectMocks
+		// fields
 		// using constructor injection, setter injection, or field injection.
 		// 意思大概是用spy或是InjectMocks，他會試著替換物件變數成mockito的物件，可能用建構子、setter或是直接用=換吧
-		// 可參考InjectMocks的api  http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/InjectMocks.html
+		// 可參考InjectMocks的api
+		// http://static.javadoc.io/org.mockito/mockito-core/2.9.0/org/mockito/InjectMocks.html
 	}
 
 	/**
@@ -414,7 +416,7 @@ public class Mockito基本應用 {
 	// 可以參考這一頁http://www.baeldung.com/mockito-annotations
 	public void $15Annotation() {
 		// @ Captor 簡化 ArgumentCaptor 的創建 – 當需要捕獲的參數是一個令人討厭的通用類，而且你想避免編譯時警告。
-		// ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class); 
+		// ArgumentCaptor<String> argument = ArgumentCaptor.forClass(String.class);
 		mlist.add("one");// 這裡的add只能用一次，才能capture不出錯
 		Mockito.verify(mlist).add(argument.capture());
 		System.out.println(argument.getValue().toString());
@@ -438,11 +440,11 @@ public class Mockito基本應用 {
 
 	public void $16驗証timeout() {
 		mlist.add("123");
-		//注意逾時的寫法
+		// 注意逾時的寫法
 		Mockito.verify(mlist, Mockito.timeout(1000)).add("123");
-		//注意逾時加次數的驗証
+		// 注意逾時加次數的驗証
 		Mockito.verify(mlist, Mockito.timeout(1000).times(1)).add("123");
-		//用new的寫法
+		// 用new的寫法
 		Mockito.verify(mlist, new Timeout(1000, VerificationModeFactory.times(1))).add("123");
 	}
 

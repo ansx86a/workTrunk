@@ -19,10 +19,13 @@ import tool.Utils;
  * <pre>
  * https://www.baeldung.com/java-completablefuture
  * https://colobu.com/2018/03/12/20-Examples-of-Using-Java%E2%80%99s-CompletableFuture/
- * </pre>
+ * https://github.com/wangchenshu/CompletableFuture-share
  * 
- * @author ai
+ * 下面這個是功能強化的樣子，有空再看看吧
+ * https://github.com/spotify/completable-futures
+ * </pre>
  *
+ * @author ai
  */
 
 @FixMethodOrder(value = MethodSorters.NAME_ASCENDING) // 依照method的名字來執行junit
@@ -101,6 +104,8 @@ public class CompletableFutureTest {
 		System.out.println(completableFuture.get());// 這裡因為已執行完成，就直接回傳
 		System.out.println(timer);
 		System.out.println(completableFuture2.get());// 這裡只要再等100ms就可以執行完成
+		System.out.println(timer);
+		System.out.println(completableFuture2.get());// 第二次執行get就是直接取值了
 		System.out.println(timer);
 		System.out.println("========" + Utils.getMethodName() + "======================================");
 	}
@@ -243,7 +248,7 @@ public class CompletableFutureTest {
 				throw new RuntimeException("Computation error!");
 			}
 			return "Hello, " + name;
-		}).handle((s, t) -> s != null ? s : "Hello, Stranger!");
+		}).handle((s, t) -> t != null ? t.toString() : "Hello, Stranger!");
 		System.out.println(timer);
 		System.out.println(completableFuture.isCompletedExceptionally());// false
 		System.out.println(completableFuture.isDone());
@@ -275,13 +280,60 @@ public class CompletableFutureTest {
 		System.out.println(completableFuture.isDone());// true
 		System.out.println(timer);
 		System.out.println(completableFuture.get());// 這行有java.util.concurrent.ExecutionException:
-													// java.lang.RuntimeException: Computation error!
+		// java.lang.RuntimeException: Computation error!
 		System.out.println(timer);// 這行以下會因為上面的例外失敗
 		System.out.println("========" + Utils.getMethodName() + "======================================");
 	}
 
 	@Test
+	public void test08_強制例外失敗() {
+		Stopwatch timer = Stopwatch.createStarted();
+		CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> waitMethod(500, "成功"))
+				.handle((s, t) -> "手動失敗這裡就被無視了");
+		System.out.println(timer);
+		try {
+			System.out.println(completableFuture.isCompletedExceptionally());// false
+			System.out.println(completableFuture.isDone());// false
+			completableFuture.completeExceptionally(new RuntimeException("手動失敗完成"));
+			System.out.println(completableFuture.get());
+		} catch (Exception ex) {
+			System.out.println(timer);
+			System.out.println(completableFuture.isCompletedExceptionally());// false
+			System.out.println(completableFuture.isDone());// false
+			System.out.println(ex);
+		}
+
+		System.out.println("========" + Utils.getMethodName() + "======================================");
+
+	}
+
+	@Test
 	public void test08_待實作測試cancel和iscanceled的例子() throws InterruptedException, ExecutionException {
+		Stopwatch timer = Stopwatch.createStarted();
+		// 為了測delayedExecutor才寫得這麼長，就先註解，可能用不到
+//		CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> waitMethod(100, "Hello"))
+//				.thenApplyAsync(s -> s + waitMethod(200, "_World"),
+//						CompletableFuture.delayedExecutor(50, TimeUnit.MILLISECONDS));
+		CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> waitMethod(1000, "Hello"));
+		System.out.println(timer);
+		System.out.println(completableFuture.isCancelled());// false
+		System.out.println(completableFuture.isDone());// false
+		System.out.println(completableFuture.isCompletedExceptionally());// false
+		// 可以重覆cancel，完成前call會回傳true，完成後call會回傳false
+		// cancel等同completeExceptionally(new CancellationException())。
+		System.out.println(completableFuture.cancel(false));// 參數無用只用來說明
+		System.out.println(timer);
+		System.out.println(completableFuture.isCancelled());// true
+		System.out.println(completableFuture.isDone());// true
+		System.out.println(completableFuture.isCompletedExceptionally());// true
+
+		System.out.println("取消後不能再get不然會出錯");
+		try {
+			System.out.println(completableFuture.get());
+		} catch (Exception ex) {
+			System.out.println(ex.toString());
+		}
+		System.out.println("========" + Utils.getMethodName() + "======================================");
 
 	}
 
@@ -290,25 +342,106 @@ public class CompletableFutureTest {
 
 		/**
 		 * <pre>
-		和get一樣，只是他是uncheckedException
-		join() 
-		Returns the result value when complete, or throws an (unchecked) exception if completed exceptionally.
-		應該是等待完成，和join一樣只是他必須handler ckecked Exception
-		T	get()  
-		Waits if necessary for this future to complete, and then returns its result.
-		不知道timeout會發生什麼事
-		T	get(long timeout, TimeUnit unit)
-		Waits if necessary for at most the given time for this future to complete, and then returns its result, if available.
-		直接get，如果未完成就回傳給的default值
-		T	getNow(T valueIfAbsent)
-		Returns the result value (or throws any encountered exception) if completed, else returns the given valueIfAbsent.
+		 和get一樣，只是他是uncheckedException
+		 join()
+		 Returns the result value when complete, or throws an (unchecked) exception if completed exceptionally.
+		 應該是等待完成，和join一樣只是他必須handler ckecked Exception
+		 T	get()
+		 Waits if necessary for this future to complete, and then returns its result.
+		 不知道timeout會發生什麼事
+		 T	get(long timeout, TimeUnit unit)
+		 Waits if necessary for at most the given time for this future to complete, and then returns its result, if available.
+		 直接get，如果未完成就回傳給的default值
+		 T	getNow(T valueIfAbsent)
+		 Returns the result value (or throws any encountered exception) if completed, else returns the given valueIfAbsent.
 		 * </pre>
 		 */
 	}
 
+	@Test
+	public void test10_2擇一() throws InterruptedException, ExecutionException {
+		CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> waitMethod(100, "Hello future1"))
+				.thenApply(s -> s + waitMethod(200, " apply01"));
+		CompletableFuture<String> future2 = future1.applyToEither(CompletableFuture
+				.supplyAsync(() -> waitMethod(100, "Hello future2")).thenApply(s -> s + waitMethod(200, " apply02")),
+				s -> s + " from applyToEither");
+		System.out.println(future2.get());
+		// 測試結果是兩個supplyAsync並行，apply也一樣，但是只回傳最早完成的結果
+		// 就算get結束後也是會慢慢執行完成的，除非exit
+		System.out.println("========" + Utils.getMethodName() + "======================================");
+
+	}
+
+	@Test
+	public void test10_2擇一無回傳() throws InterruptedException, ExecutionException {
+		CompletableFuture<Void> future1 = CompletableFuture.supplyAsync(() -> waitMethod(100, "Hello future1"))
+				.thenAccept(s -> System.out.println("apply01"));
+		CompletableFuture<String> future2 = future1.applyToEither(CompletableFuture
+				.supplyAsync(() -> waitMethod(100, "Hello future2")).thenAccept(s -> System.out.println("apply02")),
+				s -> s + " from acceptToEither");
+		System.out.println(future2.get());
+		// 測試結果是兩個並行，就算get完還是會慢慢跑完
+
+		// 附上範例，他使用acceptEither的方式比較複雜一點，先不學
+//	    String original = "Message";
+//	    StringBuilder result = new StringBuilder();
+//	    CompletableFuture cf = CompletableFuture.completedFuture(original)
+//	            .thenApplyAsync(s -> delayedUpperCase(s))
+//	            .acceptEither(CompletableFuture.completedFuture(original).thenApplyAsync(s -> delayedLowerCase(s)),
+//	                    s -> result.append(s).append("acceptEither"));
+//	    cf.join();
+//	    assertTrue("Result was empty", result.toString().endsWith("acceptEither"));
+
+		System.out.println("========" + Utils.getMethodName() + "======================================");
+
+	}
+
+	@Test
+	public void test10_2個都執行完成再執行() throws InterruptedException, ExecutionException {
+		Stopwatch timer = Stopwatch.createStarted();
+		CompletableFuture<String> future1 = CompletableFuture
+				.supplyAsync(() -> waitMethod(100, "Hello future1 " + timer))
+				.thenApply(s -> s + waitMethod(200, " apply01 " + timer));
+		CompletableFuture<Void> future2 = future1
+				.runAfterBoth(
+						CompletableFuture.supplyAsync(() -> waitMethod(200, "Hello future2 " + timer))
+								.thenApply(s -> s + waitMethod(200, " apply02 " + timer)),
+						() -> System.out.println("done = " + timer));
+		// 其它例子thenAcceptBoth，thenCombine
+
+		System.out.println(timer);
+		future2.get();// 兩個是並發執行的，然後都執行完都跑runAfterBoth
+		System.out.println(timer);
+		System.out.println("========" + Utils.getMethodName() + "======================================");
+
+	}
+
+	@Test
+	public void test10_任何一個執行完成後就XXX() {
+		Stopwatch timer = Stopwatch.createStarted();
+		CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> waitMethod(100, "Hello future1"));
+		CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> waitMethod(200, "Hello future2"));
+		CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> waitMethod(300, "Hello future3"));
+
+		CompletableFuture.anyOf(future1, future2, future3).whenComplete((res, th) -> {
+			System.out.println("any of -- " + timer);
+			System.out.println("response=" + res);
+			System.out.println("exception=" + th);
+		});
+
+		CompletableFuture.allOf(future1, future2, future3).whenComplete((res, th) -> {
+			System.out.println("all of -- " + timer);
+			System.out.println("response=" + res);
+			System.out.println("exception=" + th);
+		});
+		waitMethod(500, "等待完成中……");
+		System.out.println("========" + Utils.getMethodName() + "======================================");
+
+	}
+
 	private <T> T waitMethod(int waitMs, T result) {
 		try {
-			System.out.println("strat sleep " + waitMs);
+			System.out.println("strat sleep " + waitMs + " -- " + result);
 			Thread.sleep(waitMs);
 		} catch (InterruptedException e) {
 			e.printStackTrace();

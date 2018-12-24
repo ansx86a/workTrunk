@@ -17,6 +17,9 @@ import java.util.stream.Stream;
 
 public class Lambda整理 {
 
+	// 新看到的有空看看：20181220
+	// https://medium.com/@johnmcclean/reactive-programming-with-java-8-and-simple-react-the-tutorial-3634f512eeb1
+
 	// good:http://winterbe.com/posts/2014/07/31/java8-stream-tutorial-examples/
 	// https://www.oreilly.com/learning/java-8-functional-interfaces
 	public static void main(String[] args) {
