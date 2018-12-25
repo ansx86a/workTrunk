@@ -9,6 +9,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * 老實說這是一個廢程式，不過倒是有一些好玩的語言待整理
+ * @author ai
+ *
+ */
 public class 自動轉型的method寫法 {
 
 	private Map<String, Object> attrs_ = new HashMap<>();

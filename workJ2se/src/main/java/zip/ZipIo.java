@@ -9,6 +9,14 @@ import java.util.zip.ZipOutputStream;
 
 import tool.Utils;
 
+/**
+ * 應該只能壓一層，所以當初有搬檔後重新命名的程式，應該要可以優化<br>
+ * 這裡難得的是單純用java來做zip沒有用3rd的元件<br>
+ * 在myUtils的filesService有zip4j的例子，這裡就留存備用吧<br>
+ * 新的zip 3rd有空試試 https://github.com/zeroturnaround/zt-zip
+ * @author ai
+ *
+ */
 public class ZipIo {
 
 	public static void main(String[] args) throws Exception {

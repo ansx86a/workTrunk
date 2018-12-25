@@ -1,16 +1,12 @@
-package 新功能;
+package 小技巧;
 
 import java.util.Objects;
 
-public class Java7Utils {
+import org.junit.Test;
 
-	public static void main(String[] args) {
-		Java7Utils u = new Java7Utils();
-		u.$1Objects的應用();
-
-	}
-
-	public void $1Objects的應用() {
+public class 新工具 {
+	@Test
+	public void Objects的應用_java7() {
 		System.out.println("==有一些用來判斷null和deepEqual就不列，只是容易讀和程式會變長的不列");
 
 		System.out.println("使用Objects.equal，避免null exception");
@@ -20,7 +16,5 @@ public class Java7Utils {
 		System.out.println("Objects.toString(null)=" + Objects.toString(null));
 		System.out.println("Objects.toString(null, \"defaultString\")=" + Objects.toString(null, "defaultString"));
 
-		
 	}
-
 }

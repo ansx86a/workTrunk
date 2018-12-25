@@ -81,14 +81,4 @@ public class 第一個junit {
 		System.out.println("@Test - ====測試有內容的集合結束");
 	}
 
-	@Test
-	public void 測試新功能() {
-		try {
-			Java7Ex.byte2value();
-			列舉中文範例.main(null);
-			Lambda整理.main(null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
