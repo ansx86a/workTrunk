@@ -5,6 +5,8 @@
 	<groupId>workJ2se</groupId>
 	<artifactId>workJ2se</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- pom的一些變數設定可以參考這裡 -->
+	<!-- https://books.sonatype.com/mvnref-book/reference/resource-filtering-sect-properties.html -->
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -379,9 +381,33 @@
 			<version>4.12</version>
 			<!-- <scope>test</scope> -->
 		</dependency>
+
+
+
+
 	</dependencies>
 
-
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<rulesets>
+						<!-- https://maven.apache.org/plugins/maven-pmd-plugin/examples/usingRuleSets.html -->
+						<ruleset>${project.build.outputDirectory}/rulesets/java/myPmdRuleSet.xml</ruleset>
+						<!-- A rule set, that comes bundled with PMD -->
+						<!-- <ruleset>/category/java/bestpractices.xml</ruleset> -->
+						<!-- Custom local file system rule set -->
+						<!-- <ruleset>d:\rulesets\strings.xml</ruleset> -->
+						<!-- Custom remote rule set accessed via a URL -->
+						<!-- <ruleset>http://localhost/design.xml</ruleset> -->
+					</rulesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 
 	<build>
@@ -391,65 +417,84 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<testSource>1.8</testSource>
-					<testTarget>1.8</testTarget>
+					<source>1.10</source>
+					<target>1.10</target>
+					<testSource>1.10</testSource>
+					<testTarget>1.10</testTarget>
 				</configuration>
 			</plugin>
 
-
+			<!-- https://pmd.github.io/pmd-6.9.0/pmd_rules_java.html -->
+			<!-- 主要是npath這一個rule -->
+			<!-- mvn package site，要配合site的plugin，不過下site應該就不用下package了吧？ -->
 			<plugin>
-				<!-- unit test的plug， -->
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
-				<configuration>
-					<!-- 為true就不會有test -->
-					<skip>false</skip>
-					<!-- 載入其它的test -->
-					<includes>
-						<!-- junit -->
-						<include>**/*第一個junit</include>
-						<!-- testng -->
-						<include>**/*NG001</include>
-					</includes>
-					<!-- 排除特定的一些test -->
-					<excludes>
-						<exclude>**/*ServiceTest</exclude>
-						<exclude>**/TempDaoTest</exclude>
-					</excludes>
-
-					<!-- 導入xml的話，只會跑xml的unit test，其它的就不會跑了，所以註解一下 -->
-					<!-- <suiteXmlFiles> -->
-					<!-- <suiteXmlFile>target/test-classes/testNG/testng.xml</suiteXmlFile> -->
-					<!-- </suiteXmlFiles> -->
-				</configuration>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.11.0</version>
 			</plugin>
+
 
 			<plugin>
-				<!-- 測試覆蓋率 -->
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<!-- 不要寫版本，好像會拉最新的，這樣跑maven時才不會出現編碼錯誤 -->
-				<!-- <version>2.5.1</version> -->
-				<!-- http://mvnrepository.com/artifact/org.codehaus.mojo/cobertura-maven-plugin -->
-				<version>2.7</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.7.1</version>
 				<configuration>
-					<formats>
-						<format>xml</format>
-						<format>html</format>
-					</formats>
+					<port>9000</port>
+					<tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
 				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>cobertura</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
+
+			<!-- <plugin> -->
+			<!-- unit test的plug， -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-surefire-plugin</artifactId> -->
+			<!-- <version>2.19.1</version> -->
+			<!-- <configuration> -->
+			<!-- 為true就不會有test -->
+			<!-- <skip>false</skip> -->
+			<!-- 載入其它的test -->
+			<!-- <includes> -->
+			<!-- junit -->
+			<!-- <include>**/*第一個junit</include> -->
+			<!-- testng -->
+			<!-- <include>**/*NG001</include> -->
+			<!-- </includes> -->
+			<!-- 排除特定的一些test -->
+			<!-- <excludes> -->
+			<!-- <exclude>**/*ServiceTest</exclude> -->
+			<!-- <exclude>**/TempDaoTest</exclude> -->
+			<!-- </excludes> -->
+
+			<!-- 導入xml的話，只會跑xml的unit test，其它的就不會跑了，所以註解一下 -->
+			<!-- <suiteXmlFiles> -->
+			<!-- <suiteXmlFile>target/test-classes/testNG/testng.xml</suiteXmlFile> -->
+			<!-- </suiteXmlFiles> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
+
+			<!-- <plugin> -->
+			<!-- 測試覆蓋率 -->
+			<!-- <groupId>org.codehaus.mojo</groupId> -->
+			<!-- <artifactId>cobertura-maven-plugin</artifactId> -->
+			<!-- 不要寫版本，好像會拉最新的，這樣跑maven時才不會出現編碼錯誤 -->
+			<!-- <version>2.5.1</version> -->
+			<!-- http://mvnrepository.com/artifact/org.codehaus.mojo/cobertura-maven-plugin -->
+			<!-- <version>2.7</version> -->
+			<!-- <configuration> -->
+			<!-- <formats> -->
+			<!-- <format>xml</format> -->
+			<!-- <format>html</format> -->
+			<!-- </formats> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <phase>package</phase> -->
+			<!-- <goals> -->
+			<!-- <goal>cobertura</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
 
 			<plugin>
 				<!-- 包可執行jar檔的plugin -->
