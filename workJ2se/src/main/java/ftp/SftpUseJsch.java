@@ -21,6 +21,7 @@ public class SftpUseJsch {
 		SftpUseJsch sf = new SftpUseJsch();
 		File uploadFile = new File("z:/要上傳的檔案");
 		sf.upload(uploadFile);
+		
 	}
 
 	public void upload(File uploadFile) {
@@ -61,11 +62,14 @@ public class SftpUseJsch {
 			Channel channel = sshSession.openChannel("sftp");
 			channel.connect();
 			sftp = (ChannelSftp) channel;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 		return sftp;
 	}
+	
+	
 
 }

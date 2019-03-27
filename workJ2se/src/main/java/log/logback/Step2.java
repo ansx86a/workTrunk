@@ -20,8 +20,6 @@ public class Step2 {
 			}
 			Thread.sleep(1000);
 		}
-	
-
 	}
 
 }
