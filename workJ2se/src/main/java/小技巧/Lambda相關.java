@@ -1,33 +1,14 @@
 package 小技巧;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
 
-public class 小技巧 {
-
-    private List<String> 匿名加內容的List = new ArrayList<String>() {
-        {
-            add("msg 1");
-            add("msg 2");
-            add("msg 3");
-            int i = 0;
-            add("msg i->" + i);
-        }
-    };
-
-    @Test
-    public void 匿名List() {
-        // 不好的例子，應該就使用guava
-        System.out.println(匿名加內容的List);
-    }
+public class Lambda相關 {
 
     @Test
     public void 避免NULL的取值法() {
-
         HashMap<String, String> map = new HashMap<>();
         map.put("key1", "value1");
         HashMap<String, String> nullMap = null;
@@ -48,5 +29,4 @@ public class 小技巧 {
         System.out.println(option.map(o -> o.get("沒有值的key")).map(String::toString));
         System.out.println(option.map(o -> o.get("沒有值的key")).map(String::toString).isPresent());
     }
-
 }

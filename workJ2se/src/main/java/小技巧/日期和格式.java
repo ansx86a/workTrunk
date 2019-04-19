@@ -11,9 +11,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class 日期和格式 {
-
     @Test
     public void Double轉數字格式和去小數點() {
         DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
@@ -42,6 +40,5 @@ public class 日期和格式 {
         Date lastMonthStart = DateUtils.truncate(lastMonthEnd, Calendar.MONTH);
         System.out.println(lastMonthEnd);
         System.out.println(lastMonthStart);
-
     }
 }

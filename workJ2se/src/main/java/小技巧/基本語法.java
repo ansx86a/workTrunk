@@ -7,7 +7,6 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class 基本語法 {
-
 	@Test
 	public void 位元運算() {
 		// 位元運算 ~(not) |(or) &(and) ^(xor) <<(左移) >>(右移)
@@ -24,7 +23,7 @@ public class 基本語法 {
 	@Test
 	public void 位元運算byte2value_java7() {
 		// 8位byte
-		byte aByte = (byte) 0b0010_0001;
+		byte aByte = 0b0010_0001;
 		// 16位short
 		short aShort = (short) 0b1010000101000101;
 		// 32位int
@@ -37,7 +36,6 @@ public class 基本語法 {
 	public void 判斷isa() {
 		// 判斷is a 的時候用
 		System.out.println("字串 instanceof String：" + ("xxx" instanceof String));// true
-
 	}
 
 	@Test
@@ -60,9 +58,7 @@ public class 基本語法 {
 	}
 
 	@Test
-	/**
-	 * 沒事不要使用，要看需求，阿里巴巴的規範有提有空再補
-	 */
+	/** 沒事不要使用，要看需求，阿里巴巴的規範有提有空再補. */
 	public void 測試不定參數() {
 		不定參數(1, "不定參數", 9, 8, 7);
 	}
