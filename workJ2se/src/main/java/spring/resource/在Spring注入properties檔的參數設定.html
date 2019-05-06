@@ -1,0 +1,188 @@
+﻿<div class="date-outer">
+        
+<h2 class="date-header"><span>2017/11/17</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry uncustomized-post-template" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<meta content="3019681097816408143" itemprop="blogId">
+<meta content="7761569550332407480" itemprop="postId">
+<a name="7761569550332407480"></a>
+<h3 class="post-title entry-title" itemprop="name">
+在Spring注入properties檔的參數設定
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-7761569550332407480" itemprop="description articleBody">
+<p>在Spring要從properties檔注入參數的範例如下。</p>
+<a name="more"></a>
+<p>例如連接資料庫的datasource設定如url，使用者名稱及密碼等通常不會直接設定在Spring的配置檔，而是會另外設定在properties檔，如此部屬在不同環境時，只要抽換properties檔就可以連接不同的資料庫了。</p>
+<p>datasource的設定檔為<code>dataSource.properties</code>，位在應用程式根目錄（也就是<code class="snippet">src/dataSource.properties</code>），內容如下。</p>
+<pre><code class="nohighlight cmd"><span style="color:gray;">#DB JDBC</span> 
+jdbc.driverClassName=oracle.jdbc.driver.OracleDriver
+jdbc.url=jdbc:oracle:thin:@10.1.1.231:1521:mydb
+jdbc.username=matthung
+jdbc.password=12345
+<span style="color:gray;">#FILE</span> 
+file.path=D:\\files\\
+</code></pre>
+<p>在Spring的配置檔<code>applicationContext.xml</code>設定如下</p>
+<pre><code class="xml hljs"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">"http://www.springframework.org/schema/beans"</span>
+  <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">"http://www.w3.org/2001/XMLSchema-instance"</span>
+  <span class="hljs-attr">xmlns:context</span>=<span class="hljs-string">"http://www.springframework.org/schema/context"</span>
+  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">"
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!-- Spring 3.1之後的版本 --&gt;</span>
+  <span class="hljs-comment">&lt;!-- 讀取properties檔 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">context:property-placeholder</span> <span class="hljs-attr">location</span>=<span class="hljs-string">"classpath:dataSource.properties"</span> <span class="hljs-attr">order</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">ignore-unresolvable</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">file-encoding</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span> 
+  
+  <span class="hljs-comment">&lt;!-- Spring 3.1之前的版本 --&gt;</span>
+  <span class="hljs-comment">&lt;!--
+  &lt;bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;
+    &lt;property name="fileEncoding" value="UTF-8" /&gt;
+    &lt;property name="location" value="classpath:dataSource.properties" /&gt;
+    &lt;property name="ignoreUnresolvablePlaceholders" value="true" /&gt;
+  &lt;/bean&gt;
+  --&gt;</span>
+  
+  <span class="hljs-comment">&lt;!-- 設定datasource --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"dataSource"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"driverClassName"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"oracle.jdbc.driver.OracleDriver"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"url"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"${jdbc.url}"</span> /&gt;</span> <span class="hljs-comment">&lt;!-- 使用Spring property placeholder  ${...} 來注入properties檔的參數 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"username"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"${jdbc.username}"</span> /&gt;</span> 
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"${jdbc.password}"</span> /&gt;</span>  
+  <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span>
+</code></pre>
+<p>在程式中要讀取Properites檔可使用<code class="snippet"><a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/beans/factory/annotation/Value.html" target="_blank">@Value</a></code>注入至成員變數。</p>
+<pre><code class="java hljs"><span class="hljs-meta">@Service</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileServiceImpl</span> </span>{
+  
+  <span class="hljs-meta">@Value</span>(<span class="hljs-string">"${file.path}"</span>)
+  <span class="hljs-keyword">private</span> String filePath; <span class="hljs-comment">// inject "D:\\files\\" from properties file</span>
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> File <span class="hljs-title">readFile</span><span class="hljs-params">(String fileName)</span></span>{
+    <span class="hljs-keyword">return</span> read(filePath + fileName);
+  }
+  
+}
+</code></pre>
+<p>若是要使用<code class="snippet"><a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/core/env/Environment.html" target="_blank">Environment</a></code>變數來取得Properties，則設定如下，使用<code class="snippet"><a href="https://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/context/annotation/PropertySource.html" target="_blank">@PropertySource</a></code></p><p>
+</p><pre><code class="java hljs"><span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@PropertySource</span>(<span class="hljs-string">"classpath:dataSource.properties"</span>, ignoreResourceNotFound=<span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>{
+
+  <span class="hljs-meta">@Autowired</span>
+  <span class="hljs-keyword">protected</span> Environment env;
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getProperty</span><span class="hljs-params">(String key)</span> </span>{
+    <span class="hljs-keyword">return</span> env.getProperty(key);
+  }
+
+}
+</code></pre>
+<p>要特別注意的是使用<code class="snippet">&lt;context:property-placeholder &gt;</code>的配置<a href="https://stackoverflow.com/questions/14169834/spring-3-1-environment-does-not-work-with-user-property-files" target="_blank">不會將Properties注入</a>至<code class="snippet">Environment</code>，而僅能使用<code class="snippet">@Value(${...})</code>注入成員變數或在配置檔使用<code class="snippet">${...}</code>的方式來讀取Properties</p>
+<br>
+<p>如果有<a href="https://stackoverflow.com/questions/3403773/using-multiple-property-files-via-propertyplaceholderconfigurer-in-multiple-pr" target="_blank">多個properties檔</a>，則設定如下</p>
+<pre><code class="xml hljs">  <span class="hljs-comment">&lt;!-- Spring 3.1之後的版本 --&gt;</span>
+  <span class="hljs-comment">&lt;!-- 讀取properties檔 --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">context:property-placeholder</span> 
+    <span class="hljs-attr">location</span>=<span class="hljs-string">"classpath:dataSource.properties, 
+              classpath:error.properties"</span> 
+    <span class="hljs-attr">order</span>=<span class="hljs-string">"1"</span> 
+    <span class="hljs-attr">ignore-unresolvable</span>=<span class="hljs-string">"true"</span> 
+    <span class="hljs-attr">file-encoding</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span> 
+</code></pre>
+<p>在程式中要讀取Properites的類別設定</p>
+<pre><code class="java hljs"><span class="hljs-meta">@Configuration</span>
+<span class="hljs-meta">@PropertySource</span>({<span class="hljs-string">"classpath:dataSource.properties"</span>, 
+                 <span class="hljs-string">"classpath:error.properties"</span>},
+  ignoreResourceNotFound=<span class="hljs-keyword">true</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>{
+
+  <span class="hljs-meta">@Autowired</span>
+  <span class="hljs-keyword">protected</span> Environment env;
+  
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getProperty</span><span class="hljs-params">(String key)</span> </span>{
+    <span class="hljs-keyword">return</span> env.getProperty(key);
+  }
+
+}
+</code></pre>
+<p>如果覺得文章有幫助的話還幫忙點個Google廣告，感恩。</p>
+
+<br>
+<p>參考：
+</p><ul>
+<li><a href="http://samchu.logdown.com/posts/216176-inject-spring-configuration-files" target="_blank">Spring注入設定檔的方式</a></li>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#beans-factory-placeholderconfigurer" target="_blank">Example: the Class name substitution PropertyPlaceholderConfigurer</a></li>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#resources-as-dependencies" target="_blank">Resources as dependencies</a></li>
+<li><a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/core.html#resources-implementations-classpathresource" target="_blank">ClassPathResource</a></li>
+<li><a href="https://www.boraji.com/spring-4-propertysource-annotation-example" target="_blank">Spring 4 - @PropertySource annotation example</a></li>
+<li><a href="https://stackoverflow.com/questions/14169834/spring-3-1-environment-does-not-work-with-user-property-files" target="_blank">Spring 3.1 Environment does not work with user property files</a></li>
+<li><a href="http://www.baeldung.com/properties-with-spring" target="_blank">Properties with Spring and Spring Boot</a></li>
+<li><a href="https://stackoverflow.com/questions/3403773/using-multiple-property-files-via-propertyplaceholderconfigurer-in-multiple-pr" target="_blank">Using multiple property files (via PropertyPlaceholderConfigurer) in multiple projects/modules</a></li>
+<li><a href="" target="_blank"></a></li>
+</ul>
+<p></p>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1">
+<span class="post-author vcard">
+</span>
+<span class="post-timestamp">
+</span>
+<span class="reaction-buttons">
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-backlinks post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-control blog-admin pid-460898662">
+<a href="https://www.blogger.com/post-edit.g?blogID=3019681097816408143&amp;postID=7761569550332407480&amp;from=pencil" title="編輯文章">
+<img alt="" class="icon-action" height="18" src="https://resources.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2">
+<span class="post-labels">
+標籤：
+<a href="https://matthung0807.blogspot.com/search/label/java" rel="tag">java</a>,
+<a href="https://matthung0807.blogspot.com/search/label/spring" rel="tag">spring</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3">
+<span class="post-location">
+</span>
+</div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>沒有留言:</h4>
+<div id="Blog1_comments-block-wrapper">
+<dl class="avatar-comment-indent" id="comments-block">
+</dl>
+</div>
+<p class="comment-footer">
+<a href="https://www.blogger.com/comment.g?blogID=3019681097816408143&amp;postID=7761569550332407480&amp;isPopup=true" onclick="javascript:window.open(this.href, &quot;bloggerPopup&quot;, &quot;toolbar=0,location=0,statusbar=1,menubar=0,scrollbars=yes,width=640,height=500&quot;); return false;">張貼留言</a>
+</p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
