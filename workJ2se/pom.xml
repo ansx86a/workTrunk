@@ -374,6 +374,29 @@
 			<version>0.1.53</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.inferred/freebuilder -->
+		<dependency>
+			<groupId>org.inferred</groupId>
+			<artifactId>freebuilder</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.auto.value/auto-value -->
+		<dependency>
+			<groupId>com.google.auto.value</groupId>
+			<artifactId>auto-value</artifactId>
+			<version>1.6.5</version>
+            <!--intellij要拿掉才行，eclipse不用-->
+			<!--<scope>provided</scope>-->
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.auto.value/auto-value-annotations -->
+		<dependency>
+			<groupId>com.google.auto.value</groupId>
+			<artifactId>auto-value-annotations</artifactId>
+			<version>1.6.5</version>
+		</dependency>
+
+
 		<!-- 單元測試 -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -390,6 +413,10 @@
 	<reporting>
 		<plugins>
 			<plugin>
+				<!-- 可以先跑site把css產出來會比較好看html -->
+				<!-- 好像也可以放在build，不一定要放在report -->
+				<!-- 用maven跑pmd:pmd，就會產html到C:\allenWrok\git\workTrunk\workJ2se\target\site -->
+				<!-- pmd:check好像只跑xml，被包在pmd:pmd裡面的一部分 -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>3.11.0</version>
@@ -405,6 +432,25 @@
 						<!-- <ruleset>http://localhost/design.xml</ruleset> -->
 					</rulesets>
 				</configuration>
+			</plugin>
+
+			<!-- 可以先跑site把css產出來會比較好看html -->
+			<!-- 用maven跑checkstyle:checkstyle，就會產html到C:\allenWrok\git\workTrunk\workJ2se\target\site -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+				<!-- 設不成功，一直讀sun而不讀我用的customer或是google的 -->
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>checkstyle</report>
+						</reports>
+					</reportSet>
+				</reportSets>
 			</plugin>
 		</plugins>
 	</reporting>
