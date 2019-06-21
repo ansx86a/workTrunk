@@ -37,15 +37,15 @@ import com.google.auto.value.AutoValue;
  */
 @AutoValue
 abstract public class User {
-    static User create(String name, int age, String address) {
-        return new AutoValue_User(name, age, address);
-    }
-
-    abstract public String name();
-
-    abstract public int age();
-
-    abstract public String address();
-
-    private String ignoredProperty; // sadly, it can't be `final`
+//    static User create(String name, int age, String address) {
+//        return new AutoValue_User(name, age, address);
+//    }
+//
+//    abstract public String name();
+//
+//    abstract public int age();
+//
+//    abstract public String address();
+//
+//    private String ignoredProperty; // sadly, it can't be `final`
 }

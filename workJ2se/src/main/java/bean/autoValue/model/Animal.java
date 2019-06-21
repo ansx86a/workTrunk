@@ -10,25 +10,25 @@ import com.google.auto.value.AutoValue;
  */
 @AutoValue
 abstract class Animal {
-    abstract String name();
-
-    abstract int numberOfLegs();
-
-    static Builder builder() {
-        return new AutoValue_Animal.Builder();
-    }
-
-    @AutoValue.Builder
-    abstract static class Builder {
-        abstract Builder setName(String value);
-
-        abstract Builder setNumberOfLegs(int value);
-
-        abstract Animal build();
-    }
-
-    public static void main(String args[]) {
-        Animal animal = Animal.builder().setName("name").setNumberOfLegs(999).build();
-        System.out.println(animal.toString());
-    }
+//    abstract String name();
+//
+//    abstract int numberOfLegs();
+//
+//    static Builder builder() {
+//        return new AutoValue_Animal.Builder();
+//    }
+//
+//    @AutoValue.Builder
+//    abstract static class Builder {
+//        abstract Builder setName(String value);
+//
+//        abstract Builder setNumberOfLegs(int value);
+//
+//        abstract Animal build();
+//    }
+//
+//    public static void main(String args[]) {
+//        Animal animal = Animal.builder().setName("name").setNumberOfLegs(999).build();
+//        System.out.println(animal.toString());
+//    }
 }
