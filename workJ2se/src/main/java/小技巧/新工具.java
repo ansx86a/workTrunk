@@ -1,7 +1,11 @@
 package 小技巧;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Objects;
+import java.util.SplittableRandom;
 
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 
 public class 新工具 {
@@ -15,5 +19,12 @@ public class 新工具 {
         System.out.println("toString 給default值，避免null 有exception");
         System.out.println("Objects.toString(null)=" + Objects.toString(null));
         System.out.println("Objects.toString(null, \"defaultString\")=" + Objects.toString(null, "defaultString"));
+    }
+
+    public void 亂數() throws NoSuchAlgorithmException {
+        new SplittableRandom().nextInt(5, 10);// 指5-9
+        new SplittableRandom().nextBytes(new byte[100]);
+        SecureRandom.getInstanceStrong().nextBytes(new byte[100]);
+        byte[] randomBytes = RandomUtils.nextBytes(20);
     }
 }
