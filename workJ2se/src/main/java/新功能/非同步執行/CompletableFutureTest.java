@@ -59,7 +59,7 @@ public class CompletableFutureTest {
 		CompletableFuture<String> completableFuture = new CompletableFuture<>();
 		Executors.newCachedThreadPool().submit(() -> {// 用別的thread來執行程式
 			completableFuture.complete(waitMethod(500, "Hello completableFuture完成"));
-			return null;// 這裡不知道是要幹嘛的
+			return null;// submit會回傳future，要不回傳就submit把改成用execute
 		});
 		return completableFuture;
 	}
@@ -73,7 +73,7 @@ public class CompletableFutureTest {
 		System.out.println(timer);
 		String result = future.get();// 測試還要等多久才能拿到結果
 		System.out.println(timer);
-		System.out.println(result);
+		System.out.println(result);//和runAsync的差別是有回傳值
 		System.out.println("========" + Utils.getMethodName() + "======================================");
 	}
 
@@ -85,7 +85,7 @@ public class CompletableFutureTest {
 		Thread.sleep(200);// 執行一堆有的沒的要200毫秒
 		System.out.println(timer);
 		System.out.println(future.isDone());
-		future.get();
+		System.out.println(future.get());//和supplyAsync的差別是沒有回傳值
 		System.out.println(timer);
 		System.out.println(future.isDone());
 		System.out.println("========" + Utils.getMethodName() + "======================================");
@@ -128,6 +128,7 @@ public class CompletableFutureTest {
 
 	@Test
 	public void test05_當Future未完成時Main結束就馬上結束() throws InterruptedException {
+		//可見預設是背景的執行緒吧，所以main結束就沒了
 		CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> waitMethod(100, "Hello"));
 		completableFuture.thenRun(() -> System.out.println("test05自動執行結束"));
 		Thread.sleep(200);// 註解這行就不會出來test05自動執行結束
