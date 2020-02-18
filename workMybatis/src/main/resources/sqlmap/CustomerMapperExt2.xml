@@ -130,6 +130,7 @@
 		</foreach>
 	</select>
 	<!-- ============================================================================================== -->
+	<!-- 這裡的parameterType可以改成list，然後collection就可以用list不用list1，比較簡化 -->
 	<select id="動態sqlForEachClass" parameterType="model.input.MyInput"
 		resultType="map">
 		select * from customers
