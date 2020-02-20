@@ -1,5 +1,6 @@
 package 新功能.lambda;
 
+import com.google.common.collect.ImmutableMap;
 import org.junit.Test;
 
 import com.beust.jcommander.internal.Lists;
@@ -352,22 +353,48 @@ public class Lambda整理 {
         System.out.println(sp2.get());
 
     }
-    
+
     @Test
     public void $15危險碼用foreach造成null() {
+        //這裡應該是List是非執行緒安全的原因，不是lamba的原，所以在不一樣的jvm會有不一樣的問題發生
+
         List<Integer> list = Lists.newArrayList();
-        IntStream.range(0, 100).parallel().forEach(o->list.add(o));
+        IntStream.range(0, 100).parallel().forEach(o -> list.add(o));
         System.out.println(list);
         System.out.println(list.size());//java11會有不等於100的情況
-        System.out.println(list.size()==100);//java8必等於100，java11不一定
+        System.out.println(list.size() == 100);//java8必等於100，java11不一定
         System.out.println(list.contains(null));//java8有可能null，java11不會
-        
+
         List<String> list2 = Lists.newArrayList();
-        list.parallelStream().forEach(o->list2.add(""+o));
+        list.parallelStream().forEach(o -> list2.add("" + o));
         System.out.println(list2);
         System.out.println(list2.size());
-        System.out.println(list2.size()==list.size());//java8必等於100，java11不一定
+        System.out.println(list2.size() == list.size());//java8必等於100，java11不一定
         System.out.println(list2.contains(null));//java8有可能null，java11不會
+    }
+
+    @Test
+    public void $16展開2階層的資料() {
+        //List中的List
+        List<List<String>> lists = Arrays.asList(Arrays.asList("Tony", "Tom", "John"),
+                Arrays.asList("Amy", "Emma", "Iris"));
+        List<String> allNames = lists.stream().flatMap(List::stream)
+                .collect(Collectors.toList());
+        System.out.println(allNames);
+
+        //List中的Array
+        List<String[]> lists2 = Arrays.asList("Tony,Tom,John".split(","),
+                "Amy,Emma,Iris".split(","));
+        List<String> allNames2 = lists2.stream().flatMap(Arrays::stream)
+                .collect(Collectors.toList());
+        System.out.println(allNames2);
+
+        //List中的map
+        List<Map<String, String>> list3 = Arrays.asList(ImmutableMap.of("k1", "v1", "k2", "v2"), ImmutableMap.of("k1", "v1", "k2", "v22"));
+        List<String> allNames3 = list3.stream().flatMap(o -> o.values().stream()).distinct()
+                .collect(Collectors.toList());
+        System.out.println(allNames3);
+
     }
 
 }
