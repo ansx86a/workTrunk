@@ -34,6 +34,7 @@ public class CompletableFutureTest {
 	@Test
 	public void test01_CompleableFuture基本沒意義的同步例子() throws InterruptedException, ExecutionException {
 		Stopwatch timer = Stopwatch.createStarted();
+		//感覺就像是mock在用的，可直接get
 		Future<String> future = CompletableFuture.completedFuture(waitMethod(500, "Hello completableFuture完成"));
 		System.out.println(timer);
 		System.out.println(future.isDone());
@@ -46,7 +47,7 @@ public class CompletableFutureTest {
 	@Test
 	public void test01_submit和CompletableFuture的基本() throws InterruptedException, ExecutionException {
 		Stopwatch timer = Stopwatch.createStarted();
-		Future<String> future = test01_getCompletableFuture(); // 取得一個未來會執行完成的結果
+		Future<String> future = test01_getCompletableFuture(); // 取得一個未來會執行完成的結果，手動完成future
 		Thread.sleep(200);// 執行一堆有的沒的要200毫秒
 		System.out.println(timer);
 		String result = future.get();// 測試還要等多久才能拿到結果

@@ -1,19 +1,22 @@
 package commonTool;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Test;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
+import com.google.common.collect.Multimaps;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
+import org.junit.Test;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class GuavaListAndMap {
 
@@ -121,6 +124,28 @@ public class GuavaListAndMap {
         System.out.println(map);
         System.out.println(map.get("1").getClass());
         System.out.println(map.get("1") instanceof List);// true
+
+    }
+
+    @Test
+    public void 反轉Map使用ListMultiMap() {
+        //正常來說，key是唯一，value不是唯一的情況
+        Map<String, String> map = ImmutableMap.of("k1", "v1", "k2", "v1", "k3", "v3");
+        //中介層為SET
+        SetMultimap<String, String> setMultimap = Multimaps.forMap(map);
+        //然後就可以key value轉換了，比BIMap好用吧，但應該比較浪費資源
+        Multimap<String, String> result = Multimaps.invertFrom(setMultimap, MultimapBuilder.hashKeys().arrayListValues().build());
+        System.out.println(result.get("v1"));
+        result.put("v1","new k1");
+        result.put("new v2","new k2");
+        result.put("new v2","k2");
+        //注意，之後轉回map因為的value會變成List
+        Map<String, Collection<String>> resultMap =   Multimaps.invertFrom(result, MultimapBuilder.hashKeys().arrayListValues().build()).asMap();
+        for(Map.Entry<String, Collection<String>> o :resultMap.entrySet()){
+            System.out.println(o);
+        }
+
+
     }
 
 }
