@@ -6,6 +6,9 @@ import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Splitter;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
@@ -20,6 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class Guava的功能 {
 
@@ -229,6 +234,44 @@ public class Guava的功能 {
     @Subscribe
     public void event(DeadEvent deadEvent) {
         System.out.println("this is deadEvent ->" + deadEvent);
+    }
+
+    @Test
+    public void 測試cache() throws ExecutionException {
+
+        LoadingCache<String, Object> cache = CacheBuilder.newBuilder()
+                .initialCapacity(2)//初值大小，hashmap預設16
+                .maximumSize(10)//最多幾筆
+                //.maximumWeight(1024*1024*1024)//最大1M，和maximumSize不能蓈存
+                .expireAfterAccess(10, TimeUnit.MINUTES)//多久過期
+                .refreshAfterWrite(1, TimeUnit.MINUTES)//多久重譯，要實作load才有
+                .recordStats()//記錄log
+                //.weakValues()//隨時可能被回收
+                .softValues()//記憶體不足時回收，減低memory leak的風險，除非cache很大，不然使用maximumSize或maximumWeight即可
+                .removalListener(o -> System.out.println(String.format("key[%s] value[%s]", o.getKey(), o.getValue())))//移除時的動作
+                .build(new CacheLoader<String, Object>() {
+                    @Override
+                    public Object load(String key) throws Exception {
+                        return key + " -2";
+                    }
+                });
+
+        System.out.println(cache.size());
+        System.out.println(cache.get("123"));
+        for (int i = 0; i < 200; i++) {
+            cache.get("" + i);//使用loader
+            cache.getIfPresent("" + i);//無則回傳null
+            cache.get("" + i, () -> "not found");//callable優先loader
+        }
+        System.out.println(cache.size());
+        System.out.println(cache.asMap());//注意，更改asMap會直接影嚮cache
+        cache.refresh("192");//有實作loader時可用這個更新，好像是先執行remove再add
+        cache.invalidateAll(Arrays.asList("199","197"));//多資回收
+        System.out.println(cache.asMap());
+        cache.invalidate("195");//單筆回收
+        System.out.println(cache.asMap());
+        System.out.println(cache.stats());
+
     }
 
 
