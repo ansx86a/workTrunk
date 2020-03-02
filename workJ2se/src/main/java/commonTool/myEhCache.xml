@@ -1,0 +1,29 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core.xsd">
+
+    <cache alias="foo">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.String</value-type>
+        <resources>
+            <!-- 這裡應該是共可放10MB + 20筆資料-->
+            <heap unit="entries">20</heap>
+            <!-- 非heap上的記憶體，大概指的是使用作業系統的記憶體，可避免heap爆掉但是也是會吃更多的ram吧-->
+            <offheap unit="MB">10</offheap>
+        </resources>
+    </cache>
+
+    <cache-template name="myDefaults">
+        <key-type>java.lang.Long</key-type>
+        <value-type>java.lang.String</value-type>
+        <heap unit="entries">200</heap>
+    </cache-template>
+
+    <cache alias="bar" uses-template="myDefaults">
+        <key-type>java.lang.Number</key-type>
+    </cache>
+
+    <cache alias="simpleCache" uses-template="myDefaults"/>
+
+</config>
