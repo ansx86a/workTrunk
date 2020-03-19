@@ -1,11 +1,7 @@
 package commonTool;
 
 
-import com.google.common.base.CaseFormat;
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
-import com.google.common.base.Splitter;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -37,7 +33,7 @@ public class Guava的功能 {
     }
 
     @Test
-    public void $1() {
+    public void $使用table可支援2key_1value() {
         //立用pair的特性，也可是等於使用table，或是拓展table到6個key？
         Pair p = Pair.of("A", "B");
         System.out.println(p.hashCode());
@@ -172,6 +168,8 @@ public class Guava的功能 {
 
         //assertThat(courseSet).hasSize(3);
     }
+//=====上面都是table，都是用抄的沒仔細看過====================================================================================================================
+
 
     @Test
     public void 驗証() {
@@ -193,25 +191,7 @@ public class Guava的功能 {
         //記錄一下，Iterables.toArray() 可以直接傳class為型別不用再傳什麼array
     }
 
-    @Test
-    public void 字串處理() {
-        List<String> list = Arrays.asList("", "0", "1", null, "2", "", "3", "");
-        System.out.println(Joiner.on(";").skipNulls().join(list));//沒skip null 會出ex
-        System.out.println(Joiner.on(";").useForNull("null string").join(list));
 
-
-        String str = ",1,   null  ,2,,  3  ,4,   ,5,";
-        System.out.println(Splitter.on(",").splitToList(str));
-        System.out.println(Splitter.on(",").trimResults().splitToList(str));
-        System.out.println(Splitter.on(",").trimResults().omitEmptyStrings().splitToList(str));
-        System.out.println(Splitter.on(",").trimResults().omitEmptyStrings().splitToList(str));
-        //on可用正規表示式 pattern
-
-        CharMatcher.javaDigit();//CharMatcher感覺不好用，跳過，我喜歡直接用正規表示式來操作
-
-        //可以轉換 db <-> java的get,set之類的
-        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, "abc_def_ggg"));
-    }
 
     @Test
     public void testEventBus() {
@@ -266,7 +246,7 @@ public class Guava的功能 {
         System.out.println(cache.size());
         System.out.println(cache.asMap());//注意，更改asMap會直接影嚮cache
         cache.refresh("192");//有實作loader時可用這個更新，好像是先執行remove再add
-        cache.invalidateAll(Arrays.asList("199","197"));//多資回收
+        cache.invalidateAll(Arrays.asList("199", "197"));//多資回收
         System.out.println(cache.asMap());
         cache.invalidate("195");//單筆回收
         System.out.println(cache.asMap());

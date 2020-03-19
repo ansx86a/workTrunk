@@ -1,5 +1,6 @@
 package commonTool;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ListMultimap;
@@ -8,9 +9,11 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Sets.SetView;
+import com.google.common.collect.TreeMultiset;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -20,20 +23,8 @@ import java.util.Map;
 
 public class GuavaListAndMap {
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        GuavaListAndMap g = new GuavaListAndMap();
 
-        // System.out.println("List特點是資料給完初值就不會變了");
-        // g.$1List建立時給初值後再add就會出錯();
-        // System.out.println("Map特點同上，另外key重覆或事後給值會掛點");
-        // g.$2Map_key重覆或事後給值會掛點();
-        // System.out.println("Set的交集和聯集");
-        // g.$3Set的交集聯集();
-
-        g.$4();
-    }
-
+    @Test
     public void $1List建立時給初值後再add就會出錯() {
         try {
             ImmutableList<String> list1 = ImmutableList.of("a", "b", "c", "d");
@@ -44,6 +35,7 @@ public class GuavaListAndMap {
         }
     }
 
+    @Test
     public void $2Map_key重覆或事後給值會掛點() {
         try {
             ImmutableMap<String, String> map = ImmutableMap.of("key1", "value1", "key2", "value2");
@@ -62,6 +54,7 @@ public class GuavaListAndMap {
         }
     }
 
+    @Test
     public void $3Set的交集聯集() {
         HashSet setA = Sets.newHashSet(1, 2, 3, 4, 5);
         HashSet setB = Sets.newHashSet(4, 5, 6, 7, 8);
@@ -89,7 +82,8 @@ public class GuavaListAndMap {
         }
     }
 
-    public void $4() {
+    @Test
+    public void $找出Map的差集() {
         ImmutableMap<String, Integer> mapA = ImmutableMap.of("key1", 1, "key2", 2, "key3", 3, "key4", 3);
         ImmutableMap<String, Integer> mapB = ImmutableMap.of("key3", 3, "key4", 4, "key5", 5, "key6", 6);
 
@@ -136,16 +130,33 @@ public class GuavaListAndMap {
         //然後就可以key value轉換了，比BIMap好用吧，但應該比較浪費資源
         Multimap<String, String> result = Multimaps.invertFrom(setMultimap, MultimapBuilder.hashKeys().arrayListValues().build());
         System.out.println(result.get("v1"));
-        result.put("v1","new k1");
-        result.put("new v2","new k2");
-        result.put("new v2","k2");
+        result.put("v1", "new k1");
+        result.put("new v2", "new k2");
+        result.put("new v2", "k2");
         //注意，之後轉回map因為的value會變成List
-        Map<String, Collection<String>> resultMap =   Multimaps.invertFrom(result, MultimapBuilder.hashKeys().arrayListValues().build()).asMap();
-        for(Map.Entry<String, Collection<String>> o :resultMap.entrySet()){
+        Map<String, Collection<String>> resultMap = Multimaps.invertFrom(result, MultimapBuilder.hashKeys().arrayListValues().build()).asMap();
+        for (Map.Entry<String, Collection<String>> o : resultMap.entrySet()) {
             System.out.println(o);
         }
-
-
     }
 
+    @Test
+    public void 使用Set來計數() {
+        TreeMultiset.create();
+        //Multiset<String> set = HashMultiset.create();
+        HashMultiset<String> set = HashMultiset.create();
+
+        set.add("1");
+        set.add("1");
+        set.add("1");
+        set.add("1");
+        set.add("2");
+        set.add("2");
+        System.out.println(set.count("1"));
+        System.out.println(set.count("2"));
+        System.out.println(set.count("3"));
+        System.out.println(set);
+        System.out.println(set.elementSet());
+        set.stream().forEach(o -> System.out.println(o));
+    }
 }

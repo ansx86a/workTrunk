@@ -1,5 +1,7 @@
-package format;
+package 字串處理;
 
+import com.google.common.base.CaseFormat;
+import com.google.common.base.CharMatcher;
 import org.junit.Test;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
@@ -49,5 +51,12 @@ public class Format {
 
     }
 
+    @Test
+    public void guava字串處理() {
+        CharMatcher.javaDigit();//CharMatcher感覺不好用，跳過，我喜歡直接用正規表示式來操作
+
+        //可以轉換 db <-> java的get,set之類的
+        System.out.println(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, "abc_def_ggg"));
+    }
 
 }
