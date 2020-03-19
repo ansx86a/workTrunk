@@ -40,4 +40,13 @@ public class 分割 {
 
     }
 
+    @Test
+    public void String在split時如果是空值就切割全部的字串() {
+        System.out.println("當split為空值時是每個字元都會被切出來，包含空白字元");
+        String s = "123456780     abcdefghijk";
+        System.out.println(s);
+        System.out.println(Arrays.toString(s.split("")));
+
+    }
+
 }

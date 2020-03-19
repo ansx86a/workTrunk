@@ -7,6 +7,10 @@ import org.junit.Test;
 
 public class Lambda相關 {
 
+
+    /**
+     * 總結來說，就是Optional有一個map的方法，他會回傳Optional來達成避掉NPE
+     */
     @Test
     public void 避免NULL的取值法() {
         HashMap<String, String> map = new HashMap<>();
