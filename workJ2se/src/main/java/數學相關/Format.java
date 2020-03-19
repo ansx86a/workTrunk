@@ -25,6 +25,16 @@ public class Format {
         System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
     }
 
+    @Test
+    public void floatToBit() {
+        //應該是把bits改用int來解讀
+        System.out.println(Float.floatToIntBits(1f));
+        System.out.println(Integer.toString(Float.floatToIntBits(1f), 16));
+        System.out.println(Double.doubleToLongBits(1d));
+        System.out.println(Long.toString(Double.doubleToLongBits(1d), 16));
+
+    }
+
     public void 看到一些其它有點興趣的東西() {
         //mchange-commons-java 中的lang有byteutils可以用來轉一些東西
         //apache中的加解密應該也有一些應用

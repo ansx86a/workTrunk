@@ -6,9 +6,28 @@ import org.junit.Test;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.SplittableRandom;
+import java.util.TreeSet;
 
 public class 亂數 {
+
+    @Test
+    public void 產生UUID() {
+        System.out.println(java.util.UUID.randomUUID().toString().toUpperCase());
+    }
+
+    @Test
+    public void 一般用的亂數() {
+
+        System.out.println(Math.random());//0≤x<1
+        System.out.println(new Random().nextInt(10));//0≤x<10
+        TreeSet<Integer> t = new TreeSet<>();
+        for (int i = 0; i < 10000; i++) {
+            t.add(new Random().nextInt(10));
+        }
+        System.out.println(t);
+    }
 
     @Test
     public void java原生的亂數_取得區間亂數() throws NoSuchAlgorithmException {
