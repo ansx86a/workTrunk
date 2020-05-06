@@ -24,21 +24,5 @@ public class 日期和格式 {
         System.out.println(df3.format(d));
     }
 
-    @Test
-    public void 取得上個星期X() {
-        LocalDate now = LocalDate.now();
-        System.out.println(now);
-        System.out.println(now.getDayOfWeek());
-        LocalDate d = now.with(TemporalAdjusters.previous(DayOfWeek.MONDAY));
-        System.out.println(d);
-        System.out.println(d.getDayOfWeek());
-    }
-    @Test
-    public void 取得上個月初和月底() {
-        //先用月份truncate取得這個月的1號，再減1天即可
-        Date lastMonthEnd = DateUtils.addDays(DateUtils.truncate(new Date(), Calendar.MONTH), -1);
-        Date lastMonthStart = DateUtils.truncate(lastMonthEnd, Calendar.MONTH);
-        System.out.println(lastMonthEnd);
-        System.out.println(lastMonthStart);
-    }
+
 }

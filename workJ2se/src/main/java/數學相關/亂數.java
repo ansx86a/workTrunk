@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.SplittableRandom;
 import java.util.TreeSet;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class 亂數 {
 
@@ -25,6 +26,16 @@ public class 亂數 {
         TreeSet<Integer> t = new TreeSet<>();
         for (int i = 0; i < 10000; i++) {
             t.add(new Random().nextInt(10));
+        }
+        System.out.println(t);
+    }
+
+    @Test
+    public void 一般用的亂數java7() {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        TreeSet<Integer> t = new TreeSet<>();
+        for (int i = 0; i < 10000; i++) {
+            t.add(random.nextInt(10));
         }
         System.out.println(t);
     }
@@ -52,6 +63,7 @@ public class 亂數 {
         System.out.println(Arrays.toString(result));
 
         System.out.println(RandomUtils.nextInt(1, 10));
+        //比較特殊的是有一個 RandomStringUtils，可以取ascii的亂數
     }
 
 
