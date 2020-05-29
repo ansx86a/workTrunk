@@ -2,6 +2,9 @@ package 數學相關;
 
 import org.junit.Test;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class Format {
 
 
@@ -39,6 +42,18 @@ public class Format {
         //mchange-commons-java 中的lang有byteutils可以用來轉一些東西
         //apache中的加解密應該也有一些應用
 
+    }
+
+    @Test
+    public void Double轉數字格式和去小數點() {
+        DecimalFormat df = new DecimalFormat("###,###,###,##0.00");
+        DecimalFormat df2 = new DecimalFormat("###,###,###,##0.00");
+        DecimalFormat df3 = new DecimalFormat("###,###,#00,000.00");
+        df.setRoundingMode(RoundingMode.DOWN);
+        double d = 0.229;
+        System.out.println(df.format(d));
+        System.out.println(df2.format(d));
+        System.out.println(df3.format(d));
     }
 
 

@@ -1,4 +1,4 @@
-package 小技巧;
+package 數學相關;
 
 import org.junit.Test;
 
