@@ -99,6 +99,15 @@
             <version>28.2-jre</version>
         </dependency>
 
+        <!-- 使用thymeleaf時要使用-->
+        <!-- https://mvnrepository.com/artifact/ognl/ognl -->
+        <dependency>
+            <groupId>ognl</groupId>
+            <artifactId>ognl</artifactId>
+            <version>3.2.14</version>
+        </dependency>
+
+
         <!-- swagger的測試 -->
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -130,6 +139,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <jvmArguments>
+                        -Dfile.encoding=UTF-8
+                        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+                    </jvmArguments>
+                </configuration>
             </plugin>
 
             <plugin>

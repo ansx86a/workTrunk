@@ -57,6 +57,19 @@ public class 亂數 {
     }
 
     @Test
+    public void java8用Stream取亂數() {
+        new Random(47)
+                .ints(5, 20)//取5-19的int，看原始碼是非parallel
+                .distinct()//範例是放在這裡，結果limit會是10個，如果先limit再distinct可能會小於10個
+                .limit(10)//不用limit會一直跑最大的long值
+                .sorted()
+                .forEach(System.out::println);
+        //可直接用ints，並從IntStream轉成Stream
+        new Random(47).ints().boxed();
+
+    }
+
+    @Test
     public void apache的亂數() {
 
         byte[] result = RandomUtils.nextBytes(20);
