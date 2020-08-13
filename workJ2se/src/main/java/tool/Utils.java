@@ -21,7 +21,8 @@ public class Utils {
 	public static File getResourceFromRoot(String resource) {
 		try {
 			File f = getRootFile();
-			f = new File(f, resource);
+			//修改成不管是不是test都讀取class的檔案
+			f = new File(f.getAbsolutePath().replaceAll("\\Qtest-classes\\E","classes"), resource);
 			return f;
 		} catch (Exception e) {
 			e.printStackTrace();

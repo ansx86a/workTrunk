@@ -419,8 +419,12 @@
 			<!-- <scope>test</scope> -->
 		</dependency>
 
-
-
+		<!-- template 模板引擎 https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.30</version>
+		</dependency>
 
 	</dependencies>
 
