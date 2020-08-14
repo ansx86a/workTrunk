@@ -2,6 +2,7 @@ package commonTool;
 
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Verify;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -177,6 +178,8 @@ public class Guava的功能 {
         //java7 有Objects.requireNonNull有87像
         Preconditions.checkArgument(true, "錯誤訊息");
         Preconditions.checkNotNull(new Object(), "錯誤訊息，可用預存字:%s", "error info");
+        //verify可用在驗証非arguments
+        Verify.verify(1==1,"錯誤訊息，可用預存字:%s", "error info");
 
     }
 

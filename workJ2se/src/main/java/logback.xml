@@ -7,7 +7,7 @@
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
 			by default -->
 		<encoder>
-			<pattern>列印 --- %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+			<pattern>logback.xml -- 列印 --- %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
 				%msg%n</pattern>
 		</encoder>
 	</appender>

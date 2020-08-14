@@ -3,7 +3,7 @@ package 字串處理;
 import com.google.common.base.Joiner;
 import com.google.common.primitives.Longs;
 import joptsimple.internal.Strings;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
