@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+</body>
+<script>
+
+function 塞到變數的例子() {
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: 'mvc001',
+        data: { aaa: "aaa" },
+        success: function(data) {},
+        error: function(data) {},
+    });
+}
+
+function 塞到物件的例子() {
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: 'mvc002',
+        data: { name: "name",age:100 },
+        success: function(data) {},
+        error: function(data) {},
+    });
+}
+
+function 塞到物件的例子For直接從Form序列化參數() {
+    $.ajax({
+        type: 'GET',
+        async: false,
+        url: 'mvc002',
+        data: $("#formId").serialize()+"&customerParam=xxxx",
+        success: function(data) {},
+        error: function(data) {},
+    });
+}
+
+function 使用Json方式搞定複雜的結構(){
+    $.ajax({
+        type: 'POST',
+        async: false,
+        url: 'mvc003',
+        data: JSON.stringify({aaa:{a1:111,a2:222},bbb:[{a:1},{a:2}]}),
+        dataType:"json",
+        contentType:"application/json",
+        success: function(data) {},
+        error: function(data) {},
+    });
+}
+
+</script>
+
+</html>

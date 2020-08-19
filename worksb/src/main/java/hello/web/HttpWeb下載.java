@@ -1,13 +1,10 @@
 package hello.web;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.StringEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MimeType;
 import org.springframework.web.bind.annotation.GetMapping;
