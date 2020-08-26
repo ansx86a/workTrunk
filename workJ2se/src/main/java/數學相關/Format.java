@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.MessageFormat;
+import java.text.NumberFormat;
 
 public class Format {
 
@@ -56,5 +58,21 @@ public class Format {
         System.out.println(df3.format(d));
     }
 
+    @Test
+    public void 比DecimalFormat簡單的格式化() {
+        //NumberFormat是DecimalFormat的父類別，使用getInstance可以拿到DecimalFormat
+        //好處是可以自動把.00拿掉，但是只到小數點3位數而已
+        System.out.println(NumberFormat.getInstance().format(123456789.00));
+        System.out.println(NumberFormat.getInstance().format(123456789.1234500));
+        System.out.println(NumberFormat.getCurrencyInstance().format(123456789.00));
+        System.out.println(NumberFormat.getCurrencyInstance().format(123456789.1234500));
+        System.out.println(NumberFormat.getNumberInstance().format(123456789.00));
+        System.out.println(NumberFormat.getNumberInstance().format(123456789.1234500));
+
+
+        System.out.println(MessageFormat.format("可以針對數字格式化小數點，會4捨5入{0,number,##.##} ", 456.789));
+
+
+    }
 
 }

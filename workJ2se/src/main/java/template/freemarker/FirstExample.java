@@ -48,6 +48,7 @@ public class FirstExample {
         TempObject t = new TempObject();
         t.name = "id1";
         Writer out = new OutputStreamWriter(System.out);
+        System.out.println("start=========");
         template.process(t, out);
         System.out.println("next==========");
         t.name = "id2";
