@@ -1,4 +1,4 @@
-package 字串編碼;
+package 字串處理;
 
 import org.junit.Test;
 
