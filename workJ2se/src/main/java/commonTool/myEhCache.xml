@@ -6,6 +6,8 @@
     <cache alias="foo">
         <key-type>java.lang.String</key-type>
         <value-type>java.lang.String</value-type>
+        <!-- 這裡應該是多久過期 -->
+<!--        <expiry><ttl unit="minutes">180</ttl></expiry>-->
         <resources>
             <!-- 這裡應該是共可放10MB + 20筆資料-->
             <heap unit="entries">20</heap>
@@ -14,6 +16,7 @@
         </resources>
     </cache>
 
+    <!-- 如果有多個重覆的設定，就可以設定template來共用 -->
     <cache-template name="myDefaults">
         <key-type>java.lang.Long</key-type>
         <value-type>java.lang.String</value-type>

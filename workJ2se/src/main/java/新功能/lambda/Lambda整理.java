@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static java.util.Comparator.*;
+
 
 //Con
 public class Lambda整理 {
@@ -292,9 +294,12 @@ public class Lambda整理 {
         };
         List list2 = list.stream().sorted(c).collect(Collectors.toList());
 
-        list.stream().sorted(Comparator.comparing(Integer::intValue).thenComparing(Integer::longValue).reversed());
-        list.stream().sorted(Comparator.comparing(Integer::intValue).thenComparing(Integer::longValue).reversed());
-        list.stream().sorted(Comparator.nullsFirst(Comparator.comparing(Integer::intValue)));
+        list.stream().sorted(comparing(Integer::intValue).thenComparing(Integer::longValue).reversed());
+        list.stream().sorted(comparing(Integer::intValue).thenComparing(Integer::longValue).reversed());
+        //注意這邊的nullFirst是指物件的nullFirst而不是物件被面包的field可以null，field null仍然會npe
+        list.stream().sorted(nullsFirst(comparing(Integer::intValue)));
+        //如果要改成field的null的話，如下
+        list.stream().sorted(comparing(Integer::intValue,nullsFirst(naturalOrder())));
 
         // 這裡可以知道stream不會去改本來的值
         System.out.println(list);
