@@ -105,7 +105,7 @@ public class PoiEx002XssfModel {
 		p.$8欄位換行();
 		p.$9欄位加上外框border();
 		p.$10欄位底色和遮罩();
-		p.$11欄位數字的格式化();
+		p.$11欄位數字的格式化();//客戶要求數字要有千分位時就可以用到
 		// p.$12();//設定Workbook Properties ，不懂差在那，檔案可以跑出來確看不出來那裡有變
 		p.$13TreeView視景();
 		p.$14richtext欄位();
