@@ -1,7 +1,7 @@
 package http;
 
 import com.google.common.collect.ImmutableMap;
-import hello.rest.Greeting;
+import hello.vo.Greeting;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustStrategy;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -24,6 +23,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import javax.net.ssl.SSLContext;
 import java.io.FileNotFoundException;
@@ -40,8 +42,24 @@ import static java.util.stream.Collectors.toList;
 
 public class Spring的restTemplate {
 
+    /**
+     * spring 5 多了一個webClient可以用，先記錄一下，還不懂怎麼用
+     * maven要加入spring-webflux才能用，下面變成只能記錄跑出來會fail
+     *
+     */
     @Test
-    public void testLocal使用getForObject直接把body轉成POJO() throws UnsupportedEncodingException {
+    public void testWebClient() {
+        WebClient webClient = WebClient.builder().baseUrl("http://localhost:8080")
+//                .defaultCookie("", "")
+//                .defaultHeader("", "")
+                .build();
+        Mono<String> result = webClient.get().uri("/resttest/greeting?name=User").retrieve().bodyToMono(String.class);
+        System.out.println(result.block());
+    }
+
+
+    @Test
+    public void testLocal使用getForObject直接把body轉成POJO() {
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject("http://localhost:8080/resttest/greeting?name=User", String.class);
         System.out.println(result);
@@ -90,6 +108,8 @@ public class Spring的restTemplate {
         MultiValueMap<String, String> multiValueMap = new LinkedMultiValueMap<>();
         multiValueMap.add("name", "name is 西索");
         HttpEntity httpEntity = new HttpEntity(multiValueMap, headers);
+        //上面好像也可以沒有headers，下面直接使用Object也行辟
+        HttpEntity httpEntity1 = new HttpEntity<>(new Greeting());
 
         String result = restTemplate.postForObject("http://localhost:8080/resttest/post1", httpEntity, String.class);
         System.out.println(result);
@@ -159,6 +179,7 @@ public class Spring的restTemplate {
         requestFactory.setHttpClient(httpClient);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
     }
+
     @Test
     public void testSkipHttps自已簡化程式碼() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(SSLContexts.custom()
@@ -172,14 +193,12 @@ public class Spring的restTemplate {
     /**
      * 抄到一個更短的
      */
-    public void testSkipHttps2(){
+    public void testSkipHttps2() {
         CloseableHttpClient httpClient = HttpClients.custom().setSSLHostnameVerifier(new NoopHostnameVerifier()).build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setHttpClient(httpClient);
         new RestTemplate(requestFactory);
     }
-
-
 
 
 }

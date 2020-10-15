@@ -1,5 +1,6 @@
 package hello.rest;
 
+import hello.vo.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
