@@ -31,6 +31,10 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
 
         <!--		要包成war的第一要件是這裡要改成tomcat的設定-->
         <!--		<dependency>-->
