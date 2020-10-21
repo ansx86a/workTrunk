@@ -21,25 +21,15 @@ public class EmailReceiver {
      * @param port
      * @return a Properties object
      */
-    private Properties getServerProperties(String protocol, String host,
-                                           String port) {
+    private Properties getServerProperties(String protocol, String host, String port) {
         Properties properties = new Properties();
-
         // server setting
-        properties.put(String.format("mail.%s.host", protocol), host);
-        properties.put(String.format("mail.%s.port", protocol), port);
-
-        // SSL setting
-        properties.setProperty(
-                String.format("mail.%s.socketFactory.class", protocol),
-                "javax.net.ssl.SSLSocketFactory");
-        properties.setProperty(
-                String.format("mail.%s.socketFactory.fallback", protocol),
-                "false");
-        properties.setProperty(
-                String.format("mail.%s.socketFactory.port", protocol),
-                String.valueOf(port));
-
+        properties.put("mail." + protocol + ".host", host);
+        properties.put("mail." + protocol + ".port", port);
+        // SSL setting好像只有第一行重要，其它2行好像沒差
+        properties.setProperty("mail." + protocol + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        properties.setProperty("mail." + protocol + ".socketFactory.fallback", "false");
+        properties.setProperty("mail." + protocol + ".socketFactory.port", "" + port);
         return properties;
     }
 
@@ -52,8 +42,7 @@ public class EmailReceiver {
      * @param userName
      * @param password
      */
-    public void downloadEmails(String protocol, String host, String port,
-                               String userName, String password) {
+    public void downloadEmails(String protocol, String host, String port, String userName, String password) {
         Properties properties = getServerProperties(protocol, host, port);
         Session session = Session.getDefaultInstance(properties);
 
@@ -153,7 +142,6 @@ public class EmailReceiver {
         String protocol = "imap";
         String host = "imap.gmail.com";
         String port = "993";
-
 
         String userName = "bnsx86b@gmail.com";
         String password = "graffiti";

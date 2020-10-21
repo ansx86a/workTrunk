@@ -45,7 +45,6 @@ public class Spring的restTemplate {
     /**
      * spring 5 多了一個webClient可以用，先記錄一下，還不懂怎麼用
      * maven要加入spring-webflux才能用，下面變成只能記錄跑出來會fail
-     *
      */
     @Test
     public void testWebClient() {
@@ -184,9 +183,11 @@ public class Spring的restTemplate {
     public void testSkipHttps自已簡化程式碼() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(SSLContexts.custom()
                 .loadTrustMaterial(null, (chain, authType) -> true)
-                .build());
+                .build(),NoopHostnameVerifier.INSTANCE);
         HttpComponentsClientHttpRequestFactory requestFactory =
                 new HttpComponentsClientHttpRequestFactory(HttpClients.custom().setSSLSocketFactory(csf).build());
+        //以下留下來參考，應該要能disable hostname verifier但我測好像沒用，要加此method的第三行在建構子裡面才有用
+        //HttpClients.custom().setSSLHostnameVerifier((hostName, session) -> true);
         RestTemplate restTemplate = new RestTemplate(requestFactory);
     }
 

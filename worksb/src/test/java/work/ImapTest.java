@@ -29,23 +29,20 @@ public class ImapTest {
      * 要先去我的帳戶，把低安全性應用程式存取權給打開，以下的程式才會生效
      */
     @Test
-    public void getResult1() {
+    public void 測試取得根目錄的全folder並列出全部的inbox資料imaps協定() {
         try {
             Properties props = new Properties();
             props.put("mail.store.protocol", "imaps");
             Session session = Session.getDefaultInstance(props, null);
             Store store = session.getStore("imaps");
             store.connect("imap.gmail.com", "bnsx86b@gmail.com", "graffiti");
+            Folder inbox = store.getFolder("INBOX");//注意要大寫
 
-            //if you want mail from specified folder, just change change folder name
-            //Folder inbox = store.getFolder("[Gmail]/Drafts");
-            Folder inbox = store.getFolder("inbox");
-
+            //列出全部的目錄
             inbox.open(Folder.READ_ONLY);
             int messageCount = inbox.getMessageCount();
             System.out.println(store.getDefaultFolder().list("*"));
-            javax.mail.Folder[] folders = store.getDefaultFolder().list("*");
-
+            javax.mail.Folder[] folders = store.getDefaultFolder().list("*");//感覺直接用list()即可
             for (javax.mail.Folder folder : folders) {
                 if ((folder.getType() & javax.mail.Folder.HOLDS_MESSAGES) != 0) {
                     System.out.println(folder.getName());
@@ -60,7 +57,7 @@ public class ImapTest {
             for (int i = 0; i < messages.length; i++) {
                 System.out.println("getResult1: " + messages[i].getSubject());
             }
-            inbox.close(true);
+            inbox.close(true);//好像true才會使delete生效
             store.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,21 +68,26 @@ public class ImapTest {
      * 以下程式在登入時會被server斷線，先保留做為記錄
      */
     @Test
-    public void test2() {
+    public void 測試取得根目錄的全folder並列出全部的inbox資料imap協定() {
 
         try {
+            String protocol = "imap";
             Properties props = new Properties();
             props.put("mail.imap.host", "imap.gmail.com");
             props.put("mail.imap.port", "993");
-            props.put("mail.store.protocol", "imap");
+            props.put("mail.store.protocol", protocol);
             props.put("mail.debug", "false");
+
+            //加上下行設定就不會被server中斷，另2行例子有寫但註解掉也能跑
+            props.setProperty("mail." + protocol + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            //props.setProperty("mail.imap.socketFactory.fallback", "false");
+            //props.setProperty("mail.imap.socketFactory.port", "993");
+
             Session session = Session.getInstance(props);
-            Store store = session.getStore("imap");
+            Store store = session.getStore(protocol);
             store.connect("bnsx86b@gmail.com", "graffiti");
 
-            //if you want mail from specified folder, just change change folder name
-            //Folder inbox = store.getFolder("[Gmail]/Drafts");
-            Folder inbox = store.getFolder("inbox");
+            Folder inbox = store.getFolder("INBOX");
 
             inbox.open(Folder.READ_ONLY);
             int messageCount = inbox.getMessageCount();
@@ -181,7 +183,7 @@ public class ImapTest {
                         System.out.println("\t Sent Date: " + sentDate);
                         System.out.println("\t Message: " + messageContent);
                         System.out.println(msg.getFlags());
-                        msg.setFlag(Flags.Flag.DELETED,true);
+                        msg.setFlag(Flags.Flag.DELETED, true);
                     }
 
                     // disconnect

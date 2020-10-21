@@ -30,6 +30,9 @@ public class GuavaListAndMap {
             ImmutableList<String> list1 = ImmutableList.of("a", "b", "c", "d");
             System.out.println(list1);
             list1.add("111");
+            //可以考慮使用builder
+            list1 = ImmutableList.<String>builder().add("a","b","c").build();
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -42,6 +45,10 @@ public class GuavaListAndMap {
             System.out.println(map);
             map = ImmutableMap.of("key1", "value1", "key2", "value2", "key1", "value1", "key2", "value2");
             System.out.println(map);
+            //map只能放個5組吧，使用builder就可以不受限制
+            map = ImmutableMap.<String, String>builder().put("key1","value1").build();
+
+
         } catch (Exception ex) {
             System.out.println(ex);
         }
