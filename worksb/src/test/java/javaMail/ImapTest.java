@@ -17,30 +17,24 @@ import java.util.Properties;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * https://myaccount.google.com/lesssecureapps?pli=1
+ * 要先去我的帳戶，把低安全性應用程式存取權給打開，以下的程式才會生效
+ * <p>
+ * 熊下有全部可用的Properties
+ * <p>
+ * https://javaee.github.io/javamail/docs/api/com/sun/mail/imap/package-summary.html
+ * <p>
+ * proxy相關，可以用SOCKS5的不用帳密
+ * mail.imap.proxy.host	string	Specifies the host name of an HTTP web proxy server that will be used for connections to the mail server.
+ * mail.imap.proxy.port	string	Specifies the port number for the HTTP web proxy server. Defaults to port 80.
+ * mail.imap.proxy.user	string	Specifies the user name to use to authenticate with the HTTP web proxy server. By default, no authentication is done.
+ * mail.imap.proxy.password	string	Specifies the password to use to authenticate with the HTTP web proxy server. By default, no authentication is done.
+ * mail.imap.socks.host	string	Specifies the host name of a SOCKS5 proxy server that will be used for connections to the mail server.
+ * mail.imap.socks.port	string	Specifies the port number for the SOCKS5 proxy server. This should only need to be used if the proxy server is not using the standard port number of 1080.
+ */
+
 public class ImapTest {
-
-    @Test
-    public void test() {
-        System.out.println("ok");
-    }
-
-    /**
-     * https://myaccount.google.com/lesssecureapps?pli=1
-     * 要先去我的帳戶，把低安全性應用程式存取權給打開，以下的程式才會生效
-     *
-     * 熊下有全部可用的Properties
-     *
-     * https://javaee.github.io/javamail/docs/api/com/sun/mail/imap/package-summary.html
-     *
-     * proxy相關，可以用SOCKS5的不用帳密
-     * mail.imap.proxy.host	string	Specifies the host name of an HTTP web proxy server that will be used for connections to the mail server.
-     * mail.imap.proxy.port	string	Specifies the port number for the HTTP web proxy server. Defaults to port 80.
-     * mail.imap.proxy.user	string	Specifies the user name to use to authenticate with the HTTP web proxy server. By default, no authentication is done.
-     * mail.imap.proxy.password	string	Specifies the password to use to authenticate with the HTTP web proxy server. By default, no authentication is done.
-     * mail.imap.socks.host	string	Specifies the host name of a SOCKS5 proxy server that will be used for connections to the mail server.
-     * mail.imap.socks.port	string	Specifies the port number for the SOCKS5 proxy server. This should only need to be used if the proxy server is not using the standard port number of 1080.
-     *
-     */
     @Test
     public void 測試取得根目錄的全folder並列出全部的inbox資料imaps協定() {
         try {
@@ -82,7 +76,6 @@ public class ImapTest {
      */
     @Test
     public void 測試取得根目錄的全folder並列出全部的inbox資料imap協定() {
-
         try {
             String protocol = "imap";
             Properties props = new Properties();
@@ -127,4 +120,22 @@ public class ImapTest {
             e.printStackTrace();
         }
     }
+
+    private void 移除訊息(Message message) throws MessagingException {
+        //Folder.open(Folder.READ_WRITE);和Folder.close(true);才會生效
+        message.setFlag(Flags.Flag.DELETED, true);
+    }
+
+    private void 建立目錄(String folderName, Store store) throws MessagingException {
+        Folder folder = store.getFolder(folderName);
+        if (!folder.exists()) {
+            folder.create(Folder.HOLDS_MESSAGES);
+        }
+    }
+
+    private void 備份或搬檔(Message message, Folder toFolder, boolean isCopyThenDelete) throws MessagingException {
+        toFolder.appendMessages(new Message[]{message});
+        message.setFlag(Flags.Flag.DELETED, isCopyThenDelete);
+    }
+
 }
