@@ -1,7 +1,9 @@
-package work;
+package javaMail;
 
+import org.apache.commons.mail.util.MimeMessageParser;
 import org.junit.Test;
 
+import javax.activation.DataSource;
 import javax.mail.Address;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -9,9 +11,13 @@ import javax.mail.MessagingException;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
+import javax.mail.internet.MimeMessage;
+import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
-public class EmailReceiver {
+public class ImapBodyReceiver {
 
     /**
      * Returns a Properties object which is configured for a POP3/IMAP server
@@ -42,7 +48,7 @@ public class EmailReceiver {
      * @param userName
      * @param password
      */
-    public void downloadEmails(String protocol, String host, String port, String userName, String password) {
+    public void 讀取內文(String protocol, String host, String port, String userName, String password) throws Exception {
         Properties properties = getServerProperties(protocol, host, port);
         Session session = Session.getDefaultInstance(properties);
 
@@ -63,33 +69,33 @@ public class EmailReceiver {
                 Address[] fromAddress = msg.getFrom();
                 String from = fromAddress[0].toString();
                 String subject = msg.getSubject();
-                String toList = parseAddresses(msg
-                        .getRecipients(Message.RecipientType.TO));
-                String ccList = parseAddresses(msg
-                        .getRecipients(Message.RecipientType.CC));
+                String toList = Arrays.stream(msg.getRecipients(Message.RecipientType.TO)).map(o -> o.toString()).collect(Collectors.joining(", "));
+                //ccList有時會有null的問題，先註解掉
+                //String ccList = Arrays.stream(msg.getRecipients(Message.RecipientType.CC)).map(o -> o.toString()).collect(Collectors.joining(", "));
                 String sentDate = msg.getSentDate().toString();
-
                 String contentType = msg.getContentType();
                 String messageContent = "";
-
-                if (contentType.contains("text/plain")
-                        || contentType.contains("text/html")) {
-                    try {
-                        Object content = msg.getContent();
-                        if (content != null) {
-                            messageContent = content.toString();
-                        }
-                    } catch (Exception ex) {
-                        messageContent = "[Error downloading content]";
-                        ex.printStackTrace();
-                    }
+                MimeMessageParser mimeMessageParser = new MimeMessageParser((MimeMessage) msg).parse();
+                //使用apache的common email來讀取內文
+                if (contentType.contains("text/html")) {
+                    messageContent = mimeMessageParser.getHtmlContent();
+                } else {
+                    //好像plain讀不到html，但是反過來用html可以讀出純文字的樣子
+                    messageContent = mimeMessageParser.getPlainContent();
                 }
+                for (DataSource dataSource : mimeMessageParser.getAttachmentList()) {
+                    //這裡的附件是信中的圖片也算，而不是只捉附件這個欄位是整封信中非文元的部分都算吧，有要用再來測
+                    System.out.println(dataSource.getContentType());
+                    System.out.println(dataSource.getName());
+                    //IOUtils.copy(dataSource.getInputStream(),new FileOutputStream("z:/" + dataSource.getName()));
+                }
+
 
                 // print out details of each message
                 System.out.println("Message #" + (i + 1) + ":");
                 System.out.println("\t From: " + from);
                 System.out.println("\t To: " + toList);
-                System.out.println("\t CC: " + ccList);
+                //System.out.println("\t CC: " + ccList);
                 System.out.println("\t Subject: " + subject);
                 System.out.println("\t Sent Date: " + sentDate);
                 System.out.println("\t Message: " + messageContent);
@@ -108,31 +114,10 @@ public class EmailReceiver {
     }
 
     /**
-     * Returns a list of addresses in String format separated by comma
-     *
-     * @param address an array of Address objects
-     * @return a string represents a list of addresses
-     */
-    private String parseAddresses(Address[] address) {
-        String listAddress = "";
-
-        if (address != null) {
-            for (int i = 0; i < address.length; i++) {
-                listAddress += address[i].toString() + ", ";
-            }
-        }
-        if (listAddress.length() > 1) {
-            listAddress = listAddress.substring(0, listAddress.length() - 2);
-        }
-
-        return listAddress;
-    }
-
-    /**
      * Test downloading e-mail messages
      */
     @Test
-    public void test() {
+    public void test() throws Exception {
         // for POP3
         //String protocol = "pop3";
         //String host = "pop.gmail.com";
@@ -146,7 +131,7 @@ public class EmailReceiver {
         String userName = "bnsx86b@gmail.com";
         String password = "graffiti";
 
-        EmailReceiver receiver = new EmailReceiver();
-        receiver.downloadEmails(protocol, host, port, userName, password);
+        ImapBodyReceiver receiver = new ImapBodyReceiver();
+        receiver.讀取內文(protocol, host, port, userName, password);
     }
 }

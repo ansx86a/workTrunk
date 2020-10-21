@@ -127,18 +127,19 @@
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.mail/imap -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-email -->
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>imap</artifactId>
-            <version>1.6.5</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.5</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.sun.mail/pop3 -->
+        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
         <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>pop3</artifactId>
-            <version>1.6.5</version>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.2</version>
         </dependency>
+
         <!-- swagger的測試 -->
         <dependency>
             <groupId>org.springdoc</groupId>
