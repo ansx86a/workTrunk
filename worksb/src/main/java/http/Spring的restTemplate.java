@@ -201,5 +201,15 @@ public class Spring的restTemplate {
         new RestTemplate(requestFactory);
     }
 
+    public void test使用exchage有用get有header要怎麼用(){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization","Basic "+"base64");
+        //也可以用下面這個，可指定明碼不用base64
+        //headers.setBasicAuth();
+        HttpEntity httpEntity = new HttpEntity(null, headers);
+        ResponseEntity<byte[]> result = restTemplate.exchange("url",HttpMethod.GET,httpEntity,byte[].class);
+        System.out.println(result.getBody().length);
+    }
 
 }
