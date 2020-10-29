@@ -4,7 +4,7 @@
 
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
-		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder
 			by default -->
 		<encoder>
 			<pattern>logback.xml -- 列印 --- %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
@@ -30,6 +30,20 @@
 			</pattern>
 		</encoder>
 	</appender>
+	<appender name="File_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>z:/logErrorFile.log</file>
+		<!-- 加入filter可以做這個log只印出下某些level的log -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>只有ERROR才會寫入 -- %-4relative [%thread] %-5level %logger{35} - %msg%n
+			</pattern>
+		</encoder>
+
+	</appender>
 
 	<appender name="ROLLING"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -39,7 +53,7 @@
 			<!-- rollover daily -->
 			<fileNamePattern>z:/newlogFile222.log-%d{yyyy-MM-dd}.%i.txt
 			</fileNamePattern>
-			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+			<!-- each file should be at most 100MB, keep 60 days worth of history,
 				but at most 20GB -->
 			<maxFileSize>1MB</maxFileSize>
 			<maxHistory>60</maxHistory>
@@ -57,5 +71,7 @@
 		<appender-ref ref="STDOUT" />
 		<appender-ref ref="FILE" />
 <!-- 		<appender-ref ref="ROLLING" /> -->
+<!--		記錄一下如果實作ERROR的部分，還沒測試過，主要知道有一個filter的東西即可-->
+<!--		<appender-ref ref="FILE_ERROR" />-->
 	</root>
 </configuration>

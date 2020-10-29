@@ -3,6 +3,8 @@ package validate;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -11,7 +13,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.InputStream;
 import java.util.Set;
 
 public class 使用程式控管驥証 {
@@ -26,6 +27,7 @@ public class 使用程式控管驥証 {
         //要客製I18N的話，就要解決使用預設的ResourceBundle不然都會跑上一行的程式去
 
         Input input = new Input();
+        input.inpout2 = new Inpout2();
         input.name = null;
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Input>> violations = validator.validate(input);
@@ -37,12 +39,14 @@ public class 使用程式控管驥証 {
             System.out.println("錯誤原因：" + violation.getMessage());
             System.out.println("============================================");
         }
-
+        //有一個本家的Excpetion可以使用
+        throw new ConstraintViolationException(violations);
     }
 
 
     private static class Input {
-        @Min(1)
+        //message也不一定要用ResourceBundle的資料
+        @Min(value = 1,message = "我跟你說要大於{value}才可以")
         @Max(100)
         private int age;
         //如果是null就不會跳騙証，所以要加一下notNull
@@ -51,7 +55,12 @@ public class 使用程式控管驥証 {
         private String ip;
         @NotBlank//會trime string，如果是null的話也會出錯
         private String name;
+        @Valid
+        private Inpout2 inpout2;
+    }
 
-
+    private static class Inpout2{
+        @NotBlank(message = "我是不能為空值的子類別")
+        private String name2;
     }
 }
