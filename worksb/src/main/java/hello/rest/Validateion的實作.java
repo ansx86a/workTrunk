@@ -17,6 +17,8 @@ import javax.validation.Validator;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,7 +84,8 @@ public class Validateion的實作 {
     }
 
     /**
-     *  http://localhost:8080/validate5?age=21
+     * http://localhost:8080/validate5?age=21
+     *
      * @param age
      * @return
      */
@@ -91,8 +94,35 @@ public class Validateion的實作 {
         return age;
     }
 
+    /**
+     * http://localhost:8080/validate6?name=11&age=11&validByGroup=1
+     * 注意，會先驗証沒有group的部分，有錯就會先丟ex
+     * 之後才會驗group 的部分，要注意要全部一起驥証就要全加或全不加group
+     *
+     * @param input
+     * @return
+     */
+    @GetMapping("/validate6")
+    @Validated(OnCreate.class)
+    public Input 使用Group驗証(@Valid Input input) {
+        return input;
+    }
 
     /**
+     * http://localhost:8080/validate7?name=11&age=11&validByGroup=2
+     *
+     * @param input
+     * @return
+     */
+    @GetMapping("/validate7")
+    @Validated(OnUpdate.class)
+    public Input 使用Group驗証2(@Valid Input input) {
+        return input;
+    }
+
+    /**
+     * ExceptionHandler可寫到@ControllerAdvice裡面，就會變成對多個controller有用
+     *
      * 看起來可以處理多個參數，要明砣表示參數的話，要subString不然會有controller method文字
      *
      * @param e
@@ -123,11 +153,15 @@ public class Validateion的實作 {
 
 
     public static class Input {
-        @Min(value = 1, message = "我跟你說要大於{value}才可以")
+        @Min(value = 1, message     * 之後才會驗group 的部分，要注意要全部一起驥証就要全加或全不加group
+                = "我跟你說要大於{value}才可以")
         @Max(100)
         private int age;
         @NotBlank//會trime string，如果是null的話也會出錯
         private String name;
+        @Pattern(regexp = "1.+", groups = OnCreate.class)
+        @Pattern(regexp = "2.+", groups = OnUpdate.class)
+        private String validByGroup;
 
         public int getAge() {
             return age;
@@ -144,6 +178,20 @@ public class Validateion的實作 {
         public void setName(String name) {
             this.name = name;
         }
+
+        public String getValidByGroup() {
+            return validByGroup;
+        }
+
+        public void setValidByGroup(String validByGroup) {
+            this.validByGroup = validByGroup;
+        }
+    }
+
+    interface OnCreate {
+    }
+
+    interface OnUpdate {
     }
 }
 
