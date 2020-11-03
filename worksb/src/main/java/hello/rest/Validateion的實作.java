@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.Validator;
@@ -19,7 +20,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
@@ -103,7 +106,7 @@ public class Validateion的實作 {
      * @return
      */
     @GetMapping("/validate6")
-    @Validated(OnCreate.class)
+    @Validated(Group.OnCreate.class)
     public Input 使用Group驗証(@Valid Input input) {
         return input;
     }
@@ -115,14 +118,36 @@ public class Validateion的實作 {
      * @return
      */
     @GetMapping("/validate7")
-    @Validated(OnUpdate.class)
+    @Validated(Group.OnUpdate.class)
     public Input 使用Group驗証2(@Valid Input input) {
         return input;
     }
 
     /**
-     * ExceptionHandler可寫到@ControllerAdvice裡面，就會變成對多個controller有用
+     * http://localhost:8080/validate8?name=11&age=11&validByGroup=2
      *
+     * @param input
+     * @return
+     */
+    @GetMapping("/validate8")
+    public Input 用程式驗証模擬Group的部分(Input input) {
+        //只使用group的話，沒有group的部分就不會被使用
+        Set<ConstraintViolation<Input>> result = validator.validate(input, Group.OnUpdate.class);
+        if (!result.isEmpty()) {
+            throw new ConstraintViolationException(result);
+        }
+        //所以增加沒有group的部分
+        result = validator.validate(input);
+        if (!result.isEmpty()) {
+            throw new ConstraintViolationException(result);
+        }
+        return input;
+    }
+
+
+    /**
+     * ExceptionHandler可寫到@ControllerAdvice裡面，就會變成對多個controller有用
+     * <p>
      * 看起來可以處理多個參數，要明砣表示參數的話，要subString不然會有controller method文字
      *
      * @param e
@@ -138,6 +163,7 @@ public class Validateion的實作 {
         return "錯誤參數為原生型別的部分：" + errors;
     }
 
+
     /**
      * 看起來會對第一個物件就丟出bindException，後面的物件就不會被檢查到
      *
@@ -151,17 +177,20 @@ public class Validateion的實作 {
         return "錯誤參數為物件的部分：" + errors;
     }
 
-
     public static class Input {
-        @Min(value = 1, message     * 之後才會驗group 的部分，要注意要全部一起驥証就要全加或全不加group
-                = "我跟你說要大於{value}才可以")
+        @Min(value = 1, message = "我跟你說要大於{value}才可以")
         @Max(100)
         private int age;
         @NotBlank//會trime string，如果是null的話也會出錯
         private String name;
-        @Pattern(regexp = "1.+", groups = OnCreate.class)
-        @Pattern(regexp = "2.+", groups = OnUpdate.class)
+        @Pattern(regexp = "1.+", groups = Group.OnCreate.class)
+        @Pattern(regexp = "2.+", groups = Group.OnUpdate.class)
         private String validByGroup;
+
+        /**
+         * 記錄一下如果遇到List裡麼使用
+         */
+        private List<@Min(0) Integer> list = Arrays.asList(1, 2, 3, 4, 5);
 
         public int getAge() {
             return age;
@@ -188,10 +217,13 @@ public class Validateion的實作 {
         }
     }
 
-    interface OnCreate {
+    interface Group {
+        interface OnCreate {
+        }
+
+        interface OnUpdate {
+        }
     }
 
-    interface OnUpdate {
-    }
 }
 

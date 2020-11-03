@@ -36,7 +36,7 @@ public class Javax的mail {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("from-email@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ansx86a@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bnsx86b@gmail.com"));
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler," + "\n\n No spam to my email, please!");
 			Transport.send(message);
@@ -64,7 +64,7 @@ public class Javax的mail {
 		try {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("from-email@gmail.com"));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("ansx86a@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("bnsx86b@gmail.com"));
 			message.setSubject("Testing Subject");
 			message.setText("Dear Mail Crawler," + "\n\n No spam to my email, please!");
 			Transport.send(message);
