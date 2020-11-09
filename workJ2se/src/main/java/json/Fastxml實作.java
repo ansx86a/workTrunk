@@ -1,9 +1,25 @@
 package json;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -11,28 +27,39 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.json.JsonReadFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.InjectableValues;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 public class Fastxml實作 {
 
@@ -385,9 +412,10 @@ public class Fastxml實作 {
         d = DeserializationFeature.EAGER_DESERIALIZER_FETCH;
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         MapperFeature m;
-
+        //使用annotation，false會讓很多功能不能用，true
         m = MapperFeature.USE_ANNOTATIONS;
-
+        //，true
+        m = MapperFeature.USE_GETTERS_AS_SETTERS;
 
     }
 
@@ -426,25 +454,60 @@ public class Fastxml實作 {
     public void 測試annotation() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        System.out.println(objectMapper.writeValueAsString(new TestAnn()));
+        String result = objectMapper.writeValueAsString(new TestAnn());
+        System.out.println(result);
+        System.out.println(reflectionToString(objectMapper.readValue(result, TestAnn.class)));
         //測試使用自已寫建構子也就是自已的反序列化
         String json = "{\"name1\":\"名字\",\"age1\":18}";
         TestAnn2 testAnn2 = objectMapper.readValue(json, TestAnn2.class);
-        System.out.println(ToStringBuilder.reflectionToString(testAnn2));
+        System.out.println(reflectionToString(testAnn2));
         //測試用builder的反序列化
         TestAnn3 testAnn3 = objectMapper.readValue(json, TestAnn3.class);
-        System.out.println(ToStringBuilder.reflectionToString(testAnn3));
+        System.out.println(reflectionToString(testAnn3));
 
         //objectmapper有提供conver，好像是A->JSON->B，以下幾個範列可參考一下
         //int[] ints = mapper.convertValue(sourceList, int[].class);
         //Map<String,Object> propertyMap = mapper.convertValue(pojoValue, Map.class);
         //PojoType pojo = mapper.convertValue(propertyMap, PojoType.class);
 
+        System.out.println("測試anyGetter=================================================================");
+        //測試anyGetter
+        TestAnn testAnn = new TestAnn();
+        testAnn.properties.put("p1", "我是p1");
+        testAnn.properties.put("p2", "我是p2");
+        String jsonAnyGetter = objectMapper.writeValueAsString(testAnn);
+        System.out.println(jsonAnyGetter);
+        System.out.println("jsonAnyGetter會把key,value pair的properties放在root object，但這些properties會照成反序列化錯誤");
+        System.out.println(reflectionToString(objectMapper.readValue(jsonAnyGetter, TestAnn.class)));
+        System.out.println("anySetter可是把沒mapping到的field全丟到map裡面去");
+
+        //@JsonRawValue// 提供field的值可轉成jsonString，而不轉成pojo
+        //@JsonValue// 使用在Enum的method上，可指定enum要轉成的json值
+        //@JsonRootName//可指定在rootClass上 產出變成{ "rootName":{...}}，原本應該為{...}，如要對應xml還可加設定namespace
+        //@JsonAlias({"name1","name_1"})這個註解可deserialization時可以用多組名字來解析
+        //@JsonIgnore(field),@JsonIgnoreProperties(class),@JsonIgnoreType(class)
+        //@JsonInclude(JsonInclude.Include.NON_NULL) 可以去掉null的值，還有其它的部分自已有空再看看
+        //@JsonUnwrapped就是把pojo的值攤到root層，然後root層的值可以設回pojo，和anySetter差不多
+        //@JsonView 看不種跳過
+        //@JsonFilter，感覺可以用JsonIgnore即可，除非同一個bean要Ignore 動態不同的欄位
+        //用法是FilterProvider filters = new SimpleFilterProvider().addFilter.........有點麻煩就先跳過
+        //annotation可以客製自已的customerXxxx，先跳過
+
+        System.out.println("測試inject======================================");
+        //這裡只是要顯示可以有context使用inject，實用性仍然可能不足，純記錄
+        InjectableValues injectableValues = new InjectableValues.Std().addValue("age1", 100);
+        TestAnn4 testAnn4 = new ObjectMapper().reader(injectableValues).forType(TestAnn4.class)
+                .readValue("{\"name\" : \"name1\"}");
+        System.out.println(reflectionToString(testAnn4));
+
 
     }
 
     @JsonIgnoreProperties({"name3"})
+    @JsonPropertyOrder({"name6", "位置從0開始插入", "這裡可以改寫產出的property順序"})
     static class TestAnn {
+        //JsonProperty好像也可以放在getSet，代替JsonGetter和JsonSetter的工作
+        //或者是直接使用 public String xxx不要封裝使用好像也行
         @JsonProperty("用JsonProperty設定name不需要get")
         private String 沒有getSet也能產出 = "name";
         @JsonProperty("JsonProperty會被get影嚮")
@@ -454,6 +517,15 @@ public class Fastxml實作 {
         @JsonIgnore
         private String name4 = "name4，會被JsonIgnore忽略";
         private String name5 = "name5，也可把JsonIgnore放在get或是set";
+        private String name6 = "可以用JsonGetter來處理properties和get不同名字的問題";
+        private Map<String, String> properties = new HashMap<>();
+        @JsonSerialize(using = DateSerializer.class)
+        @JsonDeserialize(using = DateDeserializer.class)
+        private Date date = new Date();
+        @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+        private Date date2 = new Date();
+        @JsonUnwrapped
+        private FullName fullName = new FullName();
 
         public String getName1() {
             return name1 + "我被影嚮了";
@@ -471,9 +543,44 @@ public class Fastxml實作 {
             return name4;
         }
 
+        @JsonIgnore
         public String getName5() {
             return name5;
         }
+
+        @JsonGetter("name6")
+        public String getNewName6() {
+            return "newName6，可蓋過properties的設定或刪除properties也沒問題";
+        }
+
+        //如果只有get產出的json，沒有對應的set會有反序列作的錯誤，這時就用JsonSetter可以解這個問題
+        @JsonSetter("name6")
+        public void setNewName6(String name6) {
+            this.name6 = name6;
+        }
+
+        @JsonSetter("只有get也是可以被序列化的")
+        public void setXXX(String xxx) {
+
+        }
+
+        @JsonAnyGetter
+        public Map<String, String> getProperties() {
+            return properties;
+        }
+
+        @JsonAnySetter
+        public void add(String key, String value) {
+            properties.put(key, value);
+        }
+
+    }
+
+    static class FullName {
+        @JsonProperty
+        private String firstName = "firstName";
+        @JsonProperty
+        private String lastName = "lastName";
     }
 
     static class TestAnn2 {
@@ -519,4 +626,146 @@ public class Fastxml實作 {
         }
     }
 
+    static class DateSerializer extends StdSerializer<Date> {
+        public DateSerializer() {
+            this(null);
+        }
+
+        public DateSerializer(Class<Date> t) {
+            super(t);
+        }
+
+        @Override
+        public void serialize(Date value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+            gen.writeString(DateFormatUtils.format(value, "yyyy-MM-dd HH:mm:ss"));
+        }
+    }
+
+    static class DateDeserializer extends StdDeserializer<Date> {
+        public DateDeserializer() {
+            this(null);
+        }
+
+        protected DateDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public Date deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            try {
+                return DateUtils.parseDate(p.getText(), "yyyy-MM-dd HH:mm:ss");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            throw new RuntimeException("fail");
+        }
+    }
+
+    static class TestAnn4 {
+        @JsonProperty
+        String name;
+        @JacksonInject(value = "age1")
+        int age;
+    }
+
+    /**
+     * 解決無窮遞迴的問題，解法是用不序列化
+     *
+     * @throws JsonProcessingException
+     */
+    @Test
+    public void testRefenceEachOther() throws JsonProcessingException {
+        ItemRef itemRef = new ItemRef();
+        UserRef userRef = new UserRef();
+        itemRef.userRef = userRef;
+        userRef.itemRef = itemRef;
+        System.out.println(new ObjectMapper().writeValueAsString(itemRef));
+        System.out.println(new ObjectMapper().writeValueAsString(userRef));
+        System.out.println("使用JsonManagedReference+JsonBackReference為一對，但JsonBackReference的部分不會被序列化");
+        System.out.println("這和直接在另一個類別使用JsonIgnore不是一樣嗎？除了清楚定義外有什麼差別");
+    }
+
+    static class ItemRef {
+        public String itemName = "itemName";
+        @JsonManagedReference
+        public UserRef userRef;
+    }
+
+    static class UserRef {
+        public String userName = "userName";
+        @JsonBackReference
+        public ItemRef itemRef;
+    }
+
+    /**
+     * 解決無窮遞迴的問題，使用JsonIdentityInfo定義id的方式解決
+     */
+    @Test
+    public void testJsonIdentityInfo() throws JsonProcessingException {
+        ItemIdentify itemIdentify = new ItemIdentify();
+        UserIdentify userIdentify = new UserIdentify();
+        itemIdentify.user = userIdentify;
+        userIdentify.item = itemIdentify;
+        System.out.println(new ObjectMapper().writeValueAsString(itemIdentify));
+        System.out.println(new ObjectMapper().writeValueAsString(userIdentify));
+//        {"id1":1,"itemName":"itemName","user":{"id9":9,"userName":"userName","item":1}}
+//        {"id9":9,"userName":"userName","item":{"id1":1,"itemName":"itemName","user":9}}
+    }
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id1")
+    static class ItemIdentify {
+        public int id1 = 1;
+        public String itemName = "itemName";
+        public UserIdentify user;
+    }
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id9")
+    static class UserIdentify {
+        public int id9 = 9;
+        public String userName = "userName";
+        public ItemIdentify item;
+    }
+
+    @Test
+    public void testJsonType() throws JsonProcessingException {
+        //不太清楚用，先記錄下來
+        //好像是多型的class可以多type的property來顯示而已，感覺沒什麼用處
+        Zoo.Dog dog = new Zoo.Dog();
+        dog.name = "dogName";
+        Zoo.Cat cat = new Zoo.Cat();
+        cat.name = "catName";
+        Zoo.Animal animal = new Zoo.Animal();
+        animal.name = "animalName";
+        Zoo zoo = new Zoo();
+        zoo.animal = dog;
+        System.out.println(new ObjectMapper().writeValueAsString(zoo));
+        zoo.animal = cat;
+        System.out.println(new ObjectMapper().writeValueAsString(zoo));
+        zoo.animal = animal;
+        System.out.println(new ObjectMapper().writeValueAsString(zoo));
+    }
+}
+
+class Zoo {
+    public Animal animal;
+
+    //可以多一個type的property
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+    //可以決定type顯示的值
+    @JsonSubTypes({@JsonSubTypes.Type(value = Dog.class, name = "dog")
+            , @JsonSubTypes.Type(value = Cat.class, name = "cat")})
+    public static class Animal {
+        public String name;
+    }
+
+    //不明白用處，是反序列化要用到的嗎？
+    @JsonTypeName("dog")
+    public static class Dog extends Animal {
+        public double barkVolume;
+    }
+
+    @JsonTypeName("cat")
+    public static class Cat extends Animal {
+        public boolean likesCream;
+        public int lives;
+    }
 }
