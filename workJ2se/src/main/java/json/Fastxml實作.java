@@ -1,5 +1,9 @@
 package json;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -15,10 +19,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchema;
 import com.fasterxml.jackson.module.jsonSchema.JsonSchemaGenerator;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.junit.Test;
 
 import java.io.StringReader;
@@ -412,6 +419,103 @@ public class Fastxml實作 {
 
         public void setAge(int age) {
             this.age = age;
+        }
+    }
+
+    @Test
+    public void 測試annotation() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        System.out.println(objectMapper.writeValueAsString(new TestAnn()));
+        //測試使用自已寫建構子也就是自已的反序列化
+        String json = "{\"name1\":\"名字\",\"age1\":18}";
+        TestAnn2 testAnn2 = objectMapper.readValue(json, TestAnn2.class);
+        System.out.println(ToStringBuilder.reflectionToString(testAnn2));
+        //測試用builder的反序列化
+        TestAnn3 testAnn3 = objectMapper.readValue(json, TestAnn3.class);
+        System.out.println(ToStringBuilder.reflectionToString(testAnn3));
+
+        //objectmapper有提供conver，好像是A->JSON->B，以下幾個範列可參考一下
+        //int[] ints = mapper.convertValue(sourceList, int[].class);
+        //Map<String,Object> propertyMap = mapper.convertValue(pojoValue, Map.class);
+        //PojoType pojo = mapper.convertValue(propertyMap, PojoType.class);
+
+
+    }
+
+    @JsonIgnoreProperties({"name3"})
+    static class TestAnn {
+        @JsonProperty("用JsonProperty設定name不需要get")
+        private String 沒有getSet也能產出 = "name";
+        @JsonProperty("JsonProperty會被get影嚮")
+        private String name1 = "name1";
+        private String name2 = "我沒註解也沒getter不會被序列化";
+        private String name3 = "name3補class的JsonIgnoreProperties忽略掉";
+        @JsonIgnore
+        private String name4 = "name4，會被JsonIgnore忽略";
+        private String name5 = "name5，也可把JsonIgnore放在get或是set";
+
+        public String getName1() {
+            return name1 + "我被影嚮了";
+        }
+
+        public String get只有get也是可以被序列化的() {
+            return "沒設物件變數也行";
+        }
+
+        public String getName3() {
+            return name3;
+        }
+
+        public String getName4() {
+            return name4;
+        }
+
+        public String getName5() {
+            return name5;
+        }
+    }
+
+    static class TestAnn2 {
+        String name;
+        int age;
+
+        @JsonCreator
+        public TestAnn2(@JsonProperty("name1") String name, @JsonProperty("age1") int age) {
+            this.name = name;
+            this.age = age;
+        }
+    }
+
+
+    @JsonDeserialize(builder = TestAnn3.Builder.class)
+    static class TestAnn3 {
+        String name;
+        int age;
+
+        //annotation裡的值可不寫就會用預設值如下
+        @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
+        static class Builder {
+            String name;
+            int age;
+
+            //重點是這一些with要對應到名字
+            Builder withName1(String name) {
+                this.name = name;
+                return this;
+            }
+
+            Builder withAge1(Integer age) {
+                this.age = age;
+                return this;
+            }
+
+            public TestAnn3 build() {
+                TestAnn3 testAnn3 = new TestAnn3();
+                testAnn3.name = name;
+                testAnn3.age = age;
+                return testAnn3;
+            }
         }
     }
 
