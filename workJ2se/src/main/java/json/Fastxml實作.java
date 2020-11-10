@@ -414,8 +414,52 @@ public class Fastxml實作 {
         MapperFeature m;
         //使用annotation，false會讓很多功能不能用，true
         m = MapperFeature.USE_ANNOTATIONS;
-        //，true
+        //好像是屬性為Collection或map時，當只有get無set時，自動也提供set的功能，true
         m = MapperFeature.USE_GETTERS_AS_SETTERS;
+        //設true且屬性前面有modify為transient時，該屬性會被祭序在序列化和反序列化，false
+        m = MapperFeature.PROPAGATE_TRANSIENT_MARKER;
+        //不是很懂那裡用到： 自動檢測套用public建構子或是static method命為valueOf(single argumnet)，true
+        //我猜只有在反序列化的時候去new出物件使用吧，不知道對不對
+        m = MapperFeature.AUTO_DETECT_CREATORS;
+        //自動檢測public field為屬性，true
+        m = MapperFeature.AUTO_DETECT_FIELDS;
+        //自動檢測public get method無參數的部分轉為屬性，true
+        m = MapperFeature.AUTO_DETECT_GETTERS;
+        //自動檢測public is method無參數的部分轉為屬性，true
+        m = MapperFeature.AUTO_DETECT_IS_GETTERS;
+        //自動檢測public set method 1個參數的部分用來反列列化，true
+        m = MapperFeature.AUTO_DETECT_SETTERS;
+        //看不懂，好像是final(immutable)可以只有get不用set嗎？，false
+        m = MapperFeature.REQUIRE_SETTERS_FOR_GETTERS;
+        //可以給final(immutable) field設值，true
+        m = MapperFeature.ALLOW_FINAL_FIELDS_AS_MUTATORS;
+        //只要寫getter(feild才行)，就會幫忙推斷setter(field)的寫法，true
+        m = MapperFeature.INFER_PROPERTY_MUTATORS;
+        //好像是java.beans.ConstructorProperties annotation會被推斷成JsonCreator……後面看不懂，true
+        m = MapperFeature.INFER_CREATOR_FROM_CONSTRUCTOR_PROPERTIES;
+        // 使用反射來存取本來不能存取的modify，來增加效能不用做反射的檢查，沒事不要修改，true
+        m = MapperFeature.CAN_OVERRIDE_ACCESS_MODIFIERS;
+        // 對public也修正modify，基本上應該不用這麼做，目的是為了提高反射的效能，沒事不要修改，true
+        m = MapperFeature.OVERRIDE_PUBLIC_ACCESS_MODIFIERS;
+        // 看不種，好像是序列化時要使用靜態類別或是runtime type，false
+        m = MapperFeature.USE_STATIC_TYPING;
+        // 看不種，false
+        m = MapperFeature.USE_BASE_TYPE_AS_DEFAULT_IMPL;
+        // 看不種，和JsonView相關，true
+        m = MapperFeature.DEFAULT_VIEW_INCLUSION;
+        // 設成true的話使用JsonPropertyOrder.alphabetic()，應該是自然排序法，false無排序，參照JsonPropertyOrder註解，false
+        m = MapperFeature.SORT_PROPERTIES_ALPHABETICALLY;
+        // 設true時，在反序列化時，可以不分大小寫來匹配屬性，但會帶來額外的性能開銷，false
+        m = MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES;
+        // enum反序列化時是否區分大小寫，一般來說enum是用name()或toString()來反序列化的，false
+        m = MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS;
+        // 看不懂，false
+        m = MapperFeature.ACCEPT_CASE_INSENSITIVE_VALUES;
+        // 看不懂，false
+        m = MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
+        // json的field定義為開頭小寫，ex:(java)URL->(json)url，設成true時，(java)URL->(json)URL，正常是不應該開啟的，false
+        m = MapperFeature.USE_STD_BEAN_NAMING;
+
 
     }
 
@@ -712,13 +756,14 @@ public class Fastxml實作 {
 //        {"id9":9,"userName":"userName","item":{"id1":1,"itemName":"itemName","user":9}}
     }
 
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id1")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id1")
     static class ItemIdentify {
         public int id1 = 1;
         public String itemName = "itemName";
         public UserIdentify user;
     }
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id9")
+
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id9")
     static class UserIdentify {
         public int id9 = 9;
         public String userName = "userName";
