@@ -459,8 +459,16 @@ public class Fastxml實作 {
         m = MapperFeature.USE_WRAPPER_NAME_AS_PROPERTY_NAME;
         // json的field定義為開頭小寫，ex:(java)URL->(json)url，設成true時，(java)URL->(json)URL，正常是不應該開啟的，false
         m = MapperFeature.USE_STD_BEAN_NAMING;
-
-
+        // 看不太懂用法，目前都用JsonProperty不就可以達到要求，不知道怎麼測試，false
+        m = MapperFeature.ALLOW_EXPLICIT_PROPERTY_RENAMING;
+        // 應該是在反序列化的時候才有用，讓boolean可以吃0,1代替true,false，數字可吃字串,true
+        m = MapperFeature.ALLOW_COERCION_OF_SCALARS;
+        // 看不種意思，棤組是什麼？,true
+        m = MapperFeature.IGNORE_DUPLICATE_MODULE_REGISTRATIONS;
+        // 看不懂，不理解指的merge是什麼情況會發生,true
+        m = MapperFeature.IGNORE_MERGE_FOR_UNMERGEABLE;
+        // 好像和驗証有關，當作沒這項好了，3.0之後可能刪掉此設定並且預設為true,false
+        m = MapperFeature.BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES;
     }
 
 
