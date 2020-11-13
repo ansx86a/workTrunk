@@ -4,7 +4,6 @@ import hello.vo.CacheTestObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.interceptor.SimpleKey;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("cache")
-public class CacheTestController {
+public class CacheTest快取Controller {
 
     @Autowired
     CacheTestObject cacheTestObject;
@@ -32,11 +31,19 @@ public class CacheTestController {
     }
 
     /**
-     * http://localhost:8080/cache/counter
+     * http://localhost:8080/cache/cacheable
      */
     @GetMapping("cacheable")
     public int cacheable() {
         return cacheTestObject.doCachable();
+    }
+
+    /**
+     * http://localhost:8080/cache/cacheable2
+     */
+    @GetMapping("cacheable2")
+    public int cacheable2() {
+        return cacheTestObject.doCachable2();
     }
 
     /**

@@ -12,6 +12,8 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+//因為我的程式沒有profile所以沒有影嚮
+
 //以下內容可以去捉sprint-boot-reference.pdf來看
 //下面是用JNDI的方式
 @Profile({"SIT", "UAT", "反正要要用JNDI的都加進來"})
