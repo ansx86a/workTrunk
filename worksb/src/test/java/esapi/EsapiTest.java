@@ -2,11 +2,11 @@ package esapi;
 
 import org.junit.Test;
 import org.owasp.esapi.ESAPI;
-import org.owasp.esapi.ValidationRule;
 import org.owasp.esapi.Validator;
 import org.owasp.esapi.crypto.CipherText;
 import org.owasp.esapi.crypto.PlainText;
 import org.owasp.esapi.errors.EncryptionException;
+import org.owasp.esapi.reference.crypto.JavaEncryptor;
 
 public class EsapiTest {
 
@@ -66,7 +66,14 @@ public class EsapiTest {
         //因為CipherText的建構子，所以要轉成asPortableSerializedByteArray
         CipherText cipherText2 = CipherText.fromPortableSerializedBytes(cipherText.asPortableSerializedByteArray());
         System.out.println(ESAPI.encryptor().decrypt(cipherText2).toString());
-
     }
 
+    @Test
+    public void 產生金鑰() throws Exception {
+        //產生128位元的key
+        //256位元以下的要裝JCE的樣子，感覺很難跳過
+        JavaEncryptor.main(new String[]{});
+
+
+    }
 }
