@@ -534,6 +534,13 @@
 			<version>1.0.3</version>
 		</dependency>
 
+		<!-- 加密使用 -->
+		<dependency>
+			<groupId>org.owasp.esapi</groupId>
+			<artifactId>esapi</artifactId>
+			<version>2.2.2.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<reporting>

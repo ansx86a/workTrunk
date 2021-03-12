@@ -147,6 +147,7 @@ public class Spring的restTemplate {
 
         RestTemplate templateApache = new RestTemplate(apacheFactory);
         //這個雁該是jdk預設的HttpUrlConnection，spring應該優先使用這個
+        //可以設定ConnectTimeout 和ReadTimeout
         RestTemplate templateJdkDefault = new RestTemplate(new SimpleClientHttpRequestFactory());
         //OkHttpClientHttpRequestFactory , OkHttp3ClientHttpRequestFactory 就不例舉了
         //factory也可以後設：restTemplate.setRequestFactory();
@@ -180,7 +181,7 @@ public class Spring的restTemplate {
     public void testSkipHttps自已簡化程式碼() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
         SSLConnectionSocketFactory csf = new SSLConnectionSocketFactory(SSLContexts.custom()
                 .loadTrustMaterial(null, (chain, authType) -> true)
-                .build(),NoopHostnameVerifier.INSTANCE);
+                .build(), NoopHostnameVerifier.INSTANCE);
         HttpComponentsClientHttpRequestFactory requestFactory =
                 new HttpComponentsClientHttpRequestFactory(HttpClients.custom().setSSLSocketFactory(csf).build());
         //以下留下來參考，應該要能disable hostname verifier但我測好像沒用，要加此method的第三行在建構子裡面才有用
@@ -198,14 +199,14 @@ public class Spring的restTemplate {
         new RestTemplate(requestFactory);
     }
 
-    public void test使用exchage有用get有header要怎麼用(){
+    public void test使用exchage有用get有header要怎麼用() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization","Basic "+"base64");
+        headers.set("Authorization", "Basic " + "base64");
         //也可以用下面這個，可指定明碼不用base64
         //headers.setBasicAuth();
         HttpEntity httpEntity = new HttpEntity(null, headers);
-        ResponseEntity<byte[]> result = restTemplate.exchange("url",HttpMethod.GET,httpEntity,byte[].class);
+        ResponseEntity<byte[]> result = restTemplate.exchange("url", HttpMethod.GET, httpEntity, byte[].class);
         System.out.println(result.getBody().length);
     }
 
