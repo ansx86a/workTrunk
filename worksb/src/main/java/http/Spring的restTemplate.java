@@ -70,6 +70,8 @@ public class Spring的restTemplate {
 
     }
 
+    //補充，這裡用的是StringHttpMessageConverter預設使用iso8859才會亂碼所以修正
+    //但是class用一般的class而不是String的話，好像會變成MappingJacksonHttpMessageConverter，好像就不會有亂碼的問題
     private static RestTemplate changeEncoding(RestTemplate restTemplate, Charset encoding) {
         //注意，這裡的順序可能會影嚮使用的convert，原始碼放1，我放0可以，放最後會有exception，順序可能不能亂放？？？
         //另一個方法是new resttemplate時，就只使用需要的converters就行了，有這個建構子
@@ -135,6 +137,8 @@ public class Spring的restTemplate {
                 HttpMethod.GET, HttpEntity.EMPTY, String.class);
         System.out.println(responseEntity.getStatusCode());
         System.out.println(responseEntity.getBody());
+        //exchange中有ParameterizedTypeReference，下面手寫範例未經過測試
+        //ResponseEntity<List<XxxObject>> responseEntity =  restTemplate.exchange(url,get,empty,new ParameterizedTypeReference<List<XxxObject>>());
     }
 
     public void 相關設定() {
