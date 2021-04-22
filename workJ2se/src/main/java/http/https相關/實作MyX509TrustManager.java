@@ -1,4 +1,4 @@
-package http;
+package http.https相關;
 
 import java.security.KeyStore;
 import java.security.cert.CertificateException;

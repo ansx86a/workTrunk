@@ -1,4 +1,6 @@
-package http;
+package http.原生httplib;
+
+import http.https相關.實作MyX509TrustManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,12 +1,15 @@
-package http;
+package http.commons;
 
 import java.util.Calendar;
 
+import http.https相關.NewSSLProtocolSocketFactory;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.protocol.Protocol;
 
+//org.apache.commons.httpclient
+//這應該是舊的，包在commons那包，使用新的org.apache.httpcomponents
 public class CommonsHttps {
 
 	public static void main(String[] args) {

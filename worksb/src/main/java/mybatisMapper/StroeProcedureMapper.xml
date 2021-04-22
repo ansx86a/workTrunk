@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper>
+    <select id="callSp01" parameterType="mybatisMapper.StroeProcedureMapper$SpArg" statementType="CALLABLE">
+        {
+        call sp01(
+            #{arg1,mode=IN,jdbcType=CHAR}
+            ,#{arg2,mode=OUT,jdbcType=CHAR}
+            )
+        }
+    </select>
+
+
+</mapper>

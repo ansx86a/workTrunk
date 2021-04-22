@@ -215,7 +215,7 @@ public class ApacheHttpClient實作 {
 		}
 	}
 
-	public void $4基本的份驗証() throws Exception {
+	public void $4基本認證() throws Exception {
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(new AuthScope("httpbin.org", 80),
 				new UsernamePasswordCredentials("user", "passwd"));
