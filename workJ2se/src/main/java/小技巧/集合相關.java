@@ -1,12 +1,25 @@
 package 小技巧;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import org.junit.Test;
 
 public class 集合相關 {
+
+    @Test
+    public void Map的values刪除也會反應到Map上() {
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "1");
+        map.put("2", "2");
+        map.put("3", "3");
+        map.put("4", "4");
+        System.out.println(map);//{1=1, 2=2, 3=3, 4=4}
+        map.values().remove("1");//注意這襝的remove只能用key值的類別，沒有index可用
+        //map.values().removeIf()//java8另有lambda可用
+        System.out.println(map);//{2=2, 3=3, 4=4}
+
+
+    }
 
     /**
      * <pre>
@@ -24,9 +37,12 @@ public class 集合相關 {
         List list = Arrays.asList(str);// [aaa, bbb]
         System.out.println(list);
         str[0] = "ccc";
+        //結果asList是一個view，改成本來的array，值就會一起改變
         System.out.println(list);// [ccc, bbb]
         list.set(0, "ddd");
+        //list的set仍然是可以使用，所以不是不可變的list
         System.out.println(list);// [ddd, bbb]
+        //因為是一個view所以不能增加或是刪除這個list，所以特性和Array相同不能增昌或是減少個數
         list.add("java.lang.UnsupportedOperationException");
     }
 
