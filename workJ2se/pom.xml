@@ -541,6 +541,19 @@
 			<version>2.2.2.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
+		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit</artifactId>
+			<version>5.11.0.202103091610-r</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.github.h-thurow/simple-jndi -->
+		<dependency>
+			<groupId>com.github.h-thurow</groupId>
+			<artifactId>simple-jndi</artifactId>
+			<version>0.23.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<reporting>
