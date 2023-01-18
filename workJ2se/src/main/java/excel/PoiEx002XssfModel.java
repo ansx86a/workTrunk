@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,6 +21,10 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
+import org.apache.poi.poifs.crypt.EncryptionInfo;
+import org.apache.poi.poifs.crypt.EncryptionMode;
+import org.apache.poi.poifs.crypt.Encryptor;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -1364,6 +1369,22 @@ public class PoiEx002XssfModel {
 
 	public void $30() throws IOException {
 	
+	}
+
+	public static void excel加密(String password,File fromFile,XSSFWorkbook wb) throws IOException, GeneralSecurityException {
+		POIFSFileSystem fs = new POIFSFileSystem();
+		EncryptionInfo info = new EncryptionInfo(EncryptionMode.agile);
+		Encryptor enc = info.getEncryptor();
+		enc.confirmPassword(password);
+		OutputStream encos = enc.getDataStream(fs);
+		wb.write(encos);
+		wb.close();
+		encos.close();
+
+		OutputStream os = new FileOutputStream(fromFile);
+		fs.writeFilesystem(os);
+		os.close();
+		fs.close();
 	}
 
 }
